@@ -752,7 +752,6 @@ export default function CardsSch({ verMas, setVermas }) {
   };
   return (
     <div className={style.layout}>
-      
       {arrColegios?.map((c) => {
         return (
           <>
@@ -832,14 +831,14 @@ export default function CardsSch({ verMas, setVermas }) {
                         {c.numero_estudiantes} {"alumnos"}
                       </p>
                       <div className={`${style.div} flex-col gap-4`}>
-                      <p
-                        style={{
-                          fontSize: "1.6vh",
-                        }}
-                      >
-                        {c.area} {"m2"}
-                      </p>
-                    </div>
+                        <p
+                          style={{
+                            fontSize: "1.6vh",
+                          }}
+                        >
+                          {c.area} {"m2"}
+                        </p>
+                      </div>
                     </div>
 
                     {/* Área */}
@@ -855,44 +854,52 @@ export default function CardsSch({ verMas, setVermas }) {
 
                     {/* Métodos de Aprendizaje: */}
                     <div className={style.div}>
-                      {c.Metodos?.map((m) => {
-                        return (
-                          <>
-                            <div
-                              key={m}
-                              style={{
-                                display: "flex",
-                                gap: "1vh",
-                                fontSize: "1.6vh",
-                              }}
-                            >
-                              <Pincon />
-                              <p>{m}</p>
-                            </div>
-                          </>
-                        );
-                      })}
+                      {c.Metodos.length >0 ? (
+                        c.Metodos?.map((m) => {
+                          return (
+                            <>
+                              <div
+                                key={m}
+                                style={{
+                                  display: "flex",
+                                  gap: "1vh",
+                                  fontSize: "1.6vh",
+                                }}
+                              >
+                                <Pincon />
+                                <p>{m}</p>
+                              </div>
+                            </>
+                          );
+                        })
+                      ) : (
+                        <p>No hay datos</p>
+                      )}
                     </div>
 
                     {/* Neurodiversidad : */}
                     <div className={style.div}>
-                      {c.Dificultades?.map((d) => {
-                        return (
-                          <>
-                            <div
-                              key={d}
-                              style={{
-                                display: "flex",
-                                gap: "1vh",
-                                fontSize: "1.6vh",
-                              }}
-                            >
-                              <Pincon />
-                              <p>{d}</p>
-                            </div>
-                          </>
-                        );
-                      })}
+                      {c.Dificultades.length >0 ? (
+                        c.Dificultades?.map((d) => {
+                          return (
+                            <>
+                              <div
+                                key={d}
+                                style={{
+                                  display: "flex",
+                                  gap: "1vh",
+                                  fontSize: "1.6vh",
+                                }}
+                              >
+                                <Pincon />
+                                <p>{d}</p>
+                              </div>
+                            </>
+                          );
+                        })
+                      ) : (
+                        <p>No hay datos</p>
+                      )}
                     </div>
                     <div style={{ paddingBottom: "5vh" }}>
                       <p

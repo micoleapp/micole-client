@@ -80,9 +80,7 @@ export default function Comparador() {
               <p>Cant. Alumnos:</p>
               <p>Área:</p>
             </div>
-            <div className={style.divTabla}>
-             
-            </div>
+           
 
             <div className={style.divTabla}>
               <p>Métodos de Aprendizaje:</p>
@@ -102,6 +100,9 @@ export default function Comparador() {
             </div>
            </>
           }
+           <div className={style.divTabla}>
+             
+             </div>
             {/* <p>Acreditaciones:</p> */}
           </div>
           <CardsSch  verMas={Vermas} setVermas={setVermas}/>
