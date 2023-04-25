@@ -4,6 +4,7 @@ import style from "./cardSch.module.css";
 import SwComparador from "../Swipper/SwComparador";
 import Pincon from "./svg/PinIcon";
 import { useSelector } from "react-redux";
+import Acred from "../drop/Acred";
 
 // const colegios = [
 //   {
@@ -751,46 +752,60 @@ export default function CardsSch({ verMas, setVermas }) {
     setVermas(!verMas);
   };
   return (
-    <div className={style.layout}>
-      {arrColegios?.map((c) => {
-        return (
-          <>
-            <div className={style.containerCard}>
-              {/* HEAD */}
-              <div className={style.cardHead}>
-                <img src={c.logo} alt={c.nombre_colegio} />
-                <div className={style.cardHead_info}>
-                  <p
-                    style={{
-                      fontWeight: "700",
-                      color: "#0D263B",
-                      fontSize: "1.8vh",
-                    }}
-                  >
-                    {c.nombre_colegio}
-                  </p>
-                  <p>{c.Distrito?.nombre_distrito}</p>
-                  <div className="drop-shadow-md">
-                    <Rating
-                      name="simple-controlled"
-                      value={c.rating / 2}
-                      readOnly
-                      max={5}
-                    />
+    <div className="flex flex-col items-center ">
+      <div className="flex flex-col">
+        <div className="pl-[15vh] flex flex-row">
+          {arrColegios?.map((c) => {
+            return (
+              <>
+                <div className={style.containerCard}>
+                  {/* HEAD */}
+                  <div className={style.cardHead}>
+                    <img src={c.logo} alt={c.nombre_colegio} />
+                    <div className={style.cardHead_info}>
+                      <p
+                        style={{
+                          fontWeight: "700",
+                          color: "#0D263B",
+                          fontSize: "1.8vh",
+                        }}
+                      >
+                        {c.nombre_colegio}
+                      </p>
+                      <p>{c.Distrito?.nombre_distrito}</p>
+                      <div className="drop-shadow-md">
+                        <Rating
+                          name="simple-controlled"
+                          value={c.rating / 2}
+                          readOnly
+                          max={5}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    {/* SW*/}
+                    <div className={style.SW}>
+                      <SwComparador
+                        galeria={c?.galeria_fotos}
+                        primeraFoto={c?.primera_imagen}
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div>
-                {/* SW*/}
-                <div className={style.SW}>
-                  <SwComparador
-                    galeria={c?.galeria_fotos}
-                    primeraFoto={c?.primera_imagen}
-                  />
-                </div>
-                {/* BODY*/}
-                <div className={style.bodyCard}>
-                  <div className={style.bodyInfo}>
+              </>
+            );
+          })}
+        </div>
+        <div className="flex flex-row items-center gap-12">
+          <div className="min-w-[8vh] max-w-[8vh]">
+            <p className="text-[1.6vh] ">Direccion</p>
+          </div>
+          <div className={style.bodyCard}>
+            {arrColegios?.map((c) => {
+              return (
+                <>
+                  <div className={style.containerCard}>
                     <div className={style.div}>
                       <p
                         style={{
@@ -800,28 +815,59 @@ export default function CardsSch({ verMas, setVermas }) {
                         {c.direccion}
                       </p>
                     </div>
+                  </div>
+                </>
+              );
+            })}
+          </div>
+        </div>
+        <div className="flex flex-row items-center gap-12">
+          <div className="min-w-[8vh] max-w-[8vh]">
+            <p className="text-[1.6vh] ">Tipo de escuela:</p>
+          </div>
 
-                    {/* Tipo de escuela: */}
-                    <div className={style.div}>
-                      {c.Categoria?.map((ca) => {
-                        return (
-                          <>
+          <div className={style.bodyCard}>
+            {arrColegios?.map((c) => {
+              return (
+                <>
+                  <div className={style.containerCard}>
+                    {c.Categoria?.map((ca) => {
+                      return (
+                        <>
+                          <div className={style.div}>
                             <div
                               style={{
                                 display: "flex",
-                                gap: "1vh",
+                             
                                 fontSize: "1.6vh",
+                                flexDirection: "row",
                               }}
                             >
                               <Pincon />
-                              <p>{ca.nombre_categoria}</p>
+                              <p className="text-[1.6vh] ">
+                                {ca.nombre_categoria}
+                              </p>
                             </div>
-                          </>
-                        );
-                      })}
-                    </div>
+                          </div>
+                        </>
+                      );
+                    })}
+                  </div>
+                </>
+              );
+            })}
+          </div>
+        </div>
+        <div className="flex flex-row  items-center gap-12">
+          <div className="min-w-[8vh] max-w-[8vh]">
+            <p className="text-[1.6vh] ">Cant. Alumnos:</p>
+          </div>
 
-                    {/* Cant. Alumnos: */}
+          <div className={style.bodyCard}>
+            {arrColegios?.map((c) => {
+              return (
+                <>
+                  <div className={style.containerCard}>
                     <div className={style.div}>
                       <p
                         style={{
@@ -830,19 +876,23 @@ export default function CardsSch({ verMas, setVermas }) {
                       >
                         {c.numero_estudiantes} {"alumnos"}
                       </p>
-                      <div className={`${style.div} flex-col gap-4`}>
-                        <p
-                          style={{
-                            fontSize: "1.6vh",
-                          }}
-                        >
-                          {c.area} {"m2"}
-                        </p>
-                      </div>
                     </div>
-
-                    {/* Área */}
-                    {/* <div className={style.div}>
+                  </div>
+                </>
+              );
+            })}
+          </div>
+        </div>
+        <div className="flex flex-row items-center gap-12">
+          <div className="min-w-[8vh] max-w-[8vh]">
+            <p className="text-[1.6vh] ">Área:</p>
+          </div>
+          <div className={style.bodyCard}>
+            {arrColegios?.map((c) => {
+              return (
+                <>
+                  <div className={style.containerCard}>
+                    <div className={style.div}>
                       <p
                         style={{
                           fontSize: "1.6vh",
@@ -850,11 +900,24 @@ export default function CardsSch({ verMas, setVermas }) {
                       >
                         {c.area} {"m2"}
                       </p>
-                    </div> */}
-
-                    {/* Métodos de Aprendizaje: */}
+                    </div>
+                  </div>
+                </>
+              );
+            })}
+          </div>
+        </div>
+        <div className="flex flex-row items-center gap-12">
+          <div className="min-w-[8vh] max-w-[8vh]">
+            <p className="text-[1.6vh] ">Métodos Aprendizaje</p>
+          </div>
+          <div className={style.bodyCard}>
+            {arrColegios?.map((c) => {
+              return (
+                <>
+                  <div className={style.containerCard}>
                     <div className={style.div}>
-                      {c.Metodos.length >0 ? (
+                      {c.Metodos.length > 0 ? (
                         c.Metodos?.map((m) => {
                           return (
                             <>
@@ -864,22 +927,37 @@ export default function CardsSch({ verMas, setVermas }) {
                                   display: "flex",
                                   gap: "1vh",
                                   fontSize: "1.6vh",
+                                  flexDirection: "row",
                                 }}
                               >
                                 <Pincon />
-                                <p>{m}</p>
+                                <p className="text-[1.6vh] ">{m}</p>
                               </div>
                             </>
                           );
                         })
                       ) : (
-                        <p>No hay datos</p>
+                        <p className="text-[1.6vh] ">No hay datos</p>
                       )}
                     </div>
+                  </div>
+                </>
+              );
+            })}
+          </div>
+        </div>
+        <div className="flex flex-row items-center gap-12">
+          <div className="min-w-[8vh] max-w-[8vh]">
+            <p className="text-[1.6vh] ">Neurodiversidad:</p>
+          </div>
 
-                    {/* Neurodiversidad : */}
+          <div className={style.bodyCard}>
+            {arrColegios?.map((c) => {
+              return (
+                <>
+                  <div className={style.containerCard}>
                     <div className={style.div}>
-                      {c.Dificultades.length >0 ? (
+                      {c.Dificultades.length > 0 ? (
                         c.Dificultades?.map((d) => {
                           return (
                             <>
@@ -889,47 +967,67 @@ export default function CardsSch({ verMas, setVermas }) {
                                   display: "flex",
                                   gap: "1vh",
                                   fontSize: "1.6vh",
+                                  flexDirection: "row",
                                 }}
                               >
                                 <Pincon />
-                                <p>{d}</p>
+                                <p className="text-[1.6vh] ">{d}</p>
                               </div>
                             </>
                           );
                         })
                       ) : (
-                        <p>No hay datos</p>
+                        <p className="text-[1.6vh] ">No hay datos</p>
                       )}
                     </div>
-                    <div style={{ paddingBottom: "5vh" }}>
-                      <p
-                        style={{
-                          fontSize: "1.8vh",
-                          color: "#0061DF",
-                          cursor: "pointer",
-                        }}
-                        onClick={hanlderVermas}
-                      >
-                        {verMas ? "Ver menos" : "Ver mas"}
-                      </p>
-                      {verMas && (
-                        <div>
-                          <p>holi</p>
-                        </div>
-                      )}
-                    </div>
-
-                    <Button variant="contained">Reservar cita</Button>
-                    {/* Acreditaciones: */}
-
-                    {/*Infraestructura:: */}
                   </div>
-                </div>
-              </div>
-            </div>
-          </>
-        );
-      })}
+                </>
+              );
+            })}
+          </div>
+        </div>
+        <div className="flex flex-row items-center gap-12">
+          <div className="min-w-[8vh] max-w-[8vh]]">
+            <p className="text-[1.6vh] ">Afiliaciones:</p>
+          </div>
+          <div className={style.bodyCard}>
+            {arrColegios?.map((c) => {
+              return (
+                <>
+                  <div className={style.containerCard}>
+                    {verMas && (
+                      <div className={`${style.div} `}>
+                        <Acred ids={c.id} />
+                      </div>
+                    )}
+                  </div>
+                </>
+              );
+            })}
+          </div>
+        </div>
+        <div className="flex flex-row items-center">
+          <div className="min-w-[8vh] max-w-[8vh]]">
+            <p className="text-[1.6vh] ">Infraestructura:</p>
+          </div>
+
+          <div className={style.bodyCard}>
+            {arrColegios?.map((c) => {
+              return (
+                <>
+                  <div className={style.containerCard}>
+                    {verMas && (
+                      <div className={`${style.div} `}>
+                        <Acred ids={c.id} />
+                      </div>
+                    )}
+                  </div>
+                </>
+              );
+            })}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

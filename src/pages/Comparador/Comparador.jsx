@@ -69,7 +69,7 @@ export default function Comparador() {
             
           }}
         >
-          <div className={style.divP}>
+          {/* <div className={style.divP}>
             <div className={`${style.divTabla} justify-end items-end`}>
               <p>Dirección:</p>
             </div>
@@ -88,7 +88,7 @@ export default function Comparador() {
             <div className={style.divTabla}>
               <p>Neurodiversidad:</p>
             </div>
-               {/* { Vermas === false &&<p>Ver mas</p>} */}
+          
            {Vermas&&
            <>
             <div className={style.divTabla}>
@@ -103,8 +103,8 @@ export default function Comparador() {
            <div className={style.divTabla}>
              
              </div>
-            {/* <p>Acreditaciones:</p> */}
-          </div>
+   
+          </div> */}
           <CardsSch  verMas={Vermas} setVermas={setVermas}/>
         </div>
       </div>
