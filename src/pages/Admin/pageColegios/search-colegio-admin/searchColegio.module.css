@@ -1,0 +1,35 @@
+.btnFiltroResponsive{
+  display: none;
+}
+.FiltrosResponsive{
+  display: flex;
+  flex-direction: row;
+}
+
+.divMobile{
+  display: none;
+}
+@media (max-width: 800px) {
+  .btnFiltroResponsive{
+    display: flex;
+  }
+  .FiltrosResponsive{
+    display:none;
+  }
+  
+}
+@media (max-width: 500px) {
+  .btnFiltroResponsive{
+    display: flex;
+  }
+  .FiltrosResponsive{
+    display:none;
+  }
+  .divDesktop{
+    display: none;
+  }
+  .divMobile{
+    display: flex;
+  }
+  
+}
