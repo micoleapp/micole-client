@@ -12,7 +12,7 @@ export default function InfoGeneral() {
         (state) => state.schools
     );
 
-
+// lalalalal
 
     return (
         <section className=" bg-white p-5 left flex flex-col gap-8 w-full shadow-md">
