@@ -46,8 +46,7 @@ export const getVacantes = (niveles) => (dispatch) => {
     .catch((err) => console.log(err));
 };
 
-export const getFilterHome =
-  (distritos, grado, ingreso, page) => (dispatch) => {
+export const getFilterHome =(distritos, grado, ingreso, page) => (dispatch) => {
     dispatch(isLoading());
     axios
       .get(
