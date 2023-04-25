@@ -20,10 +20,9 @@
 }
 .divTabla{
     display: flex;
-    height: 3vh;
-    align-items: center;
+    align-items: start;
     justify-content: flex-start;
-    min-height: 9vh;
+    min-height: 12vh;
     height: 6vh;
 }
 /* .layout{

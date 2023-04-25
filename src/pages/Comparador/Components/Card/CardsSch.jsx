@@ -1,4 +1,4 @@
-import { Rating } from "@mui/material";
+import { Button, Rating } from "@mui/material";
 import React, { useState } from "react";
 import style from "./cardSch.module.css";
 import SwComparador from "../Swipper/SwComparador";
@@ -742,16 +742,17 @@ import { useSelector } from "react-redux";
 //     ],
 //   },
 // ];
-export default function CardsSch({verMas,setVermas}) {
+export default function CardsSch({ verMas, setVermas }) {
   const [rating, setRating] = React.useState(null);
-  const {  arrColegios} = useSelector((state) => state.comparador);
- console.log(arrColegios)
+  const { arrColegios } = useSelector((state) => state.comparador);
+  console.log(arrColegios);
 
- const hanlderVermas =()=>{
-  setVermas(!verMas)
- }
+  const hanlderVermas = () => {
+    setVermas(!verMas);
+  };
   return (
     <div className={style.layout}>
+      
       {arrColegios?.map((c) => {
         return (
           <>
@@ -792,9 +793,13 @@ export default function CardsSch({verMas,setVermas}) {
                 <div className={style.bodyCard}>
                   <div className={style.bodyInfo}>
                     <div className={style.div}>
-                      <p    style={{
+                      <p
+                        style={{
                           fontSize: "1.6vh",
-                        }}>{c.direccion}</p>
+                        }}
+                      >
+                        {c.direccion}
+                      </p>
                     </div>
 
                     {/* Tipo de escuela: */}
@@ -820,22 +825,33 @@ export default function CardsSch({verMas,setVermas}) {
                     {/* Cant. Alumnos: */}
                     <div className={style.div}>
                       <p
-                         style={{
-                            fontSize: "1.6vh",
-                          }}
-                      >{c.numero_estudiantes} {'alumnos'}</p>
-                    </div>
-
-                    {/* Área */}
-                    <div className={style.div}>
+                        style={{
+                          fontSize: "1.6vh",
+                        }}
+                      >
+                        {c.numero_estudiantes} {"alumnos"}
+                      </p>
+                      <div className={`${style.div} flex-col gap-4`}>
                       <p
                         style={{
                           fontSize: "1.6vh",
                         }}
                       >
-                        {c.area} {'m2'}
+                        {c.area} {"m2"}
                       </p>
                     </div>
+                    </div>
+
+                    {/* Área */}
+                    {/* <div className={style.div}>
+                      <p
+                        style={{
+                          fontSize: "1.6vh",
+                        }}
+                      >
+                        {c.area} {"m2"}
+                      </p>
+                    </div> */}
 
                     {/* Métodos de Aprendizaje: */}
                     <div className={style.div}>
@@ -878,14 +894,25 @@ export default function CardsSch({verMas,setVermas}) {
                         );
                       })}
                     </div>
-                           <p style={{fontSize:'1.8vh', color:'#0061DF', cursor:'pointer'}} onClick={hanlderVermas}>{verMas ? 'Ver menos':'Ver mas'}</p>
-                           {
-                            verMas&&
-                            <div>
+                    <div style={{ paddingBottom: "5vh" }}>
+                      <p
+                        style={{
+                          fontSize: "1.8vh",
+                          color: "#0061DF",
+                          cursor: "pointer",
+                        }}
+                        onClick={hanlderVermas}
+                      >
+                        {verMas ? "Ver menos" : "Ver mas"}
+                      </p>
+                      {verMas && (
+                        <div>
+                          <p>holi</p>
+                        </div>
+                      )}
+                    </div>
 
-                              <p>holi</p>
-                            </div>
-                           }
+                    <Button variant="contained">Reservar cita</Button>
                     {/* Acreditaciones: */}
 
                     {/*Infraestructura:: */}

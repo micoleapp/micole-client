@@ -43,7 +43,7 @@ export default function Comparador() {
             width: "100%",
             display: "flex",
             alignItems: "center",
-            justifyContent: "flex-end",
+            justifyContent: "center",
             paddingBottom: "10vh",
           }}
         >
@@ -70,18 +70,18 @@ export default function Comparador() {
           }}
         >
           <div className={style.divP}>
-            <div className={style.divTabla}>
+            <div className={`${style.divTabla} justify-end items-end`}>
               <p>Dirección:</p>
             </div>
-            <div className={style.divTabla}>
+            <div   className={`${style.divTabla} justify-center items-center`}>
               <p>Tipo de escuela:</p>
             </div>
-            <div className={style.divTabla}>
+            <div className={`${style.divTabla} justify-center flex-col gap-2`}>
               <p>Cant. Alumnos:</p>
-        
+              <p>Área:</p>
             </div>
             <div className={style.divTabla}>
-              <p>Área:</p>
+             
             </div>
 
             <div className={style.divTabla}>
