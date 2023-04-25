@@ -87,7 +87,7 @@
     /* border: 1px solid grey; */
     min-width:35vh ;
     max-width: 35vh;
-    height: 7vh;
+    max-height: 50vh;
     min-height: 5vh;
     overflow-y: scroll;
     display: flex;
