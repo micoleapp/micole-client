@@ -1,18 +1,19 @@
 .divP {
    
-    width: 100%;
-    min-height: 50%;
+    width: 20%;
     display: flex;
     /* padding-bottom: 5.4vh; */
-    gap: 5vh;
+    /* gap: 5vh; */
     flex-direction: column;
+    /* padding-bottom: 14vh; */
+    align-items: flex-start;
   
 }
 
 .divP p {
     font-size: 2vh;
     font-weight: 600;
-    min-height: 3.1vh;
+    /* min-height: 3.1vh; */
     margin: 0;
     color: #0D263B;
     padding-left: 1vh;
@@ -20,8 +21,10 @@
 .divTabla{
     display: flex;
     height: 3vh;
-    align-items: flex-start;
+    align-items: center;
     justify-content: flex-start;
+    min-height: 9vh;
+    height: 6vh;
 }
 /* .layout{
     display: flex;

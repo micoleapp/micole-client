@@ -742,38 +742,17 @@ import { useSelector } from "react-redux";
 //     ],
 //   },
 // ];
-export default function CardsSch() {
+export default function CardsSch({verMas,setVermas}) {
   const [rating, setRating] = React.useState(null);
   const {  arrColegios} = useSelector((state) => state.comparador);
  console.log(arrColegios)
+
+ const hanlderVermas =()=>{
+  setVermas(!verMas)
+ }
   return (
     <div className={style.layout}>
-       <div
-       className={style.nameCat}
-          >
-            <div className={style.divP}>
-              <div className={style.divTabla}>
-                <p className={style.divTabla}>Dirección:</p>
-              </div>
-              <div className={style.divTabla}>
-                <p className={style.divTabla}>Tipo de escuela:</p>
-              </div>
-              <div className="flex flex-col gap-5 items-centerjustify-center">
-                <p>Cant. Alumnos:</p>
-                <p>Área:</p>
-              </div>
-
-              <div className="flex flex-col gap-11 items-centerjustify-center">
-                <p>Métodos de Aprendizaje:</p>
-                <p>Neurodiversidad:</p>
-              </div>
-
-              {/* <p>Acreditaciones:</p> */}
-            </div>
-          </div>
-          <div  className={style.container }>
-
-               {arrColegios?.map((c) => {
+      {arrColegios?.map((c) => {
         return (
           <>
             <div className={style.containerCard}>
@@ -804,7 +783,6 @@ export default function CardsSch() {
               <div>
                 {/* SW*/}
                 <div className={style.SW}>
-                  
                   <SwComparador
                     galeria={c?.galeria_fotos}
                     primeraFoto={c?.primera_imagen}
@@ -855,7 +833,7 @@ export default function CardsSch() {
                           fontSize: "1.6vh",
                         }}
                       >
-                        {c.area ? c.area:"Datos no disponibles"} {'m2'}
+                        {c.area} {'m2'}
                       </p>
                     </div>
 
@@ -900,8 +878,16 @@ export default function CardsSch() {
                         );
                       })}
                     </div>
+                           <p style={{fontSize:'1.8vh', color:'#0061DF', cursor:'pointer'}} onClick={hanlderVermas}>{verMas ? 'Ver menos':'Ver mas'}</p>
+                           {
+                            verMas&&
+                            <div>
 
+                              <p>holi</p>
+                            </div>
+                           }
                     {/* Acreditaciones: */}
+
                     {/*Infraestructura:: */}
                   </div>
                 </div>
@@ -909,9 +895,7 @@ export default function CardsSch() {
             </div>
           </>
         );
-      })}  
-          </div>
- 
+      })}
     </div>
   );
 }
