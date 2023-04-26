@@ -36,27 +36,27 @@ export default function InfoGeneral() {
                 <div className="flex text-xs w-full flex-col lg:flex-row gap-3 justify-between">
                     <ul className="grid grid-cols-3 w-full gap-3">
                         <li className="text-text-[#0D263B] gap-2">
-                            <span className="font-semibold text-black ">RUC: </span>
+                            <span className="font-semibold text-[#0D263B]  ">RUC: </span>
                             {oneSchool.ruc}
                         </li>
                         <li className="text-text-[#0D263B] gap-2">
-                            <span className="font-semibold text-black ">Area: </span>
+                            <span className="font-semibold text-[#0D263B]  ">Area: </span>
                             {oneSchool.area}
                         </li>
                         <li className="text-text-[#0D263B] gap-2">
-                            <span className="font-semibold text-black ">
+                            <span className="font-semibold text-[#0D263B]  ">
                                 Fundación:{" "}
                             </span>
                             {oneSchool.fecha_fundacion}
                         </li>
                         <li className="text-text-[#0D263B] gap-2">
-                            <span className="font-semibold text-black ">Niveles: </span>
+                            <span className="font-semibold text-[#0D263B]  ">Niveles: </span>
                             {oneSchool.Nivels?.map((nivel) => nivel.nombre_nivel).join(
                                 ", "
                             )}
                         </li>
                         <li className="text-text-[#0D263B] gap-2">
-                            <span className="font-semibold text-black ">
+                            <span className="font-semibold text-[#0D263B]  ">
                                 Director:{" "}
                             </span>
                             {oneSchool.nombre_director}
