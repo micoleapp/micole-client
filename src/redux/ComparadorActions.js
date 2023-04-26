@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getDataColegios,getAcreCom } from "./ComparadorSlice";
+import { getDataColegios,getAcreCom ,deleteSch} from "./ComparadorSlice";
 import Swal from "sweetalert2";
 import SwalProp from "../exports/SwalProp";
 export const getDataSchools =({ id }) =>
@@ -50,3 +50,9 @@ export const getAcreditacionesComparador = (id) => (dispatch) => {
     });
   }
 };
+
+
+export const deleteColegio=({ id }) => (dispatch) => {
+  console.log(id)
+dispatch(deleteSch(id))
+  };

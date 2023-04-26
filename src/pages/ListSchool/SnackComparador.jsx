@@ -9,14 +9,15 @@ import { MdDeleteForever } from "react-icons/md";
 import style from "./snack.module.css";
 import TrashIcon from "./svg/TrashIcon";
 import KeyboardArrowDownTwoToneIcon from "@mui/icons-material/KeyboardArrowDownTwoTone";
-const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
+import { useDispatch } from "react-redux";
+import { deleteColegio } from "../../redux/ComparadorActions";
 
 export default function SnackComparador({ open, setOpen }) {
   //   const [open, setOpen] = useState(false);
-  const { arrColegios } = useSelector((state) => state.comparador);
+  
 
+  const { arrColegios } = useSelector((state) => state.comparador);
+  const dispatch = useDispatch();
   const [state, setState] = React.useState({
     vertical: "bottom",
     horizontal: "right",
@@ -40,8 +41,12 @@ export default function SnackComparador({ open, setOpen }) {
 
   useEffect(() => {
     setOpen(true);
-  }, [arrColegios.length]);
+  }, [arrColegios.length,arrColegios]);
 
+  const handlerDelete = (e, id) => {
+    console.log('oli');
+     dispatch(deleteColegio({id}))
+  };
   return (
     <Stack spacing={2} sx={{ width: "100%" }}>
       {/* <Button variant="outlined" onClick={handleClick}>
@@ -71,7 +76,10 @@ export default function SnackComparador({ open, setOpen }) {
               {arrColegios?.map((c) => {
                 return (
                   <>
-                    <div className={style.containerCard}>
+                    <div
+                    //   onClick={handlerDelete}
+                      className={style.containerCard}
+                    >
                       {/* HEAD */}
                       <div className="flex flex-row items-center ">
                         <div className={style.cardHead}>
@@ -98,8 +106,14 @@ export default function SnackComparador({ open, setOpen }) {
                           </div>
                         </div>
                       </div>
-                      <div className="flex flex-row items-center  ">
-                        <TrashIcon />
+                      <div onClick={(e)=> handlerDelete(e, c.id)} className="flex flex-row items-center  ">
+                
+                        <TrashIcon
+                        //   onClick={handlerDelete}
+                          sx={{ cursor: "pointer" }}
+                        />
+                 
+
                       </div>
                     </div>
                   </>
@@ -107,6 +121,13 @@ export default function SnackComparador({ open, setOpen }) {
               })}
             </div>
           )}
+
+          <div className="flex flex-row gap-2 w-full items-center justify-center">
+            <Button sx variant="contained">
+              Cancelar
+            </Button>
+            <Button>Comparar</Button>
+          </div>
         </div>
       </Snackbar>
     </Stack>

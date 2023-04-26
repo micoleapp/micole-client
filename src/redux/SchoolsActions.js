@@ -201,9 +201,14 @@ export const getColegiosSearch = (Input) => (dispatch) => {
 
 export const getSchoolDetail = (id) => (dispatch) => {
   dispatch(isLoading());
+
   axios
     .get(`/colegios/${id}`)
-    .then((res) => dispatch(getOneSchool(res.data[0])))
+    .then((res) =>{
+      console.log(res.data)
+      dispatch(getOneSchool(res.data[0]))
+      
+      })
     .catch((err) => dispatch(getError(err.message)));
 };
 
