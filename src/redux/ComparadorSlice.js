@@ -4,6 +4,8 @@ export const comparadorSlice = createSlice({
   name: "comparador",
   initialState: {
     arrColegios: [],
+    Afilia:[],
+    Infras:[]
   },
   reducers: {
     getDataColegios: (state, action) => {
@@ -16,9 +18,16 @@ export const comparadorSlice = createSlice({
         console.log("oli")
       }
     },
+    getAcreCom: (state, action) => {
+      console.log(action.payload)
+      const data = Object.assign({}, ...action.payload)
+      console.log(data)
+        state.Afilia = [...state.Afilia,data];
+      
+    },
   },
 });
 
-export const { getDataColegios } = comparadorSlice.actions;
+export const { getDataColegios,getAcreCom } = comparadorSlice.actions;
 
 export default comparadorSlice.reducer;

@@ -5,7 +5,7 @@ import SwComparador from "../Swipper/SwComparador";
 import Pincon from "./svg/PinIcon";
 import { useSelector } from "react-redux";
 import Acred from "../drop/Acred";
-
+import DoDisturbIcon from "@mui/icons-material/DoDisturb";
 // const colegios = [
 //   {
 //     Metodos: ["Montessori", "Reggio Emilia"],
@@ -799,7 +799,9 @@ export default function CardsSch({ verMas, setVermas }) {
         </div>
         <div className="flex flex-row items-center gap-12">
           <div className="min-w-[8vh] max-w-[8vh]">
-            <p className="text-[1.7vh] text-[#0D263B] font-semibold   ">Dirección</p>
+            <p className="text-[1.7vh] text-[#0D263B] font-semibold   ">
+              Dirección
+            </p>
           </div>
           <div className={style.bodyCard}>
             {arrColegios?.map((c) => {
@@ -808,9 +810,7 @@ export default function CardsSch({ verMas, setVermas }) {
                   <div className={style.containerCard}>
                     <div className={style.div}>
                       <p
-                        style={{
-                          fontSize: "1.6vh",
-                        }}
+                       className="flex text-[1.5vh] max-w-[20vh]"
                       >
                         {c.direccion}
                       </p>
@@ -823,7 +823,9 @@ export default function CardsSch({ verMas, setVermas }) {
         </div>
         <div className="flex flex-row items-center gap-12">
           <div className="min-w-[8vh] max-w-[8vh]">
-            <p className="text-[1.7vh] text-[#0D263B] font-semibold  ">Tipo de escuela:</p>
+            <p className="text-[1.7vh] text-[#0D263B] font-semibold  ">
+              Tipo de escuela:
+            </p>
           </div>
 
           <div className={style.bodyCard}>
@@ -838,7 +840,7 @@ export default function CardsSch({ verMas, setVermas }) {
                             <div
                               style={{
                                 display: "flex",
-                             
+
                                 fontSize: "1.6vh",
                                 flexDirection: "row",
                               }}
@@ -860,7 +862,9 @@ export default function CardsSch({ verMas, setVermas }) {
         </div>
         <div className="flex flex-row  items-center gap-12">
           <div className="min-w-[8vh] max-w-[8vh]">
-            <p className="text-[1.7vh] text-[#0D263B] font-semibold">Cant. Alumnos:</p>
+            <p className="text-[1.7vh] text-[#0D263B] font-semibold">
+              Cant. Alumnos:
+            </p>
           </div>
 
           <div className={style.bodyCard}>
@@ -909,7 +913,9 @@ export default function CardsSch({ verMas, setVermas }) {
         </div>
         <div className="flex flex-row items-center gap-12">
           <div className="min-w-[8vh] max-w-[8vh]">
-            <p className="text-[1.7vh] text-[#0D263B] font-semibold  ">Métodos Aprendizaje</p>
+            <p className="text-[1.7vh] text-[#0D263B] font-semibold  ">
+              Métodos Aprendizaje
+            </p>
           </div>
           <div className={style.bodyCard}>
             {arrColegios?.map((c) => {
@@ -937,7 +943,10 @@ export default function CardsSch({ verMas, setVermas }) {
                           );
                         })
                       ) : (
-                        <p className="text-[1.6vh] ">No hay datos</p>
+                        <div className="flex w-full items-center justify-center">
+
+                        <DoDisturbIcon sx={{color:'#999999'}} />
+                    </div>
                       )}
                     </div>
                   </div>
@@ -948,7 +957,9 @@ export default function CardsSch({ verMas, setVermas }) {
         </div>
         <div className="flex flex-row items-center gap-12">
           <div className="min-w-[8vh] max-w-[8vh]">
-            <p className="text-[1.7vh] text-[#0D263B] font-semibold  ">Neurodiversidad:</p>
+            <p className="text-[1.7vh] text-[#0D263B] font-semibold  ">
+              Neurodiversidad:
+            </p>
           </div>
 
           <div className={style.bodyCard}>
@@ -977,7 +988,10 @@ export default function CardsSch({ verMas, setVermas }) {
                           );
                         })
                       ) : (
-                        <p className="text-[1.6vh] ">No hay datos</p>
+                        <div className="flex w-full items-center justify-center">
+
+                        <DoDisturbIcon sx={{color:'#999999'}} />
+                    </div>
                       )}
                     </div>
                   </div>
@@ -986,58 +1000,76 @@ export default function CardsSch({ verMas, setVermas }) {
             })}
           </div>
         </div>
-     {  verMas===false &&   <div onClick={hanlderVermas} className="flex flex-row items-center justify-center gap-12">
-                <p className="text-[1.7vh] text-[#0061DF] font-semibold   ">Ver mas</p>
-        </div>}
+        {verMas === false && (
+          <div
+            onClick={hanlderVermas}
+            className="flex flex-row items-center justify-center gap-12"
+          >
+            <p className="text-[1.7vh] text-[#0061DF] font-semibold   ">
+              Ver mas
+            </p>
+          </div>
+        )}
 
-        {  verMas &&   <div onClick={hanlderVermas} className="flex flex-row items-center justify-center gap-12">
-                <p className="text-[1.7vh] text-[#0061DF] font-semibold   ">Ver menos</p>
-        </div>}
-      {     verMas && <div className="flex flex-row items-center gap-12">
-          <div  className="min-w-[8vh] max-w-[8vh]">
-            <p className="text-[1.7vh] text-[#0D263B]  font-semibold   ">Afiliaciones:</p>
+        {verMas && (
+          <div
+            onClick={hanlderVermas}
+            className="flex flex-row items-center justify-center gap-12"
+          >
+            <p className="text-[1.7vh] text-[#0061DF] font-semibold   ">
+              Ver menos
+            </p>
           </div>
-          <div className={style.bodyCard}>
-            {arrColegios?.map((c) => {
-              return (
-                <>
-                  <div className={style.containerCard}>
-                    {verMas && (
-                      <div  className={`${style.div} h-[20vh] `}>
-                        <Acred ids={c.id} />
-                      </div>
-                    )}
-                  </div>
-                </>
-              );
-            })}
+        )}
+        {verMas && (
+          <div className="flex flex-row items-center gap-12">
+            <div className="min-w-[8vh] max-w-[8vh]">
+              <p className="text-[1.7vh] text-[#0D263B]  font-semibold   ">
+                Afiliaciones:
+              </p>
+            </div>
+            <div className={style.bodyCard}>
+              {arrColegios?.map((c) => {
+                return (
+                  <>
+                    <div className={style.containerCard}>
+                      {verMas && (
+                        <div className={`${style.div} h-[20vh] `}>
+                          <Acred ids={c.id} />
+                        </div>
+                      )}
+                    </div>
+                  </>
+                );
+              })}
+            </div>
           </div>
-        </div>}
-        {
-          verMas &&
-             <div className="flex flex-row items-center">
-          <div className="min-w-[8vh] max-w-[8vh]]">
-            <p className="text-[1.7vh] text-[#0D263B] font-semibold ">Infraestructura:</p>
-          </div>
+        )}
+        {verMas && (
+          <div className="flex flex-row items-center">
+            <div className="min-w-[8vh] max-w-[8vh]]">
+              <p className="text-[1.7vh] text-[#0D263B] font-semibold ">
+                Infraestructura:
+              </p>
+            </div>
 
-          <div className={style.bodyCard}>
-            {arrColegios?.map((c) => {
-              return (
-                <>
-                  <div className={style.containerCard}>
-                    {verMas && (
-                      <div className={`${style.div} h-[20vh] `}>
-                        <Acred ids={c.id} />
-                      </div>
-                    )}
-                  </div>
-                </>
-              );
-            })}
+            <div className={style.bodyCard}>
+              {arrColegios?.map((c) => {
+                return (
+                  <>
+                    <div className={style.containerCard}>
+                      {verMas && (
+                        <div className={`${style.div} h-[20vh] `}>
+                          <Acred ids={c.id} />
+                        </div>
+                      )}
+                    </div>
+                  </>
+                );
+              })}
+            </div>
           </div>
-        </div>
-        }
-     
+        )}
       </div>
     </div>
   );

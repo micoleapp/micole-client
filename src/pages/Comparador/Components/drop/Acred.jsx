@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAcreditaciones } from "../../../../redux/SchoolsActions";
+import { getAcreditacionesComparador } from "../../../../redux/ComparadorActions";
 
 export default function Acred({ ids }) {
   const dispatch = useDispatch();
-  const { oneSchool, Acre } = useSelector((state) => state.schools);
+  const { Aflilia } = useSelector((state) => state.comparador);
 
   useEffect(() => {
-    dispatch(getAcreditaciones(ids));
+    dispatch(getAcreditacionesComparador(ids));
   }, []);
 
   return (
@@ -25,7 +26,7 @@ export default function Acred({ ids }) {
             >
               Acreditaciones
             </p>
-            {Acre[0]?.Afiliacions?.map((ac) => {
+            {Aflilia[0]?.Afiliacions?.map((ac) => {
               return (
                 <>
                   {ac.Afiliacion_tipo_Id === 1 && (
@@ -51,7 +52,7 @@ export default function Acred({ ids }) {
             >
               Alianzas
             </p>
-            {Acre[0]?.Afiliacions?.map((ac) => {
+            {Aflilia[0]?.Afiliacions?.map((ac) => {
               return (
                 <>
                   {ac.Afiliacion_tipo_Id === 2 && (
@@ -103,7 +104,7 @@ export default function Acred({ ids }) {
             >
               Asociaciones
             </p>
-            {Acre[0]?.Afiliacions?.map((ac) => {
+            {Aflilia[0]?.Afiliacions?.map((ac) => {
               return (
                 <>
                   {ac.Afiliacion_tipo_Id === 4 && (
