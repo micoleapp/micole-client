@@ -22,7 +22,7 @@ export default function SnackComparador({ open, setOpen }) {
     vertical: "bottom",
     horizontal: "right",
   });
-  const [openSch, setOpenSch] = useState(false);
+  const [openSch, setOpenSch] = useState(true);
   const { vertical, horizontal } = state;
 
   const handleClick = () => {
@@ -58,11 +58,9 @@ export default function SnackComparador({ open, setOpen }) {
         autoHideDuration={16000}
         onClose={handleClose}
       >
-        {/* <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-          This is a success message!
-        </Alert> */}
-        <div className="p-2 flex flex-col items-start justify-start bg-white shadow-md">
-          <div className="flex flex-row gap-2 w-full justify-between">
+  
+        <div className="p-5 flex flex-col items-start justify-start bg-white shadow-md">
+          <div className=" pb-2 flex flex-row gap-2 w-full justify-between">
             <p className="font-semibold  text-[#0D263B] text-[1.8vh]">
               Compara hasta 3 colegios
             </p>
@@ -123,10 +121,10 @@ export default function SnackComparador({ open, setOpen }) {
           )}
 
           <div className="flex flex-row gap-2 w-full items-center justify-center">
-            <Button sx variant="contained">
+            <Button onClick={handleClose} variant="outlined">
               Cancelar
             </Button>
-            <Button>Comparar</Button>
+            <Button  variant="contained">Comparar</Button>
           </div>
         </div>
       </Snackbar>
