@@ -5,17 +5,22 @@ import { getDataSchools } from "../../redux/ComparadorActions";
 import CardsSch from "./Components/Card/CardsSch";
 import style from "./compa.module.css";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 export default function Comparador() {
   const dispatch = useDispatch();
   const [Vermas, setVermas] = useState(false)
-
+  const { arrColegios } = useSelector((state) => state.comparador);
   //   const handler = () => {
   //     dispatch(getDataSchools({ colegio }));
   //   };
   return (
     <>
       <div className="min-h-screen">
-        <div
+        { arrColegios.length > 0 ? 
+        
+      <>
+      
+      <div
           style={{
             width: "100%",
             display: "flex",
@@ -69,44 +74,22 @@ export default function Comparador() {
             
           }}
         >
-          {/* <div className={style.divP}>
-            <div className={`${style.divTabla} justify-end items-end`}>
-              <p>Dirección:</p>
-            </div>
-            <div   className={`${style.divTabla} justify-center items-center`}>
-              <p>Tipo de escuela:</p>
-            </div>
-            <div className={`${style.divTabla} justify-center flex-col gap-2`}>
-              <p>Cant. Alumnos:</p>
-              <p>Área:</p>
-            </div>
-           
-
-            <div className={style.divTabla}>
-              <p>Métodos de Aprendizaje:</p>
-            </div>
-            <div className={style.divTabla}>
-              <p>Neurodiversidad:</p>
-            </div>
-          
-           {Vermas&&
-           <>
-            <div className={style.divTabla}>
-              <p>Infraestructura:</p>
-
-            </div>
-            <div className={style.divTabla}>
-              <p>Afiliaciones:</p>
-            </div>
-           </>
-          }
-           <div className={style.divTabla}>
-             
-             </div>
-   
-          </div> */}
           <CardsSch  verMas={Vermas} setVermas={setVermas}/>
         </div>
+      
+      </>
+
+        
+      :
+      <div className="flex justify-center items-center p-5  semibold text-[3vh]">
+          <p>Aún no has seleccionado ningun colegio!</p>
+      </div>
+    
+      }
+        
+    
+    
+    
       </div>
     </>
   );

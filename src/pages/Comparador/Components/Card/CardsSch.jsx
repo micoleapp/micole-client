@@ -4,8 +4,10 @@ import style from "./cardSch.module.css";
 import SwComparador from "../Swipper/SwComparador";
 import Pincon from "./svg/PinIcon";
 import { useSelector } from "react-redux";
-import Acred from "../drop/Acred";
+
 import DoDisturbIcon from "@mui/icons-material/DoDisturb";
+import AcredComparador from "../drop/Acred";
+import InfraComparador from "../drop/Infra";
 // const colegios = [
 //   {
 //     Metodos: ["Montessori", "Reggio Emilia"],
@@ -797,7 +799,7 @@ export default function CardsSch({ verMas, setVermas }) {
             );
           })}
         </div>
-        <div className="flex flex-row items-center gap-12">
+        <div className="flex flex-row items-start gap-12">
           <div className="min-w-[8vh] max-w-[8vh]">
             <p className="text-[1.7vh] text-[#0D263B] font-semibold   ">
               Dirección
@@ -821,7 +823,7 @@ export default function CardsSch({ verMas, setVermas }) {
             })}
           </div>
         </div>
-        <div className="flex flex-row items-center gap-12">
+        <div className="flex flex-row items-start gap-12">
           <div className="min-w-[8vh] max-w-[8vh]">
             <p className="text-[1.7vh] text-[#0D263B] font-semibold  ">
               Tipo de escuela:
@@ -911,8 +913,8 @@ export default function CardsSch({ verMas, setVermas }) {
             })}
           </div>
         </div>
-        <div className="flex flex-row items-center gap-12">
-          <div className="min-w-[8vh] max-w-[8vh]">
+        <div className="flex flex-row items-start gap-5">
+          <div className="min-w-[8vh] max-w-[10vh]">
             <p className="text-[1.7vh] text-[#0D263B] font-semibold  ">
               Métodos Aprendizaje
             </p>
@@ -943,9 +945,10 @@ export default function CardsSch({ verMas, setVermas }) {
                           );
                         })
                       ) : (
-                        <div className="flex w-full items-center justify-center">
+                        <div className="flex w-full items-center gap-1  pl-2 justify-start">
 
-                        <DoDisturbIcon sx={{color:'#999999'}} />
+                        <DoDisturbIcon sx={{color:'#999999', width:'2vh'}} />
+                        <p className="text-[1.5vh]">Sin especificar</p>
                     </div>
                       )}
                     </div>
@@ -988,9 +991,10 @@ export default function CardsSch({ verMas, setVermas }) {
                           );
                         })
                       ) : (
-                        <div className="flex w-full items-center justify-center">
+                        <div className="flex w-full items-center gap-1  pl-2 justify-start">
 
-                        <DoDisturbIcon sx={{color:'#999999'}} />
+                        <DoDisturbIcon sx={{color:'#999999', width:'2vh'}} />
+                        <p className="text-[1.5vh]">Sin Soporte</p>
                     </div>
                       )}
                     </div>
@@ -1022,7 +1026,7 @@ export default function CardsSch({ verMas, setVermas }) {
           </div>
         )}
         {verMas && (
-          <div className="flex flex-row items-center gap-12">
+          <div className="flex flex-row items-start gap-12">
             <div className="min-w-[8vh] max-w-[8vh]">
               <p className="text-[1.7vh] text-[#0D263B]  font-semibold   ">
                 Afiliaciones:
@@ -1034,8 +1038,8 @@ export default function CardsSch({ verMas, setVermas }) {
                   <>
                     <div className={style.containerCard}>
                       {verMas && (
-                        <div className={`${style.div} h-[20vh] `}>
-                          <Acred ids={c.id} />
+                        <div className={`${style.div} h-[50vh]  items-end justify-start `}>
+                          <AcredComparador ids={c.id} nameColegio={c.nombre_colegio}/>
                         </div>
                       )}
                     </div>
@@ -1046,27 +1050,28 @@ export default function CardsSch({ verMas, setVermas }) {
           </div>
         )}
         {verMas && (
-          <div className="flex flex-row items-center">
-            <div className="min-w-[8vh] max-w-[8vh]]">
+          <div className="flex flex-row items-start gap-12">
+            <div className="min-w-[8vh] max-w-[8vh]">
               <p className="text-[1.7vh] text-[#0D263B] font-semibold ">
                 Infraestructura:
               </p>
             </div>
 
             <div className={style.bodyCard}>
-              {arrColegios?.map((c) => {
+            {arrColegios?.map((c) => {
                 return (
                   <>
                     <div className={style.containerCard}>
                       {verMas && (
-                        <div className={`${style.div} h-[20vh] `}>
-                          <Acred ids={c.id} />
+                        <div className={`${style.div} h-[50vh] items-start justify-start  `}>
+                         <InfraComparador id={c.id}/>
                         </div>
                       )}
                     </div>
                   </>
                 );
               })}
+                  
             </div>
           </div>
         )}
