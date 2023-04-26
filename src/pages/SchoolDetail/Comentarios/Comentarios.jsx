@@ -60,10 +60,10 @@ export default function Comentarios({id}) {
         if (!isAuth) {
             Swal.fire({
                 icon: "info",
-                title: "Inicia Sesion",
-                text: "Debes iniciar sesion o registrarte para comentar",
+                title: "Inicia Sesión",
+                text: "Debes iniciar sesión o registrarte para comentar",
 
-                confirmButtonText: "Iniciar Sesion",
+                confirmButtonText: "Iniciar Sesión",
 
             }).then(res => {
                 if (res.isConfirmed) {
@@ -86,8 +86,8 @@ export default function Comentarios({id}) {
         if (localStorage.getItem("id") === id) {
             SwalProp({
                 status: false,
-                title: "Error!",
-                text: "No puedes comentar mas de una vez"});
+                title: "Ups!...",
+                text: "No puedes comentar más de una vez"});
             return;
         }
         try {

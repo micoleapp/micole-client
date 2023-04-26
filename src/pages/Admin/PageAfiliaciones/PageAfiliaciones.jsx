@@ -104,7 +104,7 @@ export default function PageAfiliaciones() {
         .then((res) => {
           SwalProp({
             status: true,
-            text:"Afiliacion creada!",
+            text:"Afiliación creada!",
             title: "Éxito",
           });
           setNewInfraestructura({
@@ -144,11 +144,11 @@ export default function PageAfiliaciones() {
   const handleDeleteInfra = (id) => {
     try {
       Swal.fire({
-        title: "Estas seguro?",
-        text: "No podras revertir esto!",
+        title: "Estás seguro?",
+        text: "No podrás revertir esto!",
         icon: "warning",
         showDenyButton: true,
-        confirmButtonText: "Si, eliminar!",
+        confirmButtonText: "Sí, eliminar!",
         denyButtonText: `No`,
       }).then((res) => {
         if (res.isConfirmed) {

@@ -105,7 +105,7 @@ function Departamentos() {
           SwalProp({
             status: true,
             title: "Éxito" ,
-            text:"Pais eliminado!"
+            text:"País eliminado!"
           });
           dispatch(getAllDepartaments());
         })

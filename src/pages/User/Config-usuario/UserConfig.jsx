@@ -55,7 +55,7 @@ export default function UserConfig() {
       SwalProp({
         status: false,
         title: "Ups!...",
-        text: "Ingrese su contraseña para modificar algun campo",
+        text: "Ingrese su contraseña para modificar algún campo",
         }
       );
       return;

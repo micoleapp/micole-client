@@ -44,14 +44,14 @@ export default function ListadeEspera() {
         .catch((err) => {
           SwalProp({
             status: false,
-            title: "Oops...",
+            title: "Ups!...",
             text: err.response.data.error,
           });
         });
     } catch (err) {
       SwalProp({
         status: false,
-        title: "Oops...",
+        title: "Ups!...",
         text: err.message,
       });
     }
@@ -75,14 +75,14 @@ export default function ListadeEspera() {
         .catch((err) => {
           SwalProp({
             status: false,
-            title: "Oops...",
+            title: "Ups!...",
             text: err.response.data.error,
           });
         });
     } catch (err) {
       SwalProp({
         status: false,
-        title: "Oops...",
+        title: "Ups!...",
         text: err.message,
       });
     }
