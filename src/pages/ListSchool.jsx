@@ -35,6 +35,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import ListItemText from "@mui/material/ListItemText";
 import { getDataSchools } from "../redux/ComparadorActions";
+import SnackComparador from "./ListSchool/SnackComparador";
 
 const yearNow = new Date().getFullYear();
 const Ingreso2 = [yearNow, yearNow + 1, yearNow + 2];
@@ -293,14 +294,16 @@ function ListSchool() {
     setPage(1);
     dispatch(getFilterListSchool(newData, page));
   }
-
+  const [openComparador, setOpenComparador] = useState(false)
 const handlerComparador =(e,id)=>{
   console.log(id)
   dispatch(getDataSchools({id}))
+  setOpenComparador(true)
 }
 
   return (
-    <div
+    <>
+        <div
       className="flex flex-col py-5 px-0 lg:p-5 bg-[#f6f7f8] "
 
       data-aos-duration="1000"
@@ -1108,6 +1111,11 @@ const handlerComparador =(e,id)=>{
         </section>
       </div>
     </div>
+    {
+    openComparador && <SnackComparador open={openComparador} setOpen={setOpenComparador}  /> 
+    }
+    </>
+
   );
 }
 
