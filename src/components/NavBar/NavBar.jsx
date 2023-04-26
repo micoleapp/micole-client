@@ -85,7 +85,7 @@ function NavBar() {
           >
             Contáctanos
           </p>
-          {/* <div className="flex"> */}
+          <div className="flex">
           <Link to={"/comparador"}>
             <p
               className={`${style.p} hover-underline-animation`}
@@ -100,8 +100,8 @@ function NavBar() {
             color="success"
             sx={{ top: "-4px", left: "10px" }}
           ></Badge>
-          {/* <Comparador/> */}
-          {/* </div> */}
+     
+          </div>
         </div>
 
         <div className="md:hidden">
