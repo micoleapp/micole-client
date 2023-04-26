@@ -97,8 +97,8 @@ function NavBar() {
 
           <Badge
             badgeContent={arrColegios.length}
-            color="success"
-            sx={{ top: "-4px", left: "10px" }}
+         
+            sx={{ top: "-4px", left: "10px" , background:'#0D263B', color:'#fff'}}
           ></Badge>
      
           </div>
