@@ -85,23 +85,23 @@ function NavBar() {
           >
             Contáctanos
           </p>
-          <div className="flex">
-            <Link     to={"/comparador"}> 
-               <p
+          {/* <div className="flex"> */}
+          <Link to={"/comparador"}>
+            <p
               className={`${style.p} hover-underline-animation`}
               // onClick={scrollBot}
             >
               Comparar Colegios
             </p>
-            </Link>
-         
-            <Badge
-              badgeContent={arrColegios.length}
-              color="success"
-              sx={{ top: "-4px", left: "10px" }}
-            ></Badge>
-            {/* <Comparador/> */}
-          </div>
+          </Link>
+
+          <Badge
+            badgeContent={arrColegios.length}
+            color="success"
+            sx={{ top: "-4px", left: "10px" }}
+          ></Badge>
+          {/* <Comparador/> */}
+          {/* </div> */}
         </div>
 
         <div className="md:hidden">
