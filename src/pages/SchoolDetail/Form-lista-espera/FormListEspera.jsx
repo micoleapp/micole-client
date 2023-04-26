@@ -16,10 +16,10 @@ export default function FormListaEspera({ gradoId, año }) {
     if (!isAuth) {
       Swal.fire({
         icon: "info",
-        title: "Inicia Sesion",
-        text: "Debes iniciar sesion o registrarte para comentar",
+        title: "Inicia Sesión",
+        text: "Debes iniciar sesión o registrarte para comentar",
 
-        confirmButtonText: "Iniciar Sesion",
+        confirmButtonText: "Iniciar Sesión",
 
       }).then(res => {
         if (res.isConfirmed) {

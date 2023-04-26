@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import SecCitas from '../../../components/SchoolDetail-CITAS/SecCitas';
 import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
+import SwalProp from '../../../exports/SwalProp';
 import ModalLogin from '../../../components/ModalLogin/ModalLogin';
 import { postCita } from '../../../redux/SchoolsActions';
 import style from "../../SchoolD.module.css"
@@ -64,9 +65,9 @@ export default function CitasD({ ingresoParams, nombre_grado }) {
             e.target["cel"].value === "" ||
             e.target["email"].value === ""
         ) {
-            Swal.fire({
-                icon: "error",
-                title: "Algo salio mal",
+            SwalProp({
+                status: false,
+                title: "Algo salió mal",
                 text: "Debes llenar todos los datos para continuar",
             });
             return;
@@ -80,10 +81,10 @@ export default function CitasD({ ingresoParams, nombre_grado }) {
 
             Swal.fire({
                 icon: "info",
-                title: "Inicia Sesion",
-                text: "Debes iniciar sesion o registrarte",
+                title: "Inicia Sesión",
+                text: "Debes iniciar sesión o registrarte",
 
-                confirmButtonText: "Iniciar Sesion",
+                confirmButtonText: "Iniciar Sesión",
 
             }).then(res => {
                 if (res.isConfirmed) {

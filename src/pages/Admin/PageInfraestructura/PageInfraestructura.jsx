@@ -146,11 +146,11 @@ export default function PageInfraestructura() {
   const handleDeleteInfra = (id) => {
     try {
       Swal.fire({
-        title: "Estas seguro?",
-        text: "No podras revertir esto!",
+        title: "Estás seguro?",
+        text: "No podrás revertir esto!",
         icon: "warning",
         showDenyButton: true,
-        confirmButtonText: "Si, eliminar!",
+        confirmButtonText: "Sí, eliminar!",
         denyButtonText: `No`,
       }).then((res) => {
         if (res.isConfirmed) {
