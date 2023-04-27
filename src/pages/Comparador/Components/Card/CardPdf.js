@@ -270,7 +270,7 @@ export default function CardsSch() {
 
        
       </div>
-    </div>
+    </div> 
   );
 }
  {/* afili */}
