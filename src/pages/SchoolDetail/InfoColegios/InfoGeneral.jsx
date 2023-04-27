@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    faUsers,
-    faCalendar,
-    faSchool,
-} from "@fortawesome/free-solid-svg-icons";
+import { BsPinAngle } from 'react-icons/bs';
 export default function InfoGeneral() {
 
     const { oneSchool } = useSelector(
