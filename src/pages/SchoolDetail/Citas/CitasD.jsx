@@ -35,13 +35,6 @@ export default function CitasD({ ingresoParams, nombre_grado }) {
                 time: data.time
             });
         }
-
-
-
-
-
-
-
     }
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -94,13 +87,12 @@ export default function CitasD({ ingresoParams, nombre_grado }) {
             modo: !modo ? "Presencial" : "Virtual",
         });
     };
-
-    // useEffect(() => {
-    //     setCita({
-    //       ...cita,
-    //       grado: nombre_grado
-    //     })
-    //   }, [nombre_grado])
+    useEffect(() => {
+        if (isAuth) {
+          setCita({ ...cita, nombre: user?.nombre_responsable + " " + user?.apellidos_responsable, correo: user?.email, celular: user?.telefono })
+        }
+      }, [isAuth])
+   
     return (
         <>
             <div className=" bg-white flex flex-col gap-5 rounded-md  w-full">
