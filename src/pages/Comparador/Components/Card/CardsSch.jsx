@@ -27,7 +27,7 @@ export default function CardsSch({ verMas, setVermas }) {
   return (
     <div className=" flex flex-col items-center ">
       <div className="flex flex-col">
-        <div className="pl-[15vh] flex flex-row">
+        <div className="pl-[15vh]  flex flex-end flex-row">
           {arrColegios?.map((c) => {
             return (
               <>
@@ -74,7 +74,7 @@ export default function CardsSch({ verMas, setVermas }) {
             );
           })}
         </div>
-        <div className="flex flex-row items-center gap-12">
+        <div className="flex flex-row items-center gap-[4rem]">
           <div className="min-w-[8vh] max-w-[8vh]">
             <p className="text-[1.7vh] text-[#0D263B] font-semibold  ">
               Dirección:
@@ -96,7 +96,7 @@ export default function CardsSch({ verMas, setVermas }) {
             })}
           </div>
         </div>
-        <div className="flex flex-row items-center gap-12">
+        <div className="flex flex-row items-center gap-[4rem]">
           <div className="min-w-[8vh] max-w-[8vh]">
             <p className="text-[1.7vh] text-[#0D263B] font-semibold  ">
               Tipo de escuela:
@@ -135,7 +135,7 @@ export default function CardsSch({ verMas, setVermas }) {
             })}
           </div>
         </div>
-        <div className="flex flex-row  items-center gap-12">
+        <div className="flex flex-row  items-center gap-[4rem]">
           <div className="min-w-[8vh] max-w-[8vh]">
             <p className="text-[1.7vh] text-[#0D263B] font-semibold">
               Cant. Alumnos:
@@ -162,7 +162,7 @@ export default function CardsSch({ verMas, setVermas }) {
             })}
           </div>
         </div>
-        <div className="flex flex-row items-center gap-12">
+        <div className="flex flex-row items-center gap-[4rem]">
           <div className="min-w-[8vh] max-w-[8vh]">
             <p className="text-[1.7vh] text-[#0D263B] font-semibold  ">Área:</p>
           </div>
@@ -186,7 +186,7 @@ export default function CardsSch({ verMas, setVermas }) {
             })}
           </div>
         </div>
-        <div className="flex flex-row items-start gap-5">
+        <div className="flex flex-row items-start gap-[3rem]">
           <div className="min-w-[8vh] max-w-[10vh]">
             <p className="text-[1.7vh] text-[#0D263B] font-semibold  ">
               Métodos Aprendizaje
@@ -232,7 +232,7 @@ export default function CardsSch({ verMas, setVermas }) {
             })}
           </div>
         </div>
-        <div className="flex flex-row items-center gap-12">
+        <div className="flex flex-row items-center gap-[4rem]">
           <div className="min-w-[8vh] max-w-[8vh]">
             <p className="text-[1.7vh] text-[#0D263B] font-semibold  ">
               Neurodiversidad:
@@ -330,7 +330,7 @@ export default function CardsSch({ verMas, setVermas }) {
           </div>
         )}
         {verMas && (
-          <div className="flex flex-row items-start gap-12">
+          <div className="flex flex-row items-start gap-[4rem]">
             <div className="min-w-[8vh] max-w-[8vh]">
               <p className="text-[1.7vh] text-[#0D263B] font-semibold ">
                 Infraestructura:

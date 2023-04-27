@@ -44,6 +44,9 @@
     padding-bottom: 1vh;
     min-height: 12vh;
     align-items: center;
+    justify-content: center;
+ box-shadow:(0px 10px 50px rgba(13, 38, 59, 0.1));
+
 }
 
 .cardHead img {

@@ -4,7 +4,7 @@ import { getAcreditaciones } from "../../../../redux/SchoolsActions";
 import { getAcreditacionesComparador } from "../../../../redux/ComparadorActions";
 import axios from "axios";
 import SwalProp from "../../../../exports/SwalProp";
-
+import DoDisturbIcon from "@mui/icons-material/DoDisturb";
 export default function AcredComparador({ ids, nameColegio }) {
   const dispatch = useDispatch();
   // const { Afilia , arrColegios } = useSelector((state) => state.comparador);
@@ -40,7 +40,8 @@ export default function AcredComparador({ ids, nameColegio }) {
   return (
     <div className="p-1 bg-white flex flex-col h-fit   ">
       <div className=" p-1  flex   text-xs max-w-[35vh] gap-5">
-        {Afilia&&Afilia?.map((ac) => {
+        {Afilia ? 
+        Afilia?.map((ac) => {
           return (
             <div key={ac.nombre_colegio}>
               {nameColegio === ac.nombre_colegio && (
@@ -146,7 +147,15 @@ export default function AcredComparador({ ids, nameColegio }) {
               )}
             </div>
           );
-        })}
+        })
+      : 
+      <div className="flex w-full items-center gap-1  pl-2 justify-start">
+      <DoDisturbIcon
+        sx={{ color: "#999999", width: "2vh" }}
+      />
+      <p className="text-[1.5vh]">Sin Soporte</p>
+    </div>
+      }
       </div>
     </div>
   );
