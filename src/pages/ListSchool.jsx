@@ -170,7 +170,7 @@ function ListSchool() {
   );
   const [order, setOrder] = React.useState([]);
   const [categorias, setCategorias] = React.useState([]);
-  const [english, setEnglish] = React.useState(40);
+  const [english, setEnglish] = React.useState(null);
 
   const handleChangeEnglish = (event, newValue) => {
     setEnglish(newValue);

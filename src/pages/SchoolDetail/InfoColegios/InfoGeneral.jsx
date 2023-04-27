@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    faUsers,
-    faCalendar,
-    faSchool,
-} from "@fortawesome/free-solid-svg-icons";
+import { BsPinAngle } from 'react-icons/bs';
 export default function InfoGeneral() {
 
     const { oneSchool } = useSelector(
@@ -15,9 +10,9 @@ export default function InfoGeneral() {
 // lalalalal
 
     return (
-        <section className=" bg-white p-5 left flex flex-col gap-8 w-full shadow-md">
+        <section className="left flex flex-col gap-8 w-full">
 
-            <div className="  bg-white flex flex-col gap-2 rounded-md ">
+            <div className=" bg-white flex flex-col gap-2 rounded-md ">
                 <h2 className="font-semibold text-[#0D263B] text-[2.4vh] text-xl">Descripción</h2>
                 <p className=" text-[#696969] text-[1.8vh] ">{oneSchool.descripcion}</p>
             </div>

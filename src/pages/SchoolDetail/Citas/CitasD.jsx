@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import SecCitas from '../../../components/SchoolDetail-CITAS/SecCitas';
 import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
@@ -26,16 +26,6 @@ export default function CitasD({ ingresoParams, nombre_grado }) {
         grado: nombre_grado
     });
 
-    useEffect(() => {
-        setCita({
-          ...cita,
-          nombre: isAuth ? user.nombre_responsable + " " + user?.apellidos_responsable : "",
-
-          celular: isAuth ? user.telefono : "",
-          correo: isAuth ? user.email : "",
-        })
-      }, [user])
-
     function handleChangeDateHS(data) {
         console.log(data)
         if (data.select === true) {
@@ -45,13 +35,6 @@ export default function CitasD({ ingresoParams, nombre_grado }) {
                 time: data.time
             });
         }
-
-
-
-
-
-
-
     }
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -67,7 +50,8 @@ export default function CitasD({ ingresoParams, nombre_grado }) {
         ) {
             SwalProp({
                 status: false,
-                title: "Algo salió mal",
+
+                title: "Ups...",
                 text: "Debes llenar todos los datos para continuar",
             });
             return;
@@ -104,12 +88,16 @@ export default function CitasD({ ingresoParams, nombre_grado }) {
             modo: !modo ? "Presencial" : "Virtual",
         });
     };
-
+    useEffect(() => {
+        if (isAuth) {
+          setCita({ ...cita, nombre: user?.nombre_responsable + " " + user?.apellidos_responsable, correo: user?.email, celular: user?.telefono })
+        }
+      }, [isAuth])
    
     return (
         <>
-            <div className="p-5 bg-white flex flex-col gap-5 rounded-md shadow-md w-full">
-                <h2 className=" p-5 font-semibold  text-[#0D263B] text-[2.4vh]">Solicitar una visita</h2>
+            <div className=" bg-white flex flex-col gap-5 rounded-md  w-full">
+                <h2 className="font-semibold  text-[#0D263B] text-[2.4vh]">Solicitar una visita</h2>
                 <div className={style.divSwipperCitas}>
                     <SecCitas sendDateHs={handleChangeDateHS} />
                 </div>
@@ -117,7 +105,7 @@ export default function CitasD({ ingresoParams, nombre_grado }) {
                 {/* FORMULARIO DE LA CITA */}
                 <form
                     onSubmit={handleSubmit}
-                    className="p-5 w-full flex flex-col gap-7"
+                    className="w-full flex flex-col gap-7"
                 >
                     <div className="flex gap-5">
                         <input

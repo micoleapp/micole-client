@@ -25,20 +25,24 @@ export default function Ubicacion() {
             <p className="font-semibold text-black ">Dirección: </p >
             {oneSchool.direccion}
           </div>
-          <div className="text-text-[#0D263B] gap-2">
+
+          <div className="text-[#0D263B] gap-2">
             <p className="font-semibold text-black ">Departamento: </p >
             {oneSchool?.Departamento?.nombre_departamento}
           </div>
-          <div className="text-text-[#0D263B] gap-2">
+          <div className="text-[#0D263B] gap-2">
+
             <p className="font-semibold text-black ">Distrito: </p >
             {oneSchool?.Distrito?.nombre_distrito}
           </div>
 
-          <div className="text-text-[#0D263B] flex-col gap-2">
+
+          <div className="text-[#0D263B] flex-col gap-2">
             <p className="font-semibold text-black ">Provincia </p >
             {oneSchool?.Provincium?.nombre_provincia}
           </div>
-          <div className="text-text-[#0D263B] gap-2">
+          <div className="text-[#0D263B] gap-2">
+
             <p className="font-semibold text-black ">Pais </p >
             Peru
           </div>
@@ -49,4 +53,6 @@ export default function Ubicacion() {
       </div>
     </>
   );
+
 }
+
