@@ -11,7 +11,10 @@ import TrashIcon from "./svg/TrashIcon";
 import KeyboardArrowDownTwoToneIcon from "@mui/icons-material/KeyboardArrowDownTwoTone";
 import { useDispatch } from "react-redux";
 import { deleteColegio } from "../../redux/ComparadorActions";
-
+function SlideTransition(props) {
+    return <Slide {...props} direction="up" />;
+  }
+  
 export default function SnackComparador({ open, setOpen }) {
   //   const [open, setOpen] = useState(false);
   
@@ -21,6 +24,7 @@ export default function SnackComparador({ open, setOpen }) {
   const [state, setState] = React.useState({
     vertical: "bottom",
     horizontal: "right",
+    Transition: Fade,
   });
   const [openSch, setOpenSch] = useState(true);
   const { vertical, horizontal } = state;
