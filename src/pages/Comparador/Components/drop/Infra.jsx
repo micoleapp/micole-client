@@ -84,7 +84,7 @@ export default function InfraComparador({ id }) {
         ))}
       </Tabs> */}
       <div className=" text-[1.8vh] flex flex-col  w-full justify-center">
-        <p className="text-[1.6vh] font-medium text-[#0D263B] pb-2  ">
+        <p className="text-[1.6vh] font-medium text-[#0D263B] p-2  ">
           Administrativo
         </p>
         <div className="flex flex-col w-full gap-x-10 gap-y-5">
@@ -111,7 +111,7 @@ export default function InfraComparador({ id }) {
             </>
           ))}
         </div>
-        <p className="text-[1.6vh] font-medium text-[#0D263B] pb-2 ">
+        <p className="text-[1.6vh] font-medium text-[#0D263B] p-2  ">
           Artística
         </p>
         <div className="flex flex-col w-full gap-x-10 gap-y-5">
@@ -136,7 +136,7 @@ export default function InfraComparador({ id }) {
             </li>
           ))}
         </div>
-        <p className="text-[1.6vh] font-medium text-[#0D263B] pb-2  ">
+        <p className="text-[1.6vh] font-medium text-[#0D263B] p-2  ">
           Deportiva
         </p>
         <div className="flex flex-col w-full gap-x-10 gap-y-5">
@@ -161,7 +161,7 @@ export default function InfraComparador({ id }) {
             </li>
           ))}
         </div>
-        <p className="text-[1.6vh] font-medium text-[#0D263B] pb-2  ">
+        <p className="text-[1.6vh] font-medium text-[#0D263B] p-2  ">
           Enseñanza
         </p>
         <div className="flex flex-col w-full gap-x-10 gap-y-5">
@@ -186,7 +186,7 @@ export default function InfraComparador({ id }) {
             </li>
           ))}
         </div>
-        <p className="text-[1.6vh] font-medium text-[#0D263B] pb-2  ">
+        <p className="text-[1.6vh] font-medium text-[#0D263B] p-2  ">
           Laboratorio
         </p>
         <div className="flex flex-col w-full gap-x-10 gap-y-5">
