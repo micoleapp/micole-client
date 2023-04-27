@@ -27,14 +27,14 @@ export default function SwComparador({ galeria, primeraFoto }) {
   const { oneSchool } = useSelector((state) => state.schools);
   const arrImg = galeria !== null && JSON.parse(galeria).length > 0 && JSON.parse(galeria);
   console.log(arrImg);
-  arrImg.unshift(primeraFoto);
+  // arrImg.unshift(primeraFoto);
   return (
     <>
       {/* <div className={style.divResponsiveDesktop}> */}
       <div className={style.slider_container}>
         <Swiper
          style={{
-            "--swiper-navigation-color": "#73A3E1",
+            "--swiper-navigation-color": "#FFFF",
             "--swiper-navigation-border": "#000",
             "--swiper-pagination-color": "#fff",
           }}

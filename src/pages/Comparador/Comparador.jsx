@@ -15,7 +15,7 @@ export default function Comparador() {
   //   };
   return (
     <>
-      <div className="min-h-screen">
+      <div className=" pb-[15vh] min-h-screen">
         {arrColegios.length > 0 ? (
           <>
             <div className="w-full flex items-center justify-end p-5 pr-11">
@@ -37,7 +37,7 @@ export default function Comparador() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                paddingBottom: "10vh",
+                paddingBottom: "5vh",
               }}
             >
               <Typography
@@ -48,7 +48,7 @@ export default function Comparador() {
                   fontSize: "2.5vh",
                 }}
               >
-                Comparador de Colegios
+                Comparador
               </Typography>
             </div>
             <div
