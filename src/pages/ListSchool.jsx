@@ -5,7 +5,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Slider from "@mui/material/Slider";
 import ContentLoader from "react-content-loader";
-import { Rating, Typography, Pagination, Box } from "@mui/material";
+import { Rating, Typography, Pagination, Box, Button } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -34,6 +34,8 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import ListItemText from "@mui/material/ListItemText";
+import { getDataSchools } from "../redux/ComparadorActions";
+import SnackComparador from "./ListSchool/SnackComparador/SnackComparador";
 
 const yearNow = new Date().getFullYear();
 const Ingreso2 = [yearNow, yearNow + 1, yearNow + 2];
@@ -274,7 +276,7 @@ function ListSchool() {
     };
 
     return (
-      <button className="text-2xl" onClick={toggleFavorito}>
+      <button className="text-2xl " onClick={toggleFavorito}>
         {favorito ? "❤️" : "🤍"}
       </button>
     );
@@ -292,8 +294,16 @@ function ListSchool() {
     setPage(1);
     dispatch(getFilterListSchool(newData, page));
   }
+  const [openComparador, setOpenComparador] = useState(false)
+const handlerComparador =(e,id)=>{
+  console.log(id)
+  dispatch(getDataSchools({id}))
+  setOpenComparador(true)
+}
+
   return (
-    <div
+    <>
+        <div
       className="flex flex-col py-5 px-0 lg:p-5 bg-[#f6f7f8] "
 
       data-aos-duration="1000"
@@ -1023,7 +1033,7 @@ function ListSchool() {
                                 VER DETALLE
                               </button> :   null}
 
-
+                             
                           </div>
                         </div>
 
@@ -1036,7 +1046,13 @@ function ListSchool() {
                               max={5}
                             />
                           </div>
+                          <div className="flex flex-row gap-2">
+                                  <Button onClick={(e)=> handlerComparador(e,school.id)} variant="outlined" >
+                                  Comparar
+                                </Button>
                           <FavoritoButton />
+                          </div>
+                    
                           {/* <div className="flex gap-5">
                             <FontAwesomeIcon
                               size="lg"
@@ -1095,6 +1111,11 @@ function ListSchool() {
         </section>
       </div>
     </div>
+    {
+    openComparador && <SnackComparador open={openComparador} setOpen={setOpenComparador}  /> 
+    }
+    </>
+
   );
 }
 
