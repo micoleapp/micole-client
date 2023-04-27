@@ -33,3 +33,14 @@
     align-items: flex-end;
     justify-content: center;
 } */
+.divMobile {
+    display: none;
+}
+@media (max-width: 800px) {
+   .divDsktop {
+    display: none;
+   }
+   .divMobile {
+    display: flex;
+}
+}

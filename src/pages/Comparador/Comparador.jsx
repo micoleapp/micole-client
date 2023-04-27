@@ -6,6 +6,7 @@ import CardsSch from "./Components/Card/CardsSch";
 import style from "./compa.module.css";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import CardsMobileComparador from "./Components/CardsMobile/CardsMobileComparador";
 export default function Comparador() {
   const dispatch = useDispatch();
   const [Vermas, setVermas] = useState(false);
@@ -51,7 +52,8 @@ export default function Comparador() {
                 Comparador
               </Typography>
             </div>
-            <div
+          <div className={style.divDsktop}>
+             <div
               style={{
                 display: "flex",
                 flexDirection: "row",
@@ -63,6 +65,10 @@ export default function Comparador() {
             >
               <CardsSch verMas={Vermas} setVermas={setVermas} />
             </div>
+          </div>
+          <div className={style.divMobile}>
+        <CardsMobileComparador />
+      </div>
           </>
         ) : (
           <div className="flex justify-center items-center p-5  semibold text-[3vh]">

@@ -25,6 +25,7 @@ export default function CardsSch({ verMas, setVermas }) {
     dispatch(deleteColegio({ id }));
   };
   return (
+    //                className={`${style.div} max-h-[50vh] items-start justify-start  `}
     <div className=" flex flex-col items-center ">
       <div className="flex flex-col">
         <div className="pl-[15vh]  flex flex-end flex-row">
