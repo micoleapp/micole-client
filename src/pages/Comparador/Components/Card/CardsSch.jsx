@@ -301,7 +301,7 @@ export default function CardsSch({ verMas, setVermas }) {
           </div>
         )}
         {verMas && (
-          <div className="flex flex-row items-start gap-12">
+          <div className="flex flex-row items-start gap-[4rem]">
             <div className="min-w-[8vh] max-w-[8vh]">
               <p className="text-[1.7vh] text-[#0D263B]  font-semibold   ">
                 Afiliaciones:
