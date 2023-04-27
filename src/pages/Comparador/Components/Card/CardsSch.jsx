@@ -40,7 +40,7 @@ export default function CardsSch({ verMas, setVermas }) {
                         style={{
                           fontWeight: "700",
                           color: "#0D263B",
-                          fontSize: "1.8vh",
+                          fontSize: "1.6vh",
                         }}
                       >
                         {c.colegio.nombre_colegio}
