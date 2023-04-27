@@ -141,3 +141,10 @@ input[type=number] { -moz-appearance:textfield; }
 .buttonprop {
   background-color: #0061dd !important;
 }
+
+.swal2-confirm{
+  background-color: #0061dd !important;
+} 
+.swal2-deny{
+  background-color: #0061dd !important;
+}

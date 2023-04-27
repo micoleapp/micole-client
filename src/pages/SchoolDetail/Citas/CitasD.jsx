@@ -50,6 +50,7 @@ export default function CitasD({ ingresoParams, nombre_grado }) {
         ) {
             SwalProp({
                 status: false,
+
                 title: "Ups...",
                 text: "Debes llenar todos los datos para continuar",
             });
@@ -64,10 +65,10 @@ export default function CitasD({ ingresoParams, nombre_grado }) {
 
             Swal.fire({
                 icon: "info",
-                title: "Inicia Sesion",
-                text: "Debes iniciar sesion o registrarte",
+                title: "Inicia Sesión",
+                text: "Debes iniciar sesión o registrarte",
 
-                confirmButtonText: "Iniciar Sesion",
+                confirmButtonText: "Iniciar Sesión",
 
             }).then(res => {
                 if (res.isConfirmed) {

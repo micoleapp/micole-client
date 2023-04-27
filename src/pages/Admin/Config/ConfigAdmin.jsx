@@ -49,7 +49,7 @@ export default function ConfigAdmin() {
     if (!user?.password ) {
       SwalProp({
         status: false,
-        text: "Ingrese su contraseña para modificar algun campo",
+        text: "Ingrese su contraseña para modificar algún campo",
         title: "Ups!..."
     });
       return;

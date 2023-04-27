@@ -33,7 +33,7 @@ export default function InscripcionEvento({
           handleClose();
           SwalProp({
             status: true,
-            title: "Inscripcion Exitosa!",
+            title: "Inscripción Exitosa!",
             text: "",
           });
 
@@ -49,10 +49,10 @@ export default function InscripcionEvento({
       handleClose();
       Swal.fire({
         icon: "info",
-        title: "Inicia Sesion",
-        text: "Debes iniciar sesion o registrarte para inscribirte al evento",
+        title: "Inicia Sesión",
+        text: "Debes iniciar sesión o registrarte para inscribirte al evento",
 
-        confirmButtonAriaLabel: "Iniciar Sesion",
+        confirmButtonAriaLabel: "Iniciar Sesión",
       });
 
       return;

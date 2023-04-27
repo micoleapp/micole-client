@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import { useDispatch, useSelector } from "react-redux";
 import ListItemText from "@mui/material/ListItemText";
 import FormControlLabel from "@mui/material/FormControlLabel";
-
+import Success from "../assets/Icon.png"
 import Checkbox from "@mui/material/Checkbox";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -194,7 +194,7 @@ function DashboardSchool() {
       SwalProp({
        status:false,
         title: "Ups!...",
-        text: "Ingrese su contraseña para modificar algun campo"
+        text: "Ingrese su contraseña para modificar algún campo"
     });
       return;
     }
@@ -680,7 +680,7 @@ function DashboardSchool() {
     SwalProp({
       status: true,
       title: "Éxito",
-      text:"Imagenes subidas!"
+      text:"Imágenes subidas!"
     });
     setSpanTwo(false);
     setActiveUpTwo(false);
@@ -868,8 +868,8 @@ function DashboardSchool() {
   const handleSubmitFormComplete = (e) => {
     e.preventDefault();
     Swal.fire({
-      icon: "success",
-      title: "Felicidades, ya estas a un paso de publicar tu colegio",
+      imageUrl: Success,
+      title: "Felicidades, ya estás a un paso de publicar tu colegio",
       confirmButtonText: "Continuar",
     }).then((res) => {
       if (res.isConfirmed) {
@@ -968,7 +968,7 @@ function DashboardSchool() {
           SwalProp({
             status: true,
             title: "Felicitaciones!",
-            text: "Colegio listo para mostrarse en nuestra pagina!",
+            text: "Colegio listo para mostrarse en nuestra página!",
           });
         })
         .catch((err) => {
@@ -1047,11 +1047,11 @@ function DashboardSchool() {
   const handleDelete = (id) => {
     try {
       Swal.fire({
-        title: "Estas seguro?",
-        text: "No podras revertir esto!",
+        title: "Estás seguro?",
+        text: "No podrás revertir esto!",
         icon: "warning",
         showDenyButton: true,
-        confirmButtonText: "Si, eliminar!",
+        confirmButtonText: "Sí, eliminar!",
         denyButtonText: `No`,
       }).then((res) => {
         if (res.isConfirmed) {
@@ -2121,9 +2121,7 @@ function DashboardSchool() {
                         </Button>
                       ))} */}
                       </Box>
-                      <small className="flex justify-end">
-                        Al apretar NEXT estas guardando tus datos
-                      </small>
+                      
                     </form>
                   )}
                   {activeStep === 1 && (
@@ -2406,9 +2404,7 @@ function DashboardSchool() {
                         </Button>
                       ))} */}
                       </Box>
-                      <small className="flex justify-end">
-                        Al apretar NEXT estas guardando tus datos
-                      </small>
+                     
                     </div>
                   )}
                   {activeStep === 2 && (
@@ -2644,9 +2640,7 @@ function DashboardSchool() {
                         </Button>
                       ))} */}
                       </Box>
-                      <small className="flex justify-end">
-                        Al apretar NEXT estas guardando tus datos
-                      </small>
+                      
                     </div>
                   )}
                   {activeStep === 3 && (
@@ -2752,9 +2746,7 @@ function DashboardSchool() {
                         </Button>
                       ))} */}
                       </Box>
-                      <small className="flex justify-end">
-                        Al apretar NEXT estas guardando tus datos
-                      </small>
+                     
                     </div>
                   )}
                   {activeStep === 4 && (
@@ -3061,9 +3053,7 @@ function DashboardSchool() {
                                           </Button>
                                         ))} */}
                       </Box>
-                      <small className="flex justify-end">
-                        Al apretar NEXT estas guardando tus datos
-                      </small>
+                     
                     </div>
                   )}
                 </React.Fragment>

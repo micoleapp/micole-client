@@ -132,14 +132,14 @@ export const login = (user) => (dispatch) => {
       SwalProp({
         status : true,
         title: "Bienvenido a MiCole",
-        text: 'Inicio de sesion exitoso'
+        text: 'Inicio de sesión exitoso'
       })
 
     })
     .catch((err) => {dispatch(getError(err.response.data.error))
       SwalProp({
         status: false,
-        title: 'Oops...',
+        title: "Ups!...",
         text: err.response.data.error
       })});
 };
