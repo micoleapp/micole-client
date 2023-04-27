@@ -311,7 +311,7 @@ export default function CardsSch({ verMas, setVermas }) {
                   <>
                     <div className={style.containerCard}>
                       {verMas && (
-                        <div className={`${style.div} h-[50vh] items-start justify-start  `}>
+                        <div className={`${style.div} max-h-[50vh] items-start justify-start  `}>
                           <AcredComparador ids={c.colegio.id} nameColegio={c.colegio.nombre_colegio}/>
                         </div>
                       )}
@@ -336,7 +336,7 @@ export default function CardsSch({ verMas, setVermas }) {
                   <>
                     <div className={style.containerCard}>
                       {verMas && (
-                        <div className={`${style.div} h-[50vh] items-start justify-start  `}>
+                        <div className={`${style.div} max-h-[50vh]  items-start justify-start  `}>
                          <InfraComparador id={c.colegio.id}/>
                         </div>
                       )}

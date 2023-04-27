@@ -38,7 +38,7 @@ export default function AcredComparador({ ids, nameColegio }) {
   }, []);
 
   return (
-    <div className="p-1 bg-white flex flex-col   ">
+    <div className="p-1 bg-white flex flex-col h-fit   ">
       <div className=" p-1  flex   text-xs max-w-[35vh] gap-5">
         {Afilia&&Afilia?.map((ac) => {
           return (
