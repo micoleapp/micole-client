@@ -153,11 +153,7 @@ function SchoolDetail() {
 
   document.title = oneSchool?.nombre_colegio?.length > 0 ? oneSchool.nombre_colegio : "MiCole"
 
-  useEffect(() => {
-    if (isAuth) {
-      setCita({ ...cita, nombre: user?.nombre_responsable + " " + user?.apellidos_responsable, correo: user?.email, celular: user?.telefono })
-    }
-  }, [isAuth])
+
 
   const [value, setValue] = useState("1");
   const handleChange = (event, newValue) => {
