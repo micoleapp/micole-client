@@ -5,7 +5,7 @@ import { getAcreditaciones } from '../../../../redux/SchoolsActions';
 export default function Acreditaciones() {
   const dispatch = useDispatch();
   const { oneSchool, Acre } = useSelector((state) => state.schools);
-
+console.log(Acre)
   useEffect(() => {
     dispatch(getAcreditaciones(oneSchool?.id));
   }, []);
