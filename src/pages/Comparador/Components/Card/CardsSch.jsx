@@ -8,7 +8,9 @@ import { useSelector } from "react-redux";
 import DoDisturbIcon from "@mui/icons-material/DoDisturb";
 import AcredComparador from "../drop/Acred";
 import InfraComparador from "../drop/Infra";
-
+import CloseIcon from '@mui/icons-material/Close';
+import { deleteColegio } from "../../../../redux/ComparadorActions";
+import { useDispatch } from "react-redux";
 export default function CardsSch({ verMas, setVermas }) {
   const [rating, setRating] = React.useState(null);
   const { arrColegios } = useSelector((state) => state.comparador);
@@ -16,6 +18,12 @@ export default function CardsSch({ verMas, setVermas }) {
 
   const hanlderVermas = () => {
     setVermas(!verMas);
+  };
+
+ const  dispatch   = useDispatch()
+  const handlerDelete = (e, id) => {
+
+    dispatch(deleteColegio({ id }));
   };
   return (
     <div className="flex flex-col items-center ">
@@ -25,8 +33,10 @@ export default function CardsSch({ verMas, setVermas }) {
             return (
               <>
                 <div className={style.containerCard}>
+                
                   {/* HEAD */}
                   <div className={style.cardHead}>
+              
                     <img src={c.colegio.logo} alt={c.colegio.nombre_colegio} />
                     <div className={style.cardHead_info}>
                       <p
@@ -48,6 +58,7 @@ export default function CardsSch({ verMas, setVermas }) {
                         />
                       </div>
                     </div>
+                    <CloseIcon sx={{color:'#9999'}} onClick={(e)=>handlerDelete(e,c.colegio.id)} />
                   </div>
                   <div>
                     {/* SW*/}

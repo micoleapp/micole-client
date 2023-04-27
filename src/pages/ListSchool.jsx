@@ -35,7 +35,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import ListItemText from "@mui/material/ListItemText";
 import { getDataSchools } from "../redux/ComparadorActions";
-import SnackComparador from "./ListSchool/SnackComparador";
+import SnackComparador from "./ListSchool/SnackComparador/SnackComparador";
 
 const yearNow = new Date().getFullYear();
 const Ingreso2 = [yearNow, yearNow + 1, yearNow + 2];

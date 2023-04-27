@@ -7,12 +7,14 @@ import { useSelector } from "react-redux";
 import { Rating } from "@mui/material";
 import { MdDeleteForever } from "react-icons/md";
 import style from "./snack.module.css";
-import TrashIcon from "./svg/TrashIcon";
+
 import KeyboardArrowDownTwoToneIcon from "@mui/icons-material/KeyboardArrowDownTwoTone";
 import { useDispatch } from "react-redux";
-import { deleteColegio } from "../../redux/ComparadorActions";
+
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { deleteColegio } from "../../../redux/ComparadorActions";
+import TrashIcon from "./svg/TrashIcon";
 function SlideTransition(props) {
   return <Slide {...props} direction="up" />;
 }
