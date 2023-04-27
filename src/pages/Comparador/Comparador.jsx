@@ -18,7 +18,7 @@ export default function Comparador() {
       <div className="min-h-screen">
         {arrColegios.length > 0 ? (
           <>
-            <div className="w-full flex items-center justify-end p-5">
+            <div className="w-full flex items-center justify-end p-5 pr-11">
               <Button
                 sx={{
                   fontFamily: "Poppins",
