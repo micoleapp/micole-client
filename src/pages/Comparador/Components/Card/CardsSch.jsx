@@ -27,7 +27,7 @@ export default function CardsSch({ verMas, setVermas }) {
                 <div className={style.containerCard}>
                   {/* HEAD */}
                   <div className={style.cardHead}>
-                    <img src={c.logo} alt={c.nombre_colegio} />
+                    <img src={c.colegio.logo} alt={c.colegio.nombre_colegio} />
                     <div className={style.cardHead_info}>
                       <p
                         style={{
@@ -36,13 +36,13 @@ export default function CardsSch({ verMas, setVermas }) {
                           fontSize: "1.8vh",
                         }}
                       >
-                        {c.nombre_colegio}
+                        {c.colegio.nombre_colegio}
                       </p>
-                      <p>{c.Distrito?.nombre_distrito}</p>
+                      <p>{c.colegio.Distrito?.nombre_distrito}</p>
                       <div className="drop-shadow-md">
                         <Rating
                           name="simple-controlled"
-                          value={c.rating / 2}
+                          value={c.colegio.rating / 2}
                           readOnly
                           max={5}
                         />
@@ -53,8 +53,8 @@ export default function CardsSch({ verMas, setVermas }) {
                     {/* SW*/}
                     <div className={style.SW}>
                       <SwComparador
-                        galeria={c?.galeria_fotos}
-                        primeraFoto={c?.primera_imagen}
+                        galeria={c.colegio?.galeria_fotos}
+                        primeraFoto={c.colegio?.primera_imagen}
                       />
                     </div>
                   </div>
@@ -63,11 +63,9 @@ export default function CardsSch({ verMas, setVermas }) {
             );
           })}
         </div>
-        <div className="flex flex-row items-start gap-12">
+        <div className="flex flex-row items-center gap-12">
           <div className="min-w-[8vh] max-w-[8vh]">
-            <p className="text-[1.7vh] text-[#0D263B] font-semibold   ">
-              Dirección
-            </p>
+            <p className="text-[1.7vh] text-[#0D263B] font-semibold  ">Dirección:</p>
           </div>
           <div className={style.bodyCard}>
             {arrColegios?.map((c) => {
@@ -78,7 +76,7 @@ export default function CardsSch({ verMas, setVermas }) {
                       <p
                        className="flex text-[1.5vh] max-w-[20vh]"
                       >
-                        {c.direccion}
+                        {c.colegio.direccion}
                       </p>
                     </div>
                   </div>
@@ -99,7 +97,7 @@ export default function CardsSch({ verMas, setVermas }) {
               return (
                 <>
                   <div className={style.containerCard}>
-                    {c.Categoria?.map((ca) => {
+                    {c.colegio.Categoria?.map((ca) => {
                       return (
                         <>
                           <div className={style.div}>
@@ -144,7 +142,7 @@ export default function CardsSch({ verMas, setVermas }) {
                           fontSize: "1.6vh",
                         }}
                       >
-                        {c.numero_estudiantes} {"alumnos"}
+                        {c.colegio.numero_estudiantes} {"alumnos"}
                       </p>
                     </div>
                   </div>
@@ -168,7 +166,7 @@ export default function CardsSch({ verMas, setVermas }) {
                           fontSize: "1.6vh",
                         }}
                       >
-                        {c.area} {"m2"}
+                        {c.colegio.area} {"m2"}
                       </p>
                     </div>
                   </div>
@@ -189,8 +187,8 @@ export default function CardsSch({ verMas, setVermas }) {
                 <>
                   <div className={style.containerCard}>
                     <div className={style.div}>
-                      {c.Metodos.length > 0 ? (
-                        c.Metodos?.map((m) => {
+                      {c.colegio.Metodos.length > 0 ? (
+                        c.colegio.Metodos?.map((m) => {
                           return (
                             <>
                               <div
@@ -235,8 +233,8 @@ export default function CardsSch({ verMas, setVermas }) {
                 <>
                   <div className={style.containerCard}>
                     <div className={style.div}>
-                      {c.Dificultades.length > 0 ? (
-                        c.Dificultades?.map((d) => {
+                      {c.colegio.Dificultades.length > 0 ? (
+                        c.colegio.Dificultades?.map((d) => {
                           return (
                             <>
                               <div
@@ -303,7 +301,7 @@ export default function CardsSch({ verMas, setVermas }) {
                     <div className={style.containerCard}>
                       {verMas && (
                         <div className={`${style.div} h-[50vh] items-start justify-start  `}>
-                          <AcredComparador ids={c.id} nameColegio={c.nombre_colegio}/>
+                          <AcredComparador ids={c.colegio.id} nameColegio={c.colegio.nombre_colegio}/>
                         </div>
                       )}
                     </div>
@@ -328,7 +326,7 @@ export default function CardsSch({ verMas, setVermas }) {
                     <div className={style.containerCard}>
                       {verMas && (
                         <div className={`${style.div} h-[50vh] items-start justify-start  `}>
-                         <InfraComparador id={c.id}/>
+                         <InfraComparador id={c.colegio.id}/>
                         </div>
                       )}
                     </div>

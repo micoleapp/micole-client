@@ -2,11 +2,11 @@ import axios from "axios";
 import { getDataColegios,getAcreCom ,deleteSch} from "./ComparadorSlice";
 import Swal from "sweetalert2";
 import SwalProp from "../exports/SwalProp";
-export const getDataSchools =({ id }) =>
-  (dispatch) => {
+export const getDataSchools =({ id }) =>  (dispatch) => {
+  console.log(id)
     try {
       axios
-        .get(`/colegios/${id}`)
+        .get(`/colegios/comparador/${id}`)
         .then((res) => dispatch(getDataColegios(res.data)))
         .catch((err) => {
           SwalProp({
