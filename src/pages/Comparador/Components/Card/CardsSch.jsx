@@ -213,7 +213,7 @@ export default function CardsSch({ verMas, setVermas }) {
                                 }}
                               >
                                 <Pincon />
-                                <p className="text-[1.6vh] ">{m}</p>
+                                <p className="text-[1.6vh] ">{m.nombre_metodo}</p>
                               </div>
                             </>
                           );
@@ -260,7 +260,7 @@ export default function CardsSch({ verMas, setVermas }) {
                                 }}
                               >
                                 <Pincon />
-                                <p className="text-[1.6vh] ">{d}</p>
+                                <p className="text-[1.6vh] ">{d.nombre_dificultad }</p>
                               </div>
                             </>
                           );
