@@ -20,7 +20,7 @@ export default function Comparador() {
         {arrColegios.length > 0 ? (
           <>
             <div className="w-full flex items-center justify-end p-5 pr-11">
-              <Button
+              {/* <Button
                 sx={{
                   fontFamily: "Poppins",
                   fontWeight: "600",
@@ -30,8 +30,11 @@ export default function Comparador() {
                 variant="contained"
               >
                 Descargar comparación
-              </Button>
+              </Button> */}
             </div>
+         
+         
+         
             <div
               style={{
                 width: "100%",
