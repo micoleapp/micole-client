@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import { useDispatch, useSelector } from "react-redux";
 import ListItemText from "@mui/material/ListItemText";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import Success from "../assets/Icon.png"
+import Success from "../assets/Icon.png";
 import Checkbox from "@mui/material/Checkbox";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -44,7 +44,7 @@ import { steps } from "../MockupInfo/Pasos";
 import {
   getVacantes,
   postHorariosVacantes,
-  getCitaAgendadas
+  getCitaAgendadas,
 } from "../redux/SchoolsActions";
 import { CiUser, CiClock1 } from "react-icons/ci";
 import { BsWindowDock } from "react-icons/bs";
@@ -53,7 +53,13 @@ import { RiImageAddLine } from "react-icons/ri";
 import { GiHexagonalNut } from "react-icons/gi";
 import { BsCalendarCheck } from "react-icons/bs";
 import { useEffect } from "react";
-import { logout, getSchoolDetail , setVacantesRedux, getInfraestructuraSchool, getAfiliacionSchool} from "../redux/AuthActions";
+import {
+  logout,
+  getSchoolDetail,
+  setVacantesRedux,
+  getInfraestructuraSchool,
+  getAfiliacionSchool,
+} from "../redux/AuthActions";
 import { useState } from "react";
 import { useRef } from "react";
 import axios from "axios";
@@ -78,7 +84,7 @@ import { getCita } from "../redux/CitasActions";
 import Miplan from "../components/Miplan/Miplan";
 import Modal from "@mui/material/Modal";
 import ListadeEspera from "./ListaEspera/ListadeEspera";
-import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 const styleModal = {
   position: "absolute",
   top: "50%",
@@ -161,8 +167,14 @@ function DashboardSchool() {
     dificultades,
     metodos,
   } = useSelector((state) => state.schools);
-  const { user, oneSchool, loading,infraestructura:oneInfra,afiliacion:oneAfiliacion } = useSelector((state) => state.auth);
-
+  const {
+    user,
+    oneSchool,
+    loading,
+    infraestructura: oneInfra,
+    afiliacion: oneAfiliacion,
+  } = useSelector((state) => state.auth);
+  console.log(afiliaciones);
   const id = user.id;
 
   const {
@@ -187,15 +199,15 @@ function DashboardSchool() {
         title: "Ups!...",
         text: "Las nuevas contraseñas no coinciden",
       });
-     
+
       return;
     }
     if (!user.password) {
       SwalProp({
-       status:false,
+        status: false,
         title: "Ups!...",
-        text: "Ingrese su contraseña para modificar algún campo"
-    });
+        text: "Ingrese su contraseña para modificar algún campo",
+      });
       return;
     }
     const data = {
@@ -214,7 +226,6 @@ function DashboardSchool() {
             title: "Éxito",
             text: "Datos actualizados!",
           });
-          
         })
         .catch((err) => {
           SwalProp({
@@ -453,25 +464,22 @@ function DashboardSchool() {
     infraestructura: oneInfra?.Infraestructuras
       ? oneInfra.Infraestructuras
       : [],
-    afiliaciones:
-      oneAfiliacion?.Afiliacions ? oneAfiliacion.Afiliacions : [],
+    afiliaciones: oneAfiliacion?.Afiliacions ? oneAfiliacion.Afiliacions : [],
     dificultades: oneSchool?.Dificultades ? oneSchool.Dificultades : [],
     metodos: oneSchool?.Metodos ? oneSchool.Metodos : [],
   };
-  
-  
 
   const [datosPrincipales, setDatosPrincipales] = useState(
     initialDatosPrincipales
-    );  
-    console.log(initialDatosPrincipales)
-    console.log(datosPrincipales)
-    console.log(oneAfiliacion)
-    console.log(oneInfra)
-    useEffect(()=>{
-      setDatosPrincipales(initialDatosPrincipales)
-    },[oneInfra,oneAfiliacion])
-    const datosPrincipalesCompleted = () => {
+  );
+  console.log(initialDatosPrincipales);
+  console.log(datosPrincipales);
+  console.log(oneAfiliacion);
+  console.log(oneInfra);
+  useEffect(() => {
+    setDatosPrincipales(initialDatosPrincipales);
+  }, [oneInfra, oneAfiliacion]);
+  const datosPrincipalesCompleted = () => {
     if (
       datosPrincipales.nombreColegio !== "" &&
       datosPrincipales.descripcion !== "" &&
@@ -570,13 +578,13 @@ function DashboardSchool() {
     }
     SwalProp({
       status: true,
-      title: "Éxito" ,
-      text:"Imagen subida!"
+      title: "Éxito",
+      text: "Imagen subida!",
     });
     setSpanOne(false);
     setActiveUpOne(false);
   };
-    const handleFilesSubmitLogo = async (e) => {
+  const handleFilesSubmitLogo = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     try {
@@ -598,7 +606,7 @@ function DashboardSchool() {
     SwalProp({
       status: true,
       title: "Éxito",
-      text:"Imagen subida!"
+      text: "Imagen subida!",
     });
     setSpanLogo(false);
     setActiveUpLogo(false);
@@ -625,7 +633,7 @@ function DashboardSchool() {
     SwalProp({
       status: true,
       title: "Éxito",
-      text:"Imagen subida!"
+      text: "Imagen subida!",
     });
     setSpanOne(false);
     setActiveUpOne(false);
@@ -680,7 +688,7 @@ function DashboardSchool() {
     SwalProp({
       status: true,
       title: "Éxito",
-      text:"Imágenes subidas!"
+      text: "Imágenes subidas!",
     });
     setSpanTwo(false);
     setActiveUpTwo(false);
@@ -705,8 +713,7 @@ function DashboardSchool() {
     oneSchool?.galeria_fotos?.length > 0
       ? JSON.parse(oneSchool.galeria_fotos)
       : [];
-      const initialPreviewLogo =
-      oneSchool?.logo?.length > 0 ? oneSchool.logo : "";
+  const initialPreviewLogo = oneSchool?.logo?.length > 0 ? oneSchool.logo : "";
   const [preview, setPreview] = useState(initialPreview);
   const [previewOne, setPreviewOne] = useState(initialPreviewOne);
   const [previewLogo, setPreviewLogo] = useState(initialPreviewLogo);
@@ -773,10 +780,9 @@ function DashboardSchool() {
         reader.onloadend = () => {
           setPreview((prev) => [...prev, reader.result]);
         };
-        setActiveUpTwo(true)
-        setSpanTwo(true)
-      }
-      );
+        setActiveUpTwo(true);
+        setSpanTwo(true);
+      });
     }
   }, [files]);
 
@@ -792,8 +798,8 @@ function DashboardSchool() {
       reader.onloadend = () => {
         setPreviewOne(reader.result);
       };
-      setActiveUpOne(true)
-      setSpanOne(true)
+      setActiveUpOne(true);
+      setSpanOne(true);
     }
   }, [file]);
   useEffect(() => {
@@ -816,7 +822,7 @@ function DashboardSchool() {
       };
     }
   }, [fileEditEvento]);
-  
+
   useEffect(() => {
     if (fileLogo !== null && fileLogo !== undefined) {
       const reader = new FileReader();
@@ -824,41 +830,43 @@ function DashboardSchool() {
       reader.onloadend = () => {
         setPreviewLogo(reader.result);
       };
-      setActiveUpLogo(true)
-      setSpanLogo(true)
-      
+      setActiveUpLogo(true);
+      setSpanLogo(true);
     }
   }, [fileLogo]);
-  
 
   const eliminarImagenDePreview = (img) => {
-    let newPreview = preview.filter((image) => image !== img)
+    let newPreview = preview.filter((image) => image !== img);
     setPreview(newPreview);
-    setMultimedia({...multimedia,images:newPreview})
+    setMultimedia({ ...multimedia, images: newPreview });
   };
-  useEffect(()=>{
-    if(multimedia.images.length === 0){
-      setSpanTwo(false)
-      setActiveUpTwo(false)
+  useEffect(() => {
+    if (multimedia.images.length === 0) {
+      setSpanTwo(false);
+      setActiveUpTwo(false);
     }
-  },[multimedia.images])
+  }, [multimedia.images]);
   const eliminarImagenDePreviewOne = (img) => {
     setPreviewOne("");
-    setMultimedia({...multimedia,image:""})
-    setSpanOne(false)
-    setActiveUpOne(false)
+    setMultimedia({ ...multimedia, image: "" });
+    setSpanOne(false);
+    setActiveUpOne(false);
   };
   const eliminarImagenDePreviewLogo = (img) => {
     setPreviewLogo("");
-    setMultimedia({...multimedia,logo:""})
-    setActiveUpLogo(false)
-    setSpanLogo(false)
+    setMultimedia({ ...multimedia, logo: "" });
+    setActiveUpLogo(false);
+    setSpanLogo(false);
   };
   const [image, setImage] = useState(null);
   const [imageLogo, setImageLogo] = useState(null);
 
   const multimediaCompleted = () => {
-    if (multimedia.image !== "" && multimedia.images.length !== 0 && multimedia.logo !== "") {
+    if (
+      multimedia.image !== "" &&
+      multimedia.images.length !== 0 &&
+      multimedia.logo !== ""
+    ) {
       return false;
     } else {
       return true;
@@ -893,7 +901,7 @@ function DashboardSchool() {
       ],
     },
     {
-      Miércoles : [
+      Miércoles: [
         dayjs("2014-08-18T08:00:00"),
         dayjs("2014-08-18T17:00:00"),
         true,
@@ -960,7 +968,7 @@ function DashboardSchool() {
 
     console.log(newDays);
     dispatch(postHorariosVacantes(newDays));
-    console.log(user.id)
+    console.log(user.id);
     try {
       axios
         .put(`/colegios/activo/${user.id}`, { isActive: true })
@@ -991,7 +999,7 @@ function DashboardSchool() {
   const [seeNewPassword, setSeeNewPassword] = useState(false);
 
   useEffect(() => {
-    console.log(datosPrincipales.niveles)
+    console.log(datosPrincipales.niveles);
     dispatch(getVacantes(datosPrincipales.niveles));
   }, [datosPrincipales.niveles]);
 
@@ -1016,7 +1024,7 @@ function DashboardSchool() {
           SwalProp({
             status: true,
             title: "Éxito",
-            text:"Evento creado!"
+            text: "Evento creado!",
           });
           dispatch(getSchoolDetail(id));
           setEvento({
@@ -1062,7 +1070,7 @@ function DashboardSchool() {
               SwalProp({
                 status: true,
                 title: "Éxito",
-                text:"Evento eliminado!"
+                text: "Evento eliminado!",
               });
             })
             .catch((err) => {
@@ -1087,7 +1095,7 @@ function DashboardSchool() {
             SwalProp({
               status: true,
               title: "Éxito",
-              text: "Evento editado!"
+              text: "Evento editado!",
             });
             dispatch(getSchoolDetail(user.id));
           })
@@ -1120,7 +1128,7 @@ function DashboardSchool() {
             SwalProp({
               status: true,
               title: "Éxito",
-              text: "Evento editado!"
+              text: "Evento editado!",
             });
             dispatch(getSchoolDetail(user.id));
           })
@@ -1169,19 +1177,17 @@ function DashboardSchool() {
     });
   };
 
-  useEffect(()=>{
-    if(activeStep === 3){
-      dispatch(setVacantesRedux(id))
+  useEffect(() => {
+    if (activeStep === 3) {
+      dispatch(setVacantesRedux(id));
     }
-    if(activeStep === 1){
-      dispatch(getInfraestructuraSchool(id))
+    if (activeStep === 1) {
+      dispatch(getInfraestructuraSchool(id));
     }
-    if(activeStep === 2){
-      dispatch(getAfiliacionSchool(id))
+    if (activeStep === 2) {
+      dispatch(getAfiliacionSchool(id));
     }
-  },[activeStep])
-
-
+  }, [activeStep]);
 
   return (
     <div className="flex lg:flex-row flex-col">
@@ -1334,29 +1340,28 @@ function DashboardSchool() {
             </span>
           </button>
 
-
           <button
-              className={`flex items-center duration-300 focus:bg-[#0061dd] focus:text-white cursor-pointer gap-2 group p-3 rounded-md hover:bg-[#0060dd97] hover:text-white ${
-                page == 7 ? "bg-[#0061dd] text-white" : null
-              } `}
-              onClick={() => {
-                setOpen();
-                setPage(7);
-              }}
+            className={`flex items-center duration-300 focus:bg-[#0061dd] focus:text-white cursor-pointer gap-2 group p-3 rounded-md hover:bg-[#0060dd97] hover:text-white ${
+              page == 7 ? "bg-[#0061dd] text-white" : null
+            } `}
+            onClick={() => {
+              setOpen();
+              setPage(7);
+            }}
+          >
+            <FormatListBulletedIcon
+              className={`text-xl text-[#0061dd] group-focus:text-white group-hover:text-white ${
+                page == 7 ? "text-white" : null
+              }`}
+            />
+            <span
+              className={`text-sm text-black/80 group-focus:text-white group-hover:text-white ${
+                page == 7 ? "text-white" : null
+              }`}
             >
-              <FormatListBulletedIcon
-                className={`text-xl text-[#0061dd] group-focus:text-white group-hover:text-white ${
-                  page == 7 ? "text-white" : null
-                }`}
-              />
-              <span
-                className={`text-sm text-black/80 group-focus:text-white group-hover:text-white ${
-                  page == 7 ? "text-white" : null
-                }`}
-              >
-                Lista de Espera
-              </span>
-            </button>
+              Lista de Espera
+            </span>
+          </button>
 
           <button
             className={`flex items-center duration-300 focus:bg-[#0061dd] focus:text-white cursor-pointer gap-2 group p-3 rounded-md hover:bg-[#0060dd97] hover:text-white ${
@@ -2121,7 +2126,6 @@ function DashboardSchool() {
                         </Button>
                       ))} */}
                       </Box>
-                      
                     </form>
                   )}
                   {activeStep === 1 && (
@@ -2148,9 +2152,9 @@ function DashboardSchool() {
                                     <FormControlLabel
                                       control={
                                         <Checkbox
-                                        checked={datosPrincipales.infraestructura.some(
-                                          (inf) => inf.id === infra.id
-                                        )}
+                                          checked={datosPrincipales.infraestructura.some(
+                                            (inf) => inf.id === infra.id
+                                          )}
                                           onChange={(event, target) => {
                                             if (target) {
                                               setDatosPrincipales({
@@ -2195,9 +2199,9 @@ function DashboardSchool() {
                                     <FormControlLabel
                                       control={
                                         <Checkbox
-                                        checked={datosPrincipales.infraestructura.some(
-                                          (inf) => inf.id === infra.id
-                                        )}
+                                          checked={datosPrincipales.infraestructura.some(
+                                            (inf) => inf.id === infra.id
+                                          )}
                                           onChange={(event, target) => {
                                             if (target) {
                                               setDatosPrincipales({
@@ -2242,9 +2246,9 @@ function DashboardSchool() {
                                     <FormControlLabel
                                       control={
                                         <Checkbox
-                                        checked={datosPrincipales.infraestructura.some(
-                                          (inf) => inf.id === infra.id
-                                        )}
+                                          checked={datosPrincipales.infraestructura.some(
+                                            (inf) => inf.id === infra.id
+                                          )}
                                           onChange={(event, target) => {
                                             if (target) {
                                               setDatosPrincipales({
@@ -2289,9 +2293,9 @@ function DashboardSchool() {
                                     <FormControlLabel
                                       control={
                                         <Checkbox
-                                        checked={datosPrincipales.infraestructura.some(
-                                          (inf) => inf.id === infra.id
-                                        )}
+                                          checked={datosPrincipales.infraestructura.some(
+                                            (inf) => inf.id === infra.id
+                                          )}
                                           onChange={(event, target) => {
                                             if (target) {
                                               setDatosPrincipales({
@@ -2336,9 +2340,9 @@ function DashboardSchool() {
                                     <FormControlLabel
                                       control={
                                         <Checkbox
-                                        checked={datosPrincipales.infraestructura.some(
-                                          (inf) => inf.id === infra.id
-                                        )}
+                                          checked={datosPrincipales.infraestructura.some(
+                                            (inf) => inf.id === infra.id
+                                          )}
                                           onChange={(event, target) => {
                                             if (target) {
                                               setDatosPrincipales({
@@ -2404,13 +2408,12 @@ function DashboardSchool() {
                         </Button>
                       ))} */}
                       </Box>
-                     
                     </div>
                   )}
                   {activeStep === 2 && (
                     <div className="flex flex-col gap-5">
                       <h1 className="text-2xl">
-                        Almenos una casilla debe ser seleccionada
+                         Debe  seleccionar al menos una casilla
                       </h1>
                       <small>Puede marcar mas de una opción</small>
                       <div className="flex flex-col lg:flex-row gap-5">
@@ -2423,9 +2426,9 @@ function DashboardSchool() {
                               Afiliaciones
                             </label>
 
-                            {afiliaciones
-                              .filter((inf) => inf.Afiliacion_tipo_Id === 1)
+                            {afiliaciones.filter((inf) => inf.Afiliacion_tipo_Id === 1)
                               .map((infra) => (
+                               
                                 <>
                                   <div className="flex flex-col">
                                     <FormControlLabel
@@ -2470,9 +2473,7 @@ function DashboardSchool() {
                               Alianzas
                             </label>
 
-                            {afiliaciones
-                              .filter((inf) => inf.Afiliacion_tipo_Id === 2)
-                              .map((infra) => (
+                            {afiliaciones.filter((inf) => inf.Afiliacion_tipo_Id === 2).map((infra) => (
                                 <>
                                   <div className="flex flex-col">
                                     <FormControlLabel
@@ -2517,8 +2518,7 @@ function DashboardSchool() {
                               Certificaciones
                             </label>
 
-                            {afiliaciones
-                              .filter((inf) => inf.Afiliacion_tipo_Id === 3)
+                            {afiliaciones.filter((inf) => inf.Afiliacion_tipo_Id === 3)
                               .map((infra) => (
                                 <>
                                   <div className="flex flex-col">
@@ -2564,8 +2564,7 @@ function DashboardSchool() {
                               Asociaciones
                             </label>
 
-                            {afiliaciones
-                              .filter((inf) => inf.Afiliacion_tipo_Id === 4)
+                            {afiliaciones.filter((inf) => inf.Afiliacion_tipo_Id === 4)
                               .map((infra) => (
                                 <>
                                   <div className="flex flex-col">
@@ -2640,7 +2639,6 @@ function DashboardSchool() {
                         </Button>
                       ))} */}
                       </Box>
-                      
                     </div>
                   )}
                   {activeStep === 3 && (
@@ -2746,7 +2744,6 @@ function DashboardSchool() {
                         </Button>
                       ))} */}
                       </Box>
-                     
                     </div>
                   )}
                   {activeStep === 4 && (
@@ -3053,7 +3050,6 @@ function DashboardSchool() {
                                           </Button>
                                         ))} */}
                       </Box>
-                     
                     </div>
                   )}
                 </React.Fragment>
@@ -3062,11 +3058,12 @@ function DashboardSchool() {
           </Box>
         ) : page === 1 ? (
           <div className="min-h-screen p-5 flex flex-col gap-5">
-            <h1 className="text-xl font-medium">Deberas completar estos datos para aparecer en nuestra lista</h1>
+            <h1 className="text-xl font-medium">
+              Deberas completar estos datos para aparecer en nuestra lista
+            </h1>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <div className="grid lg:grid-cols-3 w-full grid-cols-2">
                 {daysWithTime.map((day, index) => (
-                  
                   <div className="my-3">
                     <FormControlLabel
                       label={Object.keys(day)}
@@ -3381,7 +3378,11 @@ function DashboardSchool() {
               <div>{/* <SelectCitasAg/> */}</div>
             </div>
             <div>
-              <CardCitas  data={citasAgendadas&&citasAgendadas}  setPlan={setPage} filtros={Filtro} />
+              <CardCitas
+                data={citasAgendadas && citasAgendadas}
+                setPlan={setPage}
+                filtros={Filtro}
+              />
             </div>
           </div>
         ) : page === 6 ? (
@@ -3542,15 +3543,17 @@ function DashboardSchool() {
                       <div className="flex lg:flex-row flex-col w-full items-center p-3 justify-around shadow-md bg-white rounded-md gap-2">
                         {evento.imagen_evento !== "" ? (
                           <img
-                            src={evento.imagen_evento }
+                            src={evento.imagen_evento}
                             alt={evento.nombre_evento}
                             className="rounded-full w-24 h-24 object-cover"
                           />
-                        ) : oneSchool.logo !== null ? (<img
-                        src={oneSchool.logo }
-                        alt={oneSchool.nombre_colegio}
-                        className="rounded-full w-24 h-24 object-cover"
-                      />) : null }
+                        ) : oneSchool.logo !== null ? (
+                          <img
+                            src={oneSchool.logo}
+                            alt={oneSchool.nombre_colegio}
+                            className="rounded-full w-24 h-24 object-cover"
+                          />
+                        ) : null}
                         <div className="flex flex-col text-center lg:text-start gap-2">
                           <h2 className="font-semibold">
                             {evento.nombre_evento}
@@ -3766,12 +3769,11 @@ function DashboardSchool() {
               </Box>
             </Modal>
           </div>
-        ) :  page === 7 ? (
+        ) : page === 7 ? (
           <div className=" min-h-screen">
-             <ListadeEspera/>
+            <ListadeEspera />
           </div>
-         
-        ):null}
+        ) : null}
       </section>
     </div>
   );
