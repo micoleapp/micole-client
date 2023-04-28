@@ -6,7 +6,9 @@ import CardsSch from "./Components/Card/CardsSch";
 import style from "./compa.module.css";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 import CardsMobileComparador from "./Components/CardsMobile/CardsMobileComparador";
+import ComparacionPdf from "./Components/Card/CardPdf";
 export default function Comparador() {
   const dispatch = useDispatch();
   const [Vermas, setVermas] = useState(false);
@@ -20,21 +22,24 @@ export default function Comparador() {
         {arrColegios.length > 0 ? (
           <>
             <div className="w-full flex items-center justify-end p-5 pr-11">
-              {/* <Button
-                sx={{
-                  fontFamily: "Poppins",
-                  fontWeight: "600",
-                  color: "0D263B",
-                  fontSize: "1.5vh",
-                }}
-                variant="contained"
+              <PDFDownloadLink
+                document={<ComparacionPdf/>}
+                fileName="Comparacion.pdf"
               >
-                Descargar comparación
-              </Button> */}
+                <Button
+                  sx={{
+                    fontFamily: "Poppins",
+                    fontWeight: "600",
+                    color: "0D263B",
+                    fontSize: "1.5vh",
+                  }}
+                  variant="contained"
+                >
+                  Descargar comparación
+                </Button>
+              </PDFDownloadLink>
             </div>
-         
-         
-         
+
             <div
               style={{
                 width: "100%",
@@ -55,23 +60,23 @@ export default function Comparador() {
                 Comparador
               </Typography>
             </div>
-          <div className={style.divDsktop}>
-             <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                height: "100%",
-                gap: "3vh",
-                alignItems: "flex-end",
-                justifyContent: "center",
-              }}
-            >
-              <CardsSch verMas={Vermas} setVermas={setVermas} />
+            <div className={style.divDsktop}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  height: "100%",
+                  gap: "3vh",
+                  alignItems: "flex-end",
+                  justifyContent: "center",
+                }}
+              >
+                <CardsSch verMas={Vermas} setVermas={setVermas} />
+              </div>
             </div>
-          </div>
-          <div className={style.divMobile}>
-        <CardsMobileComparador />
-      </div>
+            <div className={style.divMobile}>
+              <CardsMobileComparador />
+            </div>
           </>
         ) : (
           <div className="flex justify-center items-center p-5  semibold text-[3vh]">

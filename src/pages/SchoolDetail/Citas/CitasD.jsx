@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SecCitas from '../../../components/SchoolDetail-CITAS/SecCitas';
 import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';

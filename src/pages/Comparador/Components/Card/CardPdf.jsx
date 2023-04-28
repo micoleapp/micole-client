@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import DoDisturbIcon from "@mui/icons-material/DoDisturb";
 import { Document, Page, Text, View, Image } from "@react-pdf/renderer";
 
-export default function CardsSch() {
+ const ComparacionPdf =()=> {
   const [rating, setRating] = React.useState(null);
   const { arrColegios } = useSelector((state) => state.comparador);
   console.log(arrColegios);
@@ -87,6 +87,8 @@ export default function CardsSch() {
    
   );
 }
+
+export default ComparacionPdf
 {
   /* afili */
 }
