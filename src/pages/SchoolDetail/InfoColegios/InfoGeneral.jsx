@@ -10,7 +10,7 @@ export default function InfoGeneral() {
 // lalalalal
 
     return (
-        <section className="left flex flex-col gap-8 w-full">
+        <section className=" bg-white left flex flex-col gap-8 w-full">
 
             <div className=" bg-white flex flex-col gap-2 rounded-md ">
                 <h2 className="font-semibold text-[#0D263B] text-[2.4vh] text-xl">Descripción</h2>

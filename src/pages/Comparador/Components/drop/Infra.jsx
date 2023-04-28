@@ -49,40 +49,11 @@ export default function InfraComparador({ id }) {
     }
   }, []);
   console.log(infraColegio?.Infraestructuras);
+  
+
   return (
     <div className=" p-5 bg-white flex flex-col gap-5  rounded-md ">
-      {/* <Tabs
-        value={value}
-        onChange={handleChange}
-        aria-label="basic tabs example"
-        variant="scrollable"
-        scrollButtons
-        allowScrollButtonsMobile
-      >
-        {infra.map((e) => (
-          <Tab
-            style={{
-              fontSize: "1.6vh",
-              fontFamily: "Poppins",
-              textTransform: "capitalize",
-            }}
-            label={
-              e === 1
-                ? "Administrativo"
-                : e === 2
-                ? "Artistica"
-                : e === 3
-                ? "Deportiva"
-                : e === 4
-                ? "Enseñanza"
-                : e === 5
-                ? "Laboratorio"
-                : null
-            }
-            {...a11yProps(e)}
-          />
-        ))}
-      </Tabs> */}
+
       <div className=" text-[1.8vh] flex flex-col  w-full justify-center">
         <p className="text-[1.6vh] font-medium text-[#0D263B] p-2  ">
           Administrativo
@@ -92,7 +63,7 @@ export default function InfraComparador({ id }) {
             (e) => e.InfraestructuraTipoId === 1
           ).map((e) => (
             <>
-              <li className="flex lg:flex-row  flex-col  text-center lg:text-start  items-center  gap-3">
+              <li className="flex flex-row   text-center lg:text-start  items-center  gap-3">
                 {e.imagen.length > 0 ? (
                   <img
                     src={e.imagen}
@@ -118,7 +89,7 @@ export default function InfraComparador({ id }) {
           {infraColegio?.Infraestructuras?.filter(
             (e) => e.InfraestructuraTipoId === 2
           ).map((e) => (
-            <li className="flex lg:flex-row  flex-col  text-center lg:text-start  items-center  gap-3">
+            <li className="flex flex-row   text-center lg:text-start  items-center  gap-3">
               {e.imagen.length > 0 ? (
                 <img
                   src={e.imagen}
@@ -143,7 +114,7 @@ export default function InfraComparador({ id }) {
           {infraColegio?.Infraestructuras?.filter(
             (e) => e.InfraestructuraTipoId === 3
           ).map((e) => (
-            <li className="flex lg:flex-row  flex-col  text-center lg:text-start  items-center  gap-3">
+            <li className="flex flex-row   text-center lg:text-start  items-center  gap-3">
               {e.imagen.length > 0 ? (
                 <img
                   src={e.imagen}
@@ -168,7 +139,7 @@ export default function InfraComparador({ id }) {
           {infraColegio?.Infraestructuras?.filter(
             (e) => e.InfraestructuraTipoId === 4
           ).map((e) => (
-            <li className="flex lg:flex-row  flex-col  text-center lg:text-start  items-center  gap-3">
+            <li className="flex flex-row   text-center lg:text-start  items-center  gap-3">
               {e.imagen.length > 0 ? (
                 <img
                   src={e.imagen}
@@ -193,7 +164,7 @@ export default function InfraComparador({ id }) {
           {infraColegio?.Infraestructuras?.filter(
             (e) => e.InfraestructuraTipoId === 5
           ).map((e) => (
-            <li className="flex lg:flex-row  flex-col  text-center lg:text-start  items-center  gap-3">
+            <li className="flex flex-row   text-center lg:text-start  items-center  gap-3">
               {e.imagen.length > 0 ? (
                 <img
                   src={e.imagen}

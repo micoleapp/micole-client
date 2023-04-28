@@ -9,6 +9,7 @@ import { Divider } from "@mui/material";
 import DoDisturbIcon from "@mui/icons-material/DoDisturb";
 import { deleteColegio } from "../../../../redux/ComparadorActions";
 import AcredComparador from "../drop/Acred";
+import InfraComparador from "../drop/Infra";
 export default function CardsMobileComparador() {
   const { arrColegios } = useSelector((state) => state.comparador);
   const [openSch, setOpenSch] = useState(false);
@@ -143,9 +144,9 @@ export default function CardsMobileComparador() {
       </div>
 
       {/* div que se expande */}
-      <div className="pt-10">
+      <div className="pl-1  pt-10 flex flex-col items-start justify-start">
         <div>
-          <div className=" pb-2 flex flex-row w-full justify-end items-end gap-14">
+          <div className="pl-2  pb-2 flex flex-row w-full justify-end items-end gap-10">
             {" "}
             <p className="text-[1.6vh] font-semibold text-[#0D263B ">
               Metodologias
@@ -243,19 +244,19 @@ export default function CardsMobileComparador() {
         />
       </div>
       {/* div que se expande */}
-      <div>
+      <div className="pt-10 flex flex-col items-start justify-start">
         {arrColegios?.map((c) => {
           return (
             <>
               <div className={style.containerCard}>
-                <div className=" w-full min-w-[5vh] flex flex-row  pb-5 items-start justify-between gap-[5vh]">
+                <div className="  w-full min-w-[5vh] flex flex-row  pb-5 items-start justify-between gap-[5vh]">
                   <img
                     className="w-[7vh] h-[7vh]"
                     src={c.colegio.logo}
                     alt={c.colegio.nombre_colegio}
                   />
                   <div
-                    className={`${style.div} max-h-[20vh] items-start justify-start  `}
+                    className={`${style.div} max-h-[20vh] min-w-[25vh]   items-start justify-start  `}
                   >
                     <AcredComparador
                       ids={c.colegio.id}
@@ -276,6 +277,29 @@ export default function CardsMobileComparador() {
             sx={{ color: "#0D263B" }}
           />
         </p>
+      </div>
+
+      <div className="pt-10 flex flex-col items-start justify-start">
+        {arrColegios?.map((c) => {
+          return (
+            <>
+              <div className={style.containerCard}>
+                <div className="  w-full min-w-[5vh] flex flex-row  pb-5 items-start justify-between gap-[5vh]">
+                  <img
+                    className="w-[7vh] h-[7vh]"
+                    src={c.colegio.logo}
+                    alt={c.colegio.nombre_colegio}
+                  />
+                  <div
+                    className={`${style.div} max-h-[50vh] min-w-[25vh]   items-start justify-start  `}
+                  >
+                    <InfraComparador comparador  id={c.colegio.id} />
+                  </div>
+                </div>
+              </div>
+            </>
+          );
+        })}
       </div>
     </div>
   );
