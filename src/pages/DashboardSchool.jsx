@@ -2413,7 +2413,7 @@ function DashboardSchool() {
                   {activeStep === 2 && (
                     <div className="flex flex-col gap-5">
                       <h1 className="text-2xl">
-                         Debe  seleccionar al menos una casilla
+                        Debe seleccionar al menos una casilla
                       </h1>
                       <small>Puede marcar mas de una opción</small>
                       <div className="flex flex-col lg:flex-row gap-5">
@@ -2426,9 +2426,9 @@ function DashboardSchool() {
                               Afiliaciones
                             </label>
 
-                            {afiliaciones.filter((inf) => inf.Afiliacion_tipo_Id === 1)
+                            {afiliaciones
+                              .filter((inf) => inf.Afiliacion_tipo_Id === 1)
                               .map((infra) => (
-                               
                                 <>
                                   <div className="flex flex-col">
                                     <FormControlLabel
@@ -2473,7 +2473,9 @@ function DashboardSchool() {
                               Alianzas
                             </label>
 
-                            {afiliaciones.filter((inf) => inf.Afiliacion_tipo_Id === 2).map((infra) => (
+                            {afiliaciones
+                              .filter((inf) => inf.Afiliacion_tipo_Id === 2)
+                              .map((infra) => (
                                 <>
                                   <div className="flex flex-col">
                                     <FormControlLabel
@@ -2518,7 +2520,8 @@ function DashboardSchool() {
                               Certificaciones
                             </label>
 
-                            {afiliaciones.filter((inf) => inf.Afiliacion_tipo_Id === 3)
+                            {afiliaciones
+                              .filter((inf) => inf.Afiliacion_tipo_Id === 3)
                               .map((infra) => (
                                 <>
                                   <div className="flex flex-col">
@@ -2564,7 +2567,8 @@ function DashboardSchool() {
                               Asociaciones
                             </label>
 
-                            {afiliaciones.filter((inf) => inf.Afiliacion_tipo_Id === 4)
+                            {afiliaciones
+                              .filter((inf) => inf.Afiliacion_tipo_Id === 4)
                               .map((infra) => (
                                 <>
                                   <div className="flex flex-col">
