@@ -42,5 +42,6 @@
    }
    .divMobile {
     display: flex;
+    justify-content: center;
 }
 }

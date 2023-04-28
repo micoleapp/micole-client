@@ -12,7 +12,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { deleteColegio } from "../../../../redux/ComparadorActions";
 import { useDispatch } from "react-redux";
 export default function CardsSch({ verMas, setVermas }) {
-  const [rating, setRating] = React.useState(null);
+
   const { arrColegios } = useSelector((state) => state.comparador);
   console.log(arrColegios);
 
