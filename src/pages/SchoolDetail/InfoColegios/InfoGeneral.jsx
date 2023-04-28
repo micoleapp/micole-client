@@ -7,14 +7,14 @@ export default function InfoGeneral() {
   // lalalalal
 
   return (
-    <section className=" bg-white left flex flex-col gap-8 w-full">
-      <div className=" bg-white flex flex-col gap-2 rounded-md ">
+    <section className="  left flex flex-col gap-8 w-full">
+      <div className="  flex flex-col gap-2 rounded-md ">
         <h2 className="font-semibold text-[#0D263B] text-[2.4vh] text-xl">
           Descripción
         </h2>
         <p className=" text-[#696969] text-[1.8vh] ">{oneSchool.descripcion}</p>
       </div>
-      <div className="bg-white flex flex-col gap-2 rounded-md ">
+      <div className=" flex flex-col gap-2 rounded-md ">
         <h2 className="font-semibold  text-[#0D263B] text-[2.4vh]">
           Propuesta Valor Educativa
         </h2>
@@ -23,7 +23,7 @@ export default function InfoGeneral() {
         </p>
       </div>
 
-      <div className=" bg-white flex flex-col gap-5 rounded-md ">
+      <div className="  flex flex-col gap-5 rounded-md ">
         <h2 className="font-semibold  text-[#0D263B] text-[2.4vh]">
           Detalles del Colegio
         </h2>

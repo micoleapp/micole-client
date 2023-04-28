@@ -77,7 +77,7 @@ export default function InfraComparador({ id }) {
                     className="w-6"
                   />
                 )}
-                <p className="text-[1.4vh]">{e.nombre_infraestructura}</p>
+                 <p className="text-[1.4vh] text-start">{e.nombre_infraestructura}</p>
               </li>
             </>
           ))}
@@ -103,7 +103,7 @@ export default function InfraComparador({ id }) {
                   className="w-5"
                 />
               )}
-              <p className="text-[1.4vh]">{e.nombre_infraestructura}</p>
+      <p className="text-[1.4vh] text-start">{e.nombre_infraestructura}</p>
             </li>
           ))}
         </div>
@@ -128,7 +128,7 @@ export default function InfraComparador({ id }) {
                   className="w-5"
                 />
               )}
-              <p className="text-[1.4vh]">{e.nombre_infraestructura}</p>
+               <p className="text-[1.4vh] text-start">{e.nombre_infraestructura}</p>
             </li>
           ))}
         </div>
@@ -153,7 +153,7 @@ export default function InfraComparador({ id }) {
                   className="w-5"
                 />
               )}
-              <p className="text-[1.4vh]">{e.nombre_infraestructura}</p>
+              <p className="text-[1.4vh] text-start">{e.nombre_infraestructura}</p>
             </li>
           ))}
         </div>
@@ -178,7 +178,7 @@ export default function InfraComparador({ id }) {
                   className="w-5"
                 />
               )}
-              <p className="text-[1.4vh]">{e.nombre_infraestructura}</p>
+                 <p className="text-[1.4vh] text-start">{e.nombre_infraestructura}</p>
             </li>
           ))}
         </div>
