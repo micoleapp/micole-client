@@ -24,7 +24,7 @@ export default function MobileDatosGenerales() {
                 <div className="flex justify-center items-center flex-col ">
                   <img
                     className="w-[8vh] h-[8vh]"
-                    src={c.colegio.logo}
+                    src={c.colegio.logo === null ? "https://res.cloudinary.com/dvztuncle/image/upload/v1682798271/3256151_zdcs0j.png":c.colegio.logo  }
                     alt={c.colegio.nombre_colegio}
                   />
                 </div>

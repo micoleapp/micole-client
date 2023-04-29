@@ -25,7 +25,7 @@ export default function MobileAfiliaciones() {
                     <div className="  w-full min-w-[5vh] flex flex-row  pb-5 items-start justify-between gap-[5vh]">
                       <img
                         className="w-[7vh] h-[7vh]"
-                        src={c.colegio.logo}
+                        src={c.colegio.logo === null ? "https://res.cloudinary.com/dvztuncle/image/upload/v1682798271/3256151_zdcs0j.png":c.colegio.logo  }
                         alt={c.colegio.nombre_colegio}
                       />
                       <div

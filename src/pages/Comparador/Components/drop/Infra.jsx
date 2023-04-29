@@ -1,37 +1,20 @@
 import React, { useEffect, useState } from "react";
-// import { a11yProps, TabPanel } from '../../../components/Tabs';
-import Tab from "@mui/material/Tab";
-import Tabs from "@mui/material/Tabs";
-import { a11yProps, TabPanel } from "../../../../components/Tabs";
-import { useDispatch, useSelector } from "react-redux";
-import { getInfra } from "../../../../redux/SchoolsActions";
 import axios from "axios";
 import SwalProp from "../../../../exports/SwalProp";
+import style from "./loader.module.css";
 export default function InfraComparador({ id }) {
-  const [value, setValue] = useState(0);
-  const dispatch = useDispatch();
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-  // const { oneSchool, grados, horariosColegio, infraestructura, infraSH } =useSelector((state) => state.schools);
-
+  const [Loader, setLoader] = useState(false);
   const [infraSH, setInfraSH] = useState([]);
   let infraColegio = infraSH && Object.assign({}, ...infraSH);
-  let infra = Array.from(
-    new Set(infraColegio?.Infraestructuras?.map((e) => e.InfraestructuraTipoId))
-  );
 
   useEffect(() => {
-    // dispatch(getInfra(oneSchool?.id));
     try {
+      setLoader(true);
       axios
-
         .get(`/colegios/infraestructuras/${id}`)
         .then((res) => {
-          console.log(res.data);
-          // dispatch(getInfraestructuraSH(res.data));
           setInfraSH(res.data);
+          setLoader(true);
         })
         .catch((err) => {
           SwalProp({
@@ -48,12 +31,9 @@ export default function InfraComparador({ id }) {
       });
     }
   }, []);
-  console.log(infraColegio?.Infraestructuras);
-  
 
   return (
     <div className=" p-5 bg-white flex flex-col gap-5  rounded-md ">
-
       <div className=" text-[1.8vh] flex flex-col  w-full justify-center">
         <p className="text-[1.6vh] font-medium text-[#0D263B] p-2  ">
           Administrativo
@@ -77,7 +57,9 @@ export default function InfraComparador({ id }) {
                     className="w-6"
                   />
                 )}
-                 <p className="text-[1.4vh] text-start">{e.nombre_infraestructura}</p>
+                <p className="text-[1.4vh] text-start">
+                  {e.nombre_infraestructura}
+                </p>
               </li>
             </>
           ))}
@@ -103,7 +85,9 @@ export default function InfraComparador({ id }) {
                   className="w-5"
                 />
               )}
-      <p className="text-[1.4vh] text-start">{e.nombre_infraestructura}</p>
+              <p className="text-[1.4vh] text-start">
+                {e.nombre_infraestructura}
+              </p>
             </li>
           ))}
         </div>
@@ -128,7 +112,9 @@ export default function InfraComparador({ id }) {
                   className="w-5"
                 />
               )}
-               <p className="text-[1.4vh] text-start">{e.nombre_infraestructura}</p>
+              <p className="text-[1.4vh] text-start">
+                {e.nombre_infraestructura}
+              </p>
             </li>
           ))}
         </div>
@@ -153,7 +139,9 @@ export default function InfraComparador({ id }) {
                   className="w-5"
                 />
               )}
-              <p className="text-[1.4vh] text-start">{e.nombre_infraestructura}</p>
+              <p className="text-[1.4vh] text-start">
+                {e.nombre_infraestructura}
+              </p>
             </li>
           ))}
         </div>
@@ -178,7 +166,9 @@ export default function InfraComparador({ id }) {
                   className="w-5"
                 />
               )}
-                 <p className="text-[1.4vh] text-start">{e.nombre_infraestructura}</p>
+              <p className="text-[1.4vh] text-start">
+                {e.nombre_infraestructura}
+              </p>
             </li>
           ))}
         </div>

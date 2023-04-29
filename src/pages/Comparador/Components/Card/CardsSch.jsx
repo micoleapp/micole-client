@@ -35,7 +35,7 @@ export default function CardsSch({ verMas, setVermas }) {
                 <div className={style.containerCard}>
                   {/* HEAD */}
                   <div className={style.cardHead}>
-                    <img src={c.colegio.logo} alt={c.colegio.nombre_colegio} />
+                    <img src={c.colegio.logo === null ? "https://res.cloudinary.com/dvztuncle/image/upload/v1682798271/3256151_zdcs0j.png":c.colegio.logo  } alt={c.colegio.nombre_colegio} />
                     <div className={style.cardHead_info}>
                       <p
                         style={{

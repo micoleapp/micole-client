@@ -28,13 +28,11 @@ export default function SnackComparador({ open, setOpen }) {
   const [state, setState] = React.useState({
     vertical: "bottom",
     horizontal: "right",
-   
   });
 
   const [stateMobile, setStateMobile] = React.useState({
     vertical: "bottom",
     horizontal: "center",
-
   });
 
   const [openSch, setOpenSch] = useState(true);
@@ -110,7 +108,11 @@ export default function SnackComparador({ open, setOpen }) {
                             <div className="flex flex-row items-center ">
                               <div className={style.cardHead}>
                                 <img
-                                  src={c.colegio.logo}
+                                  src={
+                                    c.colegio.logo === null
+                                      ? "https://res.cloudinary.com/dvztuncle/image/upload/v1682798271/3256151_zdcs0j.png"
+                                      : c.colegio.logo
+                                  }
                                   alt={c.colegio.nombre_colegio}
                                 />
                                 <div className={style.cardHead_info}>
@@ -166,7 +168,7 @@ export default function SnackComparador({ open, setOpen }) {
       </div>
 
       <div className={style.divMobile}>
-       <SnackComparadorMobile  open={open} setOpen={setOpen}/>
+        <SnackComparadorMobile open={open} setOpen={setOpen} />
       </div>
     </>
   );
