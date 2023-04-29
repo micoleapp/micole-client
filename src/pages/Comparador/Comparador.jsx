@@ -6,7 +6,7 @@ import CardsSch from "./Components/Card/CardsSch";
 import style from "./compa.module.css";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { PDFDownloadLink } from "@react-pdf/renderer";
+import { PDFDownloadLink ,PDFViewer} from "@react-pdf/renderer";
 import CardsMobileComparador from "./Components/CardsMobile/CardsMobileComparador";
 import ComparacionPdf from "./Components/Card/CardPdf";
 export default function Comparador() {
@@ -23,7 +23,7 @@ export default function Comparador() {
           <>
             <div className="w-full flex items-center justify-end p-5 pr-11">
               <PDFDownloadLink
-                document={<ComparacionPdf/>}
+                document={<ComparacionPdf arrColegios={arrColegios} />}
                 fileName="Comparacion.pdf"
               >
                 <Button
@@ -84,6 +84,11 @@ export default function Comparador() {
           </div>
         )}
       </div>
+
+      <PDFViewer style={{ width: "100%", height: "90vh" }}>
+           <ComparacionPdf arrColegios={arrColegios} />
+      </PDFViewer>
+     
     </>
   );
 }

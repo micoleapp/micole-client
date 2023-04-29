@@ -323,7 +323,7 @@ function SchoolDetail() {
                     <Tab sx={{ textTransform: 'none' }} label="Infraestructura" value="2" />
                     <Tab sx={{ textTransform: 'none' }} label="Acreditaciones" value="3" />
                     <Tab sx={{ textTransform: 'none' }} label="Ubicacion" value="4" />
-                    <Tab sx={{ textTransform: 'none' }} label="Reservar Citas" value="5" />
+                    <Tab sx={{ textTransform: 'none' }} label={listaParams === "true" ?'Lista de espera' :"Reservar Citas"} value="5" />
                     <Tab sx={{ textTransform: 'none' }} label="Eventos" value="6" />
                     <Tab sx={{ textTransform: 'none' }} label="Comentarios" value="7" />
                     <Tab sx={{ textTransform: 'none' }} label="Multimedia" value="8" />
