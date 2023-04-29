@@ -14,7 +14,7 @@ import { useDispatch } from "react-redux";
 export default function CardsSch({ verMas, setVermas }) {
 
   const { arrColegios } = useSelector((state) => state.comparador);
-  console.log(arrColegios);
+
 
   const hanlderVermas = () => {
     setVermas(!verMas);
