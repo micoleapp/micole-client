@@ -16,6 +16,7 @@ import MobileDatosGenerales from "./Components/MobileDatosGenerales";
 import MobileMetodoNeuro from "./Components/MobileMetodoNeuro";
 import MobileAfiliaciones from "./Components/MobileAfiliaciones";
 import MobileInfraestructura from "./Components/MobileInfraestructura";
+import { Link } from "react-router-dom";
 export default function CardsMobileComparador() {
   const { arrColegios } = useSelector((state) => state.comparador);
   const [openSch, setOpenSch] = useState(false);
@@ -36,34 +37,46 @@ export default function CardsMobileComparador() {
   return (
     <div className=" flex flex-col items-center  w-full ">
       {/*  cards head */}
-      {arrColegios?.map((c) => {
-        return (
-          <>
-            <div className={style.containerCard}>
-              {/* HEAD */}
-              <div className={style.cardHead}>
-                <img src={c.colegio.logo} alt={c.colegio.nombre_colegio} />
-                <div className={style.cardHead_info}>
-                  <p
-                    style={{
-                      fontWeight: "700",
-                      color: "#0D263B",
-                      fontSize: "1.6vh",
-                    }}
-                  >
-                    {c.colegio.nombre_colegio}
+      <div className=" w-full flex flex-col gap-5 justify-between shadow-md pb-5 p-2">
+ 
+        {arrColegios?.map((c) => {
+          return (
+            <>
+              <div className={style.containerCard}>
+                {/* HEAD */}
+                <div className={style.cardHead}>
+                  <img src={c.colegio.logo} alt={c.colegio.nombre_colegio} />
+                  <div className={style.cardHead_info}>
+                    <p
+                      style={{
+                        fontWeight: "700",
+                        color: "#0D263B",
+                        fontSize: "1.6vh",
+                      }}
+                    >
+                      {c.colegio.nombre_colegio}
+                    </p>
+                    <p>{c.colegio.Distrito?.nombre_distrito}</p>
+                  </div>
+                </div>
+                <div className="flex flex-row gap-[2vh] items-start">
+                  {/* <Link>
+                  <p   className="text-[1.6vh] text-[#0061df] font-semibold">
+                      Ver Perfil
                   </p>
-                  <p>{c.colegio.Distrito?.nombre_distrito}</p>
+              
+                </Link> */}
+                  <CloseIcon
+                    sx={{ color: "#0061df" }}
+                    onClick={(e) => handlerDelete(e, c.colegio.id)}
+                  />
                 </div>
               </div>
-              <CloseIcon
-                sx={{ color: "#9999" }}
-                onClick={(e) => handlerDelete(e, c.colegio.id)}
-              />
-            </div>
-          </>
-        );
-      })}
+            </>
+          );
+        })}
+      </div>
+
       {/* Datos Generales*/}
       <div
         onClick={() =>
@@ -72,7 +85,7 @@ export default function CardsMobileComparador() {
             datosGenerales: !openSection.datosGenerales,
           })
         }
-        className=" w-full flex flex-row justify-between shadow-md p-2"
+        className=" w-full flex flex-row justify-between shadow-md p-4"
       >
         <p className="font-semibold  text-[#0D263B] text-[1.8vh]">
           Datos generales
@@ -93,7 +106,7 @@ export default function CardsMobileComparador() {
             MetodologiasNeuro: !openSection.MetodologiasNeuro,
           })
         }
-        className=" w-full flex flex-row justify-between shadow-md p-2"
+        className=" w-full flex flex-row justify-between shadow-md p-4"
       >
         <p className="font-semibold  text-[#0D263B] text-[1.8vh]">
           Metodologías y Neurodiversidad
@@ -116,7 +129,7 @@ export default function CardsMobileComparador() {
             afiliaciones: !openSection.afiliaciones,
           })
         }
-        className=" w-full flex flex-row justify-between shadow-md p-2"
+        className=" w-full flex flex-row justify-between shadow-md p-4"
       >
         <p className="font-semibold  text-[#0D263B] text-[1.8vh]">
           Afiliaciones
@@ -130,7 +143,6 @@ export default function CardsMobileComparador() {
       {/* div que se expande  Afiliaciones*/}
       {openSection.afiliaciones && <MobileAfiliaciones />}
 
-    
       {/*   Infraestructura*/}
       <div
         onClick={() =>
@@ -139,7 +151,7 @@ export default function CardsMobileComparador() {
             infra: !openSection.infra,
           })
         }
-        className=" w-full flex flex-row justify-between shadow-md p-2"
+        className=" w-full flex flex-row justify-between shadow-md p-4"
       >
         <p className="font-semibold  text-[#0D263B] text-[1.8vh]">
           Infraestructura
