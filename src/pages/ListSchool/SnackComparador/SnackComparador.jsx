@@ -57,10 +57,9 @@ export default function SnackComparador({ open, setOpen }) {
   }, [arrColegios.length, arrColegios]);
 
   const handlerDelete = (e, id) => {
-    console.log("oli");
     dispatch(deleteColegio({ id }));
   };
-  console.log(arrColegios);
+
   return (
     <>
       <div className={style.divDesktop}>
@@ -90,18 +89,21 @@ export default function SnackComparador({ open, setOpen }) {
                   />
                 </div>
                 {openSch && (
-                  <motion.div
-                    //  animate={{ x: 100 }}
-                    transition={{ delay: 2 }}
-                  >
+                  <div>
                     {arrColegios?.map((c) => {
                       console.log(c);
                       return (
                         <>
                           {" "}
                           <motion.div
-                            transition={{ delay: 2 }}
                             className={style.containerCard}
+                            initial={{ opacity: 0, scale: 0.5 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{
+                              duration: 0.4,
+                              delay: 0.1,
+                              ease: [0, 0.71, 0.2, 1.01],
+                            }}
                           >
                             {/* HEAD */}
 
@@ -150,7 +152,7 @@ export default function SnackComparador({ open, setOpen }) {
                         </>
                       );
                     })}
-                  </motion.div>
+                  </div>
                 )}
 
                 <div className="flex flex-row gap-2 w-full items-center justify-center">
