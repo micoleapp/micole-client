@@ -17,7 +17,7 @@ export default function Ubicacion() {
   return (
     <>
       <div className="p-5 bg-white flex flex-col  gap-5  rounded-md ">
-        <h2 className="font-semibold  text-[#0D263B] text-[2.4vh]">
+        <h2 className="font-semibold  pl-2 text-[#0D263B] text-[2.4vh]">
           Ubicación
         </h2>
         <div className=" p-3 flex flex-col  lg:flex-row  text-xs w-full justify-between">

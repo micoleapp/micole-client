@@ -15,26 +15,18 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { deleteColegio } from "../../../redux/ComparadorActions";
 import TrashIcon from "./svg/TrashIcon";
-import SnackComparadorMobile from "./SnackMobile";
 function SlideTransition(props) {
   return <Slide {...props} direction="up" />;
 }
 
-export default function SnackComparador({ open, setOpen }) {
+export default function SnackComparadorMobile({ open, setOpen }) {
   //   const [open, setOpen] = useState(false);
 
   const { arrColegios } = useSelector((state) => state.comparador);
   const dispatch = useDispatch();
   const [state, setState] = React.useState({
     vertical: "bottom",
-    horizontal: "right",
-   
-  });
-
-  const [stateMobile, setStateMobile] = React.useState({
-    vertical: "bottom",
     horizontal: "center",
-
   });
 
   const [openSch, setOpenSch] = useState(true);
@@ -65,11 +57,11 @@ export default function SnackComparador({ open, setOpen }) {
   console.log(arrColegios);
   return (
     <>
-      <div className={style.divDesktop}>
+      <div className={style.divMobile}>
         <Stack spacing={2} sx={{ width: "100%" }}>
           {/* <Button variant="outlined" onClick={handleClick}>
-        Open success snackbar
-      </Button> */}
+    Open success snackbar
+  </Button> */}
           <Snackbar
             anchorOrigin={{ vertical, horizontal }}
             open={open}
@@ -163,10 +155,6 @@ export default function SnackComparador({ open, setOpen }) {
             </motion.div>
           </Snackbar>
         </Stack>
-      </div>
-
-      <div className={style.divMobile}>
-       <SnackComparadorMobile  open={open} setOpen={setOpen}/>
       </div>
     </>
   );

@@ -911,7 +911,7 @@ const handlerComparador =(e,id)=>{
 
                             <div className="grid grid-cols-2 grid-rows-3 w-max gap-x-2 gap-y-2">
                               {school.Vacantes.length > 0 && (
-                                <small className="text-gray-400 flex gap-1 items-center">
+                                <small className="text-gray-400 flex gap-1  items-center">
                                   {" "}
                                   <span className="text-xl">
                                     <CiBag1></CiBag1>

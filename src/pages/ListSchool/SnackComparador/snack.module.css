@@ -96,3 +96,20 @@
     flex-direction: column;
   
 }
+
+.divMobile{
+    display: none;
+}
+/* .divDesktop{
+    display: none;
+} */
+
+@media (max-width: 800px) {
+
+    .divDesktop{
+        display: none;
+    }
+    .divMobile{
+        display: flex;
+    }
+}

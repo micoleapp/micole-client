@@ -85,9 +85,9 @@ export default function Comparador() {
         )}
       </div>
 
-      <PDFViewer style={{ width: "100%", height: "90vh" }}>
+      {/* <PDFViewer style={{ width: "100%", height: "90vh" }}>
            <ComparacionPdf arrColegios={arrColegios} />
-      </PDFViewer>
+      </PDFViewer> */}
      
     </>
   );

@@ -9,10 +9,6 @@ import DoDisturbIcon from "@mui/icons-material/DoDisturb";
 import { Document, Page, Text, View, Image } from "@react-pdf/renderer";
 
 const ComparacionPdf = ({ arrColegios }) => (
-  // const [rating, setRating] = React.useState(null);
-  // const { arrColegios } = useSelector((state) => state.comparador);
-  // console.log(arrColegios);
-
   <Document>
     <Page>
       <View
@@ -30,8 +26,8 @@ const ComparacionPdf = ({ arrColegios }) => (
               paddingLeft: "15vh",
               display: "flex",
               flexDirection: "row",
-              justifyContent: "flex-end",
-              alignItems: "center",
+              justifyContent: "flex-start",
+              alignItems: "start",
             }}
           >
             {arrColegios?.map((c) => {
@@ -41,19 +37,15 @@ const ComparacionPdf = ({ arrColegios }) => (
                     style={{
                       display: "flex",
                       flexDirection: "column",
-
-                      // padding: "1vh",
-                      // maxWidth: "35vh",
                     }}
                   >
-                    {/* HEAD */}
                     <View
                       style={{
                         display: "flex",
                         flexDirection: "row",
                         paddingBottom: "1vh",
                         gap: "1vh",
-                        // minHeight: "12vh",
+
                         alignItems: "center",
                         justifyContent: "center",
                         boxShadow: "(0px 10px 50px rgba(13, 38, 59, 0.1))",
@@ -93,10 +85,9 @@ const ComparacionPdf = ({ arrColegios }) => (
             style={{
               display: "flex",
               flexDirection: "row",
-              alignItems: "cener",
+              alignItems: "center",
               gap: "4rem",
             }}
-            // className="flex flex-row items-center gap-[4rem]"
           >
             <View style={{ minWidth: "8vh", maxWidth: "8vh" }}>
               <Text
@@ -105,47 +96,32 @@ const ComparacionPdf = ({ arrColegios }) => (
                   color: "#0D263B",
                   fontWeight: "600",
                 }}
-                // className="text-[1.7vh] text-[#0D263B] font-semibold  "
               >
                 Dirección:
               </Text>
-            </View>
-            <View
-              style={{ display: "flex", flexDirection: "row", width: "100%" }}
+              <View
+              >
+                {arrColegios?.map((c) => {
+                  return (
+                    <>
+                    
+                        <View>
+                          <Text
+                            style={{
+                              display: "flex",
 
-              // className={style.bodyCard}
-            >
-              {arrColegios?.map((c) => {
-                return (
-                  <>
-                    <View
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        maxWidth: "35vh",
-                        padding: "1vh",
-                      }}
-                      // className={style.containerCard}
-                    >
-                      <View
-                        style={{
-                          height: "100%",
-                          overflowY: "scroll",
-                          display: "flex",
-                          justifyContent: "center",
-                          flexDirection: "column",
-                          fontSize: "1.8vh",
-                        }}
-                        // style={{ height:'100%', overflowY:'scroll', display:'flex',justifyContent:'center', flexDirection:'column', fontSize:'1.8vh'}}
-                      >
-                        <Text className="flex text-[1.5vh] max-w-[20vh]">
-                          {c.colegio.direccion}
-                        </Text>
-                      </View>
-                    </View>
-                  </>
-                );
-              })}
+                              maxWidth: "20vh",
+                              fontSize: "1.5vh",
+                            }}
+                          >
+                            {c.colegio.direccion}
+                          </Text>
+                        </View>
+                   
+                    </>
+                  );
+                })}
+              </View>
             </View>
           </View>
           <View
@@ -156,10 +132,7 @@ const ComparacionPdf = ({ arrColegios }) => (
               gap: "4rem",
             }}
           >
-            <View
-              style={{ minWidth: "8vh", maxWidth: "8vh" }}
-              // className="min-w-[8vh] max-w-[8vh]"
-            >
+            <View style={{ minWidth: "8vh", maxWidth: "8vh" }}>
               <Text
                 style={{
                   fontSize: "1.7vh",
@@ -207,7 +180,11 @@ const ComparacionPdf = ({ arrColegios }) => (
                                 }}
                               >
                                 <Pincon />
-                                <Text className="text-[1.6vh] ">
+                                <Text
+                                  style={{
+                                    fontSize: "1.6vh",
+                                  }}
+                                >
                                   {ca.nombre_categoria}
                                 </Text>
                               </View>
@@ -221,13 +198,9 @@ const ComparacionPdf = ({ arrColegios }) => (
               })}
             </View>
           </View>
+
           <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "cener",
-              gap: "4rem",
-            }}
+           
           >
             <View style={{ minWidth: "8vh", maxWidth: "8vh" }}>
               <Text
@@ -280,12 +253,7 @@ const ComparacionPdf = ({ arrColegios }) => (
             </View>
           </View>
           <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "cener",
-              gap: "4rem",
-            }}
+            
           >
             <View style={{ minWidth: "8vh", maxWidth: "8vh" }}>
               <Text
@@ -336,176 +304,7 @@ const ComparacionPdf = ({ arrColegios }) => (
               })}
             </View>
           </View>
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "cener",
-              gap: "3rem",
-            }}
-          >
-            <View style={{ minWidth: "8vh", maxWidth: "10vh" }}>
-              <Text
-                style={{
-                  fontSize: "1.7vh",
-                  color: "#0D263B",
-                  fontWeight: "600",
-                }}
-              >
-                Métodos Aprendizaje
-              </Text>
-            </View>
-            <View
-              style={{ display: "flex", flexDirection: "row", width: "100%" }}
-            >
-              {arrColegios?.map((c) => {
-                return (
-                  <>
-                    <View
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        maxWidth: "35vh",
-                        padding: "1vh",
-                      }}
-                    >
-                      <View
-                        style={{
-                          height: "100%",
-                          overflowY: "scroll",
-                          display: "flex",
-                          justifyContent: "center",
-                          flexDirection: "column",
-                          fontSize: "1.8vh",
-                        }}
-                      >
-                        {c.colegio.Metodos.length > 0 ? (
-                          c.colegio.Metodos?.map((m) => {
-                            return (
-                              <>
-                                <View
-                                  key={m}
-                                  style={{
-                                    display: "flex",
-                                    gap: "1vh",
-                                    fontSize: "1.6vh",
-                                    flexDirection: "row",
-                                  }}
-                                >
-                                  <Pincon />
-                                  <p style={{ fontSize: "1.6vh" }}>
-                                    {m.nombre_metodo}
-                                  </p>
-                                </View>
-                              </>
-                            );
-                          })
-                        ) : (
-                          <View className="flex w-full items-center gap-1  pl-2 justify-start">
-                            <DoDisturbIcon
-                              sx={{ color: "#999999", width: "2vh" }}
-                            />
-                            <p className="text-[1.5vh]">Sin especificar</p>
-                          </View>
-                        )}
-                      </View>
-                    </View>
-                  </>
-                );
-              })}
-            </View>
-          </View>
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "cener",
-              gap: "4rem",
-            }}
-          >
-            <View style={{ minWidth: "8vh", maxWidth: "8vh" }}>
-              <Text
-                style={{
-                  fontSize: "1.7vh",
-                  color: "#0D263B",
-                  fontWeight: "600",
-                }}
-              >
-                NeuroViewersidad:
-              </Text>
-            </View>
-
-            <View
-              style={{ display: "flex", flexDirection: "row", width: "100%" }}
-            >
-              {arrColegios?.map((c) => {
-                return (
-                  <>
-                    <View
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        maxWidth: "35vh",
-                        padding: "1vh",
-                      }}
-                    >
-                      <View
-                        style={{
-                          height: "100%",
-                          overflowY: "scroll",
-                          display: "flex",
-                          justifyContent: "center",
-                          flexDirection: "column",
-                          fontSize: "1.8vh",
-                        }}
-                      >
-                        {c.colegio.Dificultades.length > 0 ? (
-                          c.colegio.Dificultades?.map((d) => {
-                            return (
-                              <>
-                                <View
-                                  key={d}
-                                  style={{
-                                    display: "flex",
-                                    gap: "1vh",
-                                    fontSize: "1.6vh",
-                                    flexDirection: "row",
-                                  }}
-                                >
-                                  <Pincon />
-                                  <Text className="text-[1.6vh] ">
-                                    {d.nombre_dificultad}
-                                  </Text>
-                                </View>
-                              </>
-                            );
-                          })
-                        ) : (
-                          <View
-                            style={{
-                              display: "flex",
-                              alignItems: "center",
-                              gap: "1vh",
-                              paddingLeft: "1vh",
-                              justifyContent: "flex-start",
-                            }}
-                            // className="flex w-full items-center gap-1  pl-2 justify-start"
-                          >
-                            <DoDisturbIcon
-                              sx={{ color: "#999999", width: "2vh" }}
-                            />
-                            <Text style={{ fontSize: "1.5vh" }}>
-                              Sin Soporte
-                            </Text>
-                          </View>
-                        )}
-                      </View>
-                    </View>
-                  </>
-                );
-              })}
-            </View>
-          </View>
+      
         </View>
       </View>
     </Page>
