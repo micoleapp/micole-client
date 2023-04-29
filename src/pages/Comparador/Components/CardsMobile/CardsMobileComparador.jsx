@@ -129,6 +129,8 @@ export default function CardsMobileComparador() {
       </div>
       {/* div que se expande  Afiliaciones*/}
       {openSection.afiliaciones && <MobileAfiliaciones />}
+
+    
       {/*   Infraestructura*/}
       <div
         onClick={() =>
