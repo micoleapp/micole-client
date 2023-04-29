@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useSquasState,useState } from "react";
 import Logo from "../../assets/logo1.png";
 import style from "./NavBar.module.css";
-import Categoria from "./Categoria/Categoria";
-import Contacto from "./Contacto/Contacto";
+
 import { Link } from "react-router-dom";
 import ModalLogin from "../ModalLogin/ModalLogin";
 import { useDispatch, useSelector } from "react-redux";
@@ -160,18 +159,7 @@ function NavBar() {
           ) : null}
         </div>
       </div>
-      {OpenCategory && (
-        <div className={style.divCategory}>
-          {" "}
-          <Categoria />{" "}
-        </div>
-      )}
-      {OpenContact && (
-        <div className={style.divContact}>
-          {" "}
-          <Contacto />{" "}
-        </div>
-      )}
+    
       {OpenLogin && (
         <ModalLogin handlerClose={setOpenLogin} OpenLogin={OpenLogin} />
       )}
@@ -212,7 +200,23 @@ function NavBar() {
           >
             Contáctanos
           </p>
+          <div className="flex">
+          <Link to={"/comparador"}>
+            <p
+              className={`${style.p} hover-underline-animation`}
+              // onClick={scrollBot}
+            >
+              Comparar Colegios
+            </p>
+          </Link>
 
+          <Badge
+            badgeContent={arrColegios.length}
+         
+            sx={{ top: "-4px", left: "10px" , background:'#0D263B', color:'#fff'}}
+          ></Badge>
+     
+          </div>
           {isAuth === true ? (
             <button
               onClick={() => {

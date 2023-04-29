@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 // import { PDFDownloadLink ,PDFViewer} from "@react-pdf/renderer";
 import CardsMobileComparador from "./Components/CardsMobile/CardsMobileComparador";
+import { Link } from "react-router-dom";
 // import ComparacionPdf from "./Components/Card/CardPdf";
 export default function Comparador() {
   const dispatch = useDispatch();
@@ -79,8 +80,21 @@ export default function Comparador() {
             </div>
           </>
         ) : (
-          <div className="flex justify-center items-center p-5  semibold text-[3vh]">
-            <p>Aún no has seleccionado ningun colegio!</p>
+          <div className="flex justify-center items-center pt-5 gap-2 p-2 flex-col ">
+            <img
+              className="w-[10vh]  h-[10vh]"
+              src="https://res.cloudinary.com/dvztuncle/image/upload/v1682803329/Group_186_idogrd.png"
+              alt=""
+            />
+            <p className="pt-2 text-[#0D263B]  text-center font-semibold text-[2.5vh]">
+              Aún no has seleccionado ningun colegio!
+            </p>
+            <p className="pt-2 text-center text-[1.8vh]">
+              Explora todos los colegios qué tenemos registrados en MiCole{" "}
+            </p>
+            <Button variant="contained">
+              <Link to={"/listschool?distrito=false&grado=false&ingreso=2023"}>Explorar</Link>
+            </Button>
           </div>
         )}
       </div>
@@ -88,7 +102,6 @@ export default function Comparador() {
       {/* <PDFViewer style={{ width: "100%", height: "90vh" }}>
            <ComparacionPdf arrColegios={arrColegios} />
       </PDFViewer> */}
-     
     </>
   );
 }
