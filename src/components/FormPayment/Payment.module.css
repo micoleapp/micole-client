@@ -2,19 +2,20 @@
   display: flex;
   flex-direction: row;
   align-items: first baseline;
-  padding: 20px;
+  padding: 1vh;
   /* justify-content: space-evenly; */
-  max-height: 80vh;
+  height: fit-content;
+  max-height: 90vh;
   gap: 5vh;
-  /* overflow-y: ; */
+  overflow-y: scroll;
 }
 
 .PaymentLayoutSingap {
   display: flex;
   flex-direction: row;
   align-items: first baseline;
-
-  max-height: 80vh;
+  height: fit-content;
+  max-height: 90vh;
 
 }
 
@@ -43,38 +44,40 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 20px;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
 }
 
 .Divdetalle h1 {
-  padding-left: 8px;
-  font-size: 16px;
+
+  font-size: 2.2vh;
   color: #0061df;
   font-weight: 600;
-  padding-bottom: 20px;
+  padding-bottom: 2vh;
 }
 
 .detalle {
   display: flex;
-  padding: 10px;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
   justify-content: space-between;
-  width: 300px;
+  width: 30vh;
 }
 
 .divBeneficios {
   width: auto;
   height: auto;
-  padding: 20px;
+  padding: 1vh;
 
   align-content: flex-start;
   border-radius: 10.6667px;
 }
 
 .divBeneficiosh1 {
-  font-size: 16px;
+  font-size: 2.2vh;
   color: #0061df;
   font-weight: 600;
-  padding-bottom: 20px;
+  padding-bottom: 2vh;
 }
 
 .containerMetodoPago {
@@ -82,10 +85,10 @@
 }
 
 .containerMetodoPago h1 {
-  font-size: 16px;
-  color: #2c2d2e;
+  font-size: 2.2vh;
+  color: #0061df;
   font-weight: 600;
-  padding-bottom: 24px;
+  padding-bottom: 2vh;
 }
 
 .mercadoPago {
@@ -114,7 +117,7 @@
   width: 200px;
   border-radius: 8px;
   height: 40px;
-  
+
   background-color: #0061df;
 }
 
@@ -138,6 +141,7 @@
     flex-direction: column-reverse;
     align-items: center;
     overflow-y: scroll;
+    height: fit-content;
     gap: 1vh;
   }
 
