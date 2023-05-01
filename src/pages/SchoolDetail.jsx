@@ -54,6 +54,7 @@ import FormListaEspera from "./SchoolDetail/Form-lista-espera/FormListEspera";
 import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import CitasD from "./SchoolDetail/Citas/CitasD";
+import BalanceIcon from "@mui/icons-material/Balance";
 function QuiltedImageList({ firstImage, gallery, setImage, setImages }) {
   return (
     <div className="w-full px-4">
@@ -178,6 +179,10 @@ function SchoolDetail() {
           <div style={{ display: "flex", flexDirection: "column" }}>
             {/* compartir en redes */}
             <div className="pl-1 flex pt-10  pb-2 flex-row ">
+              {/* <span className="flex items-center gap-0">
+                <BalanceIcon />
+                <p className="  text-[#696969] pl-1 text-[1.9vh]">Comparar</p>
+              </span> */}
               <span className="flex items-center gap-0">
                 <ShareOutlinedIcon sx={{ color: "#696969", padding: "2px" }} />
                 <p className="  text-[#696969] pl-1 text-[1.9vh]">Compartir</p>
