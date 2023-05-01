@@ -38,14 +38,20 @@ export default function CardsMobileComparador() {
     <div className=" flex flex-col items-center  w-full ">
       {/*  cards head */}
       <div className=" w-full flex flex-col gap-5 justify-between shadow-md pb-5 p-2">
- 
         {arrColegios?.map((c) => {
           return (
             <>
               <div className={style.containerCard}>
                 {/* HEAD */}
                 <div className={style.cardHead}>
-                  <img src={c.colegio.logo === null ? "https://res.cloudinary.com/dvztuncle/image/upload/v1682798271/3256151_zdcs0j.png":c.colegio.logo  } alt={c.colegio.nombre_colegio} />
+                  <img
+                    src={
+                      c.colegio.logo === null
+                        ? "https://res.cloudinary.com/dvztuncle/image/upload/v1682798271/3256151_zdcs0j.png"
+                        : c.colegio.logo
+                    }
+                    alt={c.colegio.nombre_colegio}
+                  />
                   <div className={style.cardHead_info}>
                     <p
                       style={{
@@ -57,15 +63,20 @@ export default function CardsMobileComparador() {
                       {c.colegio.nombre_colegio}
                     </p>
                     <p>{c.colegio.Distrito?.nombre_distrito}</p>
+                    
+                {/* <div className="w-full flex flex-row  max-w-[20vh] bg-[#0061df] rounded-md px-3 py-2 items-center justify-center"> */}
+                  <a
+                    target="_blank"
+                    className=" text-[1.5vh] m-0 text-[#0061df]  pt-1 "
+                    href={`/#/schooldetail/${c.colegio.id}?grado=2&ingreso=2023&lista=false`}
+                  >
+                    Ver Colegio
+                  </a>
+                {/* </div> */}
                   </div>
                 </div>
                 <div className="flex flex-row gap-[2vh] items-start">
-                  {/* <Link>
-                  <p   className="text-[1.6vh] text-[#0061df] font-semibold">
-                      Ver Perfil
-                  </p>
-              
-                </Link> */}
+          
                   <CloseIcon
                     sx={{ color: "#0061df" }}
                     onClick={(e) => handlerDelete(e, c.colegio.id)}
