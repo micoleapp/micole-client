@@ -1,9 +1,10 @@
 .layout {
-    display: flex;
-    flex-direction: column;
-    padding: 40px;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  gap: 10px;
 }
+
 .container {
   display: flex;
   width: 100%;
@@ -13,66 +14,68 @@
   gap: 20px;
   box-shadow: 2px 2px 1px rgba(34, 34, 34, 0.081);
   background-color: #fff;
-user-select: none;
-  padding: 2vh ;
+  user-select: none;
+  padding: 2vh;
 }
 
 
-.itemDiv{
-    display: flex;
-    gap: 5px;
+.itemDiv {
+  display: flex;
+  gap: 5px;
 }
 
-.divNombreGrado{
-    display: flex;
-      gap: 5px;
-    flex-direction: row;
-  
+.divNombreGrado {
+  display: flex;
+  gap: 5px;
+  flex-direction: row;
+
 }
-.promoPlan{
-    position: relative;
-bottom: -8%;
- background-color: #fff;
- z-index:20;
+
+.promoPlan {
+  position: relative;
+  bottom: -8%;
+  background-color: #fff;
+  z-index: 20;
 }
 
 
 .loader {
-    border: 4px solid rgba(0, 0, 0, .1);
-    border-left-color: transparent;
-    border-radius: 50%;
+  border: 4px solid rgba(0, 0, 0, .1);
+  border-left-color: transparent;
+  border-radius: 50%;
+}
+
+.loader {
+  border: 4px solid rgba(0, 0, 0, .1);
+  border-left-color: transparent;
+  width: 36px;
+  height: 36px;
+}
+
+.loader {
+  border: 4px solid rgba(0, 0, 0, .1);
+  border-left-color: transparent;
+  width: 36px;
+  height: 36px;
+  animation: spin89345 1s linear infinite;
+}
+
+@keyframes spin89345 {
+  0% {
+    transform: rotate(0deg);
   }
-  
-  .loader {
-    border: 4px solid rgba(0, 0, 0, .1);
-    border-left-color: transparent;
-    width: 36px;
-    height: 36px;
+
+  100% {
+    transform: rotate(360deg);
   }
-  
-  .loader {
-    border: 4px solid rgba(0, 0, 0, .1);
-    border-left-color: transparent;
-    width: 36px;
-    height: 36px;
-    animation: spin89345 1s linear infinite;
-  }
-  
-  @keyframes spin89345 {
-    0% {
-      transform: rotate(0deg);
-    }
-  
-    100% {
-      transform: rotate(360deg);
-    }
-  }
+}
+
 @media (max-width: 800px) {
-    .container {
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-end;
-      
-    }
-   
+  .container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+
+  }
+
 }
