@@ -130,6 +130,7 @@ function SchoolDetail() {
       );
     }
   }, [vacantes]);
+  useEffect(() => {}, [isAuth]);
 
   console.log(currentVacante);
 
@@ -406,7 +407,9 @@ function SchoolDetail() {
                       <SwiperEventos data={oneSchool} />
                     </div>
                   ) : (
-                    < p className="font-semibold  text-[#0D263B] pl-2 text-[2vh]">Aún no hay eventos disponibles</p>
+                    <p className="font-semibold  text-[#0D263B] pl-2 text-[2vh]">
+                      Aún no hay eventos disponibles
+                    </p>
                   )}
                 </TabPanel>
                 <TabPanel value="7">
