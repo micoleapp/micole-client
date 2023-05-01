@@ -56,7 +56,7 @@ export default function InfoGeneral() {
         </div>
         {oneSchool?.Metodos?.length > 0 && (
           <>
-            <h2 className="font-semibold text-lg">Metodos de aprendizaje</h2>
+            <h2 className="font-semibold  text-[#0D263B] text-[2.4vh]">Metodos de aprendizaje</h2>
             <div className="flex flex-wrap gap-5">
               {oneSchool?.Metodos?.map((metodo) => (
                 <p className="flex gap-2 items-center text-sm">
@@ -70,7 +70,7 @@ export default function InfoGeneral() {
         )}
         {oneSchool?.Dificultades?.length > 0 && (
           <>
-            <h2 className="font-semibold text-lg">Metodos de aprendizaje</h2>
+            <h2 className="font-semibold  text-[#0D263B] text-[2.4vh]">Metodos de aprendizaje</h2>
             <div className="flex flex-wrap gap-5">
               {oneSchool?.Dificultades?.map((dif) => (
                 <p className="flex gap-2 items-center text-sm">
