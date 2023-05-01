@@ -20,6 +20,7 @@ const styles = {
   p: 1,
   maxHeight:'90vh',
   overflowY:'scroll',
+  gap: '2vh',
   
 };
 export default function ModalInscripcion({

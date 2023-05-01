@@ -1,9 +1,10 @@
-
 .formLayout {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   height: 70vh;
+
+
 }
 
 .h1_div {
@@ -12,9 +13,10 @@
   justify-content: center;
   /* padding: 20px; */
 }
+
 .h1_div h1 {
   font-size: 32px;
-  color:#0061DF;
+  color: #0061DF;
   font-weight: 700;
 }
 
@@ -32,18 +34,20 @@
 .form input {
   height: 40px;
   width: 340px;
-
+ min-width: 40vh;
   outline-color: #0061dfab;
   border-radius: 8px;
   border: 1px solid rgb(121, 119, 119);
   padding: 10px;
 }
+
 .divInputs {
   display: flex;
   flex-direction: column;
 
   gap: 10px;
 }
+
 .label {
   font-size: 16px;
   color: rgb(49, 48, 48);
@@ -51,14 +55,16 @@
   padding-top: 10px;
   font-weight: 600;
 }
+
 .divButton {
   display: flex;
   justify-content: center;
   align-items: center;
-flex-direction: column;
-  padding: 20px;
+  flex-direction: column;
+  padding: 1vh;
   width: 100%;
 }
+
 .divButton button {
   font-family: Poppins;
   font-size: 14px;
@@ -69,7 +75,8 @@ flex-direction: column;
   height: 40px;
   background-color: #0061df;
 }
-.divSingIn{
+
+.divSingIn {
   display: flex;
   padding-top: 20px;
   align-items: center;
@@ -92,12 +99,13 @@ flex-direction: column;
 }
 
 .contenedorModal::-webkit-scrollbar:vertical {
-  width:8px;
+  width: 8px;
 }
 
-.contenedorModal::-webkit-scrollbar-button:increment,.contenedor::-webkit-scrollbar-button {
+.contenedorModal::-webkit-scrollbar-button:increment,
+.contenedor::-webkit-scrollbar-button {
   display: none;
-} 
+}
 
 .contenedorModal::-webkit-scrollbar:horizontal {
   height: 5px;
@@ -106,21 +114,22 @@ flex-direction: column;
 .contenedorModal::-webkit-scrollbar-thumb {
   background-color: #dfdfdf;
   border-radius: 10px;
-  border:0.5px solid #424242;
+  border: 0.5px solid #424242;
 }
 
 .contenedorModal::-webkit-scrollbar-track {
-  border-radius: 10px;  
+  border-radius: 10px;
 }
 
 
-.DivPass{
+.DivPass {
   position: relative;
 }
-.Password{
-position: absolute;
-top: 12px;
-right: 20px;
+
+.Password {
+  position: absolute;
+  top: 12px;
+  right: 20px;
 }
 
 @media (max-width: 800px) {
@@ -129,24 +138,29 @@ right: 20px;
     height: 40px;
     gap: 0px;
   }
+
   .label {
     color: rgb(49, 48, 48);
     padding-top: 0px;
   }
+
   .form {
     flex-direction: column;
     padding: 10px;
     gap: 0px;
   }
+
   .formLayout {
     height: auto;
     align-items: center;
   }
-  .contenedorModal{
-    max-height:700px ;
+
+  .contenedorModal {
+    max-height: 700px;
     overflow-y: scroll;
   }
-  .h1_div h1{
+
+  .h1_div h1 {
     font-size: 20px;
   }
 }
