@@ -16,14 +16,11 @@ import EventosUsuario from "./pageEventos/EventosUsuario";
 import UserConfig from "./Config-usuario/UserConfig";
 import { logout } from "../../redux/AuthActions";
 
-
 export default function MainUser() {
   const [page, setPage] = React.useState(0);
   const [isOpen, setOpen] = useState(false);
- 
 
-
-
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -88,7 +85,6 @@ export default function MainUser() {
                 Eventos{" "}
               </span>
             </button>
-       
 
             <button
               className={`flex items-center duration-300 focus:bg-[#0061dd] focus:text-white cursor-pointer gap-2 group p-3 rounded-md hover:bg-[#0060dd97] hover:text-white ${
@@ -106,7 +102,7 @@ export default function MainUser() {
               />
               <span
                 className={`text-sm text-black/80 group-focus:text-white group-hover:text-white ${
-                  page == 2? "text-white" : null
+                  page == 2 ? "text-white" : null
                 }`}
               >
                 Configuracion{" "}
@@ -138,14 +134,13 @@ export default function MainUser() {
         <section className="right w-full bg-[#EEEE]  lg:px-31 lg:py-12">
           {page === 0 ? (
             <div className="min-h-screen ">
-              <CitasUser  />
+              <CitasUser />
             </div>
           ) : page === 1 ? (
             <div className="min-h-screen flex    flex-col ">
               <EventosUsuario />
             </div>
-          )
-           : page === 2 ? (
+          ) : page === 2 ? (
             <div className="min-h-screen">
               <UserConfig />
             </div>
