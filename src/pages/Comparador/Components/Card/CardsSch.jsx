@@ -11,10 +11,9 @@ import InfraComparador from "../drop/Infra";
 import CloseIcon from "@mui/icons-material/Close";
 import { deleteColegio } from "../../../../redux/ComparadorActions";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 export default function CardsSch({ verMas, setVermas }) {
-
   const { arrColegios } = useSelector((state) => state.comparador);
-
 
   const hanlderVermas = () => {
     setVermas(!verMas);
@@ -35,7 +34,14 @@ export default function CardsSch({ verMas, setVermas }) {
                 <div className={style.containerCard}>
                   {/* HEAD */}
                   <div className={style.cardHead}>
-                    <img src={c.colegio.logo === null ? "https://res.cloudinary.com/dvztuncle/image/upload/v1682798271/3256151_zdcs0j.png":c.colegio.logo  } alt={c.colegio.nombre_colegio} />
+                    <img
+                      src={
+                        c.colegio.logo === null
+                          ? "https://res.cloudinary.com/dvztuncle/image/upload/v1682798271/3256151_zdcs0j.png"
+                          : c.colegio.logo
+                      }
+                      alt={c.colegio.nombre_colegio}
+                    />
                     <div className={style.cardHead_info}>
                       <p
                         style={{
@@ -213,7 +219,9 @@ export default function CardsSch({ verMas, setVermas }) {
                                 }}
                               >
                                 <Pincon />
-                                <p className="text-[1.6vh] ">{m.nombre_metodo}</p>
+                                <p className="text-[1.6vh] ">
+                                  {m.nombre_metodo}
+                                </p>
                               </div>
                             </>
                           );
@@ -260,7 +268,9 @@ export default function CardsSch({ verMas, setVermas }) {
                                 }}
                               >
                                 <Pincon />
-                                <p className="text-[1.6vh] ">{d.nombre_dificultad }</p>
+                                <p className="text-[1.6vh] ">
+                                  {d.nombre_dificultad}
+                                </p>
                               </div>
                             </>
                           );
@@ -357,6 +367,26 @@ export default function CardsSch({ verMas, setVermas }) {
             </div>
           </div>
         )}
+
+        <div className=" pl-20 flex flex-row gap-40 w-full items-end justify-center pt-10 ">
+          {arrColegios?.map((c) => {
+            return (
+              <>
+                {/* /schooldetail/5e684c3b-2146-4cbf-85e3-32b776e680cf?grado=2&ingreso=2023&lista=false */}
+
+                <div className="w-full flex flex-row  max-w-[20vh] bg-[#0061df] rounded-md px-3 py-2 items-center justify-center">
+                  <a
+                    target="_blank"
+                    className="text-white text-[1.8vh]  bg-[#0061df]  px-3 "
+                    href={`/#/schooldetail/${c.colegio.id}?grado=2&ingreso=2023&lista=false`}
+                  >
+                    Ver Colegio
+                  </a>
+                </div>
+              </>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

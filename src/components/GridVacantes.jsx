@@ -52,7 +52,7 @@ export default function GridVacantes({ año, setVacantesOff }) {
           SwalProp({
             status: true,
             title: "Éxito",
-            text: "Formulario enviado!",
+            text: "Año de ingreso guardado!",
           });
           dispatch(setVacantesRedux(oneSchool.id))
         }
@@ -243,7 +243,7 @@ export default function GridVacantes({ año, setVacantesOff }) {
         onClick={handleSubmit}
         className="flex mx-auto bg-[#0061dd] p-5 text-white rounded-md"
       >
-        Enviar formulario del año: {año}
+       Guardar año de ingreso: {año}
       </button>
     </>
   );

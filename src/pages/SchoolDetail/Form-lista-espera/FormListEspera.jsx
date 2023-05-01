@@ -17,7 +17,7 @@ export default function FormListaEspera({ gradoId, año }) {
       Swal.fire({
         icon: "info",
         title: "Inicia Sesión",
-        text: "Debes iniciar sesión o registrarte para comentar",
+        text: "Debes iniciar sesión o registrarte para inscribirte",
 
         confirmButtonText: "Iniciar Sesión",
 
@@ -41,7 +41,7 @@ export default function FormListaEspera({ gradoId, año }) {
             SwalProp({
               status: true,
               title: "Éxito",
-              text: "Lista creada!",
+              text: "inscribción exitosa!",
             });
           })
           .catch((err) => {
