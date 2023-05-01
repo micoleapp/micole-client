@@ -55,6 +55,8 @@ import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import CitasD from "./SchoolDetail/Citas/CitasD";
 import BalanceIcon from "@mui/icons-material/Balance";
+import { getDataSchools } from "../redux/ComparadorActions";
+import SnackComparador from "./ListSchool/SnackComparador/SnackComparador";
 function QuiltedImageList({ firstImage, gallery, setImage, setImages }) {
   return (
     <div className="w-full px-4">
@@ -160,6 +162,14 @@ function SchoolDetail() {
     setValue(newValue);
   };
 
+  const [openComparador, setOpenComparador] = useState(false);
+
+  const handlerComparador = (e, id) => {
+    console.log(id);
+    dispatch(getDataSchools({ id }));
+    setOpenComparador(true);
+  };
+
   return (
     <>
       <div className="  bg-[#f6f7f8]  ">
@@ -179,10 +189,6 @@ function SchoolDetail() {
           <div style={{ display: "flex", flexDirection: "column" }}>
             {/* compartir en redes */}
             <div className="pl-1 flex pt-10  pb-2 flex-row ">
-              {/* <span className="flex items-center gap-0">
-                <BalanceIcon />
-                <p className="  text-[#696969] pl-1 text-[1.9vh]">Comparar</p>
-              </span> */}
               <span className="flex items-center gap-0">
                 <ShareOutlinedIcon sx={{ color: "#696969", padding: "2px" }} />
                 <p className="  text-[#696969] pl-1 text-[1.9vh]">Compartir</p>
@@ -293,7 +299,21 @@ function SchoolDetail() {
                   <span className="text-[1.9vh] text-[#696969]">
                     UGEL: {oneSchool.ugel}{" "}
                   </span>
+
+                
                 </div>
+                <div className="flex flex-row gap-4 text-center">
+                     <span
+                    onClick={(e) => handlerComparador(e, oneSchool.id)}
+                    className="flex items-center gap-0"
+                  >
+                    <BalanceIcon sx={{color:'#696969'}} />
+                    <p className="  text-[#696969] pl-1 text-[1.9vh]">
+                      Comparar
+                    </p>
+                  </span>
+                </div>
+             
               </div>
             </div>
           </div>
@@ -473,6 +493,9 @@ function SchoolDetail() {
         </div>
         {openLogin && <ModalLogin handlerClose={setOpenLogin} />}
       </div>
+      {openComparador && (
+        <SnackComparador open={openComparador} setOpen={setOpenComparador} />
+      )}
     </>
   );
 }

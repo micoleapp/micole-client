@@ -884,30 +884,7 @@ const handlerComparador =(e,id)=>{
                                 {school.direccion}{" "}
                               </small>
                             </div>
-                            {/* <div className="flex items-center justify-center w-fit gap-10">
-                              <div className="flex flex-col items-center gap-2 text-center">
-                                <FontAwesomeIcon
-                                  size="lg"
-                                  color="rgb(156 163 175)"
-                                  icon={faUsers}
-                                />
-                                <span className="text-sm text-gray-400">
-                                  {school.numero_estudiantes} Alumnos
-                                </span>
-                              </div>
-                              {school?.Categoria?.map((cat) => (
-                                <div className="flex flex-col items-center gap-2 text-center">
-                                  <img
-                                    src={cat.logo_categoria}
-                                    alt="logo_categoria"
-                                    className="w-4 object-cover invert-[40%] drop-shadow-md"
-                                  />
-                                  <span className="text-sm text-gray-400">
-                                    {cat.nombre_categoria}{" "}
-                                  </span>
-                                </div>
-                              ))}
-                            </div> */}
+                     
 
                             <div className="grid grid-cols-2 grid-rows-3 w-max gap-x-2 gap-y-2">
                               {school.Vacantes.length > 0 && (
@@ -1053,23 +1030,7 @@ const handlerComparador =(e,id)=>{
                           <FavoritoButton />
                           </div>
                     
-                          {/* <div className="flex gap-5">
-                            <FontAwesomeIcon
-                              size="lg"
-                              icon={faUpRightAndDownLeftFromCenter}
-                              className="hover:scale-110 duration-200 cursor-pointer"
-                            />
-                            <FontAwesomeIcon
-                              size="lg"
-                              icon={faCirclePlus}
-                              className="hover:scale-110 duration-200 cursor-pointer"
-                            />
-                            <FontAwesomeIcon
-                              size="lg"
-                              icon={faHeart}
-                              className="hover:scale-110 duration-200 cursor-pointer"
-                            />
-                          </div> */}
+                       
                         </div>
                       </div>
                     </div>
