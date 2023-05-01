@@ -5,7 +5,7 @@ export default function Paypal() {
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="30"
-          height="25"
+          height="20"
           fill="none"
           viewBox="0 0 434 512"
         >

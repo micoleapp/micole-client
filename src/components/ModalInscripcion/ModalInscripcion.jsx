@@ -66,6 +66,7 @@ export default function ModalInscripcion({
             <Payment
               plan={OpenPaymentPLan?.plan}
               price={OpenPaymentPLan?.price}
+              handleClose={toggleClose}
             />
           )}
         </div>
