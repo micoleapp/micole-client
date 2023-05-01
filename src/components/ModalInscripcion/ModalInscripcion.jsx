@@ -17,7 +17,10 @@ const styles = {
   border: "none",
   boxShadow: 24,
   borderRadius: "8px",
-  p: 2,
+  p: 1,
+  maxHeight:'90vh',
+  overflowY:'scroll',
+  
 };
 export default function ModalInscripcion({
   handleClose,

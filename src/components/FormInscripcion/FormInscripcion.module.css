@@ -10,7 +10,7 @@
   display: flex;
   width: 100%;
   justify-content: center;
-  padding: 20px;
+  /* padding: 20px; */
 }
 .h1_div h1 {
   font-size: 32px;
