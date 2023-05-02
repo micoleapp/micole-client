@@ -1013,7 +1013,7 @@ const stringDays = [
   const handleSubmitCitas = (e) => {
     e.preventDefault();
     const diasActivos = stringDays.filter((ele)=>( ele.horarios.length > 0 ))
-    console.log(diasActivos)
+
     dispatch(postHorariosVacantes(diasActivos));
     console.log(user.id)
     try {
