@@ -18,10 +18,28 @@ function HorariosColegio({ diaSelecionado, sendDateHs }) {
 
     sendDateHs(infoDiaHora);
   };
-
+  console.log(diaSelecionado);
   // Se convierte el arr  diaSelecionado a un obj y accedemos a la propiedad time que es un array
-  const arrHorarios = diaSelecionado && Object.assign({}, ...diaSelecionado);
-  // console.log(arrHorarios.time);
+
+  // Se hace esta comprobación ya que hay colegios con la propiedad time en forma de obj
+
+  const fnParse = () => {
+    const arrHorarios = diaSelecionado && Object.assign({}, ...diaSelecionado);
+    const objHorarios = arrHorarios?.time;
+    console.log(objHorarios);
+
+    if (Array.isArray(objHorarios)) {
+      console.log("a");
+      return arrHorarios?.time;
+    } else {
+      const newArrHorarios = [];
+      newArrHorarios.push(arrHorarios?.time);
+      console.log("b");
+      return newArrHorarios;
+    }
+  };
+  const arrDefHorarios = fnParse();
+  console.log(arrDefHorarios);
   return (
     <>
       <FormControl sx={{ m: 1, minWidth: 100 }} size="small">
@@ -35,14 +53,14 @@ function HorariosColegio({ diaSelecionado, sendDateHs }) {
           label={"Horarios"}
           onChange={handleChangeHora}
         >
-          {arrHorarios &&
-            arrHorarios?.time?.map((ele) => {
-              console.log(diaSelecionado);
+          {diaSelecionado &&
+            arrDefHorarios?.map((ele) => {
+              console.log(ele);
               return (
                 <MenuItem
                   key={ele.desde}
                   onClick={(e) =>
-                    handlerInfo(e, arrHorarios.date, ele.desde, true)
+                    handlerInfo(e, diaSelecionado.date, ele.desde, true)
                   }
                   value={ele.desde}
                 >

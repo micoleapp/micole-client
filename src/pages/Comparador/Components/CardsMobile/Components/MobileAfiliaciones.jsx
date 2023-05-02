@@ -29,7 +29,7 @@ export default function MobileAfiliaciones() {
                         alt={c.colegio.nombre_colegio}
                       />
                       <div
-                        className={`${style.div} max-h-[20vh] min-w-[25vh]   items-start justify-start  `}
+                        className={`${style.div} max-h-[40vh] min-w-[25vh]   items-start justify-start  `}
                       >
                         <AcredComparador
                           ids={c.colegio.id}

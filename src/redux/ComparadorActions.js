@@ -6,7 +6,7 @@ export const getDataSchools =({ id }) =>  (dispatch) => {
   console.log(id)
     try {
       axios
-        .get(`/colegios/comparador/${id}`)
+        .get(`/comparador/${id}`)
         .then((res) => dispatch(getDataColegios(res.data)))
         .catch((err) => {
           SwalProp({
