@@ -79,6 +79,10 @@ import Miplan from "../components/Miplan/Miplan";
 import Modal from "@mui/material/Modal";
 import ListadeEspera from "./ListaEspera/ListadeEspera";
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import deleteIcon from "../assets/deleteIcon.png"
+import editIcon from "../assets/editIcon.png"
+import addIcon from "../assets/addIcon.png"
+
 const styleModal = {
   position: "absolute",
   top: "50%",
@@ -882,40 +886,37 @@ function DashboardSchool() {
   const [vacantes, setVacantes] = useState(0);
 
   const initialDaysWithTime = [
+    
     {
-      Lunes: [dayjs("2014-08-18T08:00:00"), dayjs("2014-08-18T17:00:00"), true],
+      horario: [dayjs("2014-08-18T09:00:00"), dayjs("2014-08-18T10:00:00"), false ],
     },
-    {
-      Martes: [
-        dayjs("2014-08-18T08:00:00"),
-        dayjs("2014-08-18T17:00:00"),
-        true,
-      ],
-    },
-    {
-      Miércoles : [
-        dayjs("2014-08-18T08:00:00"),
-        dayjs("2014-08-18T17:00:00"),
-        true,
-      ],
-    },
-    {
-      Jueves: [
-        dayjs("2014-08-18T08:00:00"),
-        dayjs("2014-08-18T17:00:00"),
-        true,
-      ],
-    },
-    {
-      Viernes: [
-        dayjs("2014-08-18T08:00:00"),
-        dayjs("2014-08-18T17:00:00"),
-        true,
-      ],
-    },
+    
   ];
 
-  const [daysWithTime, setDaysWithTime] = React.useState(initialDaysWithTime);
+  const initialStringDays = [
+    {
+      desde: '09:00', hasta: '10:00'
+    },
+  ]
+  
+  const [Lunes, setLunes] = React.useState(initialDaysWithTime);
+  const [Martes, setMartes] = React.useState(initialDaysWithTime);
+  const [Miercoles, setMiercoles] = React.useState(initialDaysWithTime);
+  const [Jueves, setJueves] = React.useState(initialDaysWithTime);
+  const [Viernes, setViernes] = React.useState(initialDaysWithTime);
+
+
+  const [LunesString, setLunesString] = React.useState(initialStringDays);
+  const [MartesString, setMartesString] = React.useState(initialStringDays);
+  const [MiercolesString, setMiercolesString] = React.useState(initialStringDays);
+  const [JuevesString, setJuevesString] = React.useState(initialStringDays);
+  const [ViernesString, setViernesString] = React.useState(initialStringDays);
+
+
+  console.log(LunesString);
+ console.log(MartesString)
+ 
+ 
 
   const stringyDate = (date) => {
     if (date.toString().length === 1) {
@@ -924,42 +925,94 @@ function DashboardSchool() {
       return date;
     }
   };
+  
+  const addHorario = (setdia, dia, setString, diaString  ) => {
+    setdia([
+      ...dia,
+      {
+        horario: [dayjs("2014-08-18T10:00:00"), dayjs("2014-08-18T11:00:00"), true, ],
+      },
+    ]);
+   setString([
+    ...diaString,
+    {
+       desde: '10:00', hasta: '11:00'
+    },
+   ])
+  
+  }
 
-  // { Lunes: ["08:30", "13:00", true] },
-  // {
-  //   dia: "Lunes",
-  //   horarios: { desde: "08:30", hasta: "13:00" },
-  //   disponibilidad: false,
-  //   vacantesDispo:2,
-  //   vacantes: "20",
-  // },
+  const editHorario = (setdia, dia, index ) => {
+    if (dia[index].horario[2] === false){
+      setdia([
+      ...dia.slice(0, index),
+     {
+      horario:[
+        dia[index].horario[0],
+        dia[index].horario[1],
+        true
+
+      ]},
+     
+      ...dia.slice(index + 1),
+    ]);}
+  else{
+       setdia([
+        ...dia.slice(0, index),
+       {
+        horario:[
+          dia[index].horario[0],
+          dia[index].horario[1],
+          false
+  
+        ]
+  
+  
+       },
+       
+        ...dia.slice(index + 1),
+      ])
+        console.log(dia[index].horario[2]);
+        
+  };}
+    
+  const deleteHorario = (setdia, setString, dia, diaString, index ) => {
+  
+    setdia([
+    ...dia.slice(0, index),
+    ...dia.slice(index + 1),
+  ]);
+
+setString([
+  ...diaString.slice(0, index),
+  ...diaString.slice(index + 1),
+])  
+}
+
+const diasdias= [
+  { "Lunes": [...Lunes],},
+ { "Martes": [...Martes],},
+  {"Miercoles":[ ...Miercoles],},
+  {"Jueves": [...Jueves],},
+  {"Viernes" :[...Viernes]},
+]
+
+const stringDays = [
+  { dia: "Lunes",
+   horarios: [...LunesString]},
+  { dia :"Martes",
+   horarios:[...MartesString],},
+   { dia: "Miercoles",
+   horarios: [ ...MiercolesString],},
+   {dia: "Jueves",
+    horarios:[...JuevesString],},
+   { dia: "Viernes",
+    horarios: [...ViernesString]},
+]
 
   const handleSubmitCitas = (e) => {
     e.preventDefault();
-
-    const newDaysWithTime = daysWithTime.filter((days) => {
-      return days[Object.keys(days)[0]][2] === true;
-    });
-
-    const newDaysssAA = newDaysWithTime.map((day) => console.log(day));
-
-    const newDays = newDaysWithTime.map((day) => ({
-      dia: Object.keys(day)[0],
-
-      horarios: {
-        desde: stringyDate(day[Object.keys(day)][0]["$H"])
-          .toString()
-          .concat(":")
-          .concat(stringyDate(day[Object.keys(day)][0]["$m"]).toString()),
-        hasta: stringyDate(day[Object.keys(day)][1]["$H"])
-          .toString()
-          .concat(":")
-          .concat(stringyDate(day[Object.keys(day)][1]["$m"]).toString()),
-      },
-    }));
-
-    console.log(newDays);
-    dispatch(postHorariosVacantes(newDays));
+    dispatch(postHorariosVacantes(stringDays));
     console.log(user.id)
     try {
       axios
@@ -3064,119 +3117,579 @@ function DashboardSchool() {
           <div className="min-h-screen p-5 flex flex-col gap-5">
             <h1 className="text-xl font-medium">Deberas completar estos datos para aparecer en nuestra lista</h1>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <div className="grid lg:grid-cols-3 w-full grid-cols-2">
-                {daysWithTime.map((day, index) => (
+            <div className="grid lg:grid-cols-3 w-full grid-cols-2">
+
+
+             
                   
-                  <div className="my-3">
-                    <FormControlLabel
-                      label={Object.keys(day)}
-                      control={
-                        <Checkbox
-                          checked={day[Object.keys(day)][2]}
-                          onChange={(event, target) => {
-                            if (target) {
-                              setDaysWithTime([
-                                ...daysWithTime.slice(0, index),
-                                {
-                                  [Object.keys(day)]: [
-                                    day[Object.keys(day)][0],
-                                    day[Object.keys(day)][1],
-                                    true,
-                                  ],
-                                },
-                                ...daysWithTime.slice(index + 1),
-                              ]);
-                            } else {
-                              setDaysWithTime([
-                                ...daysWithTime.slice(0, index),
-                                {
-                                  [Object.keys(day)]: [
-                                    day[Object.keys(day)][0],
-                                    day[Object.keys(day)][1],
-                                    false,
-                                  ],
-                                },
-                                ...daysWithTime.slice(index + 1),
-                              ]);
-                            }
-                          }}
-                        />
-                      }
-                    />
-                    <div className="flex flex-col gap-3">
-                      <small className="font-semibold">
-                        {[
-                          stringyDate(
-                            day[Object.keys(day)][0]["$H"]
-                          ).toString(),
-                          stringyDate(
-                            day[Object.keys(day)][0]["$m"]
-                          ).toString(),
-                        ].join(":")}{" "}
-                        -{" "}
-                        {[
-                          stringyDate(
-                            day[Object.keys(day)][1]["$H"]
-                          ).toString(),
-                          stringyDate(
-                            day[Object.keys(day)][1]["$m"]
-                          ).toString(),
-                        ].join(":")}{" "}
-                      </small>
-                      <div className="flex gap-2">
-                        <MobileTimePicker
-                          label="Desde"
-                          disabled={!day[Object.keys(day)][2]}
-                          className="w-[70px] bg-white"
-                          value={day[Object.keys(day)][0]}
-                          renderInput={(params) => <TextField {...params} />}
-                          ampm={false}
-                          onChange={(newValue) => {
-                            setDaysWithTime([
-                              ...daysWithTime.slice(0, index),
-                              {
-                                [Object.keys(day)]: [
-                                  newValue,
-                                  day[Object.keys(day)][1],
-                                  true,
-                                ],
-                              },
-                              ...daysWithTime.slice(index + 1),
-                            ]);
-                          }}
-                          minutesStep={60}
-                          minTime={dayjs("2014-08-18T08:00:00")}
-                          maxTime={day[Object.keys(day)][1]}
-                        />
-                        <MobileTimePicker
-                          label="Hasta"
-                          disabled={!day[Object.keys(day)][2]}
-                          className="w-[70px] bg-white"
-                          onChange={(newValue) => {
-                            setDaysWithTime([
-                              ...daysWithTime.slice(0, index),
-                              {
-                                [Object.keys(day)]: [
-                                  day[Object.keys(day)][0],
-                                  newValue,
-                                  true,
-                                ],
-                              },
-                              ...daysWithTime.slice(index + 1),
-                            ]);
-                          }}
-                          value={day[Object.keys(day)][1]}
-                          renderInput={(params) => <TextField {...params} />}
-                          ampm={false}
-                          minutesStep={60}
-                          minTime={day[Object.keys(day)][0]}
-                          maxTime={dayjs("2014-08-18T17:00:00")}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+<div className="my-3">
+     
+     <span>Lunes</span>
+     <div className="flex flex-col gap-3">
+      {Lunes &&  Lunes.map((hora, index) =>(<> <small className="font-semibold">
+         {[
+           stringyDate(
+             hora.horario[0]["$H"]
+           ).toString(),
+           stringyDate(
+             hora.horario[0]["$m"]
+           ).toString(),
+         ].join(":")}{" "}
+         -{" "}
+         {[
+           stringyDate(
+             hora.horario[1]["$H"]
+           ).toString(),
+           stringyDate(
+             hora.horario[1]["$m"]
+           ).toString(),
+         ].join(":")}{" "}
+         <button className="ml-6 scale-75"  onClick={() => editHorario(setLunes, Lunes, index)}><img src={editIcon} alt="edit"></img></button>
+         <button className="ml-3 scale-75" onClick={ () => deleteHorario(setLunes, setLunesString, Lunes, LunesString, index)}><img src={deleteIcon} alt="delete"></img></button>
+       </small>
+       { Lunes[index].horario[2] === true? <div className="flex gap-2">
+       <MobileTimePicker
+         label="Desde"
+         disabled={!hora.horario[2]}
+         className="w-[70px] bg-white"
+         value={hora.horario[0]}
+         renderInput={(params) => <TextField {...params} />}
+         ampm={false}
+         onChange={(newValue) => {
+           setLunes([
+             ...Lunes.slice(0, index),
+             {
+               horario: [
+                 newValue,
+                 hora.horario[1],
+                 true,
+               ],
+             },
+             ...Lunes.slice(index + 1),
+           ]);
+           setLunesString([
+            ...LunesString.slice(0, index),
+            {
+              desde: stringyDate(newValue["$H"])
+                .toString()
+                .concat(":")
+                .concat(stringyDate(newValue["$m"]).toString()),
+              hasta: stringyDate(hora.horario[1]["$H"])
+                .toString()
+                .concat(":")
+                .concat(stringyDate(hora.horario[1]["$m"]).toString()),
+            },
+            ...LunesString.slice(index + 1),
+
+           ])
+         }}
+         minutesStep={60}
+         minTime={dayjs("2014-08-18T08:00:00")}
+         maxTime={hora.horario[1]} 
+       />
+       <MobileTimePicker
+         label="Hasta"
+         disabled={!hora.horario[2]}
+         className="w-[70px] bg-white"
+         onChange={(newValue) => {
+           setLunes([
+             ...Lunes.slice(0, index),
+             {
+               horario: [
+                 hora.horario[0],
+                 newValue,
+                 true,
+               ],
+             },
+             ...Lunes.slice(index + 1),
+           ]);
+           setLunesString([
+            ...LunesString.slice(0, index),
+             {
+              desde: stringyDate(hora.horario[0]["$H"])
+                .toString()
+                .concat(":")
+                .concat(stringyDate(hora.horario[0]["$m"]).toString()),
+              hasta: stringyDate(newValue["$H"])
+                .toString()
+                .concat(":")
+                .concat(stringyDate(newValue["$m"]).toString()),
+            },
+            ...LunesString.slice(index + 1),
+
+           ])
+         }}
+         value={Lunes[index].horario[1]}
+         renderInput={(params) => <TextField {...params} />}
+         ampm={false}
+         minutesStep={60}
+         minTime={hora.horario[0]}
+         maxTime={dayjs("2014-08-18T17:00:00")}
+       />
+       
+     </div> : null}
+    
+     </>
+     
+       ))} 
+       <button className="flex " onClick={ () => addHorario(setLunes, Lunes, setLunesString, LunesString)}><img src={addIcon} alt="edit"></img><span className="ml-2 text-[#0061dd]">Añadir Horas</span></button>
+     </div>
+     
+   </div>
+   <div className="my-3">
+     
+     <span>Martes</span>
+     <div className="flex flex-col gap-3">
+      {Martes && Martes.map((hora, index) =>(<> <small className="font-semibold">
+         {[
+           stringyDate(
+             hora.horario[0]["$H"]
+           ).toString(),
+           stringyDate(
+             hora.horario[0]["$m"]
+           ).toString(),
+         ].join(":")}{" "}
+         -{" "}
+         {[
+           stringyDate(
+             hora.horario[1]["$H"]
+           ).toString(),
+           stringyDate(
+             hora.horario[1]["$m"]
+           ).toString(),
+         ].join(":")}{" "}
+          <button className="ml-6 scale-75" onClick={() => editHorario(setMartes, Martes, index)}><img src={editIcon} alt="edit"></img></button>
+          <button className="ml-3 scale-75" onClick={ () => deleteHorario(setMartes, setMartesString, Martes, MartesString, index)}><img src={deleteIcon} alt="delete"></img></button>
+       </small>
+       { Martes[index].horario[2] === true? <div className="flex gap-2">
+       <MobileTimePicker
+         label="Desde"
+         disabled={!hora.horario[2]}
+         className="w-[70px] bg-white"
+         value={hora.horario[0]}
+         renderInput={(params) => <TextField {...params} />}
+         ampm={false}
+         onChange={(newValue) => {
+           setMartes([
+             ...Martes.slice(0, index),
+             {
+               horario: [
+                 newValue,
+                 hora.horario[1],
+                 true,
+               ],
+             },
+             ...Martes.slice(index + 1),
+           ]);
+           setMartesString([
+            ...MartesString.slice(0, index),
+             {
+              desde: stringyDate(newValue["$H"])
+                .toString()
+                .concat(":")
+                .concat(stringyDate(newValue["$m"]).toString()),
+              hasta: stringyDate(hora.horario[1]["$H"])
+                .toString()
+                .concat(":")
+                .concat(stringyDate(hora.horario[1]["$m"]).toString()),
+            },
+            ...MartesString.slice(index + 1),
+
+           ])
+         }}
+         minutesStep={60}
+         minTime={dayjs("2014-08-18T08:00:00")}
+         maxTime={hora.horario[1]}
+       />
+       <MobileTimePicker
+         label="Hasta"
+         disabled={!hora.horario[2]}
+         className="w-[70px] bg-white"
+         onChange={(newValue) => {
+           setMartes([
+             ...Martes.slice(0, index),
+             {
+               horario: [
+                 hora.horario[0],
+                 newValue,
+                 true,
+               ],
+             },
+             ...Martes.slice(index + 1),
+           ]);
+           setMartesString([
+            ...MartesString.slice(0, index),
+            {
+              desde: stringyDate(hora.horario[0]["$H"])
+                .toString()
+                .concat(":")
+                .concat(stringyDate(hora.horario[0]["$m"]).toString()),
+              hasta: stringyDate(newValue["$H"])
+                .toString()
+                .concat(":")
+                .concat(stringyDate(newValue["$m"]).toString()),
+            },
+            ...MartesString.slice(index + 1),
+
+           ])
+         }}
+         value={Martes[index].horario[1]}
+         renderInput={(params) => <TextField {...params} />}
+         ampm={false}
+         minutesStep={60}
+         minTime={hora.horario[0]}
+         maxTime={dayjs("2014-08-18T17:00:00")}
+       />
+      
+     </div>: null }</>
+       ))} 
+       <button className="flex" onClick={ () => addHorario(setMartes, Martes, setMartesString, MartesString )}><img src={addIcon} alt="edit"></img><span className="ml-2 text-[#0061dd]">Añadir Horas</span></button>
+     </div>
+     
+   </div>
+   <div className="my-3">
+     
+     <span>Miércoles</span>
+     <div className="flex flex-col gap-3">
+      {Miercoles && Miercoles.map((hora, index) =>(<> <small className="font-semibold">
+         {[
+           stringyDate(
+             hora.horario[0]["$H"]
+           ).toString(),
+           stringyDate(
+             hora.horario[0]["$m"]
+           ).toString(),
+         ].join(":")}{" "}
+         -{" "}
+         {[
+           stringyDate(
+             hora.horario[1]["$H"]
+           ).toString(),
+           stringyDate(
+             hora.horario[1]["$m"]
+           ).toString(),
+         ].join(":")}{" "}
+        <button className="ml-6 scale-75" onClick={() => editHorario(setMiercoles, Miercoles, index)}><img src={editIcon} alt="edit"></img></button>
+         <button className="ml-3 scale-75" onClick={ () => deleteHorario(setMiercoles,setMiercolesString, Miercoles, MiercolesString, index)}><img src={deleteIcon} alt="delete"></img></button>
+       </small>
+      { Miercoles[index].horario[2] === true? <div className="flex gap-2">
+       <MobileTimePicker
+         label="Desde"
+         disabled={!hora.horario[2]}
+         className="w-[70px] bg-white"
+         value={hora.horario[0]}
+         renderInput={(params) => <TextField {...params} />}
+         ampm={false}
+         onChange={(newValue) => {
+           setMiercoles([
+             ...Miercoles.slice(0, index),
+             {
+               horario: [
+                 newValue,
+                 hora.horario[1],
+                 true,
+               ],
+             },
+             ...Miercoles.slice(index + 1),
+           ]);
+           setMiercolesString([
+            ...MiercolesString.slice(0, index),
+           {
+              desde: stringyDate(newValue["$H"])
+                .toString()
+                .concat(":")
+                .concat(stringyDate(newValue["$m"]).toString()),
+              hasta: stringyDate(hora.horario[1]["$H"])
+                .toString()
+                .concat(":")
+                .concat(stringyDate(hora.horario[1]["$m"]).toString()),
+            },
+            ...MiercolesString.slice(index + 1),
+
+           ])
+         }}
+         minutesStep={60}
+         minTime={dayjs("2014-08-18T08:00:00")}
+         maxTime={hora.horario[1]}
+       />
+       <MobileTimePicker
+         label="Hasta"
+         disabled={!hora.horario[2]}
+         className="w-[70px] bg-white"
+         onChange={(newValue) => {
+           setMiercoles([
+             ...Miercoles.slice(0, index),
+             {
+               horario: [
+                 hora.horario[0],
+                 newValue,
+                 true,
+               ],
+             },
+             ...Miercoles.slice(index + 1),
+           ]);
+           setMiercolesString([
+            ...MiercolesString.slice(0, index),
+             {
+              desde: stringyDate(hora.horario[0]["$H"])
+                .toString()
+                .concat(":")
+                .concat(stringyDate(hora.horario[0]["$m"]).toString()),
+              hasta: stringyDate(newValue["$H"])
+                .toString()
+                .concat(":")
+                .concat(stringyDate(newValue["$m"]).toString()),
+            },
+            ...MiercolesString.slice(index + 1),
+
+           ])
+         }}
+         value={Miercoles[index].horario[1]}
+         renderInput={(params) => <TextField {...params} />}
+         ampm={false}
+         minutesStep={60}
+         minTime={hora.horario[0]}
+         maxTime={dayjs("2014-08-18T17:00:00")}
+       />
+       
+     </div> : null}</>
+       ))} 
+       <button className="flex" onClick={ () => addHorario(setMiercoles, Miercoles, setMiercolesString, MiercolesString)}><img src={addIcon} alt="edit"></img><span className="ml-2 text-[#0061dd]">Añadir Horas</span></button>
+     </div>
+     
+   </div>
+
+   <div className="my-3">
+     
+     <span>Jueves</span>
+     <div className="flex flex-col gap-3">
+      {Jueves && Jueves.map((hora, index) =>(<> <small className="font-semibold">
+         {[
+           stringyDate(
+             hora.horario[0]["$H"]
+           ).toString(),
+           stringyDate(
+             hora.horario[0]["$m"]
+           ).toString(),
+         ].join(":")}{" "}
+         -{" "}
+         {[
+           stringyDate(
+             hora.horario[1]["$H"]
+           ).toString(),
+           stringyDate(
+             hora.horario[1]["$m"]
+           ).toString(),
+         ].join(":")}{" "}
+         <button className="ml-6 scale-75" onClick={() => editHorario(setJueves, Jueves, index)}><img src={editIcon} alt="edit"></img></button>
+         <button className="ml-3 scale-75" onClick={ () => deleteHorario(setJueves,setJuevesString, Jueves, JuevesString, index)}><img src={deleteIcon} alt="delete"></img></button>
+       </small>
+       { Jueves[index].horario[2] === true? <div className="flex gap-2">
+       <MobileTimePicker
+         label="Desde"
+         disabled={!hora.horario[2]}
+         className="w-[70px] bg-white"
+         value={hora.horario[0]}
+         renderInput={(params) => <TextField {...params} />}
+         ampm={false}
+         onChange={(newValue) => {
+           setJueves([
+             ...Jueves.slice(0, index),
+             {
+               horario: [
+                 newValue,
+                 hora.horario[1],
+                 true,
+               ],
+             },
+             ...Jueves.slice(index + 1),
+           ]);
+           setJuevesString([
+            ...JuevesString.slice(0, index),
+             {
+              desde: stringyDate(newValue["$H"])
+                .toString()
+                .concat(":")
+                .concat(stringyDate(newValue["$m"]).toString()),
+              hasta: stringyDate(hora.horario[1]["$H"])
+                .toString()
+                .concat(":")
+                .concat(stringyDate(hora.horario[1]["$m"]).toString()),
+            },
+            ...JuevesString.slice(index + 1),
+
+           ])
+         }}
+         minutesStep={60}
+         minTime={dayjs("2014-08-18T08:00:00")}
+         maxTime={hora.horario[1]}
+       />
+       <MobileTimePicker
+         label="Hasta"
+         disabled={!hora.horario[2]}
+         className="w-[70px] bg-white"
+         onChange={(newValue) => {
+           setJueves([
+             ...Jueves.slice(0, index),
+             {
+               horario: [
+                 hora.horario[0],
+                 newValue,
+                 true,
+               ],
+             },
+             ...Jueves.slice(index + 1),
+           ]);
+           setJuevesString([
+            ...JuevesString.slice(0, index),
+            {
+              desde: stringyDate(hora.horario[0]["$H"])
+                .toString()
+                .concat(":")
+                .concat(stringyDate(hora.horario[0]["$m"]).toString()),
+              hasta: stringyDate(newValue["$H"])
+                .toString()
+                .concat(":")
+                .concat(stringyDate(newValue["$m"]).toString()),
+            },
+            ...JuevesString.slice(index + 1),
+
+           ])
+         }}
+         value={Jueves[index].horario[1]}
+         renderInput={(params) => <TextField {...params} />}
+         ampm={false}
+         minutesStep={60}
+         minTime={hora.horario[0]}
+         maxTime={dayjs("2014-08-18T17:00:00")}
+       />
+       
+     </div> :null }</>
+       ))} 
+       <button className="flex" onClick={ () => addHorario(setJueves, Jueves, setJuevesString, JuevesString)}><img src={addIcon} alt="edit"></img><span className="ml-2 text-[#0061dd]">Añadir Horas</span></button>
+     </div>
+     
+   </div>
+    <div className="my-3">
+     
+      <span>Viernes</span>
+      <div className="flex flex-col gap-3">
+       {Viernes && Viernes.map((hora, index) =>(<> <small className="font-semibold">
+          {[
+            stringyDate(
+              hora.horario[0]["$H"]
+            ).toString(),
+            stringyDate(
+              hora.horario[0]["$m"]
+            ).toString(),
+          ].join(":")}{" "}
+          -{" "}
+          {[
+            stringyDate(
+              hora.horario[1]["$H"]
+            ).toString(),
+            stringyDate(
+              hora.horario[1]["$m"]
+            ).toString(),
+          ].join(":")}{" "}
+          <button className="ml-6 scale-75" onClick={() => editHorario(setViernes, Viernes, index)}><img src={editIcon} alt="edit"></img></button>
+          <button className="ml-3 scale-75" onClick={ () => deleteHorario(setViernes,setViernesString, Viernes, ViernesString, index)}><img src={deleteIcon} alt="delete"></img></button>
+        </small>
+        { Viernes[index].horario[2] === true? <div className="flex gap-2">
+        <MobileTimePicker
+          label="Desde"
+          disabled={!hora.horario[2]}
+          className="w-[70px] bg-white"
+          value={hora.horario[0]}
+          renderInput={(params) => <TextField {...params} />}
+          ampm={false}
+          onChange={(newValue) => {
+            setViernes([
+              ...Viernes.slice(0, index),
+              {
+                horario: [
+                  newValue,
+                  hora.horario[1],
+                  true,
+                ],
+              },
+              ...Viernes.slice(index + 1),
+            ]);
+            setViernesString([
+              ...ViernesString.slice(0, index),
+               {
+                desde: stringyDate(newValue["$H"])
+                  .toString()
+                  .concat(":")
+                  .concat(stringyDate(newValue["$m"]).toString()),
+                hasta: stringyDate(hora.horario[1]["$H"])
+                  .toString()
+                  .concat(":")
+                  .concat(stringyDate(hora.horario[1]["$m"]).toString()),
+              },
+              ...ViernesString.slice(index + 1),
+
+             ])
+          }}
+          minutesStep={60}
+          minTime={dayjs("2014-08-18T08:00:00")}
+          maxTime={hora.horario[1]}
+        />
+        <MobileTimePicker
+          label="Hasta"
+          disabled={!hora.horario[2]}
+          className="w-[70px] bg-white"
+          onChange={(newValue) => {
+            setViernes([
+              ...Viernes.slice(0, index),
+              {
+                horario: [
+                  hora.horario[0],
+                  newValue,
+                  true,
+                ],
+              },
+              ...Viernes.slice(index + 1),
+            ]);
+            setViernesString([
+              ...ViernesString.slice(0, index),
+               {
+                desde: stringyDate(hora.horario[0]["$H"])
+                  .toString()
+                  .concat(":")
+                  .concat(stringyDate(hora.horario[0]["$m"]).toString()),
+                hasta: stringyDate(newValue["$H"])
+                  .toString()
+                  .concat(":")
+                  .concat(stringyDate(newValue["$m"]).toString()),
+              },
+              ...ViernesString.slice(index + 1),
+
+             ])
+          }}
+          value={Viernes[index].horario[1]}
+          renderInput={(params) => <TextField {...params} />}
+          ampm={false}
+          minutesStep={60}
+          minTime={hora.horario[0]}
+          maxTime={dayjs("2014-08-18T17:00:00")}
+        />
+        
+      </div>:null }</>
+        ))} 
+        <button className="flex" onClick={ () => addHorario(setViernes, Viernes, setViernesString, ViernesString)}><img src={addIcon} alt="edit"></img><span className="ml-2 text-[#0061dd]">Añadir Horas</span></button>
+      </div>
+      
+    </div>
+  
+
+
+
+
+
+
+
+</div>
             </LocalizationProvider>
             <button
               onClick={handleSubmitCitas}
@@ -3778,3 +4291,5 @@ function DashboardSchool() {
 }
 
 export default DashboardSchool;
+
+
