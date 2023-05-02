@@ -308,7 +308,7 @@ function SchoolDetail() {
                     className="flex items-center gap-0"
                   >
                     <BalanceIcon sx={{color:'#696969'}} />
-                    <p className="  text-[#696969] pl-1 text-[1.9vh]">
+                    <p className=" cursor-pointer text-[#696969] pl-1 text-[1.9vh]">
                       Comparar
                     </p>
                   </span>
