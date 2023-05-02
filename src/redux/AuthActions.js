@@ -121,7 +121,7 @@ export const register = (user) => (dispatch) => {
 
 export const login = (user) => (dispatch) => {
   const { email, password } = user;
-  console.log(user);
+
   dispatch(isLoading());
   axios
     .post("/auth/signin", { email, password })
