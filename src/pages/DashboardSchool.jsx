@@ -2463,7 +2463,7 @@ function DashboardSchool() {
                             </label>
 
                             {afiliaciones
-                              .filter((inf) => inf.Afiliacion_tipo_Id === 1)
+                              .filter((inf) => inf.Afiliacion_tipo_id === 1)
                               .map((infra) => (
                                 <>
                                   <div className="flex flex-col">
@@ -2510,7 +2510,7 @@ function DashboardSchool() {
                             </label>
 
                             {afiliaciones
-                              .filter((inf) => inf.Afiliacion_tipo_Id === 2)
+                              .filter((inf) => inf.Afiliacion_tipo_id === 2)
                               .map((infra) => (
                                 <>
                                   <div className="flex flex-col">
@@ -2557,7 +2557,7 @@ function DashboardSchool() {
                             </label>
 
                             {afiliaciones
-                              .filter((inf) => inf.Afiliacion_tipo_Id === 3)
+                              .filter((inf) => inf.Afiliacion_tipo_id === 3)
                               .map((infra) => (
                                 <>
                                   <div className="flex flex-col">
@@ -2604,7 +2604,7 @@ function DashboardSchool() {
                             </label>
 
                             {afiliaciones
-                              .filter((inf) => inf.Afiliacion_tipo_Id === 4)
+                              .filter((inf) => inf.Afiliacion_tipo_id === 4)
                               .map((infra) => (
                                 <>
                                   <div className="flex flex-col">
