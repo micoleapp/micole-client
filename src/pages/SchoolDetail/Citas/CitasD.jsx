@@ -107,7 +107,7 @@ export default function CitasD({ ingresoParams, nombre_grado }) {
 
   return (
     <>
-      <div className=" bg-white flex flex-col gap-5 rounded-md  w-full">
+      <div className=" bg-white shadow-md flex flex-col p-5 gap-5 rounded-md  w-full">
         <h2 className="font-semibold  text-[#0D263B] text-[2.4vh]">
           Solicitar una visita
         </h2>

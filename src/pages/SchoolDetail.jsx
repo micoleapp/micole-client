@@ -81,12 +81,6 @@ let url = window.location.href;
 function QuiltedImageList({ firstImage, gallery, setImage, setImages }) {
   return (
     <div className="w-full px-4">
-      <img
-        src={firstImage}
-        alt=""
-        onClick={() => setImage(firstImage)}
-        className="cursor-pointer rounded-md h-24"
-      />
       <div className="flex gap-5 mt-2 overflow-x-scroll w-full pb-2">
         {gallery?.map((item, index) => (
           <img
@@ -534,9 +528,7 @@ function SchoolDetail() {
                       oneSchool.galeria_fotos !== null &&
                       JSON.parse(oneSchool.galeria_fotos).length > 0 && (
                         <QuiltedImageList
-                          firstImage={oneSchool.primera_imagen}
                           gallery={JSON.parse(oneSchool.galeria_fotos)}
-                          setImage={setImage}
                           setImages={setImages}
                         />
                       )}

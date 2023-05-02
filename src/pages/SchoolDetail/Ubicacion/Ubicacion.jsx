@@ -48,7 +48,7 @@ export default function Ubicacion() {
           </div>
         </div>
       </div>
-      <div className="p-5 shadow-md">
+      <div className="p-5 bg-white rounded-b-md shadow-md">
         <Maps lat={lat} lng={lng} />
       </div>
     </>
