@@ -18,6 +18,7 @@ function HorariosColegio({ diaSelecionado, sendDateHs }) {
 
     sendDateHs(infoDiaHora);
   };
+
   console.log(diaSelecionado);
   // Se convierte el arr  diaSelecionado a un obj y accedemos a la propiedad time que es un array
 
@@ -40,6 +41,7 @@ function HorariosColegio({ diaSelecionado, sendDateHs }) {
   };
   const arrDefHorarios = fnParse();
   console.log(arrDefHorarios);
+
   return (
     <>
       <FormControl sx={{ m: 1, minWidth: 100 }} size="small">
@@ -53,6 +55,7 @@ function HorariosColegio({ diaSelecionado, sendDateHs }) {
           label={"Horarios"}
           onChange={handleChangeHora}
         >
+
           {diaSelecionado &&
             arrDefHorarios?.map((ele) => {
               console.log(ele);
@@ -68,6 +71,7 @@ function HorariosColegio({ diaSelecionado, sendDateHs }) {
                 </MenuItem>
               );
             })}
+
         </Select>
       </FormControl>
     </>

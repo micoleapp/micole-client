@@ -29,6 +29,7 @@ export default function CitasD({ ingresoParams, nombre_grado }) {
   });
 
   function handleChangeDateHS(data) {
+
     console.log(data);
     if (data.select === true) {
       setCita({
@@ -66,6 +67,7 @@ export default function CitasD({ ingresoParams, nombre_grado }) {
     }
     if (isAuth) {
       console.log(cita);
+
 
       dispatch(postCita(cita));
     } else {
