@@ -240,7 +240,7 @@ export const postHorariosVacantes = (horarios) => (dispatch) => {
 
 export const postCita = (cita) => (dispatch) => {
   const { celular, correo, date, time, modo, nombre, añoIngreso, grado } = cita;
-  console.log("test");
+  console.log( celular, correo, date, time, modo, nombre, añoIngreso, grado);
   const ColegioId = localStorage.getItem("ColegioId");
 
   dispatch(isLoading());

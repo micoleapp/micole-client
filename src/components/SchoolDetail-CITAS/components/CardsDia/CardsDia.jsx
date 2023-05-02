@@ -8,6 +8,7 @@ function CardsDia({ diasSemana, fechadelDia, mesdelDia, onCardSelect }) {
     const { oneSchool, grados, horariosColegio } = useSelector(
         (state) => state.schools
     );
+ 
     const [cardSelected, setCardSelected] = useState(false);
     // Cambia la propiedad dia por ejm "Viernes" a "Vie"
     const dataAbreviada = abreviarDias(horariosColegio)
