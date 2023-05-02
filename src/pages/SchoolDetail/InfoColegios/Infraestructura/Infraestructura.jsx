@@ -48,7 +48,7 @@ export default function Infraestructura() {
               e === 1
                 ? "Administrativo"
                 : e === 2
-                ? "Artistica"
+                ? "Artística"
                 : e === 3
                 ? "Deportiva"
                 : e === 4

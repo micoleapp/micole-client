@@ -29,15 +29,27 @@ export default function CitasD({ ingresoParams, nombre_grado }) {
   });
 
   function handleChangeDateHS(data) {
-    setCita({
-      ...cita,
-      date: data.date,
-      time: data.time,
-    });
+
+    console.log(data);
+    if (data.select === true) {
+      setCita({
+        ...cita,
+        date: data.date,
+        time: data.time,
+      });
+    }
   }
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (cita.time === "" || cita.date === "") {
+      SwalProp({
+        status: false,
 
+        title: "Ups...",
+        text: "Debes selecionar dia y horarario  para continuar",
+      });
+      return;
+    }
     if (
       cita.time === "" ||
       cita.date === "" ||
@@ -54,7 +66,8 @@ export default function CitasD({ ingresoParams, nombre_grado }) {
       return;
     }
     if (isAuth) {
-      // console.log(cita);
+      console.log(cita);
+
 
       dispatch(postCita(cita));
     } else {

@@ -74,7 +74,7 @@ function FormInscripcion({ handlerOpenPayment, handlerOpenLogin , OpenLogin }) {
   return (
     <>
       <div className={style.h1_div}>
-        <h1>Completa tus datos</h1>
+        <h1 className="text-[1.8vh] p-2">Completa tus datos</h1>
       </div>
 
       <form onSubmit={handleSubmit(OnSubmit)} className={style.formLayout}>

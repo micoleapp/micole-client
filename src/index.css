@@ -47,7 +47,7 @@
   }
   
  *::-webkit-scrollbar:vertical {
-    width:0.50vh;
+    width:0.2vh;
   }
   
  *::-webkit-scrollbar-button:increment,.contenedor::-webkit-scrollbar-button {
@@ -59,9 +59,9 @@
   }
   
  *::-webkit-scrollbar-thumb {
-    background-color: #dfdfdf;
+    background-color: #dfdfdf73;
     border-radius: 10px;
-    border:0.5px solid #4242425c;
+    border:0.1px solid #5d5d5d5c;
   }
   
  *::-webkit-scrollbar-track {

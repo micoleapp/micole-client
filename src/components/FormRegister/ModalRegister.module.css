@@ -135,7 +135,19 @@
   right: 40px;
   }
   
+
+  .divMobile{
+    display: none;
+  }
   @media (max-width: 800px) {
+    
+  .divMobile{
+    display: flex;
+  }
+  
+  .divDsktop{
+    display: none;
+  }
     .divInputs input {
       width: 200px;
       height: 40px;

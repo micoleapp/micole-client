@@ -17,7 +17,11 @@ const styles = {
   border: "none",
   boxShadow: 24,
   borderRadius: "8px",
-  p: 2,
+  p: 1,
+  maxHeight:'90vh',
+  overflowY:'scroll',
+  gap: '2vh',
+  
 };
 export default function ModalInscripcion({
   handleClose,
@@ -62,6 +66,7 @@ export default function ModalInscripcion({
             <Payment
               plan={OpenPaymentPLan?.plan}
               price={OpenPaymentPLan?.price}
+              handleClose={toggleClose}
             />
           )}
         </div>

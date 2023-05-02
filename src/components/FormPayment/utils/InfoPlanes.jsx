@@ -63,7 +63,7 @@ export default function infoPlanes({ handleChangePlan }) {
 
       <div className={style.slider_container}>
         <Swiper
-          modules={[Navigation, Pagination, Scrollbar, A11y]}
+          modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
           // spaceBetween={0}
           slidesPerView={3}
           grabCursor={true}
@@ -71,6 +71,10 @@ export default function infoPlanes({ handleChangePlan }) {
           Scrollbar={true}
           pagination={{ clickable: true }}
           // pagination={true} modules={[Pagination]} 
+          autoplay={{
+            delay: 2000,
+            disableOnInteraction: false,
+          }}
           className={style.swiper}
         >
           {/*  */}

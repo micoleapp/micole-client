@@ -6,13 +6,13 @@ import VectorTalk from "../assets/VectorTalk.png";
 import GroupSchool from "../assets/GroupSchool.png";
 import Logo from "../assets/logoblanco.png";
 import { Link, useLocation } from "react-router-dom";
-import {  getAllDistrits} from "../redux/SchoolsActions";
+import { getAllDistrits } from "../redux/SchoolsActions";
 import ModalInscripcion from "../components/ModalInscripcion/ModalInscripcion";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import Swal from "sweetalert2";
 import SwalProp from "../exports/SwalProp";
-import { useRef } from 'react';
+import { useRef } from "react";
 
 function EnrollSchool() {
   const location = useLocation();
@@ -27,15 +27,15 @@ function EnrollSchool() {
   const toggleInscripcion = () => {
     setOpenRegister(true);
   };
-  const dispatch =useDispatch()
-  useState(()=>{
+  const dispatch = useDispatch();
+  useState(() => {
     window.scrollTo(0, 0);
-    dispatch(getAllDistrits())
-    if(location.state !== null && location.state.register === true){
-      setOpenRegister(true)
+    dispatch(getAllDistrits());
+    if (location.state !== null && location.state.register === true) {
+      setOpenRegister(true);
     }
-  },[])
-  
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = {
@@ -43,50 +43,55 @@ function EnrollSchool() {
       email: e.target.email.value,
       ruc: e.target.ruc.value,
       celular: e.target.celular.value,
-    }
+    };
     try {
-      axios.post('/informes', data)
-      .then(res=>{
-        SwalProp({
-          status: true,
-          title: "Éxito",
-          text:"Datos enviados exitosamente",
+      axios
+        .post("/informes", data)
+        .then((res) => {
+          SwalProp({
+            status: true,
+            title: "Éxito",
+            text: "Datos enviados exitosamente",
+          });
+        })
+        .catch((err) => {
+          SwalProp({
+            status: false,
+            title: "Algo salió mal",
+            text: err.response.data.error,
+          });
         });
-      })
-      .catch(err=>{
-        SwalProp({
-          status: false,
-          title: "Algo salió mal",
-          text: err.response.data.error,
-        });
-      })
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
+  };
 
-    console.log(data)
-  }
-  
   return (
     <div>
-      {/* <marquee
-        scrollamount={10}
-        direction=""
-        className="flex bg-transparent absolute text-white"
-      >
-        Tenemos los mejores planes para ofrecerte - Haz que tu colegio brille
-        frente a las familias - Completa tus vacantes disponibles - Cuenta con
-        un proceso de admisión simple y eficiente
-      </marquee> */}
       <header className="bg-[url('./assets/enroll.png')] h-[700px] flex justify-center items-center flex-col gap-10">
-        <h1 className="text-white text-center text-4xl font-semibold" data-aos="fade-up" data-aos-delay="0"  data-aos-mirror={false}>
+        <h1
+          className="text-white text-center text-4xl font-semibold"
+          data-aos="fade-up"
+          data-aos-delay="0"
+          data-aos-mirror={false}
+        >
           Publica tu colegio. Concreta citas con familias interesadas. <br />
           Gestiona todo en línea. Obtén nuevos estudiantes
         </h1>
-        <h2 className="text-white text-center text-3xl font-normal" data-aos="fade-up" data-aos-delay="100"  data-aos-mirror={false}>
+        <h2
+          className="text-white text-center text-3xl font-normal"
+          data-aos="fade-up"
+          data-aos-delay="100"
+          data-aos-mirror={false}
+        >
           Todo en un solo lugar, de forma simple y a bajo costo
         </h2>
-        <div onClick={toggleInscripcion} data-aos="fade-up"  data-aos-mirror={false} data-aos-delay="200">
+        <div
+          onClick={toggleInscripcion}
+          data-aos="fade-up"
+          data-aos-mirror={false}
+          data-aos-delay="200"
+        >
           <button className="uppercase p-3 rounded-sm bg-[#0061dd] text-white font-semibold">
             inscribe tu colegio aquí
           </button>
@@ -98,7 +103,19 @@ function EnrollSchool() {
           />
         )}
 
-        <button onClick={()=>myDivRef.current.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' })} className="px-4 py-1 rounded-md text-[#0061dd] bg-white font-semibold" data-aos="fade-up" data-aos-delay="300"   data-aos-mirror={false}>
+        <button
+          onClick={() =>
+            myDivRef.current.scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+              inline: "center",
+            })
+          }
+          className="px-4 py-1 rounded-md text-[#0061dd] bg-white font-semibold"
+          data-aos="fade-up"
+          data-aos-delay="300"
+          data-aos-mirror={false}
+        >
           ¡Quiero más información por el momento!
         </button>
       </header>
@@ -118,7 +135,8 @@ function EnrollSchool() {
             title="Completa tus vacantes 
 disponibles"
             parrafe="Gestiona todas las vacantes de inicial, primaria y secundaria que tengas en un solo lugar.
-"                        duration={"200"}
+"
+            duration={"200"}
           />
           <CardsOne
             img={VectorTalk}
@@ -184,12 +202,26 @@ admisión simple y eficiente"
           />
         </div>
 
-        <button className="px-4 mx-auto py-3 rounded-lg text-[#0061dd] bg-white font-normal" data-aos="zoom-in" data-aos-delay="200" data-aos-mirror={false}>
+        <button
+          className="px-4 mx-auto py-3 rounded-lg text-[#0061dd] bg-white font-normal"
+          data-aos="zoom-in"
+          data-aos-delay="200"
+          data-aos-mirror={false}
+        >
           ¿Prefieres usar otro medio de pago? Usa una billetera virtual
         </button>
       </section>
-      <section ref={myDivRef} className="bg-[url('./assets/enroll2.png')] flex justify-center items-center text-center">
-        <form className="flex flex-col bg-white m-14 h-[500px] p-5 w-[400px] justify-evenly items-center rounded-md"  data-aos="zoom-in" data-aos-delay="600" data-aos-mirror={false} onSubmit={handleSubmit}>
+      <section
+        ref={myDivRef}
+        className="bg-[url('./assets/enroll2.png')] flex justify-center items-center text-center"
+      >
+        <form
+          className="flex flex-col bg-white m-14 h-[500px] p-5 w-[400px] justify-evenly items-center rounded-md"
+          data-aos="zoom-in"
+          data-aos-delay="600"
+          data-aos-mirror={false}
+          onSubmit={handleSubmit}
+        >
           <img src={Logo} alt="logoblanco" className="object-cover w-40" />
           <h1 className="text-[#037dda] font-bold text-xl">
             Completa tus datos

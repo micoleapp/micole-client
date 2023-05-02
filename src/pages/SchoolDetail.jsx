@@ -8,7 +8,7 @@ import {
   getSchoolDetail,
   postCita,
 } from "../redux/SchoolsActions";
-import CircularProgress from '@mui/material/CircularProgress'
+import CircularProgress from "@mui/material/CircularProgress";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Swal from "sweetalert2";
 import {
@@ -51,9 +51,12 @@ import Ubicacion from "./SchoolDetail/Ubicacion/Ubicacion";
 import { Tabs } from "@mui/material";
 import SwDetail from "./SchoolDetail/SwipperDetail/SwDetail";
 import FormListaEspera from "./SchoolDetail/Form-lista-espera/FormListEspera";
-import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
-import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import CitasD from "./SchoolDetail/Citas/CitasD";
+import BalanceIcon from "@mui/icons-material/Balance";
+import { getDataSchools } from "../redux/ComparadorActions";
+import SnackComparador from "./ListSchool/SnackComparador/SnackComparador";
 function QuiltedImageList({ firstImage, gallery, setImage, setImages }) {
   return (
     <div className="w-full px-4">
@@ -77,7 +80,6 @@ function QuiltedImageList({ firstImage, gallery, setImage, setImages }) {
   );
 }
 
-
 function SchoolDetail() {
   const { id } = useParams();
   const { oneSchool, grados, horariosColegio } = useSelector(
@@ -85,8 +87,8 @@ function SchoolDetail() {
   );
   const [images, setImages] = useState({
     open: false,
-    src: []
-  })
+    src: [],
+  });
 
   const { user, isAuth, vacantes } = useSelector((state) => state.auth);
 
@@ -131,6 +133,7 @@ function SchoolDetail() {
       );
     }
   }, [vacantes]);
+  useEffect(() => {}, [isAuth]);
 
   console.log(currentVacante);
 
@@ -151,108 +154,112 @@ function SchoolDetail() {
 
   const [openLogin, setOpenLogin] = useState(false);
 
-  document.title = oneSchool?.nombre_colegio?.length > 0 ? oneSchool.nombre_colegio : "MiCole"
-
-
+  document.title =
+    oneSchool?.nombre_colegio?.length > 0 ? oneSchool.nombre_colegio : "MiCole";
 
   const [value, setValue] = useState("1");
   const handleChange = (event, newValue) => {
     setValue(newValue);
-
   };
-  console.log(oneSchool.galeria_fotos)
+
+  const [openComparador, setOpenComparador] = useState(false);
+
+  const handlerComparador = (e, id) => {
+    console.log(id);
+    dispatch(getDataSchools({ id }));
+    setOpenComparador(true);
+  };
+
   return (
-
-
     <>
-
-      <div className="bg-[#f6f7f8]  ">
-        {images.open && <SliderC setImages={setImages} images={images.src}></SliderC>}
-        {oneSchool?.primera_imagen?.length > 0 ?
+      <div className="  bg-[#f6f7f8]  ">
+        {images.open && (
+          <SliderC setImages={setImages} images={images.src}></SliderC>
+        )}
+        {oneSchool?.primera_imagen?.length > 0 ? (
           <SwDetail />
-          : <div className="w-full h-[500px] flex justify-center items-center">
-            <CircularProgress
-              size="5rem"
-              style={{ color: '#0061dd' }}
-            />
-          </div>}
-        {/* BODY DETAIL-----------------------*/}
-        <div
-          className='flex flex-col sm:flex-row lg:px-[100px] pb-10 justify-between' >
+        ) : (
+          <div className="w-full h-[500px] flex justify-center items-center">
+            <CircularProgress size="5rem" style={{ color: "#0061dd" }} />
+          </div>
+        )}
+        {/* BODY DETAIL----------------lg:px-[100px]-------*/}
+        <div className="flex flex-col  sm:flex-row pl-1 pb-20 justify-around">
           {/* Header */}
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <div style={{ display: "flex", flexDirection: "column" }}>
             {/* compartir en redes */}
-            <div className="flex pt-20  pb-2 flex-row ">
+            <div className="pl-1 flex pt-10  pb-2 flex-row ">
               <span className="flex items-center gap-0">
-             
-             
-                <ShareOutlinedIcon  sx={{color:'#696969', padding:'2px'}}/>
-                <p className="  text-[#696969] pl-1 text-[1.9vh]">
-                  Compartir
-                </p>
+                <ShareOutlinedIcon sx={{ color: "#696969", padding: "2px" }} />
+                <p className="  text-[#696969] pl-1 text-[1.9vh]">Compartir</p>
               </span>
               <span className="flex items-center pl-3 gap-0">
                 {" "}
-             
-                <FavoriteBorderOutlinedIcon sx={{color:'#696969', padding:'2px'}}/>
-                <p className="pl-1  text-[#696969] m-0 text-[1.9vh]">Favoritos
+                <FavoriteBorderOutlinedIcon
+                  sx={{ color: "#696969", padding: "2px" }}
+                />
+                <p className="pl-1  text-[#696969] m-0 text-[1.9vh]">
+                  Favoritos
                 </p>
               </span>
             </div>
             {/*nombre colegio */}
-            <h1 className="pl-3 lg:pl-0 font-semibold m-0  text-[#0D263B] text-[2.9vh]">
+            <h1 className="pl-3 lg:pl-0 font-semibold m-0  text-[#0D263B] text-[3.2vh]">
               {oneSchool.nombre_colegio}
             </h1>
-            <h2 className='pl-3 lg:pl-0 text-[#696969] text-[1.5vh]'>
+            <h2 className="pl-3 lg:pl-0 text-[#696969] text-[2vh]">
               {oneSchool.direccion}{" "}
             </h2>
             <div>
-              <div className={style.responsiveHead} >
+              <div className={style.responsiveHead}>
                 <div className=" min-w-fit  max-w-fit">
-
                   {/* divs negro */}
                   <div className="flex gap-2 lg:flex-row  pb-1 ">
-                    <span className="bg-[#0D263B] text-[1.3vh] min-w-fit m-0 px-2 p-0 text-white rounded-sm  flex items-center">
+                    <span className="bg-[#0D263B] text-[1.6vh] min-w-fit m-0 px-3 p-0 text-white rounded-sm  flex items-center">
                       {currentVacante &&
                         Number(currentVacante[0]?.capacidad) -
-                        Number(currentVacante[0]?.alumnos_matriculados)}{" "}
+                          Number(currentVacante[0]?.alumnos_matriculados)}{" "}
                       Vacantes
                     </span>
-                    <span className="bg-[#0D263B] text-[1.3vh] min-w-fit m-0 px-2 p-0 text-white rounded-sm flex items-center">
+                    <span className="bg-[#0D263B] text-[1.6vh] min-w-fit m-0 px-3 p-0 text-white rounded-sm flex items-center">
                       {nombre_grado}
                     </span>
-                    <span className="bg-[#0D263B] text-[1.3vh] min-w-fit m-0 px-2 p-0 rounded-sm text-white  flex items-center">
+                    <span className="bg-[#0D263B] text-[1.6vh] min-w-fit m-0 px-3 p-0 rounded-sm text-white  flex items-center">
                       {ingresoParams}
                     </span>
                   </div>
-
                 </div>
                 {/* COUTA DE INGRESO */}
                 {currentVacante && (
                   <div className="flex flex-col w-full ">
                     <small>
-                      <p className="font-semibold  text-[#0D263B] text-[2.2vh]"> Pensión: S/   {currentVacante.length > 0 && currentVacante[0].cuota_pension} mes </p>
-
-                    </small>
-                    <small>
-                      <p className="text-[#696969] text-[1.5vh]">  Cuota de ingreso: S/{" "}
-                        {currentVacante.length > 0 && currentVacante[0].cuota_ingreso}{" "}
+                      <p className="font-semibold  text-[#0D263B] text-[2.5vh]">
+                        {" "}
+                        Pensión: S/{" "}
+                        {currentVacante.length > 0 &&
+                          currentVacante[0].cuota_pension}{" "}
+                        mes{" "}
                       </p>
-
+                    </small>
+                    <small>
+                      <p className="text-[#696969] text-[1.9vh]">
+                        {" "}
+                        Cuota de ingreso: S/{" "}
+                        {currentVacante.length > 0 &&
+                          currentVacante[0].cuota_ingreso}{" "}
+                      </p>
                     </small>
 
                     <small>
-                      <p className="text-[#696969] text-[1.5vh]">
+                      <p className="text-[#696969] text-[1.9vh]">
                         Cuota de matricula: S/{" "}
-                        {currentVacante.length > 0 && currentVacante[0].matricula}
+                        {currentVacante.length > 0 &&
+                          currentVacante[0].matricula}
                       </p>
-
-
                     </small>
                   </div>
                 )}
               </div>
-
             </div>
             {/* ICONS HEAD */}
 
@@ -260,12 +267,8 @@ function SchoolDetail() {
               <div className={style.divIconsHead}>
                 {" "}
                 <div className="flex  flex-row  gap-3 text-center">
-                  <FontAwesomeIcon
-                    size="sm"
-                    color="rgb(156 163 175)"
-                    icon={faUsers}
-                  />
-                  <span className="text-[1.5vh] text-gray-400">
+                  <FontAwesomeIcon size="sm" color="#696969" icon={faUsers} />
+                  <span className="text-[1.9vh] text-[#696969] ">
                     {oneSchool.numero_estudiantes} Alumnos
                   </span>
                 </div>
@@ -274,43 +277,49 @@ function SchoolDetail() {
                     <img
                       src={cat.logo_categoria}
                       alt="logo_categoria"
-                      className="w-4 object-cover invert-[40%]"
+                      className="w-4 object-cover  invert-[40%]"
                     />
-                    <span className="text-[1.8vh] text-gray-400">
+                    <span className="text-[1.9vh] text-[#696969]">
                       {cat.nombre_categoria}{" "}
                     </span>
                   </div>
                 ))}
-
                 <div className="flex flex-row gap-3 text-center">
                   <FontAwesomeIcon
                     size="sm"
-                    color="rgb(156 163 175)"
+                    color="#696969"
                     icon={faCalendar}
                   />
-                  <span className="text-[1.8vh]  text-gray-400">
+                  <span className="text-[1.9vh] text-[#696969]">
                     Fundación: {oneSchool.fecha_fundacion}{" "}
                   </span>
                 </div>
                 <div className="flex flex-row gap-3 text-center">
-                  <FontAwesomeIcon
-                    size="sm"
-                    color="rgb(156 163 175)"
-                    icon={faSchool}
-                  />
-                  <span className="text-[1.8vh] text-gray-400">
+                  <FontAwesomeIcon size="sm" color="#696969" icon={faSchool} />
+                  <span className="text-[1.9vh] text-[#696969]">
                     UGEL: {oneSchool.ugel}{" "}
                   </span>
+
+                
                 </div>
+                <div className="flex flex-row gap-4 text-center">
+                     <span
+                    onClick={(e) => handlerComparador(e, oneSchool.id)}
+                    className="flex items-center gap-0"
+                  >
+                    <BalanceIcon sx={{color:'#696969'}} />
+                    <p className=" cursor-pointer text-[#696969] pl-1 text-[1.9vh]">
+                      Comparar
+                    </p>
+                  </span>
+                </div>
+             
               </div>
-
-
-
             </div>
           </div>
+
           {/* TABS DETAIL */}
           <main className="flex gap-5 flex-col lg:flex-row">
-
             <div className={style.divBox}>
               <TabContext value={value}>
                 <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -318,16 +327,52 @@ function SchoolDetail() {
                     variant="scrollable"
                     scrollButtons={true}
                     aria-label="scrollable prevent TabList example"
-                    onChange={handleChange} >
-                    <Tab sx={{ textTransform: 'none' }} label="Datos Generales" value="1" />
-                    <Tab sx={{ textTransform: 'none' }} label="Infraestructura" value="2" />
-                    <Tab sx={{ textTransform: 'none' }} label="Acreditaciones" value="3" />
-                    <Tab sx={{ textTransform: 'none' }} label="Ubicacion" value="4" />
-                    <Tab sx={{ textTransform: 'none' }} label="Reservar Citas" value="5" />
-                    <Tab sx={{ textTransform: 'none' }} label="Eventos" value="6" />
-                    <Tab sx={{ textTransform: 'none' }} label="Comentarios" value="7" />
-                    <Tab sx={{ textTransform: 'none' }} label="Multimedia" value="8" />
-
+                    onChange={handleChange}
+                  >
+                    <Tab
+                      sx={{ textTransform: "none" }}
+                      label="Datos Generales"
+                      value="1"
+                    />
+                    <Tab
+                      sx={{ textTransform: "none" }}
+                      label="Infraestructura"
+                      value="2"
+                    />
+                    <Tab
+                      sx={{ textTransform: "none" }}
+                      label="Afiliaciones"
+                      value="3"
+                    />
+                    <Tab
+                      sx={{ textTransform: "none" }}
+                      label="Ubicación"
+                      value="4"
+                    />
+                    <Tab
+                      sx={{ textTransform: "none" }}
+                      label={
+                        listaParams === "true"
+                          ? "Lista de espera"
+                          : "Reservar Citas"
+                      }
+                      value="5"
+                    />
+                    <Tab
+                      sx={{ textTransform: "none" }}
+                      label="Eventos"
+                      value="6"
+                    />
+                    <Tab
+                      sx={{ textTransform: "none" }}
+                      label="Comentarios"
+                      value="7"
+                    />
+                    <Tab
+                      sx={{ textTransform: "none" }}
+                      label="Multimedia"
+                      value="8"
+                    />
                   </TabList>
                 </Box>
                 <TabPanel value="1">
@@ -346,16 +391,21 @@ function SchoolDetail() {
                 <TabPanel value="5">
                   {listaParams === "true" ? (
                     //  Lista de espera
-                    <FormListaEspera gradoId={Number(gradoParams)} año={Number(ingresoParams)} />
+                    <FormListaEspera
+                      gradoId={Number(gradoParams)}
+                      año={Number(ingresoParams)}
+                    />
                   ) : (
                     // SACAR UNA CITA
-                    <CitasD ingresoParams={ingresoParams} nombre_grado={nombre_grado}/>
+                    <CitasD
+                      ingresoParams={ingresoParams}
+                      nombre_grado={nombre_grado}
+                    />
                   )}
                 </TabPanel>
                 {/* Eventos */}
                 <TabPanel value="6">
-
-                  {oneSchool?.Eventos?.length > 0 && (
+                  {oneSchool?.Eventos?.length > 0 ? (
                     <div
                       style={{
                         width: "100%",
@@ -364,6 +414,7 @@ function SchoolDetail() {
                         alignItems: "center",
                         flexDirection: "column",
                         gap: "10px",
+                        padding: " 1.25rem",
                       }}
                     >
                       <div
@@ -373,11 +424,17 @@ function SchoolDetail() {
                           justifyContent: "flex-start",
                         }}
                       >
-                        <h2 className="font-semibold  text-[#0D263B] text-[2.4vh]">Eventos</h2>
+                        <h2 className="font-semibold  text-[#0D263B] pl-2 text-[2.4vh]">
+                          Eventos
+                        </h2>
                       </div>
 
                       <SwiperEventos data={oneSchool} />
                     </div>
+                  ) : (
+                    <p className="font-semibold  text-[#0D263B] pl-2 text-[2vh]">
+                      Aún no hay eventos disponibles
+                    </p>
                   )}
                 </TabPanel>
                 <TabPanel value="7">
@@ -386,7 +443,9 @@ function SchoolDetail() {
                 {/* GALERIA / VIDEO */}
                 <TabPanel value="8">
                   <div className="p-5 bg-white flex flex-col gap-5 rounded-md shadow-md w-full">
-                    <h2 className="font-semibold  text-[#0D263B] text-[2.4vh]">Galería</h2>
+                    <h2 className="font-semibold  text-[#0D263B] pl-2 text-[2.4vh]">
+                      Galería
+                    </h2>
                     {oneSchool.hasOwnProperty("galeria_fotos") &&
                       oneSchool.galeria_fotos !== null &&
                       JSON.parse(oneSchool.galeria_fotos).length > 0 && (
@@ -398,8 +457,9 @@ function SchoolDetail() {
                         />
                       )}
                     <div
-                      className={`fixed top-0 left-0 z-50 bg-black/90 w-full h-full ${image ? "block" : "hidden"
-                        }`}
+                      className={`fixed top-0 left-0 z-50 bg-black/90 w-full h-full ${
+                        image ? "block" : "hidden"
+                      }`}
                     >
                       <button
                         onClick={() => setImage(null)}
@@ -416,7 +476,9 @@ function SchoolDetail() {
                   </div>
                   {oneSchool.video_url?.length > 0 && (
                     <div className=" bg-white flex flex-col gap-5 rounded-md w-full">
-                      <h2 className="font-semibold  text-[#0D263B] text-[2.4vh]">Video</h2>
+                      <h2 className="font-semibold  text-[#0D263B] text-[2.4vh]">
+                        Video
+                      </h2>
 
                       <video className="w-full h-[300px] lg:h-[400px]" controls>
                         <source src={oneSchool.video_url} type="video/mp4" />
@@ -426,15 +488,15 @@ function SchoolDetail() {
                 </TabPanel>
               </TabContext>
             </div>
-
           </main>
           {/* ------------------------------------------------------------------------------- */}
         </div>
         {openLogin && <ModalLogin handlerClose={setOpenLogin} />}
       </div>
+      {openComparador && (
+        <SnackComparador open={openComparador} setOpen={setOpenComparador} />
+      )}
     </>
-
-
   );
 }
 

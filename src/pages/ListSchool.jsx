@@ -5,7 +5,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Slider from "@mui/material/Slider";
 import ContentLoader from "react-content-loader";
-import { Rating, Typography, Pagination, Box } from "@mui/material";
+import { Rating, Typography, Pagination, Box, Button } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -34,6 +34,8 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import ListItemText from "@mui/material/ListItemText";
+import { getDataSchools } from "../redux/ComparadorActions";
+import SnackComparador from "./ListSchool/SnackComparador/SnackComparador";
 
 const yearNow = new Date().getFullYear();
 const Ingreso2 = [yearNow, yearNow + 1, yearNow + 2];
@@ -274,7 +276,7 @@ function ListSchool() {
     };
 
     return (
-      <button className="text-2xl" onClick={toggleFavorito}>
+      <button className="text-2xl " onClick={toggleFavorito}>
         {favorito ? "❤️" : "🤍"}
       </button>
     );
@@ -292,8 +294,16 @@ function ListSchool() {
     setPage(1);
     dispatch(getFilterListSchool(newData, page));
   }
+  const [openComparador, setOpenComparador] = useState(false)
+const handlerComparador =(e,id)=>{
+  console.log(id)
+  dispatch(getDataSchools({id}))
+  setOpenComparador(true)
+}
+
   return (
-    <div
+    <>
+        <div
       className="flex flex-col py-5 px-0 lg:p-5 bg-[#f6f7f8] "
 
       data-aos-duration="1000"
@@ -874,34 +884,11 @@ function ListSchool() {
                                 {school.direccion}{" "}
                               </small>
                             </div>
-                            {/* <div className="flex items-center justify-center w-fit gap-10">
-                              <div className="flex flex-col items-center gap-2 text-center">
-                                <FontAwesomeIcon
-                                  size="lg"
-                                  color="rgb(156 163 175)"
-                                  icon={faUsers}
-                                />
-                                <span className="text-sm text-gray-400">
-                                  {school.numero_estudiantes} Alumnos
-                                </span>
-                              </div>
-                              {school?.Categoria?.map((cat) => (
-                                <div className="flex flex-col items-center gap-2 text-center">
-                                  <img
-                                    src={cat.logo_categoria}
-                                    alt="logo_categoria"
-                                    className="w-4 object-cover invert-[40%] drop-shadow-md"
-                                  />
-                                  <span className="text-sm text-gray-400">
-                                    {cat.nombre_categoria}{" "}
-                                  </span>
-                                </div>
-                              ))}
-                            </div> */}
+                     
 
                             <div className="grid grid-cols-2 grid-rows-3 w-max gap-x-2 gap-y-2">
                               {school.Vacantes.length > 0 && (
-                                <small className="text-gray-400 flex gap-1 items-center">
+                                <small className="text-gray-400 flex gap-1  items-center">
                                   {" "}
                                   <span className="text-xl">
                                     <CiBag1></CiBag1>
@@ -1023,7 +1010,7 @@ function ListSchool() {
                                 VER DETALLE
                               </button> :   null}
 
-
+                             
                           </div>
                         </div>
 
@@ -1036,24 +1023,14 @@ function ListSchool() {
                               max={5}
                             />
                           </div>
+                          <div className="flex flex-row gap-2">
+                                  <Button onClick={(e)=> handlerComparador(e,school.id)} variant="outlined" >
+                                  Comparar
+                                </Button>
                           <FavoritoButton />
-                          {/* <div className="flex gap-5">
-                            <FontAwesomeIcon
-                              size="lg"
-                              icon={faUpRightAndDownLeftFromCenter}
-                              className="hover:scale-110 duration-200 cursor-pointer"
-                            />
-                            <FontAwesomeIcon
-                              size="lg"
-                              icon={faCirclePlus}
-                              className="hover:scale-110 duration-200 cursor-pointer"
-                            />
-                            <FontAwesomeIcon
-                              size="lg"
-                              icon={faHeart}
-                              className="hover:scale-110 duration-200 cursor-pointer"
-                            />
-                          </div> */}
+                          </div>
+                    
+                       
                         </div>
                       </div>
                     </div>
@@ -1095,6 +1072,11 @@ function ListSchool() {
         </section>
       </div>
     </div>
+    {
+    openComparador && <SnackComparador open={openComparador} setOpen={setOpenComparador}  /> 
+    }
+    </>
+
   );
 }
 
