@@ -29,6 +29,7 @@ export const comparadorSlice = createSlice({
         console.log(sortColegios)
        
         state.arrColegios =sortColegios;
+       
       } 
 
     },
@@ -46,6 +47,7 @@ export const comparadorSlice = createSlice({
  
  
       state.arrColegios =  state.arrColegios.filter((ele) => ele.colegio.id != id);
+     
     },
   },
 });
