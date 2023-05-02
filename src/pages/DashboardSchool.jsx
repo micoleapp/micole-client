@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import { useDispatch, useSelector } from "react-redux";
 import ListItemText from "@mui/material/ListItemText";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import Success from "../assets/Icon.png"
+import Success from "../assets/Icon.png";
 import Checkbox from "@mui/material/Checkbox";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -44,7 +44,7 @@ import { steps } from "../MockupInfo/Pasos";
 import {
   getVacantes,
   postHorariosVacantes,
-  getCitaAgendadas
+  getCitaAgendadas,
 } from "../redux/SchoolsActions";
 import { CiUser, CiClock1 } from "react-icons/ci";
 import { BsWindowDock } from "react-icons/bs";
@@ -53,7 +53,13 @@ import { RiImageAddLine } from "react-icons/ri";
 import { GiHexagonalNut } from "react-icons/gi";
 import { BsCalendarCheck } from "react-icons/bs";
 import { useEffect } from "react";
-import { logout, getSchoolDetail , setVacantesRedux, getInfraestructuraSchool, getAfiliacionSchool} from "../redux/AuthActions";
+import {
+  logout,
+  getSchoolDetail,
+  setVacantesRedux,
+  getInfraestructuraSchool,
+  getAfiliacionSchool,
+} from "../redux/AuthActions";
 import { useState } from "react";
 import { useRef } from "react";
 import axios from "axios";
@@ -78,10 +84,10 @@ import { getCita } from "../redux/CitasActions";
 import Miplan from "../components/Miplan/Miplan";
 import Modal from "@mui/material/Modal";
 import ListadeEspera from "./ListaEspera/ListadeEspera";
-import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
-import deleteIcon from "../assets/deleteIcon.png"
-import editIcon from "../assets/editIcon.png"
-import addIcon from "../assets/addIcon.png"
+import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+import deleteIcon from "../assets/deleteIcon.png";
+import editIcon from "../assets/editIcon.png";
+import addIcon from "../assets/addIcon.png";
 
 const styleModal = {
   position: "absolute",
@@ -165,7 +171,13 @@ function DashboardSchool() {
     dificultades,
     metodos,
   } = useSelector((state) => state.schools);
-  const { user, oneSchool, loading,infraestructura:oneInfra,afiliacion:oneAfiliacion } = useSelector((state) => state.auth);
+  const {
+    user,
+    oneSchool,
+    loading,
+    infraestructura: oneInfra,
+    afiliacion: oneAfiliacion,
+  } = useSelector((state) => state.auth);
 
   const id = user.id;
 
@@ -191,15 +203,15 @@ function DashboardSchool() {
         title: "Ups!...",
         text: "Las nuevas contraseñas no coinciden",
       });
-     
+
       return;
     }
     if (!user.password) {
       SwalProp({
-       status:false,
+        status: false,
         title: "Ups!...",
-        text: "Ingrese su contraseña para modificar algún campo"
-    });
+        text: "Ingrese su contraseña para modificar algún campo",
+      });
       return;
     }
     const data = {
@@ -218,7 +230,6 @@ function DashboardSchool() {
             title: "Éxito",
             text: "Datos actualizados!",
           });
-          
         })
         .catch((err) => {
           SwalProp({
@@ -457,25 +468,22 @@ function DashboardSchool() {
     infraestructura: oneInfra?.Infraestructuras
       ? oneInfra.Infraestructuras
       : [],
-    afiliaciones:
-      oneAfiliacion?.Afiliacions ? oneAfiliacion.Afiliacions : [],
+    afiliaciones: oneAfiliacion?.Afiliacions ? oneAfiliacion.Afiliacions : [],
     dificultades: oneSchool?.Dificultades ? oneSchool.Dificultades : [],
     metodos: oneSchool?.Metodos ? oneSchool.Metodos : [],
   };
-  
-  
 
   const [datosPrincipales, setDatosPrincipales] = useState(
     initialDatosPrincipales
-    );  
-    console.log(initialDatosPrincipales)
-    console.log(datosPrincipales)
-    console.log(oneAfiliacion)
-    console.log(oneInfra)
-    useEffect(()=>{
-      setDatosPrincipales(initialDatosPrincipales)
-    },[oneInfra,oneAfiliacion])
-    const datosPrincipalesCompleted = () => {
+  );
+  console.log(initialDatosPrincipales);
+  console.log(datosPrincipales);
+  console.log(oneAfiliacion);
+  console.log(oneInfra);
+  useEffect(() => {
+    setDatosPrincipales(initialDatosPrincipales);
+  }, [oneInfra, oneAfiliacion]);
+  const datosPrincipalesCompleted = () => {
     if (
       datosPrincipales.nombreColegio !== "" &&
       datosPrincipales.descripcion !== "" &&
@@ -574,13 +582,13 @@ function DashboardSchool() {
     }
     SwalProp({
       status: true,
-      title: "Éxito" ,
-      text:"Imagen subida!"
+      title: "Éxito",
+      text: "Imagen subida!",
     });
     setSpanOne(false);
     setActiveUpOne(false);
   };
-    const handleFilesSubmitLogo = async (e) => {
+  const handleFilesSubmitLogo = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     try {
@@ -602,7 +610,7 @@ function DashboardSchool() {
     SwalProp({
       status: true,
       title: "Éxito",
-      text:"Imagen subida!"
+      text: "Imagen subida!",
     });
     setSpanLogo(false);
     setActiveUpLogo(false);
@@ -629,7 +637,7 @@ function DashboardSchool() {
     SwalProp({
       status: true,
       title: "Éxito",
-      text:"Imagen subida!"
+      text: "Imagen subida!",
     });
     setSpanOne(false);
     setActiveUpOne(false);
@@ -684,7 +692,7 @@ function DashboardSchool() {
     SwalProp({
       status: true,
       title: "Éxito",
-      text:"Imágenes subidas!"
+      text: "Imágenes subidas!",
     });
     setSpanTwo(false);
     setActiveUpTwo(false);
@@ -709,8 +717,7 @@ function DashboardSchool() {
     oneSchool?.galeria_fotos?.length > 0
       ? JSON.parse(oneSchool.galeria_fotos)
       : [];
-      const initialPreviewLogo =
-      oneSchool?.logo?.length > 0 ? oneSchool.logo : "";
+  const initialPreviewLogo = oneSchool?.logo?.length > 0 ? oneSchool.logo : "";
   const [preview, setPreview] = useState(initialPreview);
   const [previewOne, setPreviewOne] = useState(initialPreviewOne);
   const [previewLogo, setPreviewLogo] = useState(initialPreviewLogo);
@@ -777,10 +784,9 @@ function DashboardSchool() {
         reader.onloadend = () => {
           setPreview((prev) => [...prev, reader.result]);
         };
-        setActiveUpTwo(true)
-        setSpanTwo(true)
-      }
-      );
+        setActiveUpTwo(true);
+        setSpanTwo(true);
+      });
     }
   }, [files]);
 
@@ -796,8 +802,8 @@ function DashboardSchool() {
       reader.onloadend = () => {
         setPreviewOne(reader.result);
       };
-      setActiveUpOne(true)
-      setSpanOne(true)
+      setActiveUpOne(true);
+      setSpanOne(true);
     }
   }, [file]);
   useEffect(() => {
@@ -820,7 +826,7 @@ function DashboardSchool() {
       };
     }
   }, [fileEditEvento]);
-  
+
   useEffect(() => {
     if (fileLogo !== null && fileLogo !== undefined) {
       const reader = new FileReader();
@@ -828,41 +834,43 @@ function DashboardSchool() {
       reader.onloadend = () => {
         setPreviewLogo(reader.result);
       };
-      setActiveUpLogo(true)
-      setSpanLogo(true)
-      
+      setActiveUpLogo(true);
+      setSpanLogo(true);
     }
   }, [fileLogo]);
-  
 
   const eliminarImagenDePreview = (img) => {
-    let newPreview = preview.filter((image) => image !== img)
+    let newPreview = preview.filter((image) => image !== img);
     setPreview(newPreview);
-    setMultimedia({...multimedia,images:newPreview})
+    setMultimedia({ ...multimedia, images: newPreview });
   };
-  useEffect(()=>{
-    if(multimedia.images.length === 0){
-      setSpanTwo(false)
-      setActiveUpTwo(false)
+  useEffect(() => {
+    if (multimedia.images.length === 0) {
+      setSpanTwo(false);
+      setActiveUpTwo(false);
     }
-  },[multimedia.images])
+  }, [multimedia.images]);
   const eliminarImagenDePreviewOne = (img) => {
     setPreviewOne("");
-    setMultimedia({...multimedia,image:""})
-    setSpanOne(false)
-    setActiveUpOne(false)
+    setMultimedia({ ...multimedia, image: "" });
+    setSpanOne(false);
+    setActiveUpOne(false);
   };
   const eliminarImagenDePreviewLogo = (img) => {
     setPreviewLogo("");
-    setMultimedia({...multimedia,logo:""})
-    setActiveUpLogo(false)
-    setSpanLogo(false)
+    setMultimedia({ ...multimedia, logo: "" });
+    setActiveUpLogo(false);
+    setSpanLogo(false);
   };
   const [image, setImage] = useState(null);
   const [imageLogo, setImageLogo] = useState(null);
 
   const multimediaCompleted = () => {
-    if (multimedia.image !== "" && multimedia.images.length !== 0 && multimedia.logo !== "") {
+    if (
+      multimedia.image !== "" &&
+      multimedia.images.length !== 0 &&
+      multimedia.logo !== ""
+    ) {
       return false;
     } else {
       return true;
@@ -886,37 +894,37 @@ function DashboardSchool() {
   const [vacantes, setVacantes] = useState(0);
 
   const initialDaysWithTime = [
-    
     {
-      horario: [dayjs("2014-08-18T09:00:00"), dayjs("2014-08-18T10:00:00"), false ],
+      horario: [
+        dayjs("2014-08-18T09:00:00"),
+        dayjs("2014-08-18T10:00:00"),
+        false,
+      ],
     },
-    
   ];
 
   const initialStringDays = [
     {
-      desde: '09:00', hasta: '10:00'
+      desde: "09:00",
+      hasta: "10:00",
     },
-  ]
-  
+  ];
+
   const [Lunes, setLunes] = React.useState(initialDaysWithTime);
   const [Martes, setMartes] = React.useState(initialDaysWithTime);
   const [Miercoles, setMiercoles] = React.useState(initialDaysWithTime);
   const [Jueves, setJueves] = React.useState(initialDaysWithTime);
   const [Viernes, setViernes] = React.useState(initialDaysWithTime);
 
-
   const [LunesString, setLunesString] = React.useState(initialStringDays);
   const [MartesString, setMartesString] = React.useState(initialStringDays);
-  const [MiercolesString, setMiercolesString] = React.useState(initialStringDays);
+  const [MiercolesString, setMiercolesString] =
+    React.useState(initialStringDays);
   const [JuevesString, setJuevesString] = React.useState(initialStringDays);
   const [ViernesString, setViernesString] = React.useState(initialStringDays);
 
-
   console.log(LunesString);
- console.log(MartesString)
- 
- 
+  console.log(MartesString);
 
   const stringyDate = (date) => {
     if (date.toString().length === 1) {
@@ -925,97 +933,78 @@ function DashboardSchool() {
       return date;
     }
   };
-  
-  const addHorario = (setdia, dia, setString, diaString  ) => {
+
+  const addHorario = (setdia, dia, setString, diaString) => {
     setdia([
       ...dia,
       {
-        horario: [dayjs("2014-08-18T10:00:00"), dayjs("2014-08-18T11:00:00"), true, ],
+        horario: [
+          dayjs("2014-08-18T10:00:00"),
+          dayjs("2014-08-18T11:00:00"),
+          true,
+        ],
       },
     ]);
-   setString([
-    ...diaString,
-    {
-       desde: '10:00', hasta: '11:00'
-    },
-   ])
-  
-  }
+    setString([
+      ...diaString,
+      {
+        desde: "10:00",
+        hasta: "11:00",
+      },
+    ]);
+  };
 
-  const editHorario = (setdia, dia, index ) => {
-    if (dia[index].horario[2] === false){
+  const editHorario = (setdia, dia, index) => {
+    if (dia[index].horario[2] === false) {
       setdia([
-      ...dia.slice(0, index),
-     {
-      horario:[
-        dia[index].horario[0],
-        dia[index].horario[1],
-        true
-
-      ]},
-     
-      ...dia.slice(index + 1),
-    ]);}
-  else{
-       setdia([
         ...dia.slice(0, index),
-       {
-        horario:[
-          dia[index].horario[0],
-          dia[index].horario[1],
-          false
-  
-        ]
-  
-  
-       },
-       
+        {
+          horario: [dia[index].horario[0], dia[index].horario[1], true],
+        },
+
         ...dia.slice(index + 1),
-      ])
-        console.log(dia[index].horario[2]);
-        
-  };}
-    
-  const deleteHorario = (setdia, setString, dia, diaString, index ) => {
-  
-    setdia([
-    ...dia.slice(0, index),
-    ...dia.slice(index + 1),
-  ]);
+      ]);
+    } else {
+      setdia([
+        ...dia.slice(0, index),
+        {
+          horario: [dia[index].horario[0], dia[index].horario[1], false],
+        },
 
-setString([
-  ...diaString.slice(0, index),
-  ...diaString.slice(index + 1),
-])  
-}
+        ...dia.slice(index + 1),
+      ]);
+      console.log(dia[index].horario[2]);
+    }
+  };
 
-const diasdias= [
-  { "Lunes": [...Lunes],},
- { "Martes": [...Martes],},
-  {"Miercoles":[ ...Miercoles],},
-  {"Jueves": [...Jueves],},
-  {"Viernes" :[...Viernes]},
-]
+  const deleteHorario = (setdia, setString, dia, diaString, index) => {
+    setdia([...dia.slice(0, index), ...dia.slice(index + 1)]);
 
-const stringDays = [
-  { dia: "Lunes",
-   horarios: [...LunesString]},
-  { dia :"Martes",
-   horarios:[...MartesString],},
-   { dia: "Miercoles",
-   horarios: [ ...MiercolesString],},
-   {dia: "Jueves",
-    horarios:[...JuevesString],},
-   { dia: "Viernes",
-    horarios: [...ViernesString]},
-]
+    setString([...diaString.slice(0, index), ...diaString.slice(index + 1)]);
+  };
+
+  const diasdias = [
+    { Lunes: [...Lunes] },
+    { Martes: [...Martes] },
+    { Miercoles: [...Miercoles] },
+    { Jueves: [...Jueves] },
+    { Viernes: [...Viernes] },
+  ];
+
+  const stringDays = [
+    { dia: "Lunes", horarios: [...LunesString] },
+    { dia: "Martes", horarios: [...MartesString] },
+    { dia: "Miercoles", horarios: [...MiercolesString] },
+    { dia: "Jueves", horarios: [...JuevesString] },
+    { dia: "Viernes", horarios: [...ViernesString] },
+  ];
 
   const handleSubmitCitas = (e) => {
     e.preventDefault();
-    const diasActivos = stringDays.filter((ele)=>( ele.horarios.length > 0 ))
+    const diasActivos = stringDays.filter((ele) => ele.horarios.length > 0);
 
     dispatch(postHorariosVacantes(diasActivos));
-    console.log(user.id)
+    console.log(user.id);
     try {
       axios
         .put(`/colegios/activo/${user.id}`, { isActive: true })
@@ -1046,7 +1035,7 @@ const stringDays = [
   const [seeNewPassword, setSeeNewPassword] = useState(false);
 
   useEffect(() => {
-    console.log(datosPrincipales.niveles)
+    console.log(datosPrincipales.niveles);
     dispatch(getVacantes(datosPrincipales.niveles));
   }, [datosPrincipales.niveles]);
 
@@ -1071,7 +1060,7 @@ const stringDays = [
           SwalProp({
             status: true,
             title: "Éxito",
-            text:"Evento creado!"
+            text: "Evento creado!",
           });
           dispatch(getSchoolDetail(id));
           setEvento({
@@ -1117,7 +1106,7 @@ const stringDays = [
               SwalProp({
                 status: true,
                 title: "Éxito",
-                text:"Evento eliminado!"
+                text: "Evento eliminado!",
               });
             })
             .catch((err) => {
@@ -1142,7 +1131,7 @@ const stringDays = [
             SwalProp({
               status: true,
               title: "Éxito",
-              text: "Evento editado!"
+              text: "Evento editado!",
             });
             dispatch(getSchoolDetail(user.id));
           })
@@ -1175,7 +1164,7 @@ const stringDays = [
             SwalProp({
               status: true,
               title: "Éxito",
-              text: "Evento editado!"
+              text: "Evento editado!",
             });
             dispatch(getSchoolDetail(user.id));
           })
@@ -1224,19 +1213,17 @@ const stringDays = [
     });
   };
 
-  useEffect(()=>{
-    if(activeStep === 3){
-      dispatch(setVacantesRedux(id))
+  useEffect(() => {
+    if (activeStep === 3) {
+      dispatch(setVacantesRedux(id));
     }
-    if(activeStep === 1){
-      dispatch(getInfraestructuraSchool(id))
+    if (activeStep === 1) {
+      dispatch(getInfraestructuraSchool(id));
     }
-    if(activeStep === 2){
-      dispatch(getAfiliacionSchool(id))
+    if (activeStep === 2) {
+      dispatch(getAfiliacionSchool(id));
     }
-  },[activeStep])
-
-
+  }, [activeStep]);
 
   return (
     <div className="flex lg:flex-row flex-col">
@@ -1389,29 +1376,28 @@ const stringDays = [
             </span>
           </button>
 
-
           <button
-              className={`flex items-center duration-300 focus:bg-[#0061dd] focus:text-white cursor-pointer gap-2 group p-3 rounded-md hover:bg-[#0060dd97] hover:text-white ${
-                page == 7 ? "bg-[#0061dd] text-white" : null
-              } `}
-              onClick={() => {
-                setOpen();
-                setPage(7);
-              }}
+            className={`flex items-center duration-300 focus:bg-[#0061dd] focus:text-white cursor-pointer gap-2 group p-3 rounded-md hover:bg-[#0060dd97] hover:text-white ${
+              page == 7 ? "bg-[#0061dd] text-white" : null
+            } `}
+            onClick={() => {
+              setOpen();
+              setPage(7);
+            }}
+          >
+            <FormatListBulletedIcon
+              className={`text-xl text-[#0061dd] group-focus:text-white group-hover:text-white ${
+                page == 7 ? "text-white" : null
+              }`}
+            />
+            <span
+              className={`text-sm text-black/80 group-focus:text-white group-hover:text-white ${
+                page == 7 ? "text-white" : null
+              }`}
             >
-              <FormatListBulletedIcon
-                className={`text-xl text-[#0061dd] group-focus:text-white group-hover:text-white ${
-                  page == 7 ? "text-white" : null
-                }`}
-              />
-              <span
-                className={`text-sm text-black/80 group-focus:text-white group-hover:text-white ${
-                  page == 7 ? "text-white" : null
-                }`}
-              >
-                Lista de Espera
-              </span>
-            </button>
+              Lista de Espera
+            </span>
+          </button>
 
           <button
             className={`flex items-center duration-300 focus:bg-[#0061dd] focus:text-white cursor-pointer gap-2 group p-3 rounded-md hover:bg-[#0060dd97] hover:text-white ${
@@ -2176,7 +2162,6 @@ const stringDays = [
                         </Button>
                       ))} */}
                       </Box>
-                      
                     </form>
                   )}
                   {activeStep === 1 && (
@@ -2203,9 +2188,9 @@ const stringDays = [
                                     <FormControlLabel
                                       control={
                                         <Checkbox
-                                        checked={datosPrincipales.infraestructura.some(
-                                          (inf) => inf.id === infra.id
-                                        )}
+                                          checked={datosPrincipales.infraestructura.some(
+                                            (inf) => inf.id === infra.id
+                                          )}
                                           onChange={(event, target) => {
                                             if (target) {
                                               setDatosPrincipales({
@@ -2250,9 +2235,9 @@ const stringDays = [
                                     <FormControlLabel
                                       control={
                                         <Checkbox
-                                        checked={datosPrincipales.infraestructura.some(
-                                          (inf) => inf.id === infra.id
-                                        )}
+                                          checked={datosPrincipales.infraestructura.some(
+                                            (inf) => inf.id === infra.id
+                                          )}
                                           onChange={(event, target) => {
                                             if (target) {
                                               setDatosPrincipales({
@@ -2297,9 +2282,9 @@ const stringDays = [
                                     <FormControlLabel
                                       control={
                                         <Checkbox
-                                        checked={datosPrincipales.infraestructura.some(
-                                          (inf) => inf.id === infra.id
-                                        )}
+                                          checked={datosPrincipales.infraestructura.some(
+                                            (inf) => inf.id === infra.id
+                                          )}
                                           onChange={(event, target) => {
                                             if (target) {
                                               setDatosPrincipales({
@@ -2344,9 +2329,9 @@ const stringDays = [
                                     <FormControlLabel
                                       control={
                                         <Checkbox
-                                        checked={datosPrincipales.infraestructura.some(
-                                          (inf) => inf.id === infra.id
-                                        )}
+                                          checked={datosPrincipales.infraestructura.some(
+                                            (inf) => inf.id === infra.id
+                                          )}
                                           onChange={(event, target) => {
                                             if (target) {
                                               setDatosPrincipales({
@@ -2391,9 +2376,9 @@ const stringDays = [
                                     <FormControlLabel
                                       control={
                                         <Checkbox
-                                        checked={datosPrincipales.infraestructura.some(
-                                          (inf) => inf.id === infra.id
-                                        )}
+                                          checked={datosPrincipales.infraestructura.some(
+                                            (inf) => inf.id === infra.id
+                                          )}
                                           onChange={(event, target) => {
                                             if (target) {
                                               setDatosPrincipales({
@@ -2459,7 +2444,6 @@ const stringDays = [
                         </Button>
                       ))} */}
                       </Box>
-                     
                     </div>
                   )}
                   {activeStep === 2 && (
@@ -2695,7 +2679,6 @@ const stringDays = [
                         </Button>
                       ))} */}
                       </Box>
-                      
                     </div>
                   )}
                   {activeStep === 3 && (
@@ -2801,7 +2784,6 @@ const stringDays = [
                         </Button>
                       ))} */}
                       </Box>
-                     
                     </div>
                   )}
                   {activeStep === 4 && (
@@ -3108,7 +3090,6 @@ const stringDays = [
                                           </Button>
                                         ))} */}
                       </Box>
-                     
                     </div>
                   )}
                 </React.Fragment>
@@ -3117,581 +3098,784 @@ const stringDays = [
           </Box>
         ) : page === 1 ? (
           <div className="min-h-screen p-5 flex flex-col gap-5">
-            <h1 className="text-xl font-medium">Deberas completar estos datos para aparecer en nuestra lista</h1>
+            <h1 className="text-[2.5vh] font-medium">
+              Deberas completar estos datos para aparecer en nuestra lista
+            </h1>
+            <p className="text-[1.8vh] text-[#7A7777]">
+              En esta sección, indica tu disponibilidad horaria para atender al
+              público. Las familias podrán programar citas en los horarios que
+              especifiques. Si no especifica horarios en un día, se considerará
+              como un día no disponible para atención al público.{" "}
+            </p>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <div className="grid lg:grid-cols-3 w-full grid-cols-2">
+              <div className="grid lg:grid-cols-3 w-full grid-cols-2">
+                <div className="my-3">
+                  <span>Lunes</span>
+                  <div className="flex flex-col gap-3">
+                    {Lunes &&
+                      Lunes.map((hora, index) => (
+                        <>
+                          {" "}
+                          <small className="font-semibold">
+                            {[
+                              stringyDate(hora.horario[0]["$H"]).toString(),
+                              stringyDate(hora.horario[0]["$m"]).toString(),
+                            ].join(":")}{" "}
+                            -{" "}
+                            {[
+                              stringyDate(hora.horario[1]["$H"]).toString(),
+                              stringyDate(hora.horario[1]["$m"]).toString(),
+                            ].join(":")}{" "}
+                            <button
+                              className="ml-6 scale-75"
+                              onClick={() =>
+                                editHorario(setLunes, Lunes, index)
+                              }
+                            >
+                              <img src={editIcon} alt="edit"></img>
+                            </button>
+                            <button
+                              className="ml-3 scale-75"
+                              onClick={() =>
+                                deleteHorario(
+                                  setLunes,
+                                  setLunesString,
+                                  Lunes,
+                                  LunesString,
+                                  index
+                                )
+                              }
+                            >
+                              <img src={deleteIcon} alt="delete"></img>
+                            </button>
+                          </small>
+                          {Lunes[index].horario[2] === true ? (
+                            <div className="flex gap-2">
+                              <MobileTimePicker
+                                label="Desde"
+                                disabled={!hora.horario[2]}
+                                className="w-[70px] bg-white"
+                                value={hora.horario[0]}
+                                renderInput={(params) => (
+                                  <TextField {...params} />
+                                )}
+                                ampm={false}
+                                onChange={(newValue) => {
+                                  setLunes([
+                                    ...Lunes.slice(0, index),
+                                    {
+                                      horario: [
+                                        newValue,
+                                        hora.horario[1],
+                                        true,
+                                      ],
+                                    },
+                                    ...Lunes.slice(index + 1),
+                                  ]);
+                                  setLunesString([
+                                    ...LunesString.slice(0, index),
+                                    {
+                                      desde: stringyDate(newValue["$H"])
+                                        .toString()
+                                        .concat(":")
+                                        .concat(
+                                          stringyDate(newValue["$m"]).toString()
+                                        ),
+                                      hasta: stringyDate(hora.horario[1]["$H"])
+                                        .toString()
+                                        .concat(":")
+                                        .concat(
+                                          stringyDate(
+                                            hora.horario[1]["$m"]
+                                          ).toString()
+                                        ),
+                                    },
+                                    ...LunesString.slice(index + 1),
+                                  ]);
+                                }}
+                                minutesStep={60}
+                                minTime={dayjs("2014-08-18T08:00:00")}
+                                maxTime={hora.horario[1]}
+                              />
+                              <MobileTimePicker
+                                label="Hasta"
+                                disabled={!hora.horario[2]}
+                                className="w-[70px] bg-white"
+                                onChange={(newValue) => {
+                                  setLunes([
+                                    ...Lunes.slice(0, index),
+                                    {
+                                      horario: [
+                                        hora.horario[0],
+                                        newValue,
+                                        true,
+                                      ],
+                                    },
+                                    ...Lunes.slice(index + 1),
+                                  ]);
+                                  setLunesString([
+                                    ...LunesString.slice(0, index),
+                                    {
+                                      desde: stringyDate(hora.horario[0]["$H"])
+                                        .toString()
+                                        .concat(":")
+                                        .concat(
+                                          stringyDate(
+                                            hora.horario[0]["$m"]
+                                          ).toString()
+                                        ),
+                                      hasta: stringyDate(newValue["$H"])
+                                        .toString()
+                                        .concat(":")
+                                        .concat(
+                                          stringyDate(newValue["$m"]).toString()
+                                        ),
+                                    },
+                                    ...LunesString.slice(index + 1),
+                                  ]);
+                                }}
+                                value={Lunes[index].horario[1]}
+                                renderInput={(params) => (
+                                  <TextField {...params} />
+                                )}
+                                ampm={false}
+                                minutesStep={60}
+                                minTime={hora.horario[0]}
+                                maxTime={dayjs("2014-08-18T17:00:00")}
+                              />
+                            </div>
+                          ) : null}
+                        </>
+                      ))}
+                    <button
+                      className="flex "
+                      onClick={() =>
+                        addHorario(setLunes, Lunes, setLunesString, LunesString)
+                      }
+                    >
+                      <img src={addIcon} alt="edit"></img>
+                      <span className="ml-2 text-[#0061dd]">Añadir Horas</span>
+                    </button>
+                  </div>
+                </div>
+                <div className="my-3">
+                  <span>Martes</span>
+                  <div className="flex flex-col gap-3">
+                    {Martes &&
+                      Martes.map((hora, index) => (
+                        <>
+                          {" "}
+                          <small className="font-semibold">
+                            {[
+                              stringyDate(hora.horario[0]["$H"]).toString(),
+                              stringyDate(hora.horario[0]["$m"]).toString(),
+                            ].join(":")}{" "}
+                            -{" "}
+                            {[
+                              stringyDate(hora.horario[1]["$H"]).toString(),
+                              stringyDate(hora.horario[1]["$m"]).toString(),
+                            ].join(":")}{" "}
+                            <button
+                              className="ml-6 scale-75"
+                              onClick={() =>
+                                editHorario(setMartes, Martes, index)
+                              }
+                            >
+                              <img src={editIcon} alt="edit"></img>
+                            </button>
+                            <button
+                              className="ml-3 scale-75"
+                              onClick={() =>
+                                deleteHorario(
+                                  setMartes,
+                                  setMartesString,
+                                  Martes,
+                                  MartesString,
+                                  index
+                                )
+                              }
+                            >
+                              <img src={deleteIcon} alt="delete"></img>
+                            </button>
+                          </small>
+                          {Martes[index].horario[2] === true ? (
+                            <div className="flex gap-2">
+                              <MobileTimePicker
+                                label="Desde"
+                                disabled={!hora.horario[2]}
+                                className="w-[70px] bg-white"
+                                value={hora.horario[0]}
+                                renderInput={(params) => (
+                                  <TextField {...params} />
+                                )}
+                                ampm={false}
+                                onChange={(newValue) => {
+                                  setMartes([
+                                    ...Martes.slice(0, index),
+                                    {
+                                      horario: [
+                                        newValue,
+                                        hora.horario[1],
+                                        true,
+                                      ],
+                                    },
+                                    ...Martes.slice(index + 1),
+                                  ]);
+                                  setMartesString([
+                                    ...MartesString.slice(0, index),
+                                    {
+                                      desde: stringyDate(newValue["$H"])
+                                        .toString()
+                                        .concat(":")
+                                        .concat(
+                                          stringyDate(newValue["$m"]).toString()
+                                        ),
+                                      hasta: stringyDate(hora.horario[1]["$H"])
+                                        .toString()
+                                        .concat(":")
+                                        .concat(
+                                          stringyDate(
+                                            hora.horario[1]["$m"]
+                                          ).toString()
+                                        ),
+                                    },
+                                    ...MartesString.slice(index + 1),
+                                  ]);
+                                }}
+                                minutesStep={60}
+                                minTime={dayjs("2014-08-18T08:00:00")}
+                                maxTime={hora.horario[1]}
+                              />
+                              <MobileTimePicker
+                                label="Hasta"
+                                disabled={!hora.horario[2]}
+                                className="w-[70px] bg-white"
+                                onChange={(newValue) => {
+                                  setMartes([
+                                    ...Martes.slice(0, index),
+                                    {
+                                      horario: [
+                                        hora.horario[0],
+                                        newValue,
+                                        true,
+                                      ],
+                                    },
+                                    ...Martes.slice(index + 1),
+                                  ]);
+                                  setMartesString([
+                                    ...MartesString.slice(0, index),
+                                    {
+                                      desde: stringyDate(hora.horario[0]["$H"])
+                                        .toString()
+                                        .concat(":")
+                                        .concat(
+                                          stringyDate(
+                                            hora.horario[0]["$m"]
+                                          ).toString()
+                                        ),
+                                      hasta: stringyDate(newValue["$H"])
+                                        .toString()
+                                        .concat(":")
+                                        .concat(
+                                          stringyDate(newValue["$m"]).toString()
+                                        ),
+                                    },
+                                    ...MartesString.slice(index + 1),
+                                  ]);
+                                }}
+                                value={Martes[index].horario[1]}
+                                renderInput={(params) => (
+                                  <TextField {...params} />
+                                )}
+                                ampm={false}
+                                minutesStep={60}
+                                minTime={hora.horario[0]}
+                                maxTime={dayjs("2014-08-18T17:00:00")}
+                              />
+                            </div>
+                          ) : null}
+                        </>
+                      ))}
+                    <button
+                      className="flex"
+                      onClick={() =>
+                        addHorario(
+                          setMartes,
+                          Martes,
+                          setMartesString,
+                          MartesString
+                        )
+                      }
+                    >
+                      <img src={addIcon} alt="edit"></img>
+                      <span className="ml-2 text-[#0061dd]">Añadir Horas</span>
+                    </button>
+                  </div>
+                </div>
+                <div className="my-3">
+                  <span>Miércoles</span>
+                  <div className="flex flex-col gap-3">
+                    {Miercoles &&
+                      Miercoles.map((hora, index) => (
+                        <>
+                          {" "}
+                          <small className="font-semibold">
+                            {[
+                              stringyDate(hora.horario[0]["$H"]).toString(),
+                              stringyDate(hora.horario[0]["$m"]).toString(),
+                            ].join(":")}{" "}
+                            -{" "}
+                            {[
+                              stringyDate(hora.horario[1]["$H"]).toString(),
+                              stringyDate(hora.horario[1]["$m"]).toString(),
+                            ].join(":")}{" "}
+                            <button
+                              className="ml-6 scale-75"
+                              onClick={() =>
+                                editHorario(setMiercoles, Miercoles, index)
+                              }
+                            >
+                              <img src={editIcon} alt="edit"></img>
+                            </button>
+                            <button
+                              className="ml-3 scale-75"
+                              onClick={() =>
+                                deleteHorario(
+                                  setMiercoles,
+                                  setMiercolesString,
+                                  Miercoles,
+                                  MiercolesString,
+                                  index
+                                )
+                              }
+                            >
+                              <img src={deleteIcon} alt="delete"></img>
+                            </button>
+                          </small>
+                          {Miercoles[index].horario[2] === true ? (
+                            <div className="flex gap-2">
+                              <MobileTimePicker
+                                label="Desde"
+                                disabled={!hora.horario[2]}
+                                className="w-[70px] bg-white"
+                                value={hora.horario[0]}
+                                renderInput={(params) => (
+                                  <TextField {...params} />
+                                )}
+                                ampm={false}
+                                onChange={(newValue) => {
+                                  setMiercoles([
+                                    ...Miercoles.slice(0, index),
+                                    {
+                                      horario: [
+                                        newValue,
+                                        hora.horario[1],
+                                        true,
+                                      ],
+                                    },
+                                    ...Miercoles.slice(index + 1),
+                                  ]);
+                                  setMiercolesString([
+                                    ...MiercolesString.slice(0, index),
+                                    {
+                                      desde: stringyDate(newValue["$H"])
+                                        .toString()
+                                        .concat(":")
+                                        .concat(
+                                          stringyDate(newValue["$m"]).toString()
+                                        ),
+                                      hasta: stringyDate(hora.horario[1]["$H"])
+                                        .toString()
+                                        .concat(":")
+                                        .concat(
+                                          stringyDate(
+                                            hora.horario[1]["$m"]
+                                          ).toString()
+                                        ),
+                                    },
+                                    ...MiercolesString.slice(index + 1),
+                                  ]);
+                                }}
+                                minutesStep={60}
+                                minTime={dayjs("2014-08-18T08:00:00")}
+                                maxTime={hora.horario[1]}
+                              />
+                              <MobileTimePicker
+                                label="Hasta"
+                                disabled={!hora.horario[2]}
+                                className="w-[70px] bg-white"
+                                onChange={(newValue) => {
+                                  setMiercoles([
+                                    ...Miercoles.slice(0, index),
+                                    {
+                                      horario: [
+                                        hora.horario[0],
+                                        newValue,
+                                        true,
+                                      ],
+                                    },
+                                    ...Miercoles.slice(index + 1),
+                                  ]);
+                                  setMiercolesString([
+                                    ...MiercolesString.slice(0, index),
+                                    {
+                                      desde: stringyDate(hora.horario[0]["$H"])
+                                        .toString()
+                                        .concat(":")
+                                        .concat(
+                                          stringyDate(
+                                            hora.horario[0]["$m"]
+                                          ).toString()
+                                        ),
+                                      hasta: stringyDate(newValue["$H"])
+                                        .toString()
+                                        .concat(":")
+                                        .concat(
+                                          stringyDate(newValue["$m"]).toString()
+                                        ),
+                                    },
+                                    ...MiercolesString.slice(index + 1),
+                                  ]);
+                                }}
+                                value={Miercoles[index].horario[1]}
+                                renderInput={(params) => (
+                                  <TextField {...params} />
+                                )}
+                                ampm={false}
+                                minutesStep={60}
+                                minTime={hora.horario[0]}
+                                maxTime={dayjs("2014-08-18T17:00:00")}
+                              />
+                            </div>
+                          ) : null}
+                        </>
+                      ))}
+                    <button
+                      className="flex"
+                      onClick={() =>
+                        addHorario(
+                          setMiercoles,
+                          Miercoles,
+                          setMiercolesString,
+                          MiercolesString
+                        )
+                      }
+                    >
+                      <img src={addIcon} alt="edit"></img>
+                      <span className="ml-2 text-[#0061dd]">Añadir Horas</span>
+                    </button>
+                  </div>
+                </div>
 
-
-             
-                  
-<div className="my-3">
-     
-     <span>Lunes</span>
-     <div className="flex flex-col gap-3">
-      {Lunes &&  Lunes.map((hora, index) =>(<> <small className="font-semibold">
-         {[
-           stringyDate(
-             hora.horario[0]["$H"]
-           ).toString(),
-           stringyDate(
-             hora.horario[0]["$m"]
-           ).toString(),
-         ].join(":")}{" "}
-         -{" "}
-         {[
-           stringyDate(
-             hora.horario[1]["$H"]
-           ).toString(),
-           stringyDate(
-             hora.horario[1]["$m"]
-           ).toString(),
-         ].join(":")}{" "}
-         <button className="ml-6 scale-75"  onClick={() => editHorario(setLunes, Lunes, index)}><img src={editIcon} alt="edit"></img></button>
-         <button className="ml-3 scale-75" onClick={ () => deleteHorario(setLunes, setLunesString, Lunes, LunesString, index)}><img src={deleteIcon} alt="delete"></img></button>
-       </small>
-       { Lunes[index].horario[2] === true? <div className="flex gap-2">
-       <MobileTimePicker
-         label="Desde"
-         disabled={!hora.horario[2]}
-         className="w-[70px] bg-white"
-         value={hora.horario[0]}
-         renderInput={(params) => <TextField {...params} />}
-         ampm={false}
-         onChange={(newValue) => {
-           setLunes([
-             ...Lunes.slice(0, index),
-             {
-               horario: [
-                 newValue,
-                 hora.horario[1],
-                 true,
-               ],
-             },
-             ...Lunes.slice(index + 1),
-           ]);
-           setLunesString([
-            ...LunesString.slice(0, index),
-            {
-              desde: stringyDate(newValue["$H"])
-                .toString()
-                .concat(":")
-                .concat(stringyDate(newValue["$m"]).toString()),
-              hasta: stringyDate(hora.horario[1]["$H"])
-                .toString()
-                .concat(":")
-                .concat(stringyDate(hora.horario[1]["$m"]).toString()),
-            },
-            ...LunesString.slice(index + 1),
-
-           ])
-         }}
-         minutesStep={60}
-         minTime={dayjs("2014-08-18T08:00:00")}
-         maxTime={hora.horario[1]} 
-       />
-       <MobileTimePicker
-         label="Hasta"
-         disabled={!hora.horario[2]}
-         className="w-[70px] bg-white"
-         onChange={(newValue) => {
-           setLunes([
-             ...Lunes.slice(0, index),
-             {
-               horario: [
-                 hora.horario[0],
-                 newValue,
-                 true,
-               ],
-             },
-             ...Lunes.slice(index + 1),
-           ]);
-           setLunesString([
-            ...LunesString.slice(0, index),
-             {
-              desde: stringyDate(hora.horario[0]["$H"])
-                .toString()
-                .concat(":")
-                .concat(stringyDate(hora.horario[0]["$m"]).toString()),
-              hasta: stringyDate(newValue["$H"])
-                .toString()
-                .concat(":")
-                .concat(stringyDate(newValue["$m"]).toString()),
-            },
-            ...LunesString.slice(index + 1),
-
-           ])
-         }}
-         value={Lunes[index].horario[1]}
-         renderInput={(params) => <TextField {...params} />}
-         ampm={false}
-         minutesStep={60}
-         minTime={hora.horario[0]}
-         maxTime={dayjs("2014-08-18T17:00:00")}
-       />
-       
-     </div> : null}
-    
-     </>
-     
-       ))} 
-       <button className="flex " onClick={ () => addHorario(setLunes, Lunes, setLunesString, LunesString)}><img src={addIcon} alt="edit"></img><span className="ml-2 text-[#0061dd]">Añadir Horas</span></button>
-     </div>
-     
-   </div>
-   <div className="my-3">
-     
-     <span>Martes</span>
-     <div className="flex flex-col gap-3">
-      {Martes && Martes.map((hora, index) =>(<> <small className="font-semibold">
-         {[
-           stringyDate(
-             hora.horario[0]["$H"]
-           ).toString(),
-           stringyDate(
-             hora.horario[0]["$m"]
-           ).toString(),
-         ].join(":")}{" "}
-         -{" "}
-         {[
-           stringyDate(
-             hora.horario[1]["$H"]
-           ).toString(),
-           stringyDate(
-             hora.horario[1]["$m"]
-           ).toString(),
-         ].join(":")}{" "}
-          <button className="ml-6 scale-75" onClick={() => editHorario(setMartes, Martes, index)}><img src={editIcon} alt="edit"></img></button>
-          <button className="ml-3 scale-75" onClick={ () => deleteHorario(setMartes, setMartesString, Martes, MartesString, index)}><img src={deleteIcon} alt="delete"></img></button>
-       </small>
-       { Martes[index].horario[2] === true? <div className="flex gap-2">
-       <MobileTimePicker
-         label="Desde"
-         disabled={!hora.horario[2]}
-         className="w-[70px] bg-white"
-         value={hora.horario[0]}
-         renderInput={(params) => <TextField {...params} />}
-         ampm={false}
-         onChange={(newValue) => {
-           setMartes([
-             ...Martes.slice(0, index),
-             {
-               horario: [
-                 newValue,
-                 hora.horario[1],
-                 true,
-               ],
-             },
-             ...Martes.slice(index + 1),
-           ]);
-           setMartesString([
-            ...MartesString.slice(0, index),
-             {
-              desde: stringyDate(newValue["$H"])
-                .toString()
-                .concat(":")
-                .concat(stringyDate(newValue["$m"]).toString()),
-              hasta: stringyDate(hora.horario[1]["$H"])
-                .toString()
-                .concat(":")
-                .concat(stringyDate(hora.horario[1]["$m"]).toString()),
-            },
-            ...MartesString.slice(index + 1),
-
-           ])
-         }}
-         minutesStep={60}
-         minTime={dayjs("2014-08-18T08:00:00")}
-         maxTime={hora.horario[1]}
-       />
-       <MobileTimePicker
-         label="Hasta"
-         disabled={!hora.horario[2]}
-         className="w-[70px] bg-white"
-         onChange={(newValue) => {
-           setMartes([
-             ...Martes.slice(0, index),
-             {
-               horario: [
-                 hora.horario[0],
-                 newValue,
-                 true,
-               ],
-             },
-             ...Martes.slice(index + 1),
-           ]);
-           setMartesString([
-            ...MartesString.slice(0, index),
-            {
-              desde: stringyDate(hora.horario[0]["$H"])
-                .toString()
-                .concat(":")
-                .concat(stringyDate(hora.horario[0]["$m"]).toString()),
-              hasta: stringyDate(newValue["$H"])
-                .toString()
-                .concat(":")
-                .concat(stringyDate(newValue["$m"]).toString()),
-            },
-            ...MartesString.slice(index + 1),
-
-           ])
-         }}
-         value={Martes[index].horario[1]}
-         renderInput={(params) => <TextField {...params} />}
-         ampm={false}
-         minutesStep={60}
-         minTime={hora.horario[0]}
-         maxTime={dayjs("2014-08-18T17:00:00")}
-       />
-      
-     </div>: null }</>
-       ))} 
-       <button className="flex" onClick={ () => addHorario(setMartes, Martes, setMartesString, MartesString )}><img src={addIcon} alt="edit"></img><span className="ml-2 text-[#0061dd]">Añadir Horas</span></button>
-     </div>
-     
-   </div>
-   <div className="my-3">
-     
-     <span>Miércoles</span>
-     <div className="flex flex-col gap-3">
-      {Miercoles && Miercoles.map((hora, index) =>(<> <small className="font-semibold">
-         {[
-           stringyDate(
-             hora.horario[0]["$H"]
-           ).toString(),
-           stringyDate(
-             hora.horario[0]["$m"]
-           ).toString(),
-         ].join(":")}{" "}
-         -{" "}
-         {[
-           stringyDate(
-             hora.horario[1]["$H"]
-           ).toString(),
-           stringyDate(
-             hora.horario[1]["$m"]
-           ).toString(),
-         ].join(":")}{" "}
-        <button className="ml-6 scale-75" onClick={() => editHorario(setMiercoles, Miercoles, index)}><img src={editIcon} alt="edit"></img></button>
-         <button className="ml-3 scale-75" onClick={ () => deleteHorario(setMiercoles,setMiercolesString, Miercoles, MiercolesString, index)}><img src={deleteIcon} alt="delete"></img></button>
-       </small>
-      { Miercoles[index].horario[2] === true? <div className="flex gap-2">
-       <MobileTimePicker
-         label="Desde"
-         disabled={!hora.horario[2]}
-         className="w-[70px] bg-white"
-         value={hora.horario[0]}
-         renderInput={(params) => <TextField {...params} />}
-         ampm={false}
-         onChange={(newValue) => {
-           setMiercoles([
-             ...Miercoles.slice(0, index),
-             {
-               horario: [
-                 newValue,
-                 hora.horario[1],
-                 true,
-               ],
-             },
-             ...Miercoles.slice(index + 1),
-           ]);
-           setMiercolesString([
-            ...MiercolesString.slice(0, index),
-           {
-              desde: stringyDate(newValue["$H"])
-                .toString()
-                .concat(":")
-                .concat(stringyDate(newValue["$m"]).toString()),
-              hasta: stringyDate(hora.horario[1]["$H"])
-                .toString()
-                .concat(":")
-                .concat(stringyDate(hora.horario[1]["$m"]).toString()),
-            },
-            ...MiercolesString.slice(index + 1),
-
-           ])
-         }}
-         minutesStep={60}
-         minTime={dayjs("2014-08-18T08:00:00")}
-         maxTime={hora.horario[1]}
-       />
-       <MobileTimePicker
-         label="Hasta"
-         disabled={!hora.horario[2]}
-         className="w-[70px] bg-white"
-         onChange={(newValue) => {
-           setMiercoles([
-             ...Miercoles.slice(0, index),
-             {
-               horario: [
-                 hora.horario[0],
-                 newValue,
-                 true,
-               ],
-             },
-             ...Miercoles.slice(index + 1),
-           ]);
-           setMiercolesString([
-            ...MiercolesString.slice(0, index),
-             {
-              desde: stringyDate(hora.horario[0]["$H"])
-                .toString()
-                .concat(":")
-                .concat(stringyDate(hora.horario[0]["$m"]).toString()),
-              hasta: stringyDate(newValue["$H"])
-                .toString()
-                .concat(":")
-                .concat(stringyDate(newValue["$m"]).toString()),
-            },
-            ...MiercolesString.slice(index + 1),
-
-           ])
-         }}
-         value={Miercoles[index].horario[1]}
-         renderInput={(params) => <TextField {...params} />}
-         ampm={false}
-         minutesStep={60}
-         minTime={hora.horario[0]}
-         maxTime={dayjs("2014-08-18T17:00:00")}
-       />
-       
-     </div> : null}</>
-       ))} 
-       <button className="flex" onClick={ () => addHorario(setMiercoles, Miercoles, setMiercolesString, MiercolesString)}><img src={addIcon} alt="edit"></img><span className="ml-2 text-[#0061dd]">Añadir Horas</span></button>
-     </div>
-     
-   </div>
-
-   <div className="my-3">
-     
-     <span>Jueves</span>
-     <div className="flex flex-col gap-3">
-      {Jueves && Jueves.map((hora, index) =>(<> <small className="font-semibold">
-         {[
-           stringyDate(
-             hora.horario[0]["$H"]
-           ).toString(),
-           stringyDate(
-             hora.horario[0]["$m"]
-           ).toString(),
-         ].join(":")}{" "}
-         -{" "}
-         {[
-           stringyDate(
-             hora.horario[1]["$H"]
-           ).toString(),
-           stringyDate(
-             hora.horario[1]["$m"]
-           ).toString(),
-         ].join(":")}{" "}
-         <button className="ml-6 scale-75" onClick={() => editHorario(setJueves, Jueves, index)}><img src={editIcon} alt="edit"></img></button>
-         <button className="ml-3 scale-75" onClick={ () => deleteHorario(setJueves,setJuevesString, Jueves, JuevesString, index)}><img src={deleteIcon} alt="delete"></img></button>
-       </small>
-       { Jueves[index].horario[2] === true? <div className="flex gap-2">
-       <MobileTimePicker
-         label="Desde"
-         disabled={!hora.horario[2]}
-         className="w-[70px] bg-white"
-         value={hora.horario[0]}
-         renderInput={(params) => <TextField {...params} />}
-         ampm={false}
-         onChange={(newValue) => {
-           setJueves([
-             ...Jueves.slice(0, index),
-             {
-               horario: [
-                 newValue,
-                 hora.horario[1],
-                 true,
-               ],
-             },
-             ...Jueves.slice(index + 1),
-           ]);
-           setJuevesString([
-            ...JuevesString.slice(0, index),
-             {
-              desde: stringyDate(newValue["$H"])
-                .toString()
-                .concat(":")
-                .concat(stringyDate(newValue["$m"]).toString()),
-              hasta: stringyDate(hora.horario[1]["$H"])
-                .toString()
-                .concat(":")
-                .concat(stringyDate(hora.horario[1]["$m"]).toString()),
-            },
-            ...JuevesString.slice(index + 1),
-
-           ])
-         }}
-         minutesStep={60}
-         minTime={dayjs("2014-08-18T08:00:00")}
-         maxTime={hora.horario[1]}
-       />
-       <MobileTimePicker
-         label="Hasta"
-         disabled={!hora.horario[2]}
-         className="w-[70px] bg-white"
-         onChange={(newValue) => {
-           setJueves([
-             ...Jueves.slice(0, index),
-             {
-               horario: [
-                 hora.horario[0],
-                 newValue,
-                 true,
-               ],
-             },
-             ...Jueves.slice(index + 1),
-           ]);
-           setJuevesString([
-            ...JuevesString.slice(0, index),
-            {
-              desde: stringyDate(hora.horario[0]["$H"])
-                .toString()
-                .concat(":")
-                .concat(stringyDate(hora.horario[0]["$m"]).toString()),
-              hasta: stringyDate(newValue["$H"])
-                .toString()
-                .concat(":")
-                .concat(stringyDate(newValue["$m"]).toString()),
-            },
-            ...JuevesString.slice(index + 1),
-
-           ])
-         }}
-         value={Jueves[index].horario[1]}
-         renderInput={(params) => <TextField {...params} />}
-         ampm={false}
-         minutesStep={60}
-         minTime={hora.horario[0]}
-         maxTime={dayjs("2014-08-18T17:00:00")}
-       />
-       
-     </div> :null }</>
-       ))} 
-       <button className="flex" onClick={ () => addHorario(setJueves, Jueves, setJuevesString, JuevesString)}><img src={addIcon} alt="edit"></img><span className="ml-2 text-[#0061dd]">Añadir Horas</span></button>
-     </div>
-     
-   </div>
-    <div className="my-3">
-     
-      <span>Viernes</span>
-      <div className="flex flex-col gap-3">
-       {Viernes && Viernes.map((hora, index) =>(<> <small className="font-semibold">
-          {[
-            stringyDate(
-              hora.horario[0]["$H"]
-            ).toString(),
-            stringyDate(
-              hora.horario[0]["$m"]
-            ).toString(),
-          ].join(":")}{" "}
-          -{" "}
-          {[
-            stringyDate(
-              hora.horario[1]["$H"]
-            ).toString(),
-            stringyDate(
-              hora.horario[1]["$m"]
-            ).toString(),
-          ].join(":")}{" "}
-          <button className="ml-6 scale-75" onClick={() => editHorario(setViernes, Viernes, index)}><img src={editIcon} alt="edit"></img></button>
-          <button className="ml-3 scale-75" onClick={ () => deleteHorario(setViernes,setViernesString, Viernes, ViernesString, index)}><img src={deleteIcon} alt="delete"></img></button>
-        </small>
-        { Viernes[index].horario[2] === true? <div className="flex gap-2">
-        <MobileTimePicker
-          label="Desde"
-          disabled={!hora.horario[2]}
-          className="w-[70px] bg-white"
-          value={hora.horario[0]}
-          renderInput={(params) => <TextField {...params} />}
-          ampm={false}
-          onChange={(newValue) => {
-            setViernes([
-              ...Viernes.slice(0, index),
-              {
-                horario: [
-                  newValue,
-                  hora.horario[1],
-                  true,
-                ],
-              },
-              ...Viernes.slice(index + 1),
-            ]);
-            setViernesString([
-              ...ViernesString.slice(0, index),
-               {
-                desde: stringyDate(newValue["$H"])
-                  .toString()
-                  .concat(":")
-                  .concat(stringyDate(newValue["$m"]).toString()),
-                hasta: stringyDate(hora.horario[1]["$H"])
-                  .toString()
-                  .concat(":")
-                  .concat(stringyDate(hora.horario[1]["$m"]).toString()),
-              },
-              ...ViernesString.slice(index + 1),
-
-             ])
-          }}
-          minutesStep={60}
-          minTime={dayjs("2014-08-18T08:00:00")}
-          maxTime={hora.horario[1]}
-        />
-        <MobileTimePicker
-          label="Hasta"
-          disabled={!hora.horario[2]}
-          className="w-[70px] bg-white"
-          onChange={(newValue) => {
-            setViernes([
-              ...Viernes.slice(0, index),
-              {
-                horario: [
-                  hora.horario[0],
-                  newValue,
-                  true,
-                ],
-              },
-              ...Viernes.slice(index + 1),
-            ]);
-            setViernesString([
-              ...ViernesString.slice(0, index),
-               {
-                desde: stringyDate(hora.horario[0]["$H"])
-                  .toString()
-                  .concat(":")
-                  .concat(stringyDate(hora.horario[0]["$m"]).toString()),
-                hasta: stringyDate(newValue["$H"])
-                  .toString()
-                  .concat(":")
-                  .concat(stringyDate(newValue["$m"]).toString()),
-              },
-              ...ViernesString.slice(index + 1),
-
-             ])
-          }}
-          value={Viernes[index].horario[1]}
-          renderInput={(params) => <TextField {...params} />}
-          ampm={false}
-          minutesStep={60}
-          minTime={hora.horario[0]}
-          maxTime={dayjs("2014-08-18T17:00:00")}
-        />
-        
-      </div>:null }</>
-        ))} 
-        <button className="flex" onClick={ () => addHorario(setViernes, Viernes, setViernesString, ViernesString)}><img src={addIcon} alt="edit"></img><span className="ml-2 text-[#0061dd]">Añadir Horas</span></button>
-      </div>
-      
-    </div>
-  
-
-
-
-
-
-
-
-</div>
+                <div className="my-3">
+                  <span>Jueves</span>
+                  <div className="flex flex-col gap-3">
+                    {Jueves &&
+                      Jueves.map((hora, index) => (
+                        <>
+                          {" "}
+                          <small className="font-semibold">
+                            {[
+                              stringyDate(hora.horario[0]["$H"]).toString(),
+                              stringyDate(hora.horario[0]["$m"]).toString(),
+                            ].join(":")}{" "}
+                            -{" "}
+                            {[
+                              stringyDate(hora.horario[1]["$H"]).toString(),
+                              stringyDate(hora.horario[1]["$m"]).toString(),
+                            ].join(":")}{" "}
+                            <button
+                              className="ml-6 scale-75"
+                              onClick={() =>
+                                editHorario(setJueves, Jueves, index)
+                              }
+                            >
+                              <img src={editIcon} alt="edit"></img>
+                            </button>
+                            <button
+                              className="ml-3 scale-75"
+                              onClick={() =>
+                                deleteHorario(
+                                  setJueves,
+                                  setJuevesString,
+                                  Jueves,
+                                  JuevesString,
+                                  index
+                                )
+                              }
+                            >
+                              <img src={deleteIcon} alt="delete"></img>
+                            </button>
+                          </small>
+                          {Jueves[index].horario[2] === true ? (
+                            <div className="flex gap-2">
+                              <MobileTimePicker
+                                label="Desde"
+                                disabled={!hora.horario[2]}
+                                className="w-[70px] bg-white"
+                                value={hora.horario[0]}
+                                renderInput={(params) => (
+                                  <TextField {...params} />
+                                )}
+                                ampm={false}
+                                onChange={(newValue) => {
+                                  setJueves([
+                                    ...Jueves.slice(0, index),
+                                    {
+                                      horario: [
+                                        newValue,
+                                        hora.horario[1],
+                                        true,
+                                      ],
+                                    },
+                                    ...Jueves.slice(index + 1),
+                                  ]);
+                                  setJuevesString([
+                                    ...JuevesString.slice(0, index),
+                                    {
+                                      desde: stringyDate(newValue["$H"])
+                                        .toString()
+                                        .concat(":")
+                                        .concat(
+                                          stringyDate(newValue["$m"]).toString()
+                                        ),
+                                      hasta: stringyDate(hora.horario[1]["$H"])
+                                        .toString()
+                                        .concat(":")
+                                        .concat(
+                                          stringyDate(
+                                            hora.horario[1]["$m"]
+                                          ).toString()
+                                        ),
+                                    },
+                                    ...JuevesString.slice(index + 1),
+                                  ]);
+                                }}
+                                minutesStep={60}
+                                minTime={dayjs("2014-08-18T08:00:00")}
+                                maxTime={hora.horario[1]}
+                              />
+                              <MobileTimePicker
+                                label="Hasta"
+                                disabled={!hora.horario[2]}
+                                className="w-[70px] bg-white"
+                                onChange={(newValue) => {
+                                  setJueves([
+                                    ...Jueves.slice(0, index),
+                                    {
+                                      horario: [
+                                        hora.horario[0],
+                                        newValue,
+                                        true,
+                                      ],
+                                    },
+                                    ...Jueves.slice(index + 1),
+                                  ]);
+                                  setJuevesString([
+                                    ...JuevesString.slice(0, index),
+                                    {
+                                      desde: stringyDate(hora.horario[0]["$H"])
+                                        .toString()
+                                        .concat(":")
+                                        .concat(
+                                          stringyDate(
+                                            hora.horario[0]["$m"]
+                                          ).toString()
+                                        ),
+                                      hasta: stringyDate(newValue["$H"])
+                                        .toString()
+                                        .concat(":")
+                                        .concat(
+                                          stringyDate(newValue["$m"]).toString()
+                                        ),
+                                    },
+                                    ...JuevesString.slice(index + 1),
+                                  ]);
+                                }}
+                                value={Jueves[index].horario[1]}
+                                renderInput={(params) => (
+                                  <TextField {...params} />
+                                )}
+                                ampm={false}
+                                minutesStep={60}
+                                minTime={hora.horario[0]}
+                                maxTime={dayjs("2014-08-18T17:00:00")}
+                              />
+                            </div>
+                          ) : null}
+                        </>
+                      ))}
+                    <button
+                      className="flex"
+                      onClick={() =>
+                        addHorario(
+                          setJueves,
+                          Jueves,
+                          setJuevesString,
+                          JuevesString
+                        )
+                      }
+                    >
+                      <img src={addIcon} alt="edit"></img>
+                      <span className="ml-2 text-[#0061dd]">Añadir Horas</span>
+                    </button>
+                  </div>
+                </div>
+                <div className="my-3">
+                  <span>Viernes</span>
+                  <div className="flex flex-col gap-3">
+                    {Viernes &&
+                      Viernes.map((hora, index) => (
+                        <>
+                          {" "}
+                          <small className="font-semibold">
+                            {[
+                              stringyDate(hora.horario[0]["$H"]).toString(),
+                              stringyDate(hora.horario[0]["$m"]).toString(),
+                            ].join(":")}{" "}
+                            -{" "}
+                            {[
+                              stringyDate(hora.horario[1]["$H"]).toString(),
+                              stringyDate(hora.horario[1]["$m"]).toString(),
+                            ].join(":")}{" "}
+                            <button
+                              className="ml-6 scale-75"
+                              onClick={() =>
+                                editHorario(setViernes, Viernes, index)
+                              }
+                            >
+                              <img src={editIcon} alt="edit"></img>
+                            </button>
+                            <button
+                              className="ml-3 scale-75"
+                              onClick={() =>
+                                deleteHorario(
+                                  setViernes,
+                                  setViernesString,
+                                  Viernes,
+                                  ViernesString,
+                                  index
+                                )
+                              }
+                            >
+                              <img src={deleteIcon} alt="delete"></img>
+                            </button>
+                          </small>
+                          {Viernes[index].horario[2] === true ? (
+                            <div className="flex gap-2">
+                              <MobileTimePicker
+                                label="Desde"
+                                disabled={!hora.horario[2]}
+                                className="w-[70px] bg-white"
+                                value={hora.horario[0]}
+                                renderInput={(params) => (
+                                  <TextField {...params} />
+                                )}
+                                ampm={false}
+                                onChange={(newValue) => {
+                                  setViernes([
+                                    ...Viernes.slice(0, index),
+                                    {
+                                      horario: [
+                                        newValue,
+                                        hora.horario[1],
+                                        true,
+                                      ],
+                                    },
+                                    ...Viernes.slice(index + 1),
+                                  ]);
+                                  setViernesString([
+                                    ...ViernesString.slice(0, index),
+                                    {
+                                      desde: stringyDate(newValue["$H"])
+                                        .toString()
+                                        .concat(":")
+                                        .concat(
+                                          stringyDate(newValue["$m"]).toString()
+                                        ),
+                                      hasta: stringyDate(hora.horario[1]["$H"])
+                                        .toString()
+                                        .concat(":")
+                                        .concat(
+                                          stringyDate(
+                                            hora.horario[1]["$m"]
+                                          ).toString()
+                                        ),
+                                    },
+                                    ...ViernesString.slice(index + 1),
+                                  ]);
+                                }}
+                                minutesStep={60}
+                                minTime={dayjs("2014-08-18T08:00:00")}
+                                maxTime={hora.horario[1]}
+                              />
+                              <MobileTimePicker
+                                label="Hasta"
+                                disabled={!hora.horario[2]}
+                                className="w-[70px] bg-white"
+                                onChange={(newValue) => {
+                                  setViernes([
+                                    ...Viernes.slice(0, index),
+                                    {
+                                      horario: [
+                                        hora.horario[0],
+                                        newValue,
+                                        true,
+                                      ],
+                                    },
+                                    ...Viernes.slice(index + 1),
+                                  ]);
+                                  setViernesString([
+                                    ...ViernesString.slice(0, index),
+                                    {
+                                      desde: stringyDate(hora.horario[0]["$H"])
+                                        .toString()
+                                        .concat(":")
+                                        .concat(
+                                          stringyDate(
+                                            hora.horario[0]["$m"]
+                                          ).toString()
+                                        ),
+                                      hasta: stringyDate(newValue["$H"])
+                                        .toString()
+                                        .concat(":")
+                                        .concat(
+                                          stringyDate(newValue["$m"]).toString()
+                                        ),
+                                    },
+                                    ...ViernesString.slice(index + 1),
+                                  ]);
+                                }}
+                                value={Viernes[index].horario[1]}
+                                renderInput={(params) => (
+                                  <TextField {...params} />
+                                )}
+                                ampm={false}
+                                minutesStep={60}
+                                minTime={hora.horario[0]}
+                                maxTime={dayjs("2014-08-18T17:00:00")}
+                              />
+                            </div>
+                          ) : null}
+                        </>
+                      ))}
+                    <button
+                      className="flex"
+                      onClick={() =>
+                        addHorario(
+                          setViernes,
+                          Viernes,
+                          setViernesString,
+                          ViernesString
+                        )
+                      }
+                    >
+                      <img src={addIcon} alt="edit"></img>
+                      <span className="ml-2 text-[#0061dd]">Añadir Horas</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
             </LocalizationProvider>
             <button
               onClick={handleSubmitCitas}
@@ -3896,7 +4080,11 @@ const stringDays = [
               <div>{/* <SelectCitasAg/> */}</div>
             </div>
             <div>
-              <CardCitas  data={citasAgendadas&&citasAgendadas}  setPlan={setPage} filtros={Filtro} />
+              <CardCitas
+                data={citasAgendadas && citasAgendadas}
+                setPlan={setPage}
+                filtros={Filtro}
+              />
             </div>
           </div>
         ) : page === 6 ? (
@@ -4057,15 +4245,17 @@ const stringDays = [
                       <div className="flex lg:flex-row flex-col w-full items-center p-3 justify-around shadow-md bg-white rounded-md gap-2">
                         {evento.imagen_evento !== "" ? (
                           <img
-                            src={evento.imagen_evento }
+                            src={evento.imagen_evento}
                             alt={evento.nombre_evento}
                             className="rounded-full w-24 h-24 object-cover"
                           />
-                        ) : oneSchool.logo !== null ? (<img
-                        src={oneSchool.logo }
-                        alt={oneSchool.nombre_colegio}
-                        className="rounded-full w-24 h-24 object-cover"
-                      />) : null }
+                        ) : oneSchool.logo !== null ? (
+                          <img
+                            src={oneSchool.logo}
+                            alt={oneSchool.nombre_colegio}
+                            className="rounded-full w-24 h-24 object-cover"
+                          />
+                        ) : null}
                         <div className="flex flex-col text-center lg:text-start gap-2">
                           <h2 className="font-semibold">
                             {evento.nombre_evento}
@@ -4281,17 +4471,14 @@ const stringDays = [
               </Box>
             </Modal>
           </div>
-        ) :  page === 7 ? (
+        ) : page === 7 ? (
           <div className=" min-h-screen">
-             <ListadeEspera/>
+            <ListadeEspera />
           </div>
-         
-        ):null}
+        ) : null}
       </section>
     </div>
   );
 }
 
 export default DashboardSchool;
-
-
