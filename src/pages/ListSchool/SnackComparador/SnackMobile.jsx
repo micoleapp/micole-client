@@ -54,14 +54,11 @@ export default function SnackComparadorMobile({ open, setOpen }) {
     console.log("oli");
     dispatch(deleteColegio({ id }));
   };
-  console.log(arrColegios);
+
   return (
     <>
       <div className={style.divMobile}>
         <Stack spacing={2} sx={{ width: "100%" }}>
-          {/* <Button variant="outlined" onClick={handleClick}>
-    Open success snackbar
-  </Button> */}
           <Snackbar
             anchorOrigin={{ vertical, horizontal }}
             open={open}
@@ -88,7 +85,7 @@ export default function SnackComparadorMobile({ open, setOpen }) {
           
                   >
                     {arrColegios?.map((c) => {
-                      console.log(c);
+               
                       return (
                         <>
                           {" "}

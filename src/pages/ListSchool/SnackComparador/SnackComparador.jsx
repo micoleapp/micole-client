@@ -29,18 +29,11 @@ export default function SnackComparador({ open, setOpen }) {
     vertical: "bottom",
     horizontal: "right",
   });
-
-  const [stateMobile, setStateMobile] = React.useState({
-    vertical: "bottom",
-    horizontal: "center",
-  });
+  
 
   const [openSch, setOpenSch] = useState(true);
   const { vertical, horizontal } = state;
 
-  const handleClick = () => {
-    setOpen(true);
-  };
   const handleOpenList = () => {
     setOpenSch(!openSch);
   };

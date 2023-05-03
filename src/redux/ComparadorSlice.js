@@ -1,37 +1,37 @@
 import { createSlice } from "@reduxjs/toolkit";
 import Swal from "sweetalert2";
+
+const updateLocalStorage = (state) => {
+  window.localStorage.setItem("arrColegios", JSON.stringify(state));
+};
+
 export const comparadorSlice = createSlice({
   name: "comparador",
   initialState: {
-    arrColegios: [],
+    arrColegios:   JSON.parse(window.localStorage.getItem("arrColegios")) || [],
     Afilia: [],
     Infras: [],
   },
   reducers: {
     getDataColegios: (state, action) => {
       console.log(action.payload);
-      const Colegio= Object.assign({}, ...action.payload.Colegio);
-      // console.log(data)
-      // console.log(data);
-      // CountInfraestructuras: 17,
-      // CountAfiliaciones: 4
-      const data ={
-         colegio: Colegio,
-         infra:action.payload.CountInfraestructuras,
-         Afilia:action.payload.CountAfiliaciones
+      const Colegio = Object.assign({}, ...action.payload.Colegio);
 
-      }
-      console.log(data)
+      const data = {
+        colegio: Colegio,
+        infra: action.payload.CountInfraestructuras,
+        Afilia: action.payload.CountAfiliaciones,
+      };
+      console.log(data);
 
       if (state.arrColegios.length < 3) {
-        const arrColegios =  [...state.arrColegios, data]
+        const arrColegios = [...state.arrColegios, data];
         const sortColegios = arrColegios.sort((a, b) => b.infra - a.infra);
-        console.log(sortColegios)
-       
-        state.arrColegios =sortColegios;
-       
-      } 
+        console.log(sortColegios);
 
+        state.arrColegios = sortColegios;
+        updateLocalStorage(state.arrColegios);
+      }
     },
     getAcreCom: (state, action) => {
       console.log(action.payload);
@@ -43,11 +43,12 @@ export const comparadorSlice = createSlice({
     deleteSch: (state, action) => {
       console.log(action.payload);
       const id = action.payload;
-      console.log(id)
- 
- 
-      state.arrColegios =  state.arrColegios.filter((ele) => ele.colegio.id != id);
-     
+      console.log(id);
+
+      state.arrColegios = state.arrColegios.filter(
+        (ele) => ele.colegio.id != id
+      );
+      updateLocalStorage(state.arrColegios);
     },
   },
 });

@@ -957,7 +957,7 @@ function ListSchool() {
                                   </small>
                                 )}
                                 {school?.Categoria.length < 2 ? (
-                                  <small className="text-gray-400 flex gap-1 items-center">
+                                  <small className="text-grey-400 flex  gap-1 items-center">
                                     <span className="text-xl text-gray-400">
                                       <ImAttachment></ImAttachment>
                                     </span>
@@ -966,7 +966,7 @@ function ListSchool() {
                                     ).join(", ")}{" "}
                                   </small>
                                 ) : (
-                                  <small className="text-gray-400 flex gap-1 items-center">
+                                  <small className="text-gray-400 flex text-ellipsis overflow-hidden max-w-[20vh] gap-1 items-center">
                                     <span className="text-xl text-gray-400">
                                       <ImAttachment></ImAttachment>
                                     </span>
