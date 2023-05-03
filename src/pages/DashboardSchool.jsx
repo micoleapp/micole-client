@@ -89,6 +89,7 @@ import deleteIcon from "../assets/deleteIcon.png";
 import editIcon from "../assets/editIcon.png";
 import addIcon from "../assets/addIcon.png";
 
+
 const styleModal = {
   position: "absolute",
   top: "50%",
@@ -2167,7 +2168,7 @@ function DashboardSchool() {
                   {activeStep === 1 && (
                     <div className="flex flex-col gap-5">
                       <h1 className="text-2xl">
-                        Almenos una casilla debe ser seleccionada
+                       Debes selecionar al menos una casilla 
                       </h1>
                       <small>Puede marcar mas de una opción</small>
                       <div className="flex flex-col lg:flex-row gap-5">
@@ -3107,9 +3108,12 @@ function DashboardSchool() {
               especifiques. Si no especifica horarios en un día, se considerará
               como un día no disponible para atención al público.{" "}
             </p>
+            {/* <CheckBox disabled  sx={{color:'#0061DF'}} /> */}
+       
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <div className="grid lg:grid-cols-3 w-full grid-cols-2">
                 <div className="my-3">
+              
                   <span>Lunes</span>
                   <div className="flex flex-col gap-3">
                     {Lunes &&

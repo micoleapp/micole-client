@@ -32,7 +32,7 @@ export default function Acreditaciones() {
                 <>
                   {ac.Afiliacion_tipo_Id === 1 && (
                     <div>
-                      <li className="text-[#696969] text-[1.8vh]  flex items-center gap-3">
+                      <li className="text-[#696969] text-[1.8vh] p-2 flex items-center gap-3">
                         <img src={ac.logo} alt="" className="w-6" />
                         {ac.nombre_afiliacion}
                       </li>
@@ -58,7 +58,7 @@ export default function Acreditaciones() {
                 <>
                   {ac.Afiliacion_tipo_Id === 2 && (
                     <div>
-                      <li className="text-[#696969] text-[1.8vh]  flex items-center gap-3">
+                      <li className="text-[#696969] text-[1.8vh] p-2  flex items-center gap-3">
                         <img src={ac.logo} alt="" className="w-6" />
                         {ac.nombre_afiliacion}
                       </li>
@@ -84,7 +84,7 @@ export default function Acreditaciones() {
                 <>
                   {ac.Afiliacion_tipo_Id === 3 && (
                     <div>
-                      <li className="text-[#696969] text-[1.8vh]  flex items-center gap-3">
+                      <li className="text-[#696969] text-[1.8vh] p-2 flex items-center gap-3">
                         <img src={ac.logo} alt="" className="w-6" />
                         {ac.nombre_afiliacion}
                       </li>
@@ -110,7 +110,7 @@ export default function Acreditaciones() {
                 <>
                   {ac.Afiliacion_tipo_Id === 4 && (
                     <div>
-                      <li className="text-[#696969] text-[1.8vh]  flex items-center gap-3">
+                      <li className="text-[#696969] text-[1.8vh] p-2 flex items-center gap-3">
                         <img src={ac.logo} alt="" className="w-6" />
                         {ac.nombre_afiliacion}
                       </li>
