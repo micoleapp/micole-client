@@ -292,7 +292,7 @@ function DashboardSchool() {
         .put(`/colegios/${user.id}`, datosPrincipales)
         .then((res) => {
           console.log(res);
-          dispatch(getSchoolDetail(id));
+          dispatch(getSchoolDetail(user.id));
         })
         .catch((err) => {
           console.log(err);
@@ -359,6 +359,7 @@ function DashboardSchool() {
         .put(`/colegios/multimedia/${user.id}`, { multimedia })
         .then((res) => {
           console.log(res);
+          dispatch(getSchoolDetail(user.id));
         })
         .catch((err) => {
           console.log(err);
@@ -848,7 +849,6 @@ function DashboardSchool() {
   useEffect(() => {
     if (multimedia.images.length === 0) {
       setSpanTwo(false);
-      setActiveUpTwo(false);
     }
   }, [multimedia.images]);
   const eliminarImagenDePreviewOne = (img) => {
@@ -1015,6 +1015,7 @@ function DashboardSchool() {
             title: "Felicitaciones!",
             text: "Colegio listo para mostrarse en nuestra página!",
           });
+          dispatch(getSchoolDetail(user.id));
         })
         .catch((err) => {
           console.log(err);
@@ -1225,6 +1226,9 @@ function DashboardSchool() {
       dispatch(getAfiliacionSchool(id));
     }
   }, [activeStep]);
+
+  console.log(activeUpTwo)
+  console.log(activeUpOne)
 
   return (
     <div className="flex lg:flex-row flex-col">
@@ -2811,6 +2815,7 @@ function DashboardSchool() {
                               </span>{" "}
                             </label>
                             <input
+                            multiple={false}
                               type="file"
                               id="image"
                               name="image"
@@ -2894,7 +2899,7 @@ function DashboardSchool() {
                               name="images"
                               accept="image/png,image/jpeg"
                               onChange={(e) => {
-                                setSpanTwo(true);
+                             
                                 setFiles(e.target.files);
                               }}
                               multiple
