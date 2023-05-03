@@ -2168,7 +2168,7 @@ function DashboardSchool() {
                   {activeStep === 1 && (
                     <div className="flex flex-col gap-5">
                       <h1 className="text-2xl">
-                        Almenos una casilla debe ser seleccionada
+                       Debes selecionar al menos una casilla 
                       </h1>
                       <small>Puede marcar mas de una opción</small>
                       <div className="flex flex-col lg:flex-row gap-5">
