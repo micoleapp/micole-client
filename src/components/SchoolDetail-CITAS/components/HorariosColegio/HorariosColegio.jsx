@@ -56,7 +56,7 @@ function HorariosColegio({ diaSelecionado, sendDateHs }) {
           onChange={handleChangeHora}
         >
 
-          {diaSelecionado &&
+          {diaSelecionado ?
             arrDefHorarios?.map((ele) => {
               console.log(ele);
               return (
@@ -70,7 +70,19 @@ function HorariosColegio({ diaSelecionado, sendDateHs }) {
                   {ele.desde}/{ele.hasta}
                 </MenuItem>
               );
-            })}
+            })
+          :
+          <MenuItem
+          // key={ele.desde}
+          // onClick={(e) =>
+          //   handlerInfo(e, diaSelecionado.date, ele.desde, true)
+          // }
+          // value={ele.desde}
+        >
+          {/* {ele.desde}/{ele.hasta} */}
+          Selecciona un dia
+        </MenuItem>
+          }
 
         </Select>
       </FormControl>

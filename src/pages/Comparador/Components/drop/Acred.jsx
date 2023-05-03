@@ -59,7 +59,7 @@ export default function AcredComparador({ ids, nameColegio }) {
                               <div>
                                 <li className="text-[#696969] text-[1.4vh]  flex items-start gap-3">
                                   <img src={ele?.logo} alt="" className="w-6" />
-                                  <p className="text-[1.4vh]">
+                                  <p className="text-[1.6vh] p-2">
                                     {ele.nombre_afiliacion}
                                   </p>
                                 </li>
@@ -81,7 +81,7 @@ export default function AcredComparador({ ids, nameColegio }) {
                               <div>
                                 <li className="text-[#696969] text-[1.8vh]  flex items-center gap-3">
                                   <img src={ele.logo} alt="" className="w-6" />
-                                  <p className="text-[1.4vh]">
+                                  <p className="text-[1.6vh] p-2">
                                     {ele.nombre_afiliacion}
                                   </p>
                                 </li>
@@ -103,7 +103,7 @@ export default function AcredComparador({ ids, nameColegio }) {
                               <div>
                                 <li className="text-[#696969] text-[1.8vh]  flex items-center gap-3">
                                   <img src={ele.logo} alt="" className="w-6" />
-                                  <p className="text-[1.4vh]">
+                                  <p className="text-[1.6vh] p-2">
                                     {ele.nombre_afiliacion}
                                   </p>
                                 </li>
@@ -123,9 +123,9 @@ export default function AcredComparador({ ids, nameColegio }) {
                           <>
                             {ele.Afiliacion_tipo_Id === 4 && (
                               <div>
-                                <li className="text-[#696969] text-[1.8vh]  flex flex-end items-center gap-3">
+                                <li className="text-[#696969] text-[1.8vh]  flex flex-end items-center  gap-3">
                                   <img src={ele.logo} alt="" className="w-6" />
-                                  <p className="text-[1.4vh]">
+                                  <p className="text-[1.6vh] p-2">
                                     {ele.nombre_afiliacion}
                                   </p>
                                 </li>

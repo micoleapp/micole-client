@@ -27,7 +27,7 @@ export default function CardsSch({ verMas, setVermas }) {
     //                className={`${style.div} max-h-[50vh] items-start justify-start  `}
     <div className=" flex flex-col items-center ">
       <div className="flex flex-col">
-        <div className="pl-[15vh]  flex flex-end flex-row">
+        <div className="pl-[15vh]  max-w-fit flex flex-end flex-row">
           {arrColegios?.map((c) => {
             return (
               <>
@@ -43,13 +43,7 @@ export default function CardsSch({ verMas, setVermas }) {
                       alt={c.colegio.nombre_colegio}
                     />
                     <div className={style.cardHead_info}>
-                      <p
-                        style={{
-                          fontWeight: "700",
-                          color: "#0D263B",
-                          fontSize: "1.6vh",
-                        }}
-                      >
+                      <p className="font-semibold text-[2vh]  text-[#0D263B]  ">
                         {c.colegio.nombre_colegio}
                       </p>
                       <p>{c.colegio.Distrito?.nombre_distrito}</p>
@@ -83,7 +77,7 @@ export default function CardsSch({ verMas, setVermas }) {
         </div>
         <div className="flex flex-row items-center gap-[4rem]">
           <div className="min-w-[8vh] max-w-[8vh]">
-            <p className="text-[1.7vh] text-[#0D263B] font-semibold  ">
+            <p className="text-[1.9vh] text-[#0D263B] font-semibold  ">
               Dirección:
             </p>
           </div>
@@ -93,7 +87,7 @@ export default function CardsSch({ verMas, setVermas }) {
                 <>
                   <div className={style.containerCard}>
                     <div className={style.div}>
-                      <p className="flex text-[1.5vh] max-w-[20vh]">
+                      <p className="flex text-[1.7vh] max-w-[20vh]">
                         {c.colegio.direccion}
                       </p>
                     </div>
@@ -105,7 +99,7 @@ export default function CardsSch({ verMas, setVermas }) {
         </div>
         <div className="flex flex-row items-center gap-[4rem]">
           <div className="min-w-[8vh] max-w-[8vh]">
-            <p className="text-[1.7vh] text-[#0D263B] font-semibold  ">
+            <p className="text-[1.9vh] text-[#0D263B] font-semibold  ">
               Tipo de escuela:
             </p>
           </div>
@@ -128,7 +122,7 @@ export default function CardsSch({ verMas, setVermas }) {
                               }}
                             >
                               <Pincon />
-                              <p className="text-[1.6vh] ">
+                              <p className="text-[1.7vh] ">
                                 {ca.nombre_categoria}
                               </p>
                             </div>
@@ -144,7 +138,7 @@ export default function CardsSch({ verMas, setVermas }) {
         </div>
         <div className="flex flex-row  items-center gap-[4rem]">
           <div className="min-w-[8vh] max-w-[8vh]">
-            <p className="text-[1.7vh] text-[#0D263B] font-semibold">
+            <p className="text-[1.9vh] text-[#0D263B] font-semibold">
               Cant. Alumnos:
             </p>
           </div>
@@ -157,7 +151,7 @@ export default function CardsSch({ verMas, setVermas }) {
                     <div className={style.div}>
                       <p
                         style={{
-                          fontSize: "1.6vh",
+                          fontSize: "1.7vh",
                         }}
                       >
                         {c.colegio.numero_estudiantes} {"alumnos"}
@@ -171,7 +165,7 @@ export default function CardsSch({ verMas, setVermas }) {
         </div>
         <div className="flex flex-row items-center gap-[4rem]">
           <div className="min-w-[8vh] max-w-[8vh]">
-            <p className="text-[1.7vh] text-[#0D263B] font-semibold  ">Área:</p>
+            <p className="text-[1.9vh] text-[#0D263B] font-semibold  ">Área:</p>
           </div>
           <div className={style.bodyCard}>
             {arrColegios?.map((c) => {
@@ -181,7 +175,7 @@ export default function CardsSch({ verMas, setVermas }) {
                     <div className={style.div}>
                       <p
                         style={{
-                          fontSize: "1.6vh",
+                          fontSize: "1.7vh",
                         }}
                       >
                         {c.colegio.area} {"m2"}
@@ -195,7 +189,7 @@ export default function CardsSch({ verMas, setVermas }) {
         </div>
         <div className="flex flex-row items-start gap-[3rem]">
           <div className="min-w-[8vh] max-w-[10vh]">
-            <p className="text-[1.7vh] text-[#0D263B] font-semibold  ">
+            <p className="text-[1.9vh] text-[#0D263B] font-semibold  ">
               Métodos Aprendizaje
             </p>
           </div>
@@ -219,7 +213,7 @@ export default function CardsSch({ verMas, setVermas }) {
                                 }}
                               >
                                 <Pincon />
-                                <p className="text-[1.6vh] ">
+                                <p className="text-[1.7vh] ">
                                   {m.nombre_metodo}
                                 </p>
                               </div>
@@ -231,7 +225,7 @@ export default function CardsSch({ verMas, setVermas }) {
                           <DoDisturbIcon
                             sx={{ color: "#999999", width: "2vh" }}
                           />
-                          <p className="text-[1.5vh]">Sin especificar</p>
+                          <p className="text-[1.7vh]">Sin especificar</p>
                         </div>
                       )}
                     </div>
@@ -243,7 +237,7 @@ export default function CardsSch({ verMas, setVermas }) {
         </div>
         <div className="flex flex-row items-center gap-[4rem]">
           <div className="min-w-[8vh] max-w-[8vh]">
-            <p className="text-[1.7vh] text-[#0D263B] font-semibold  ">
+            <p className="text-[1.9vh] text-[#0D263B] font-semibold  ">
               Neurodiversidad:
             </p>
           </div>
@@ -268,7 +262,7 @@ export default function CardsSch({ verMas, setVermas }) {
                                 }}
                               >
                                 <Pincon />
-                                <p className="text-[1.6vh] ">
+                                <p className="text-[1.7vh] ">
                                   {d.nombre_dificultad}
                                 </p>
                               </div>
@@ -280,7 +274,7 @@ export default function CardsSch({ verMas, setVermas }) {
                           <DoDisturbIcon
                             sx={{ color: "#999999", width: "2vh" }}
                           />
-                          <p className="text-[1.5vh]">Sin Soporte</p>
+                          <p className="text-[1.7vh]">Sin Soporte</p>
                         </div>
                       )}
                     </div>
@@ -295,7 +289,7 @@ export default function CardsSch({ verMas, setVermas }) {
             onClick={hanlderVermas}
             className="pt-2 flex flex-row items-center justify-center gap-12"
           >
-            <p className="text-[1.7vh] text-[#0061DF] font-semibold   ">
+            <p className="text-[2vh] text-[#0061DF] font-semibold   ">
               Ver mas
             </p>
           </div>
@@ -306,7 +300,7 @@ export default function CardsSch({ verMas, setVermas }) {
             onClick={hanlderVermas}
             className="flex flex-row items-center justify-center gap-12"
           >
-            <p className="text-[1.7vh] text-[#0061DF] font-semibold   ">
+            <p className="text-[2vh] text-[#0061DF] font-semibold   ">
               Ver menos
             </p>
           </div>
@@ -314,7 +308,7 @@ export default function CardsSch({ verMas, setVermas }) {
         {verMas && (
           <div className="flex flex-row items-start gap-[4rem]">
             <div className="min-w-[8vh] max-w-[8vh]">
-              <p className="text-[1.7vh] text-[#0D263B]  font-semibold   ">
+              <p className="text-[1.9vh] text-[#0D263B]  font-semibold   ">
                 Afiliaciones:
               </p>
             </div>
