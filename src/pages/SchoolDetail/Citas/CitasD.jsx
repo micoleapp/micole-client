@@ -107,8 +107,8 @@ export default function CitasD({ ingresoParams, nombre_grado }) {
 
   return (
     <>
-      <div className=" bg-white flex flex-col gap-5 rounded-md  w-full">
-        <h2 className="font-semibold  text-[#0D263B] text-[2.4vh]">
+      <div className=" p-5 flex flex-col gap-5 rounded-md  w-full">
+        <h2 className="font-semibold pl-[1vh] text-[#0D263B] text-[2.4vh]">
           Solicitar una visita
         </h2>
         <div className={style.divSwipperCitas}>

@@ -924,7 +924,7 @@ function ListSchool() {
                                 </small>
                               </div>
 
-                              <div className="grid grid-cols-2 grid-rows-3 w-max gap-x-2 gap-y-2">
+                              <div className="grid grid-cols-2 grid-rows-3 w-max-[18vh] gap-x-2 gap-y-2">
                                 {school.Vacantes.length > 0 && (
                                   <small className="text-gray-400 flex gap-1  items-center">
                                     {" "}

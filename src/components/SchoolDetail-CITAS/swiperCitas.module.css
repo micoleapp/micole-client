@@ -5,7 +5,7 @@
     flex-direction: column;
     border-radius: 30px;
     /* position: relative; */
-    width: 100vh;
+    width: 82vh;
     max-width: 100vh;
     /* max-height: 600px; */
     margin: 0;
@@ -44,6 +44,18 @@ borderRadius: "2vh",
 height: "20",
 display: "flex",
 flexDirection: "column", */
+
+.swiper_button_next {
+    right: 20px;
+    transform: rotate(90deg);
+  }
+
+  .swiper_button_prev {
+    left: 20px;
+    transform: rotate(90deg);
+  }
+
+
 .divDropHorarios {
     /* { display: "flex", alignItems: "flex-end", gap: "1vh" } */
     display: flex;
@@ -165,7 +177,7 @@ flexDirection: "column", */
 
     .slider_container {
         width: 40vh;
-        height: 27vh;
+        height: 30vh;
         /* justify-content: center;
         align-items: center; */
     }

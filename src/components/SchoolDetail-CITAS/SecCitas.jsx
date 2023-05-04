@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import style from "./swiperCitas.module.css";
-
+import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 // import de la libreria swipper , el carrusel de las cards
 import {
   Pagination,
@@ -20,6 +21,7 @@ import generarCalendario from "./GenCalendario";
 // Componentes del look and feel de citas
 import CardsDia from "./components/CardsDia/CardsDia";
 import HorariosColegio from "./components/HorariosColegio/HorariosColegio";
+import { Button } from "@mui/material";
 
 export default function SecCitas({ sendDateHs }) {
   //  ejecuta la funcion que genera el calendario y se guarda el arr de dias
@@ -34,13 +36,32 @@ export default function SecCitas({ sendDateHs }) {
   const [selectedCard, setSelectedCard] = useState(null);
 
   const handleCardSelect = (card) => {
-    console.log(card)
+    console.log(card);
     setSelectedCard([card]);
   };
 
+  const [toggleButton, setToggleButton] = useState(false);
+
+  const nextButton = () => {
+    console.log("next");
+    setToggleButton(true);
+  };
+
+  const prevButton = () => {
+    console.log("prev");
+    setToggleButton(false);
+  };
+
+  console.log(toggleButton);
   return (
     <>
       <div className={style.divResponsiveDesktop}>
+        {/* <Button onClick={prevButton}>
+          <KeyboardArrowLeftIcon />
+        </Button>
+        <Button onClick={nextButton}>
+          <ChevronRightIcon />
+        </Button> */}
         <div className={style.slider_container}>
           <Swiper
             modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -48,6 +69,11 @@ export default function SecCitas({ sendDateHs }) {
             slidesPerView={7}
             grabCursor={true}
             rewind={true}
+            // navigation={true}
+            navigation={{
+              prevEl: toggleButton ? "prev" : "next",
+              nextEl: toggleButton ? "next" : "prev",
+            }}
             pagination={{ clickable: true }}
             className={style.swiper}
           >
@@ -258,10 +284,12 @@ export default function SecCitas({ sendDateHs }) {
           </Swiper>
           <div className={style.divDropHorarios}>
             {/* <p className={style.pSig}>Horarios </p> */}
-            <HorariosColegio
-              diaSelecionado={selectedCard}
-              sendDateHs={sendDateHs}
-            />
+           
+              <HorariosColegio
+                diaSelecionado={selectedCard}
+                sendDateHs={sendDateHs}
+              />
+       
           </div>
         </div>
       </div>
