@@ -435,7 +435,7 @@ function SchoolDetail() {
 
                   Comparar
                 </Button>
-                {oneSchool.Plan_Pago?.nombre_plan_pago === "Free" && (
+                {oneSchool.Plan_Pago?.nombre_plan_pago === "Premium" && (
                   <Button
                     variant="contained"
                     sx={{
