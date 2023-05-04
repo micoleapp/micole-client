@@ -221,8 +221,8 @@ export const clannDetailid = () => (dispatch) => {
   }
 };
 
-export const postHorariosVacantes = (horarios) => (dispatch) => {
-  const ColegioId = localStorage.getItem('ColegioId')
+export const postHorariosVacantes = (horarios, user) => (dispatch) => {
+  const ColegioId = user
   console.log(ColegioId);
   console.log(horarios);
   dispatch(isLoading());
