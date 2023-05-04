@@ -52,16 +52,16 @@ export default function SecCitas({ sendDateHs }) {
     setToggleButton(false);
   };
 
-  console.log(toggleButton)
+  console.log(toggleButton);
   return (
     <>
       <div className={style.divResponsiveDesktop}>
-        <Button onClick={prevButton}>
+        {/* <Button onClick={prevButton}>
           <KeyboardArrowLeftIcon />
         </Button>
         <Button onClick={nextButton}>
           <ChevronRightIcon />
-        </Button>
+        </Button> */}
         <div className={style.slider_container}>
           <Swiper
             modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -71,8 +71,8 @@ export default function SecCitas({ sendDateHs }) {
             rewind={true}
             // navigation={true}
             navigation={{
-              prevEl: toggleButton ? "prev": "next",
-              nextEl: toggleButton? "next": "prev",
+              prevEl: toggleButton ? "prev" : "next",
+              nextEl: toggleButton ? "next" : "prev",
             }}
             pagination={{ clickable: true }}
             className={style.swiper}
@@ -168,8 +168,6 @@ export default function SecCitas({ sendDateHs }) {
                 </>
               );
             })}
-            {/* <div className={style.swiper_button_next}></div>
-            <div className={style.swiper_button_prev}></div> */}
           </Swiper>
           <div className={style.divDropHorarios}>
             {/* <p className={style.pSig}>Horarios </p> */}
@@ -286,10 +284,12 @@ export default function SecCitas({ sendDateHs }) {
           </Swiper>
           <div className={style.divDropHorarios}>
             {/* <p className={style.pSig}>Horarios </p> */}
-            <HorariosColegio
-              diaSelecionado={selectedCard}
-              sendDateHs={sendDateHs}
-            />
+           
+              <HorariosColegio
+                diaSelecionado={selectedCard}
+                sendDateHs={sendDateHs}
+              />
+       
           </div>
         </div>
       </div>

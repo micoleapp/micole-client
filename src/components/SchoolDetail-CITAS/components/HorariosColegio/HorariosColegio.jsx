@@ -19,7 +19,7 @@ function HorariosColegio({ diaSelecionado, sendDateHs }) {
     sendDateHs(infoDiaHora);
   };
 
-  console.log(diaSelecionado);
+
   // Se convierte el arr  diaSelecionado a un obj y accedemos a la propiedad time que es un array
 
   // Se hace esta comprobación ya que hay colegios con la propiedad time en forma de obj
@@ -44,48 +44,40 @@ function HorariosColegio({ diaSelecionado, sendDateHs }) {
 
   return (
     <>
-      <FormControl sx={{ m: 1, minWidth: 100 }} size="small">
-        <InputLabel id="demo-select-small">Horarios</InputLabel>
+      <div className="flex fle-row items-center">
+        <p className="text-[1.8vh]">Escoger horario</p>
+        <FormControl sx={{ m: 1, minWidth: 100 }} size="small">
+          <InputLabel id="demo-select-small"> Seleccionar hora</InputLabel>
 
-        <Select
-          sx={{ border: "none", outline: "none", fontSize: "2vh" }}
-          labelId="demo-select-small"
-          id="demo-select-small"
-          value={horarioColegio}
-          label={"Horarios"}
-          onChange={handleChangeHora}
-        >
-
-          {diaSelecionado ?
-            arrDefHorarios?.map((ele) => {
-              console.log(ele);
-              return (
-                <MenuItem
-                  key={ele.desde}
-                  onClick={(e) =>
-                    handlerInfo(e, diaSelecionado.date, ele.desde, true)
-                  }
-                  value={ele.desde}
-                >
-                  {ele.desde}/{ele.hasta}
-                </MenuItem>
-              );
-            })
-          :
-          <MenuItem
-          // key={ele.desde}
-          // onClick={(e) =>
-          //   handlerInfo(e, diaSelecionado.date, ele.desde, true)
-          // }
-          // value={ele.desde}
-        >
-          {/* {ele.desde}/{ele.hasta} */}
-          Selecciona un dia
-        </MenuItem>
-          }
-
-        </Select>
-      </FormControl>
+          <Select
+            sx={{ border: "none", outline: "none", fontSize: "2vh", width:'100%', minWidth:'20vh' }}
+            labelId="demo-select-small"
+            id="demo-select-small"
+            value={horarioColegio}
+            label={"Seleccionar hora"}
+            onChange={handleChangeHora}
+          >
+            {diaSelecionado ? (
+              arrDefHorarios?.map((ele) => {
+                console.log(ele);
+                return (
+                  <MenuItem
+                    key={ele.desde}
+                    onClick={(e) =>
+                      handlerInfo(e, diaSelecionado.date, ele.desde, true)
+                    }
+                    value={ele.desde}
+                  >
+                    {ele.desde}/{ele.hasta}
+                  </MenuItem>
+                );
+              })
+            ) : (
+              <MenuItem>Seleccionar un dia</MenuItem>
+            )}
+          </Select>
+        </FormControl>
+      </div>
     </>
   );
 }
