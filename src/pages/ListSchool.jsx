@@ -37,7 +37,8 @@ import ListItemText from "@mui/material/ListItemText";
 import { getDataSchools } from "../redux/ComparadorActions";
 import SnackComparador from "./ListSchool/SnackComparador/SnackComparador";
 import BalanceIcon from "@mui/icons-material/Balance";
-import IconSnack from "./ListSchool/SnackComparador/IconSnack";
+import IconSnack from "./ListSchool/SnackComparador/IconSnackBar/IconSnack";
+
 const yearNow = new Date().getFullYear();
 const Ingreso2 = [yearNow, yearNow + 1, yearNow + 2];
 
@@ -911,8 +912,8 @@ function ListSchool() {
                             </span>
                           </div>
                         </div>
-                        <div className="w-full p-5  flex flex-col justify-between gap-5">
-                          <div className="flex justify-between gap-4 xl:gap-0 flex-col xl:flex-row">
+                        <div className="w-full p-2 flex flex-col justify-between    gap-5">
+                          <div className="  flex justify-between gap-4 xl:gap-0 flex-col xl:flex-row">
                             <div className="flex flex-col gap-4 w-full">
                               <div className="flex flex-col w-fit gap-2">
                                 <h1 className="font-semibold text-lg">
@@ -1177,7 +1178,11 @@ function ListSchool() {
       )}
       {openComparador === false && (
         <div onClick={handlerOpenComparador}>
-          <IconSnack open={openComparador} setOpen={setOpenComparador} />
+          <div className="sm:flex flex-none">
+                 <IconSnack open={openComparador} setOpen={setOpenComparador} />
+          </div>
+  
+     
         </div>
       )}
     </>

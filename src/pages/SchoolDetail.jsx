@@ -77,6 +77,7 @@ import CitasD from "./SchoolDetail/Citas/CitasD";
 import BalanceIcon from "@mui/icons-material/Balance";
 import { getDataSchools } from "../redux/ComparadorActions";
 import SnackComparador from "./ListSchool/SnackComparador/SnackComparador";
+import IconSnack from "./ListSchool/SnackComparador/IconSnackBar/IconSnack";
 let url = window.location.href;
 function QuiltedImageList({ firstImage, gallery, setImage, setImages }) {
   return (
@@ -199,7 +200,9 @@ function SchoolDetail() {
     dispatch(getDataSchools({ id }));
     setOpenComparador(true);
   };
-
+  const handlerOpenComparador = () => {
+    setOpenComparador(true);
+  };
   return (
     <>
       <div className="  bg-[#f6f7f8]  ">
@@ -626,6 +629,15 @@ function SchoolDetail() {
       </div>
       {openComparador && (
         <SnackComparador open={openComparador} setOpen={setOpenComparador} />
+      )}
+        {openComparador === false && (
+        <div onClick={handlerOpenComparador}>
+          <div className="sm:flex flex-none">
+                 <IconSnack open={openComparador} setOpen={setOpenComparador} />
+          </div>
+  
+     
+        </div>
       )}
     </>
   );

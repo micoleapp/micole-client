@@ -46,6 +46,7 @@ export default function SnackComparadorMobile({ open, setOpen }) {
     setOpen(false);
   };
   const handleClear = (event, reason) => {
+    setOpen(false);
     dispatch(ClearComparador());
   };
   useEffect(() => {
@@ -73,7 +74,7 @@ export default function SnackComparadorMobile({ open, setOpen }) {
               transition={{ delay: 1 }}
             >
               <div className="p-5 flex flex-col items-start justify-start bg-white shadow-md">
-                <div className="  flex flex-row gap-2 w-full justify-between">
+                <div onClick={handleOpenList} className=" cursor-pointer flex flex-row gap-2 w-full justify-between">
                   <p className="font-semibold  text-[#0D263B] text-[1.8vh]">
                     Compara hasta 3 colegios
                   </p>
@@ -95,6 +96,22 @@ export default function SnackComparadorMobile({ open, setOpen }) {
                   >
                     <p className="font-semibold  text-[#0061DF] text-[1.6vh]">
                       Comparador completo!
+                    </p>
+                  </motion.div>
+                )}
+                   {arrColegios.length > 0 &&arrColegios.length < 3 &&  (
+                  <motion.div
+                    className="pb-2"
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{
+                      duration: 0.3,
+                      delay: 0.1,
+                      ease: [0, 0.71, 0.2, 1.01],
+                    }}
+                  >
+                    <p className="font-semibold  text-[#0061DF] text-[1.6vh]">
+                    Colegios agregados {"  "} {arrColegios.length}
                     </p>
                   </motion.div>
                 )}

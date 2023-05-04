@@ -24,12 +24,12 @@ const IconSnack = ()=> {
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{
-            duration: 0.4,
+            duration: 0.2,
             delay: 0.1,
-            ease: [0, 0.71, 0.2, 1.01],
+            ease: [0, 0.71, 0.3, 1.02],
           }}
         >
-          <div  className="p-4 flex flex-col items-start justify-start bg-white shadow-md rounded-[50%] border-[0.2px] border-[#0061DF] cursor-pointer">
+          <div  className="p-4 flex flex-col items-start justify-start bg-white  shadow hover:shadow-lg shadow-2xl rounded-[50%] border-[0.2px] border-[#0061DF] cursor-pointer">
             <BalanceIcon sx={{ color: "#0061DF", height: "2.4vh" }} />
           </div>
         </motion.div>
