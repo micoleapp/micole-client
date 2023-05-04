@@ -45,7 +45,9 @@ export default function SnackComparadorMobile({ open, setOpen }) {
     dispatch(ClearComparador());
     setOpen(false);
   };
-
+  const handleClear = (event, reason) => {
+    dispatch(ClearComparador());
+  };
   useEffect(() => {
     setOpen(true);
   }, [arrColegios.length, arrColegios]);
@@ -166,7 +168,7 @@ export default function SnackComparadorMobile({ open, setOpen }) {
                 )}
 
                 <div className="flex flex-row gap-2 w-full items-center justify-center">
-                  <Button onClick={handleClose} variant="outlined">
+                  <Button onClick={handleClear} variant="outlined">
                     Cancelar
                   </Button>
                   <Button variant="contained">
