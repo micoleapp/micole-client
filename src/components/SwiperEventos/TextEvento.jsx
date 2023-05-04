@@ -24,8 +24,8 @@ export default function TextEvento({
     <>
       {plantilla === true ? (
         <div className={style.card}>
-          <div className={style.imgDiv}>
-            <img style={{ display: "flex" }} src={logo} alt="Logo" />
+          <div >
+            <img className="min-w-[5vh] max-w-[10vh]  max-h-[10vh] p-2" src={logo} alt="Logo" />
           </div>
 
           {nombreEvento && <h1 className={style.title}>{nombreEvento}</h1>}
@@ -52,7 +52,7 @@ export default function TextEvento({
           </div>
 
           <div>
-            <Button onClick={handleOpen} variant="contained" sx={{fontSize:'1.6vh'}}>
+            <Button onClick={handleOpen} variant="contained" sx={{fontSize:'1.5vh', fontFamily:'Poppins'}}>
               Inscribirme
             </Button>
           </div>
@@ -69,7 +69,7 @@ export default function TextEvento({
         </div>
       ) : (
         <div className={style.cardPubli}>
-          <Button onClick={handleOpen} variant="contained">
+          <Button onClick={handleOpen} variant="contained"  sx={{fontSize:'1.5vh', fontFamily:'Poppins'}}>
             Inscribirme
           </Button>
         </div>
