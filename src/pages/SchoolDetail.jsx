@@ -251,32 +251,54 @@ function SchoolDetail() {
                   <MenuItem onClick={handleClose}>
                     {" "}
                     <WhatsappShareButton url={url}>
-                      <FontAwesomeIcon color="#00bb2d" size="xl" className="mr-3" icon={faWhatsapp} />
+                      <FontAwesomeIcon
+                        color="#00bb2d"
+                        size="xl"
+                        className="mr-3"
+                        icon={faWhatsapp}
+                      />
                       WhatsApp
                     </WhatsappShareButton>
                   </MenuItem>
                   <MenuItem onClick={handleClose}>
                     {" "}
                     <FacebookMessengerShareButton url={url}>
-                      <FontAwesomeIcon color="#3b5998" size="xl" className="mr-5" icon={faFacebookF} />
+                      <FontAwesomeIcon
+                        color="#3b5998"
+                        size="xl"
+                        className="mr-5"
+                        icon={faFacebookF}
+                      />
                       Facebook
                     </FacebookMessengerShareButton>
                   </MenuItem>
                   <MenuItem onClick={handleClose}>
                     <EmailShareButton url={url}>
-                    <FontAwesomeIcon className="mr-4" icon={faMailBulk} />
-                      
-                      Email</EmailShareButton>
+                      <FontAwesomeIcon className="mr-4" icon={faMailBulk} />
+                      Email
+                    </EmailShareButton>
                   </MenuItem>
                   <MenuItem onClick={handleClose}>
-                    <LinkedinShareButton  url={url}>
-                    <FontAwesomeIcon className="mr-4" size="xl" color="#0e76a8" icon={faLinkedinIn} />
-                      Linkedin</LinkedinShareButton>
+                    <LinkedinShareButton url={url}>
+                      <FontAwesomeIcon
+                        className="mr-4"
+                        size="xl"
+                        color="#0e76a8"
+                        icon={faLinkedinIn}
+                      />
+                      Linkedin
+                    </LinkedinShareButton>
                   </MenuItem>
                   <MenuItem onClick={handleClose}>
                     <TelegramShareButton url={url}>
-                    <FontAwesomeIcon className="mr-3" color="#229ED9" size="xl" icon={faTelegram} />
-                      Telegram</TelegramShareButton>
+                      <FontAwesomeIcon
+                        className="mr-3"
+                        color="#229ED9"
+                        size="xl"
+                        icon={faTelegram}
+                      />
+                      Telegram
+                    </TelegramShareButton>
                   </MenuItem>
                 </Menu>
               </span>
@@ -387,24 +409,49 @@ function SchoolDetail() {
                     UGEL: {oneSchool.ugel}{" "}
                   </span>
                 </div>
-                <div className="flex flex-row gap-4 text-center">
-                  <span
-                    onClick={(e) => handlerComparador(e, oneSchool.id)}
-                    className="flex items-center gap-0"
-                  >
-                    <BalanceIcon sx={{ color: "#696969" }} />
-                    <p className=" cursor-pointer text-[#696969] pl-1 text-[1.9vh]">
-                      Comparar
-                    </p>
-                  </span>
-                </div>
+            
               </div>
             </div>
           </div>
 
           {/* TABS DETAIL */}
+
           <main className="flex gap-5 flex-col lg:flex-row">
             <div className={style.divBox}>
+              <div className="w-full flex  lg:items-end flex-start gap-4  pb-2 p-4 lg:justify-end justify-start">
+                <Button
+                   onClick={(e) => handlerComparador(e, oneSchool.id)}
+                  variant="contained"
+                  sx={{
+                    fontFamily: "Poppins",
+                    fontWeight: "500",
+                    fontSize: "1.6vh",
+                    display:'flex',
+                    gap:'1vh',
+                    textTransform:'none'
+                  }}
+                >
+                       <BalanceIcon sx={{ color: "#ffff"}} />
+
+                  Comparar
+                </Button>
+                {oneSchool.Plan_Pago?.nombre_plan_pago === "Free" && (
+                  <Button
+                    variant="contained"
+                    sx={{
+                      fontFamily: "Poppins",
+                      fontWeight: "500",
+                      fontSize: "1.6vh",
+                      padding:'1vh',
+                      textTransform:'none'
+                    }}
+                  >
+                   
+                    Descargar Brochure
+                  </Button>
+                )}
+              </div>
+
               <TabContext value={value}>
                 <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
                   <TabList
