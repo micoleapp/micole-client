@@ -116,7 +116,7 @@ export default function CitasD({ ingresoParams, nombre_grado }) {
         </div>
 
         {/* FORMULARIO DE LA CITA */}
-        <form onSubmit={handleSubmit} className="w-full flex flex-col gap-7">
+        <form onSubmit={handleSubmit} className="w-full flex flex-col gap-7 max-w-[90vh]">
           <div className="flex gap-5">
             <input
               type="button"
