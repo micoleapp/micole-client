@@ -36,7 +36,8 @@ import Checkbox from "@mui/material/Checkbox";
 import ListItemText from "@mui/material/ListItemText";
 import { getDataSchools } from "../redux/ComparadorActions";
 import SnackComparador from "./ListSchool/SnackComparador/SnackComparador";
-
+import BalanceIcon from "@mui/icons-material/Balance";
+import IconSnack from "./ListSchool/SnackComparador/IconSnack";
 const yearNow = new Date().getFullYear();
 const Ingreso2 = [yearNow, yearNow + 1, yearNow + 2];
 
@@ -302,6 +303,10 @@ function ListSchool() {
   const handlerComparador = (e, id) => {
     console.log(id);
     dispatch(getDataSchools({ id }));
+    setOpenComparador(true);
+  };
+
+  const handlerOpenComparador = () => {
     setOpenComparador(true);
   };
 
@@ -1024,7 +1029,12 @@ function ListSchool() {
                                 <Button
                                   onClick={() => goToDetails(school.id, false)}
                                   variant="contained"
-                                  sx={{fontWeight:'500' , fontFamily:'Poppins', width:'100%', maxWidth:'25vh'}}
+                                  sx={{
+                                    fontWeight: "500",
+                                    fontFamily: "Poppins",
+                                    width: "100%",
+                                    maxWidth: "25vh",
+                                  }}
                                   // className="bg-[#edf4fe] hover:scale-110 w-full duration-200 cursor-pointer rounded-sm shadow-md disabled:bg-slate-500/20 disabled:text-white disabled:line-through p-2 text-[#0061dd] text-center font-semibold"
                                 >
                                   VER DETALLE
@@ -1042,8 +1052,12 @@ function ListSchool() {
                                 0 ? (
                                 <Button
                                   onClick={() => goToDetails(school.id, true)}
-                               
-                                  sx={{fontWeight:'500' , fontFamily:'Poppins', width:'100%', maxWidth:'25vh', }}
+                                  sx={{
+                                    fontWeight: "500",
+                                    fontFamily: "Poppins",
+                                    width: "100%",
+                                    maxWidth: "25vh",
+                                  }}
                                   variant="contained"
                                   // className="bg-[#dcffe2] hover:scale-110 duration-200 cursor-pointer rounded-sm shadow-md p-2 text-[#3cff7d] font-semibold w-full"
                                 >
@@ -1066,7 +1080,18 @@ function ListSchool() {
                               <Button
                                 onClick={(e) => handlerComparador(e, school.id)}
                                 variant="outlined"
+                                sx={{
+                                  fontFamily: "Poppins",
+                                  fontWeight: "500",
+                                  fontSize: "1.6vh",
+                                  display: "flex",
+                                  gap: "1vh",
+                                  // textTransform:'none'
+                                }}
                               >
+                                <BalanceIcon
+                                  sx={{ color: "#0061DF", height: "2.4vh" }}
+                                />
                                 Comparar
                               </Button>
                               <FavoritoButton />
@@ -1149,6 +1174,11 @@ function ListSchool() {
       </div>
       {openComparador && (
         <SnackComparador open={openComparador} setOpen={setOpenComparador} />
+      )}
+      {openComparador === false && (
+        <div onClick={handlerOpenComparador}>
+          <IconSnack open={openComparador} setOpen={setOpenComparador} />
+        </div>
       )}
     </>
   );

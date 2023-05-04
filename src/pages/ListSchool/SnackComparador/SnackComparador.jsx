@@ -19,6 +19,7 @@ import {
 } from "../../../redux/ComparadorActions";
 import TrashIcon from "./svg/TrashIcon";
 import SnackComparadorMobile from "./SnackMobile";
+import { BalanceOutlined } from "@mui/icons-material";
 function SlideTransition(props) {
   return <Slide {...props} direction="up" />;
 }
@@ -47,9 +48,8 @@ export default function SnackComparador({ open, setOpen }) {
     setOpen(false);
   };
   const handleClear = (event, reason) => {
-
     dispatch(ClearComparador());
-   
+    setOpen(false);
   };
   useEffect(() => {
     setOpen(true);
@@ -69,7 +69,7 @@ export default function SnackComparador({ open, setOpen }) {
           <Snackbar
             anchorOrigin={{ vertical, horizontal }}
             open={open}
-            autoHideDuration={16000}
+            autoHideDuration={25000}
             onClose={handleClose}
           >
             <motion.div
@@ -183,6 +183,32 @@ export default function SnackComparador({ open, setOpen }) {
           </Snackbar>
         </Stack>
       </div>
+
+      {open === false && (
+        <Stack spacing={2} sx={{ width: "100%" }}>
+          <Snackbar
+            anchorOrigin={{ vertical, horizontal }}
+            open={open}
+            autoHideDuration={160}
+            onClose={handleClose}
+          >
+            <motion.div
+              className="pb-2"
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{
+                duration: 0.4,
+                delay: 0.1,
+                ease: [0, 0.71, 0.2, 1.01],
+              }}
+            >
+              <div className="p-5 flex flex-col items-start justify-start bg-white shadow-md">
+                <BalanceOutlined />
+              </div>
+            </motion.div>
+          </Snackbar>
+        </Stack>
+      )}
 
       <div className={style.divMobile}>
         <SnackComparadorMobile open={open} setOpen={setOpen} />
