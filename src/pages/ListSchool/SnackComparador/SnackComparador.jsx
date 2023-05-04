@@ -184,8 +184,6 @@ export default function SnackComparador({ open, setOpen }) {
         </Stack>
       </div>
 
-   
-
       <div className={style.divMobile}>
         <SnackComparadorMobile open={open} setOpen={setOpen} />
       </div>
