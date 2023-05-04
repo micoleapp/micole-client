@@ -1000,12 +1000,11 @@ function DashboardSchool() {
     { dia: "Viernes", horarios: [...ViernesString] },
   ];
 
-  console.log(user.id)
   const handleSubmitCitas = (e) => {
     e.preventDefault();
     const diasActivos = stringDays.filter((ele) => ele.horarios.length > 0);
 
-    dispatch(postHorariosVacantes(diasActivos, user.id));
+    dispatch(postHorariosVacantes(diasActivos,user.id));
     console.log(user.id);
     try {
       axios
@@ -1016,7 +1015,7 @@ function DashboardSchool() {
             title: "Felicitaciones!",
             text: "Colegio listo para mostrarse en nuestra página!",
           });
-          dispatch(getSchoolDetail(user.id));
+          dispatch(getSchoolDetail(user.id)); 
         })
         .catch((err) => {
           console.log(err);
@@ -3203,7 +3202,7 @@ function DashboardSchool() {
                                     ...LunesString.slice(index + 1),
                                   ]);
                                 }}
-                                minutesStep={5}
+                                minutesStep={60}
                                 minTime={dayjs("2014-08-18T08:00:00")}
                                 maxTime={hora.horario[1]}
                               />
@@ -3249,7 +3248,7 @@ function DashboardSchool() {
                                   <TextField {...params} />
                                 )}
                                 ampm={false}
-                                minutesStep={5}
+                                minutesStep={60}
                                 minTime={hora.horario[0]}
                                 maxTime={dayjs("2014-08-18T17:00:00")}
                               />
@@ -3352,7 +3351,7 @@ function DashboardSchool() {
                                     ...MartesString.slice(index + 1),
                                   ]);
                                 }}
-                                minutesStep={5}
+                                minutesStep={60}
                                 minTime={dayjs("2014-08-18T08:00:00")}
                                 maxTime={hora.horario[1]}
                               />
@@ -3398,7 +3397,7 @@ function DashboardSchool() {
                                   <TextField {...params} />
                                 )}
                                 ampm={false}
-                                minutesStep={5}
+                                minutesStep={60}
                                 minTime={hora.horario[0]}
                                 maxTime={dayjs("2014-08-18T17:00:00")}
                               />
@@ -3506,7 +3505,7 @@ function DashboardSchool() {
                                     ...MiercolesString.slice(index + 1),
                                   ]);
                                 }}
-                                minutesStep={5}
+                                minutesStep={60}
                                 minTime={dayjs("2014-08-18T08:00:00")}
                                 maxTime={hora.horario[1]}
                               />
@@ -3552,7 +3551,7 @@ function DashboardSchool() {
                                   <TextField {...params} />
                                 )}
                                 ampm={false}
-                                minutesStep={5}
+                                minutesStep={60}
                                 minTime={hora.horario[0]}
                                 maxTime={dayjs("2014-08-18T17:00:00")}
                               />
@@ -3661,7 +3660,7 @@ function DashboardSchool() {
                                     ...JuevesString.slice(index + 1),
                                   ]);
                                 }}
-                                minutesStep={5}
+                                minutesStep={60}
                                 minTime={dayjs("2014-08-18T08:00:00")}
                                 maxTime={hora.horario[1]}
                               />
@@ -3707,7 +3706,7 @@ function DashboardSchool() {
                                   <TextField {...params} />
                                 )}
                                 ampm={false}
-                                minutesStep={5}
+                                minutesStep={60}
                                 minTime={hora.horario[0]}
                                 maxTime={dayjs("2014-08-18T17:00:00")}
                               />
@@ -3815,7 +3814,7 @@ function DashboardSchool() {
                                     ...ViernesString.slice(index + 1),
                                   ]);
                                 }}
-                                minutesStep={5}
+                                minutesStep={60}
                                 minTime={dayjs("2014-08-18T08:00:00")}
                                 maxTime={hora.horario[1]}
                               />
@@ -3861,7 +3860,7 @@ function DashboardSchool() {
                                   <TextField {...params} />
                                 )}
                                 ampm={false}
-                                minutesStep={5}
+                                minutesStep={60}
                                 minTime={hora.horario[0]}
                                 maxTime={dayjs("2014-08-18T17:00:00")}
                               />
