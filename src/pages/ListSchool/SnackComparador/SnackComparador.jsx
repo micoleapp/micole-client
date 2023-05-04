@@ -13,7 +13,10 @@ import { useDispatch } from "react-redux";
 
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { deleteColegio } from "../../../redux/ComparadorActions";
+import {
+  ClearComparador,
+  deleteColegio,
+} from "../../../redux/ComparadorActions";
 import TrashIcon from "./svg/TrashIcon";
 import SnackComparadorMobile from "./SnackMobile";
 function SlideTransition(props) {
@@ -30,17 +33,9 @@ export default function SnackComparador({ open, setOpen }) {
     horizontal: "right",
   });
 
-  const [stateMobile, setStateMobile] = React.useState({
-    vertical: "bottom",
-    horizontal: "center",
-  });
-
   const [openSch, setOpenSch] = useState(true);
   const { vertical, horizontal } = state;
 
-  const handleClick = () => {
-    setOpen(true);
-  };
   const handleOpenList = () => {
     setOpenSch(!openSch);
   };
@@ -48,7 +43,7 @@ export default function SnackComparador({ open, setOpen }) {
     if (reason === "clickaway") {
       return;
     }
-
+    dispatch(ClearComparador());
     setOpen(false);
   };
 
@@ -79,19 +74,35 @@ export default function SnackComparador({ open, setOpen }) {
               transition={{ delay: 1 }}
             >
               <div className="p-5 flex flex-col items-start justify-start bg-white shadow-md">
-                <div className=" pb-2 flex flex-row gap-2 w-full justify-between">
+                <div className="  flex flex-row gap-2 w-full justify-between">
                   <p className="font-semibold  text-[#0D263B] text-[1.8vh]">
                     Compara hasta 3 colegios
                   </p>
+
                   <KeyboardArrowDownTwoToneIcon
                     onClick={handleOpenList}
                     sx={{ color: "#0D263B" }}
                   />
                 </div>
+                {arrColegios.length === 3 && (
+                  <motion.div
+                    className="pb-2"
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{
+                      duration: 0.4,
+                      delay: 0.1,
+                      ease: [0, 0.71, 0.2, 1.01],
+                    }}
+                  >
+                    <p className="font-semibold  text-[#0061DF] text-[1.6vh]">
+                      Comparador completo!
+                    </p>
+                  </motion.div>
+                )}
                 {openSch && (
                   <div>
                     {arrColegios?.map((c) => {
-                      console.log(c);
                       return (
                         <>
                           {" "}

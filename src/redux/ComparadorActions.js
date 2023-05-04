@@ -1,9 +1,16 @@
 import axios from "axios";
-import { getDataColegios,getAcreCom ,deleteSch} from "./ComparadorSlice";
+import {
+  getDataColegios,
+  getAcreCom,
+  deleteSch,
+  ClearSch,
+} from "./ComparadorSlice";
 import Swal from "sweetalert2";
 import SwalProp from "../exports/SwalProp";
-export const getDataSchools =({ id }) =>  (dispatch) => {
-  console.log(id)
+export const getDataSchools =
+  ({ id }) =>
+  (dispatch) => {
+    console.log(id);
     try {
       axios
         .get(`/comparador/${id}`)
@@ -51,8 +58,13 @@ export const getAcreditacionesComparador = (id) => (dispatch) => {
   }
 };
 
-
-export const deleteColegio=({ id }) => (dispatch) => {
-  console.log(id)
-dispatch(deleteSch(id))
+export const deleteColegio =
+  ({ id }) =>
+  (dispatch) => {
+    console.log(id);
+    dispatch(deleteSch(id));
   };
+
+export const ClearComparador = () => (dispatch) => {
+  dispatch(ClearSch());
+};
