@@ -912,7 +912,7 @@ function ListSchool() {
                             </span>
                           </div>
                         </div>
-                        <div className="w-full p-2 flex flex-col justify-between    gap-5">
+                        <div className="w-full p-2 flex flex-col lg:justify-between  justify-between  sm:items-end   gap-5">
                           <div className="  flex justify-between gap-4 xl:gap-0 flex-col xl:flex-row">
                             <div className="flex flex-col gap-4 w-full">
                               <div className="flex flex-col w-fit gap-2">
@@ -1035,6 +1035,7 @@ function ListSchool() {
                                     fontFamily: "Poppins",
                                     width: "100%",
                                     maxWidth: "25vh",
+                                    minWidth: "25vh",
                                   }}
                                   // className="bg-[#edf4fe] hover:scale-110 w-full duration-200 cursor-pointer rounded-sm shadow-md disabled:bg-slate-500/20 disabled:text-white disabled:line-through p-2 text-[#0061dd] text-center font-semibold"
                                 >
