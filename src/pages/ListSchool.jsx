@@ -912,7 +912,7 @@ function ListSchool() {
                             </span>
                           </div>
                         </div>
-                        <div className="w-full p-2 flex flex-col lg:justify-between  justify-between  sm:items-end   gap-5">
+                        <div className="w-full p-5 flex flex-col lg:justify-between  justify-between  sm:items-end   gap-5">
                           <div className="  flex justify-between gap-4 xl:gap-0 flex-col xl:flex-row">
                             <div className="flex flex-col gap-4 w-full">
                               <div className="flex flex-col w-fit gap-2">
