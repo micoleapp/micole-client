@@ -8,13 +8,12 @@ const updateLocalStorage = (state) => {
 export const comparadorSlice = createSlice({
   name: "comparador",
   initialState: {
-    arrColegios:   JSON.parse(window.localStorage.getItem("arrColegios")) || [],
+    arrColegios: JSON.parse(window.localStorage.getItem("arrColegios")) || [],
     Afilia: [],
     Infras: [],
   },
   reducers: {
     getDataColegios: (state, action) => {
-      console.log(action.payload);
       const Colegio = Object.assign({}, ...action.payload.Colegio);
 
       const data = {
@@ -22,12 +21,14 @@ export const comparadorSlice = createSlice({
         infra: action.payload.CountInfraestructuras,
         Afilia: action.payload.CountAfiliaciones,
       };
-      console.log(data);
 
-      if (state.arrColegios.length < 3) {
+      const ColegioRepetido = state.arrColegios.some(
+        (ele) => ele.colegio.id === data.colegio.id
+      );
+
+      if (ColegioRepetido === false && state.arrColegios.length < 3) {
         const arrColegios = [...state.arrColegios, data];
         const sortColegios = arrColegios.sort((a, b) => b.infra - a.infra);
-        console.log(sortColegios);
 
         state.arrColegios = sortColegios;
         updateLocalStorage(state.arrColegios);
@@ -41,7 +42,6 @@ export const comparadorSlice = createSlice({
     },
 
     deleteSch: (state, action) => {
-      console.log(action.payload);
       const id = action.payload;
       console.log(id);
 
@@ -50,10 +50,14 @@ export const comparadorSlice = createSlice({
       );
       updateLocalStorage(state.arrColegios);
     },
+    ClearSch: (state, action) => {
+      state.arrColegios = [];
+      updateLocalStorage([]);
+    },
   },
 });
 
-export const { getDataColegios, getAcreCom, deleteSch } =
+export const { getDataColegios, getAcreCom, deleteSch, ClearSch } =
   comparadorSlice.actions;
 
 export default comparadorSlice.reducer;

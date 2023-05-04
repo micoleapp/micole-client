@@ -13,7 +13,10 @@ import { useDispatch } from "react-redux";
 
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { deleteColegio } from "../../../redux/ComparadorActions";
+import {
+  ClearComparador,
+  deleteColegio,
+} from "../../../redux/ComparadorActions";
 import TrashIcon from "./svg/TrashIcon";
 import SnackComparadorMobile from "./SnackMobile";
 function SlideTransition(props) {
@@ -40,7 +43,7 @@ export default function SnackComparador({ open, setOpen }) {
     if (reason === "clickaway") {
       return;
     }
-
+    dispatch(ClearComparador());
     setOpen(false);
   };
 
@@ -100,7 +103,6 @@ export default function SnackComparador({ open, setOpen }) {
                 {openSch && (
                   <div>
                     {arrColegios?.map((c) => {
-                   
                       return (
                         <>
                           {" "}
