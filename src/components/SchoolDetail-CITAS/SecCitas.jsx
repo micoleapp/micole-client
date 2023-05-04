@@ -168,8 +168,8 @@ export default function SecCitas({ sendDateHs }) {
                 </>
               );
             })}
-            <div className={style.swiper_button_next}></div>
-            <div className={style.swiper_button_prev}></div>
+            {/* <div className={style.swiper_button_next}></div>
+            <div className={style.swiper_button_prev}></div> */}
           </Swiper>
           <div className={style.divDropHorarios}>
             {/* <p className={style.pSig}>Horarios </p> */}
