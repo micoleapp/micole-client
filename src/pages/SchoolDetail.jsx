@@ -200,9 +200,7 @@ function SchoolDetail() {
     dispatch(getDataSchools({ id }));
     setOpenComparador(true);
   };
-  const handlerOpenComparador = () => {
-    setOpenComparador(true);
-  };
+
   return (
     <>
       <div className="  bg-[#f6f7f8]  ">

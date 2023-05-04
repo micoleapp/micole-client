@@ -52,7 +52,7 @@ export default function TextEvento({
           </div>
 
           <div>
-            <Button onClick={handleOpen} variant="contained">
+            <Button onClick={handleOpen} variant="contained" sx={{fontSize:'1.6vh'}}>
               Inscribirme
             </Button>
           </div>
