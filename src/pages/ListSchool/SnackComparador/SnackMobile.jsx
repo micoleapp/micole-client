@@ -42,7 +42,7 @@ export default function SnackComparadorMobile({ open, setOpen }) {
     if (reason === "clickaway") {
       return;
     }
-    dispatch(ClearComparador());
+
     setOpen(false);
   };
   const handleClear = (event, reason) => {
