@@ -101,50 +101,7 @@ export default function Miplan() {
           })}
 
         {planPago.length === 0 && planPago != null && (
-          // <div
-          //   style={{
-          //     width: "100%",
-          //     display: "flex",
-          //     alignItems: "center",
-          //     justifyContent: "center",
-          //   }}
-          // >
-          //   <div className={`${style.divCardFree} bg-white`}>
-          //     <div
-          //       style={{
-          //         width: "100%",
-          //         display: "flex",
-          //         justifyContent: " center",
-          //         flexDirection: "row",
-          //         alignItems: "center",
-          //       }}
-          //     >
-              
-          //       <Typography
-          //         sx={{
-          //           fontSize: "1.3rem",
-          //           fontWeight: "600",
-          //           color: "#0D263B",
-          //           paddingBottom: "10px",
-          //           fontFamily: "Poppins",
-          //         }}
-          //       >
-          //         Tus plan es {oneSchool?.Plan_Pago?.nombre_plan_pago}
-          //       </Typography>
-          //       <p>Desbloquea más beneficios actualizando tu plan</p>
-          //     </div>
-          //     <div className={style.divBtn}>
-          //       <Button
-          //         variant="contained"
-          //         onClick={toggleInscripcion}
-          //         color="primary"
-          //       >
-          //         Cambiar Plan
-          //       </Button>
-          //     </div>
-          //   </div>
-          // </div>
-
+       
           <div>
           <div className={style.divCard}>
             {/* <Card sx={{boxShadow: '0px 4px 40px rgba(31, 95, 175, 0.15)', padding:'10px',display:'flex',justifyContent:'space-between', alignItems:'center',flexDirection:'row'}}> */}
@@ -287,6 +244,7 @@ export default function Miplan() {
           <ModalInscripcion
             handleClose={setOpenRegister}
             OpenPaymentPLan={OpenPaymentPLan}
+            Miplan={true}
           />
         )}
       </div>

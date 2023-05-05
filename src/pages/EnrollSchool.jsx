@@ -100,6 +100,7 @@ function EnrollSchool() {
           <ModalInscripcion
             handleClose={setOpenRegister}
             OpenPaymentPLan={OpenPaymentPLan}
+            Miplan={false}
           />
         )}
 
@@ -152,6 +153,7 @@ admisión simple y eficiente"
           OpenPaymentPLan={OpenPaymentPLan}
           handleClose={setOpenRegister}
           handleClosePayment={setOpenPaymentPLan}
+          Miplan={false}
         />
       )}
       <section className="bg-[#0061dd] flex flex-col justify-around p-10 gap-10">

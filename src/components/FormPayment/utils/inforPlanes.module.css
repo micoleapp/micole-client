@@ -1,31 +1,24 @@
-/* .item{
-    height: 40rem;
-    min-width: 30rem;
-    padding: 2rem;
-}
-.item img{
-    height: 100%;
-    width: 100%;
-    pointer-events: none;
-}
-.slider{
-    display: flex;
-    cursor: grab;
-    height: 60vh;
-    gap: 2vh;
-    border: 1px solid red;
-}
-.slider_container{
-    margin: 0 auto;
-    overflow-x: hidden;
-    width: 100%;
-    display: flex;
-    gap: 2vh;
-    flex-direction: row;
-} */
+
 
 .cardDia{
     border: 1px solid #fffefe75;
+    width: 25vh;
+    border-radius: 2vh;
+    /* height: 20vh; */
+    justify-content: space-between;
+    display: flex;
+    padding: 2vh;
+    height: fit-content;
+    flex-direction: column;
+    /* box-shadow: rgba(135, 176, 242, 0.512) 10px 15px 20px, rgba(135, 176, 242, 0.512) -10px 10px 10px;
+  */
+    text-align: center;
+    box-shadow: 0px 5px 10px 5px rgba(27, 86, 126, 0.22);
+    border-radius: 10px;
+}
+
+.card_PlanActual{
+    border: 2px solid #0061DF;
     width: 25vh;
     border-radius: 2vh;
     /* height: 20vh; */
@@ -118,5 +111,6 @@
     }
     .divMobile{
         display: flex;
+        flex-direction: column;
     }
 }

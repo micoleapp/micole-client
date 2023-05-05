@@ -6,6 +6,7 @@ import Payment from "../FormPayment/Payment";
 import FormLogin from "../FormLogin/FormLogin";
 import { useSelector } from "react-redux";
 import { Box, Modal } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const styles = {
   position: "absolute",
@@ -18,15 +19,15 @@ const styles = {
   boxShadow: 24,
   borderRadius: "8px",
   p: 1,
-  maxHeight:'90vh',
-  overflowY:'scroll',
-  gap: '2vh',
-  
+  maxHeight: "90vh",
+  overflowY: "scroll",
+  gap: "2vh",
 };
 export default function ModalInscripcion({
   handleClose,
   handleClosePayment,
   OpenPaymentPLan,
+  Miplan,
 }) {
   const { isAuth, success } = useSelector((state) => state.auth);
   console.log(OpenPaymentPLan.price);
@@ -44,7 +45,6 @@ export default function ModalInscripcion({
   };
 
   return (
-
     <Modal
       keepMounted
       open={open}
@@ -67,19 +67,25 @@ export default function ModalInscripcion({
               plan={OpenPaymentPLan?.plan}
               price={OpenPaymentPLan?.price}
               handleClose={toggleClose}
+              Miplan={Miplan}
             />
           )}
+          <div className="flex items-center justify-center">
+            <p className="text-sm text-[1.5vh] text-center">
+              Al adquirir nuestros planes estás aceptando los{" "}
+              <Link className="text-[#0061dd] hover:underline">
+                Términos y Condiciones de Uso y la Política de Privacidad
+              </Link>
+            </p>
+          </div>
         </div>
-        <div>{OpenLogin === true && isAuth === false && <FormLogin setOpenLogin={setOpenLogin} OpenLogin={OpenLogin} />}</div>
+        <div>
+          {OpenLogin === true && isAuth === false && (
+            <FormLogin setOpenLogin={setOpenLogin} OpenLogin={OpenLogin} />
+          )}
+        </div>
         {/* </div> */}
       </Box>
-
     </Modal>
-
-
-
-
-
-
   );
 }
