@@ -41,20 +41,6 @@ export default function SecCitas({ sendDateHs }) {
     console.log(card);
     setSelectedCard([card]);
   };
-
-  const [toggleButton, setToggleButton] = useState(true);
-
-  const nextButton = () => {
-    console.log("next");
-    setToggleButton(true);
-  };
-
-  const prevButton = () => {
-    console.log("prev");
-    setToggleButton(false);
-  };
-  const swiper = useSwiper();
-  console.log(toggleButton);
   return (
     <>
       <div className={style.divResponsiveDesktop}>
@@ -66,13 +52,7 @@ export default function SecCitas({ sendDateHs }) {
             slidesPerView={7}
             grabCursor={true}
             rewind={true}
-            // navigation={{
-            //   prevEl:toggleButton  ?  `${style.prev}` :  `${style.prev_colored}` ,
-            //   nextEl:toggleButton  ? `${style.next}` :  `${style.next_colored}`
-            // }}
-            // navigation={true}
             parallax={true}
-       
             pagination={{ clickable: true }}
             className={style.swiper}
           >
