@@ -909,7 +909,7 @@ function DashboardSchool() {
     getHorarios();
   }, [horariosColegio.length])
 
-  var neo = []
+  
 
   let getHorarios = () =>{
     const diasGuardados = [];
