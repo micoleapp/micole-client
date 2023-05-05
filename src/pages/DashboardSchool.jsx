@@ -45,6 +45,7 @@ import {
   getVacantes,
   postHorariosVacantes,
   getCitaAgendadas,
+  getHorariosSchool
 } from "../redux/SchoolsActions";
 import { CiUser, CiClock1 } from "react-icons/ci";
 import { BsWindowDock } from "react-icons/bs";
@@ -894,22 +895,123 @@ function DashboardSchool() {
 
   const [vacantes, setVacantes] = useState(0);
 
-  const initialDaysWithTime = [
-    {
-      horario: [
-        dayjs("2014-08-18T09:00:00"),
-        dayjs("2014-08-18T10:00:00"),
-        false,
-      ],
-    },
-  ];
 
-  const initialStringDays = [
-    {
-      desde: "09:00",
-      hasta: "10:00",
-    },
-  ];
+
+
+  const stringToDate = (string) => {
+    let horario = "2014-08-18 ".concat(string).concat(":00")
+    return horario} 
+ 
+    const { horariosColegio } = useSelector((state) => state.schools);
+  
+  useEffect(() => {
+    dispatch(getHorariosSchool(user.id))
+    getHorarios();
+  }, [horariosColegio.length])
+
+  
+
+  let getHorarios = () =>{
+    const diasGuardados = [];
+     horariosColegio.map((dia) => {
+      diasGuardados.push({dia:dia.dia, horarios: dia.horarios })
+       })
+     const Lunesfilter = diasGuardados.filter((d)=>  d.dia == "Lunes")  
+     const lun =[];
+    Lunesfilter.map((c)=> lun.push(c.horarios))
+     if (lun.length > 0) {setLunesString(lun[0]);
+       const lundate =  lun[0].map((l) =>  (
+      {
+        horario: [
+         dayjs(stringToDate(l.desde)),
+          dayjs(stringToDate(l.hasta)),
+          false,
+        ],
+      }),
+     
+    )
+    if (lundate.length > 0) {
+    setLunes(lundate)
+   };}
+  
+    const Martesfilter = diasGuardados.filter((d)=>  d.dia == "Martes")  
+    const mar =[];
+    Martesfilter.map((c)=> mar.push(c.horarios))    
+    if (mar.length > 0) {setMartesString(mar[0]);
+        const mardate =  mar[0].map((l) =>  (
+        {
+          horario: [
+           dayjs(stringToDate(l.desde)),
+            dayjs(stringToDate(l.hasta)),
+            false,
+          ],
+        }),
+       
+      )
+     if (mardate.length > 0) {
+      setMartes(mardate)
+     };}
+    
+    const Miercolesfilter = diasGuardados.filter((d)=>  d.dia == "Miercoles")  
+    const mie =[];
+    Miercolesfilter.map((c)=> mie.push(c.horarios))
+    if (mie.length > 0) {setMiercolesString(mie[0]);
+       const miedate =  mie[0].map((l) =>  (
+        {
+          horario: [
+           dayjs(stringToDate(l.desde)),
+            dayjs(stringToDate(l.hasta)),
+            false,
+          ],
+        }),
+       
+      )
+     if (miedate.length > 0) {
+      setMiercoles(miedate)
+     };}
+    
+    const Juevesfilter = diasGuardados.filter((d)=>  d.dia == "Jueves")  
+    const jue =[];
+    Juevesfilter.map((c)=> jue.push(c.horarios))
+    if (jue.length > 0) {setJuevesString(jue[0]);
+        const juedate =  jue[0].map((l) =>  (
+        {
+          horario: [
+           dayjs(stringToDate(l.desde)),
+            dayjs(stringToDate(l.hasta)),
+            false,
+          ],
+        }),
+       
+      )
+     if (juedate.length > 0) {
+      setJueves(juedate)
+     };}
+    
+
+    const Viernesfilter = diasGuardados.filter((d)=>  d.dia == "Viernes")  
+    const vie =[];
+    Viernesfilter.map((c)=> vie.push(c.horarios))
+    if (vie.length > 0) {setViernesString(vie[0]);
+        const viedate =  vie[0].map((l) =>  (
+        {
+          horario: [
+           dayjs(stringToDate(l.desde)),
+            dayjs(stringToDate(l.hasta)),
+            false,
+          ],
+        }),
+       
+      )
+    if (viedate.length > 0) {
+      setViernes(viedate)
+     };} 
+    
+  }
+
+  const initialDaysWithTime = [];
+
+  const initialStringDays = [];
 
   const [Lunes, setLunes] = React.useState(initialDaysWithTime);
   const [Martes, setMartes] = React.useState(initialDaysWithTime);
@@ -992,16 +1094,16 @@ function DashboardSchool() {
     { Viernes: [...Viernes] },
   ];
 
-  const stringDays = [
-    { dia: "Lunes", horarios: [...LunesString] },
-    { dia: "Martes", horarios: [...MartesString] },
-    { dia: "Miercoles", horarios: [...MiercolesString] },
-    { dia: "Jueves", horarios: [...JuevesString] },
-    { dia: "Viernes", horarios: [...ViernesString] },
-  ];
-
+ 
   const handleSubmitCitas = (e) => {
     e.preventDefault();
+    const stringDays = [
+      { dia: "Lunes", horarios: [...LunesString] },
+      { dia: "Martes", horarios: [...MartesString] },
+      { dia: "Miercoles", horarios: [...MiercolesString] },
+      { dia: "Jueves", horarios: [...JuevesString] },
+      { dia: "Viernes", horarios: [...ViernesString] },
+    ];
     const diasActivos = stringDays.filter((ele) => ele.horarios.length > 0);
 
     dispatch(postHorariosVacantes(diasActivos,user.id));
@@ -3202,7 +3304,7 @@ function DashboardSchool() {
                                     ...LunesString.slice(index + 1),
                                   ]);
                                 }}
-                                minutesStep={60}
+                                minutesStep={5}
                                 minTime={dayjs("2014-08-18T08:00:00")}
                                 maxTime={hora.horario[1]}
                               />
@@ -3248,7 +3350,7 @@ function DashboardSchool() {
                                   <TextField {...params} />
                                 )}
                                 ampm={false}
-                                minutesStep={60}
+                                minutesStep={5}
                                 minTime={hora.horario[0]}
                                 maxTime={dayjs("2014-08-18T17:00:00")}
                               />
@@ -3351,7 +3453,7 @@ function DashboardSchool() {
                                     ...MartesString.slice(index + 1),
                                   ]);
                                 }}
-                                minutesStep={60}
+                                minutesStep={5}
                                 minTime={dayjs("2014-08-18T08:00:00")}
                                 maxTime={hora.horario[1]}
                               />
@@ -3397,7 +3499,7 @@ function DashboardSchool() {
                                   <TextField {...params} />
                                 )}
                                 ampm={false}
-                                minutesStep={60}
+                                minutesStep={5}
                                 minTime={hora.horario[0]}
                                 maxTime={dayjs("2014-08-18T17:00:00")}
                               />
@@ -3505,7 +3607,7 @@ function DashboardSchool() {
                                     ...MiercolesString.slice(index + 1),
                                   ]);
                                 }}
-                                minutesStep={60}
+                                minutesStep={5}
                                 minTime={dayjs("2014-08-18T08:00:00")}
                                 maxTime={hora.horario[1]}
                               />
@@ -3551,7 +3653,7 @@ function DashboardSchool() {
                                   <TextField {...params} />
                                 )}
                                 ampm={false}
-                                minutesStep={60}
+                                minutesStep={5}
                                 minTime={hora.horario[0]}
                                 maxTime={dayjs("2014-08-18T17:00:00")}
                               />
@@ -3660,7 +3762,7 @@ function DashboardSchool() {
                                     ...JuevesString.slice(index + 1),
                                   ]);
                                 }}
-                                minutesStep={60}
+                                minutesStep={5}
                                 minTime={dayjs("2014-08-18T08:00:00")}
                                 maxTime={hora.horario[1]}
                               />
@@ -3706,7 +3808,7 @@ function DashboardSchool() {
                                   <TextField {...params} />
                                 )}
                                 ampm={false}
-                                minutesStep={60}
+                                minutesStep={5}
                                 minTime={hora.horario[0]}
                                 maxTime={dayjs("2014-08-18T17:00:00")}
                               />
@@ -3814,7 +3916,7 @@ function DashboardSchool() {
                                     ...ViernesString.slice(index + 1),
                                   ]);
                                 }}
-                                minutesStep={60}
+                                minutesStep={5}
                                 minTime={dayjs("2014-08-18T08:00:00")}
                                 maxTime={hora.horario[1]}
                               />
@@ -3860,7 +3962,7 @@ function DashboardSchool() {
                                   <TextField {...params} />
                                 )}
                                 ampm={false}
-                                minutesStep={60}
+                                minutesStep={5}
                                 minTime={hora.horario[0]}
                                 maxTime={dayjs("2014-08-18T17:00:00")}
                               />

@@ -21,7 +21,7 @@ export const schoolsSlice = createSlice({
     grados: [],
     metodos: [],
     dificultades: [],
-    horariosColegio: null,
+    horariosColegio: [],
     vacantesGrados: [],
     citasAgendadas: [],
     error: "",
