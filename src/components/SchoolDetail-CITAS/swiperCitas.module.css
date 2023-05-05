@@ -168,6 +168,21 @@ flexDirection: "column", */
 .divResponsiveMobile {
     display: none;
 }
+.prev{
+    border: blue;
+}
+.next{
+    border: blue;
+}
+.prev_colored{
+    border: rgb(220, 30, 30);
+    background-color:rgb(17, 245, 120) ;
+}
+.next_colored{
+    border: rgb(248, 16, 16);
+    background-color:rgb(220, 30, 30) ;
+}
+
 
 @media (max-width: 700px) {
     .divDropHorarios {

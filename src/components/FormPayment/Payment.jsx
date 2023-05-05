@@ -22,7 +22,7 @@ import {
 import axios from "axios";
 import Swal from "sweetalert2";
 import InfoPlanesPago from "./utils/InfonPlanesPago";
-function Payment({ plan: Plan ,  handleClose }) {
+function Payment({ plan: Plan ,  handleClose, Miplan }) {
   const { user } = useSelector((state) => state.auth);
 
   const [plan, setPlan] = useState("gratis");
@@ -157,7 +157,7 @@ function Payment({ plan: Plan ,  handleClose }) {
       console.log(error);
     }
   };
-
+ 
   const handleYape = (e) => {
     e.preventDefault();
     handleClose()
@@ -323,7 +323,7 @@ function Payment({ plan: Plan ,  handleClose }) {
             </h1>
           )}
           {plan === "gratis" && (
-            <InfoPlanes handleChangePlan={handleChangePlan} />
+            <InfoPlanes Miplan={Miplan} handleChangePlan={handleChangePlan} />
           )}
           {plan != "gratis" && <InfoPlanesPago plan={plan} />}
           <div className="mt-7 flex flex-col gap-5">
@@ -351,7 +351,7 @@ function Payment({ plan: Plan ,  handleClose }) {
                 </Select>
               </FormControl>
             )}
-            {plan !== "gratis" && (
+            {plan !== "gratis" && Miplan === false&& (
               <FormControl
                 variant="standard"
                 style={{ width: "200px", height: "70px" }}

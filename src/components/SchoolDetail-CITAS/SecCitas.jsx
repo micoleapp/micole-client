@@ -13,10 +13,12 @@ import {
   A11y,
 } from "swiper";
 
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import "swiper/css";
+
 import generarCalendario from "./GenCalendario";
 // Componentes del look and feel de citas
 import CardsDia from "./components/CardsDia/CardsDia";
@@ -40,7 +42,7 @@ export default function SecCitas({ sendDateHs }) {
     setSelectedCard([card]);
   };
 
-  const [toggleButton, setToggleButton] = useState(false);
+  const [toggleButton, setToggleButton] = useState(true);
 
   const nextButton = () => {
     console.log("next");
@@ -51,32 +53,30 @@ export default function SecCitas({ sendDateHs }) {
     console.log("prev");
     setToggleButton(false);
   };
-
+  const swiper = useSwiper();
   console.log(toggleButton);
   return (
     <>
       <div className={style.divResponsiveDesktop}>
-        {/* <Button onClick={prevButton}>
-          <KeyboardArrowLeftIcon />
-        </Button>
-        <Button onClick={nextButton}>
-          <ChevronRightIcon />
-        </Button> */}
+
         <div className={style.slider_container}>
           <Swiper
-            modules={[Navigation, Pagination, Scrollbar, A11y]}
+            modules={[Pagination, Navigation, A11y ,  Parallax]}
             spaceBetween={0}
             slidesPerView={7}
             grabCursor={true}
             rewind={true}
+            // navigation={{
+            //   prevEl:toggleButton  ?  `${style.prev}` :  `${style.prev_colored}` ,
+            //   nextEl:toggleButton  ? `${style.next}` :  `${style.next_colored}`
+            // }}
             // navigation={true}
-            navigation={{
-              prevEl: toggleButton ? "prev" : "next",
-              nextEl: toggleButton ? "next" : "prev",
-            }}
+            parallax={true}
+       
             pagination={{ clickable: true }}
             className={style.swiper}
           >
+              
             {arrLimpio?.map((d) => {
               return (
                 <>
@@ -170,7 +170,6 @@ export default function SecCitas({ sendDateHs }) {
             })}
           </Swiper>
           <div className={style.divDropHorarios}>
-            {/* <p className={style.pSig}>Horarios </p> */}
             <HorariosColegio
               diaSelecionado={selectedCard}
               sendDateHs={sendDateHs}
@@ -182,7 +181,7 @@ export default function SecCitas({ sendDateHs }) {
       <div className={style.divResponsiveMobile}>
         <div className={style.slider_container}>
           <Swiper
-            modules={[Navigation, Pagination, Scrollbar, A11y]}
+            modules={[Navigation, Pagination, A11y]}
             spaceBetween={0}
             slidesPerView={3}
             grabCursor={true}
@@ -284,12 +283,11 @@ export default function SecCitas({ sendDateHs }) {
           </Swiper>
           <div className={style.divDropHorarios}>
             {/* <p className={style.pSig}>Horarios </p> */}
-           
-              <HorariosColegio
-                diaSelecionado={selectedCard}
-                sendDateHs={sendDateHs}
-              />
-       
+
+            <HorariosColegio
+              diaSelecionado={selectedCard}
+              sendDateHs={sendDateHs}
+            />
           </div>
         </div>
       </div>
