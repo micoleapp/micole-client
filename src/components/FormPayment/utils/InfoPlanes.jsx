@@ -96,12 +96,12 @@ export default function infoPlanes({ handleChangePlan, Miplan }) {
                     <div className="w-full flex items-center flex-col justify-center">
                       <div
                         className={
-                          p.id === oneSchool.PlanPagoId
+                          p.id === oneSchool?.PlanPagoId
                             ? style.card_PlanActual
                             : style.cardDia
                         }
                       >
-                        {p.id === oneSchool.PlanPagoId && (
+                        {p.id === oneSchool?.PlanPagoId && (
                           <div className="bg-[#0061DF] w-[10vh] rounded">
                             <p className="text-[#FFFF] m-0  font-semibold text-[1.5vh]">
                               Plan Actual

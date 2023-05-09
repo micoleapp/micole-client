@@ -70,14 +70,16 @@ export default function ModalInscripcion({
               Miplan={Miplan}
             />
           )}
-          <div className="flex items-center justify-center">
-            <p className="text-sm text-[1.5vh] text-center">
-              Al adquirir nuestros planes estás aceptando los{" "}
-              <Link className="text-[#0061dd] hover:underline">
-                Términos y Condiciones de Uso y la Política de Privacidad
-              </Link>
-            </p>
-          </div>
+          {OpenLogin === false && (
+            <div className="flex items-center justify-center">
+              <p className="text-sm text-[1.5vh] text-center">
+                Al adquirir nuestros planes estás aceptando los{" "}
+                <Link className="text-[#0061dd] hover:underline">
+                  Términos y Condiciones de Uso y la Política de Privacidad
+                </Link>
+              </p>
+            </div>
+          )}
         </div>
         <div>
           {OpenLogin === true && isAuth === false && (
