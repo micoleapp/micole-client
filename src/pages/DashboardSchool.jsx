@@ -321,6 +321,7 @@ function DashboardSchool() {
         .put(`/colegios/${user.id}`, datosPrincipales)
         .then((res) => {
           console.log(res);
+          dispatch(getInfraestructuraSchool(user.id));
         })
         .catch((err) => {
           console.log(err);
@@ -339,6 +340,7 @@ function DashboardSchool() {
       axios
         .put(`/colegios/${user.id}`, datosPrincipales)
         .then((res) => {
+          dispatch(getAfiliacionSchool(user.id))
           console.log(res);
         })
         .catch((err) => {
@@ -479,13 +481,10 @@ function DashboardSchool() {
   const [datosPrincipales, setDatosPrincipales] = useState(
     initialDatosPrincipales
   );
-  console.log(initialDatosPrincipales);
-  console.log(datosPrincipales);
-  console.log(oneAfiliacion);
-  console.log(oneInfra);
+
   useEffect(() => {
     setDatosPrincipales(initialDatosPrincipales);
-  }, [oneInfra, oneAfiliacion]);
+  }, [oneInfra, oneAfiliacion,oneSchool]);
   const datosPrincipalesCompleted = () => {
     if (
       datosPrincipales.nombreColegio !== "" &&
