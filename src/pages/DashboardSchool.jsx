@@ -82,13 +82,15 @@ import Cards from "../components/CardsDrgAndDrp/Cards";
 import CardCitas from "../components/CardsCitas/CardCitas";
 import SelectCitasAg from "../components/CardsCitas/SelectCitasAgendadas/SelectCitasAg";
 import { getCita } from "../redux/CitasActions";
-import Miplan from "../components/Miplan/Miplan";
+import Miplan from "./DashboardSchool/Miplan/Miplan";
 import Modal from "@mui/material/Modal";
-import ListadeEspera from "./ListaEspera/ListadeEspera";
+
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import deleteIcon from "../assets/deleteIcon.png";
 import editIcon from "../assets/editIcon.png";
 import addIcon from "../assets/addIcon.png";
+import UbiPreferente from "./DashboardSchool/UbicacionPreferente/UbiPreferente";
+import ListadeEspera from "./DashboardSchool/ListaEspera/ListadeEspera";
 
 
 const styleModal = {
@@ -1481,6 +1483,31 @@ function DashboardSchool() {
               Mi plan
             </span>
           </button>
+
+          <button
+            className={`flex items-center duration-300 focus:bg-[#0061dd] focus:text-white cursor-pointer gap-2 group p-3 rounded-md hover:bg-[#0060dd97] hover:text-white ${
+              page == 8 ? "bg-[#0061dd] text-white" : null
+            } `}
+            onClick={() => {
+              setOpen();
+              setPage(8);
+            }}
+          >
+            <StarBorderIcon
+              className={`text-xl text-[#0061dd] group-focus:text-white group-hover:text-white ${
+                page == 8 ? "text-white" : null
+              }`}
+            />
+            <span
+              className={`text-sm text-black/80 group-focus:text-white group-hover:text-white ${
+                page == 8 ? "text-white" : null
+              }`}
+            >
+              Ubicación Preferente
+            </span>
+          </button>
+
+
 
           <button
             className={`flex items-center duration-300 focus:bg-[#0061dd] focus:text-white cursor-pointer gap-2 group p-3 rounded-md hover:bg-[#0060dd97] hover:text-white ${
@@ -3996,7 +4023,7 @@ function DashboardSchool() {
           </div>
         ) : page === 2 ? (
           <div className="min-h-screen">
-            <Miplan />
+             <Miplan UbiPreferente={false}/>
           </div>
         ) : page === 3 ? (
           <div className="flex flex-col gap-5 min-h-screen px-24">
@@ -4585,7 +4612,11 @@ function DashboardSchool() {
           <div className=" min-h-screen">
             <ListadeEspera />
           </div>
-        ) : null}
+        ) :  page === 8 ? (
+          <div className=" min-h-screen">
+            <UbiPreferente />
+          </div>
+        ):null}
       </section>
     </div>
   );
