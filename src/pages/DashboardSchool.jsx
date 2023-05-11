@@ -382,17 +382,116 @@ function DashboardSchool() {
 
   let libRef = React.useRef(libraries);
 
+ 
+
+  const initialDatosPrincipales = {
+    nombreColegio: oneSchool?.nombre_colegio ? oneSchool.nombre_colegio : "",
+    descripcion: oneSchool?.descripcion ? oneSchool.descripcion : "",
+    propuesta: oneSchool?.propuesta_valor ? oneSchool.propuesta_valor : "",
+    categoria: oneSchool?.Categoria ? oneSchool.Categoria : "",
+    nombreDirector: oneSchool?.nombre_director ? oneSchool.nombre_director : "",
+    fundacion: oneSchool?.fecha_fundacion
+      ? Number(oneSchool?.fecha_fundacion)
+      : null,
+    ruc: oneSchool?.ruc ? Number(oneSchool.ruc) : null,
+    ugel: oneSchool?.ugel ? Number(oneSchool.ugel) : null,
+    area: oneSchool?.area ? Number(oneSchool.area) : null,
+    ingles: oneSchool?.horas_idioma_extranjero
+      ? Number(oneSchool.horas_idioma_extranjero)
+      : null,
+    alumnos: oneSchool?.numero_estudiantes
+      ? Number(oneSchool.numero_estudiantes)
+      : null,
+    niveles: oneSchool?.Nivels?.length > 0 ? oneSchool.Nivels : [],
+    departamento: oneSchool?.Departamento ? oneSchool.Departamento : {},
+    provincia: oneSchool?.Provincium ? oneSchool.Provincium : {},
+    distrito: oneSchool?.Distrito ? oneSchool.Distrito : {},
+    direccion: oneSchool?.direccion ? oneSchool.direccion : "",
+    lat:
+      oneSchool?.ubicacion?.length > 0
+        ? JSON.parse(oneSchool.ubicacion).lat
+        : 0,
+    lng:
+      oneSchool?.ubicacion?.length > 0
+        ? JSON.parse(oneSchool.ubicacion).lng
+        : 0,
+    infraestructura: oneInfra?.Infraestructuras
+      ? oneInfra.Infraestructuras
+      : [],
+    afiliaciones: oneAfiliacion?.Afiliacions ? oneAfiliacion.Afiliacions : [],
+    dificultades: oneSchool?.Dificultades ? oneSchool.Dificultades : [],
+    metodos: oneSchool?.Metodos ? oneSchool.Metodos : [],
+  };
+
+  const [datosPrincipales, setDatosPrincipales] = useState(
+    initialDatosPrincipales
+  );
+
+console.log(datosPrincipales)
+
+  useEffect(() => {
+    setDatosPrincipales(initialDatosPrincipales);
+  }, [oneInfra, oneAfiliacion,oneSchool]);
+  const datosPrincipalesCompleted = () => {
+    if (
+      datosPrincipales.nombreColegio !== "" &&
+      datosPrincipales.descripcion !== "" &&
+      datosPrincipales.propuesta !== "" &&
+      datosPrincipales.categoria.length !== 0 &&
+      datosPrincipales.nombreDirector !== "" &&
+      datosPrincipales.fundacion !== null &&
+      datosPrincipales.ruc !== null &&
+      datosPrincipales.ugel !== null &&
+      datosPrincipales.area !== null &&
+      datosPrincipales.ingles !== null &&
+      datosPrincipales.alumnos !== null &&
+      datosPrincipales.niveles.length !== 0 &&
+      Object.keys(datosPrincipales.departamento).length !== 0 &&
+      Object.keys(datosPrincipales.provincia).length !== 0 &&
+      Object.keys(datosPrincipales.distrito).length !== 0 &&
+      datosPrincipales.direccion !== "" &&
+      datosPrincipales.lat !== 0 &&
+      datosPrincipales.lng !== 0
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyB9qHB47v8fOmLUiByTvWinUehYqALI6q4",
     libraries: libRef.current,
   });
 
-  const [center, setCenter] = React.useState({
-    lat: -12.046374,
-    lng: -77.042793,
-  });
+ 
+   
 
+ console.log(datosPrincipales.lat)
+
+ 
+ 
+ const initialCenter = {
+  lat:  datosPrincipales.lat,
+  lng:   datosPrincipales.lng
+  }
+  console.log(datosPrincipales.lat)
+  
+  const [center, setCenter] = React.useState(initialCenter
+    
+  );
+
+ useEffect(() => {
+  setCenter(initialCenter)
+ }, [datosPrincipales])
+  
+
+
+
+
+ 
+console.log(center)
   const [map, setMap] = React.useState(null);
   const onLoad = React.useCallback(function callback(map) {
     // This is just an example of getting and using the map instance!!! don't just blindly copy!
@@ -439,78 +538,7 @@ function DashboardSchool() {
     }
   };
 
-  const initialDatosPrincipales = {
-    nombreColegio: oneSchool?.nombre_colegio ? oneSchool.nombre_colegio : "",
-    descripcion: oneSchool?.descripcion ? oneSchool.descripcion : "",
-    propuesta: oneSchool?.propuesta_valor ? oneSchool.propuesta_valor : "",
-    categoria: oneSchool?.Categoria ? oneSchool.Categoria : "",
-    nombreDirector: oneSchool?.nombre_director ? oneSchool.nombre_director : "",
-    fundacion: oneSchool?.fecha_fundacion
-      ? Number(oneSchool?.fecha_fundacion)
-      : null,
-    ruc: oneSchool?.ruc ? Number(oneSchool.ruc) : null,
-    ugel: oneSchool?.ugel ? Number(oneSchool.ugel) : null,
-    area: oneSchool?.area ? Number(oneSchool.area) : null,
-    ingles: oneSchool?.horas_idioma_extranjero
-      ? Number(oneSchool.horas_idioma_extranjero)
-      : null,
-    alumnos: oneSchool?.numero_estudiantes
-      ? Number(oneSchool.numero_estudiantes)
-      : null,
-    niveles: oneSchool?.Nivels?.length > 0 ? oneSchool.Nivels : [],
-    departamento: oneSchool?.Departamento ? oneSchool.Departamento : {},
-    provincia: oneSchool?.Provincium ? oneSchool.Provincium : {},
-    distrito: oneSchool?.Distrito ? oneSchool.Distrito : {},
-    direccion: oneSchool?.direccion ? oneSchool.direccion : "",
-    lat:
-      oneSchool?.ubicacion?.length > 0
-        ? JSON.parse(oneSchool.ubicacion).lat
-        : 0,
-    lng:
-      oneSchool?.ubicacion?.length > 0
-        ? JSON.parse(oneSchool.ubicacion).lng
-        : 0,
-    infraestructura: oneInfra?.Infraestructuras
-      ? oneInfra.Infraestructuras
-      : [],
-    afiliaciones: oneAfiliacion?.Afiliacions ? oneAfiliacion.Afiliacions : [],
-    dificultades: oneSchool?.Dificultades ? oneSchool.Dificultades : [],
-    metodos: oneSchool?.Metodos ? oneSchool.Metodos : [],
-  };
 
-  const [datosPrincipales, setDatosPrincipales] = useState(
-    initialDatosPrincipales
-  );
-
-  useEffect(() => {
-    setDatosPrincipales(initialDatosPrincipales);
-  }, [oneInfra, oneAfiliacion,oneSchool]);
-  const datosPrincipalesCompleted = () => {
-    if (
-      datosPrincipales.nombreColegio !== "" &&
-      datosPrincipales.descripcion !== "" &&
-      datosPrincipales.propuesta !== "" &&
-      datosPrincipales.categoria.length !== 0 &&
-      datosPrincipales.nombreDirector !== "" &&
-      datosPrincipales.fundacion !== null &&
-      datosPrincipales.ruc !== null &&
-      datosPrincipales.ugel !== null &&
-      datosPrincipales.area !== null &&
-      datosPrincipales.ingles !== null &&
-      datosPrincipales.alumnos !== null &&
-      datosPrincipales.niveles.length !== 0 &&
-      Object.keys(datosPrincipales.departamento).length !== 0 &&
-      Object.keys(datosPrincipales.provincia).length !== 0 &&
-      Object.keys(datosPrincipales.distrito).length !== 0 &&
-      datosPrincipales.direccion !== "" &&
-      datosPrincipales.lat !== 0 &&
-      datosPrincipales.lng !== 0
-    ) {
-      return false;
-    } else {
-      return true;
-    }
-  };
 
   const infraestructuraCompleted = () => {
     if (datosPrincipales.infraestructura.length !== 0) {
@@ -1330,6 +1358,7 @@ function DashboardSchool() {
 
   console.log(activeUpTwo)
   console.log(activeUpOne)
+  console.log(datosPrincipales.direccion)
 
   return (
     <div className="flex lg:flex-row flex-col">
