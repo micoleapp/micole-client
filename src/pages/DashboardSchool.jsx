@@ -931,12 +931,18 @@ console.log(center)
  
     const { horariosColegio } = useSelector((state) => state.schools);
   
-  useEffect(() => {
+    useEffect(() => {
+      dispatch(getHorariosSchool(user.id))
+      getHorarios();
+    }, [])
+ 
+ 
+    useEffect(() => {
     dispatch(getHorariosSchool(user.id))
     getHorarios();
-  }, [horariosColegio.length])
+  }, [horariosColegio.length ])
 
-  
+  console.log(horariosColegio)
 
   let getHorarios = () =>{
     const diasGuardados = [];
@@ -1121,7 +1127,10 @@ console.log(center)
     { Viernes: [...Viernes] },
   ];
 
- 
+  let disabledSubmitCitas = false
+   
+  
+  
   const handleSubmitCitas = (e) => {
     e.preventDefault();
     const stringDays = [
@@ -1145,7 +1154,9 @@ console.log(center)
             text: "Colegio listo para mostrarse en nuestra página!",
           });
           dispatch(getSchoolDetail(user.id)); 
-        })
+         
+        }
+        )
         .catch((err) => {
           console.log(err);
         });
@@ -3255,7 +3266,7 @@ console.log(center)
                       Lunes.map((hora, index) => (
                         <>
                           {" "}
-                          <small className="font-semibold">
+                          <small className= "font-semibold">
                             {[
                               stringyDate(hora.horario[0]["$H"]).toString(),
                               stringyDate(hora.horario[0]["$m"]).toString(),
@@ -3288,9 +3299,11 @@ console.log(center)
                               <img src={deleteIcon} alt="delete"></img>
                             </button>
                           </small>
+                          { hora.horario[0] >= hora.horario[1]? <span className="text-red-600 text-sm -mt-3 ">Horario Incorrecto</span>:null}
+                          { hora.horario[0] >= hora.horario[1]? disabledSubmitCitas = true :disabledSubmitCitas = disabledSubmitCitas}
                           {Lunes[index].horario[2] === true ? (
-                            <div className="flex gap-2">
-                              <MobileTimePicker
+                            <div className="flex-col gap-2">
+                             <div className="flex gap-2" > <MobileTimePicker
                                 label="Desde"
                                 disabled={!hora.horario[2]}
                                 className="w-[70px] bg-white"
@@ -3334,7 +3347,7 @@ console.log(center)
                                 }}
                                 minutesStep={5}
                                 minTime={dayjs("2014-08-18T08:00:00")}
-                                maxTime={hora.horario[1]}
+                                maxTime={dayjs("2014-08-18T16:45:00")}
                               />
                               <MobileTimePicker
                                 label="Hasta"
@@ -3381,11 +3394,15 @@ console.log(center)
                                 minutesStep={5}
                                 minTime={hora.horario[0]}
                                 maxTime={dayjs("2014-08-18T17:00:00")}
-                              />
+                              /></div>
+                             
+                              
                             </div>
+                            
                           ) : null}
                         </>
                       ))}
+                      
                     <button
                       className="flex "
                       onClick={() =>
@@ -3437,6 +3454,8 @@ console.log(center)
                               <img src={deleteIcon} alt="delete"></img>
                             </button>
                           </small>
+                          { hora.horario[0] >= hora.horario[1]? <span className="text-red-600 text-sm -mt-3 ">Horario Incorrecto</span>:null}
+                          { hora.horario[0] >= hora.horario[1]? disabledSubmitCitas = true :disabledSubmitCitas = disabledSubmitCitas}
                           {Martes[index].horario[2] === true ? (
                             <div className="flex gap-2">
                               <MobileTimePicker
@@ -3483,7 +3502,7 @@ console.log(center)
                                 }}
                                 minutesStep={5}
                                 minTime={dayjs("2014-08-18T08:00:00")}
-                                maxTime={hora.horario[1]}
+                                maxTime={dayjs("2014-08-18T16:45:00")}
                               />
                               <MobileTimePicker
                                 label="Hasta"
@@ -3591,6 +3610,8 @@ console.log(center)
                               <img src={deleteIcon} alt="delete"></img>
                             </button>
                           </small>
+                          { hora.horario[0] >= hora.horario[1]? <span className="text-red-600 text-sm -mt-3 ">Horario Incorrecto</span>:null}
+                          { hora.horario[0] >= hora.horario[1]? disabledSubmitCitas = true :disabledSubmitCitas = disabledSubmitCitas}
                           {Miercoles[index].horario[2] === true ? (
                             <div className="flex gap-2">
                               <MobileTimePicker
@@ -3637,7 +3658,7 @@ console.log(center)
                                 }}
                                 minutesStep={5}
                                 minTime={dayjs("2014-08-18T08:00:00")}
-                                maxTime={hora.horario[1]}
+                                maxTime={dayjs("2014-08-18T16:45:00")}
                               />
                               <MobileTimePicker
                                 label="Hasta"
@@ -3746,6 +3767,8 @@ console.log(center)
                               <img src={deleteIcon} alt="delete"></img>
                             </button>
                           </small>
+                          { hora.horario[0] >= hora.horario[1]? <span className="text-red-600 text-sm -mt-3 ">Horario Incorrecto</span>:null}
+                          { hora.horario[0] >= hora.horario[1]? disabledSubmitCitas = true :disabledSubmitCitas = disabledSubmitCitas}
                           {Jueves[index].horario[2] === true ? (
                             <div className="flex gap-2">
                               <MobileTimePicker
@@ -3792,7 +3815,7 @@ console.log(center)
                                 }}
                                 minutesStep={5}
                                 minTime={dayjs("2014-08-18T08:00:00")}
-                                maxTime={hora.horario[1]}
+                                maxTime={dayjs("2014-08-18T16:45:00")}
                               />
                               <MobileTimePicker
                                 label="Hasta"
@@ -3900,6 +3923,8 @@ console.log(center)
                               <img src={deleteIcon} alt="delete"></img>
                             </button>
                           </small>
+                          { hora.horario[0] >= hora.horario[1]? <span className="text-red-600 text-sm -mt-3 ">Horario Incorrecto</span>:null}
+                          { hora.horario[0] >= hora.horario[1]? disabledSubmitCitas = true :disabledSubmitCitas = disabledSubmitCitas}
                           {Viernes[index].horario[2] === true ? (
                             <div className="flex gap-2">
                               <MobileTimePicker
@@ -3946,7 +3971,7 @@ console.log(center)
                                 }}
                                 minutesStep={5}
                                 minTime={dayjs("2014-08-18T08:00:00")}
-                                maxTime={hora.horario[1]}
+                                maxTime={dayjs("2014-08-18T16:45:00")}
                               />
                               <MobileTimePicker
                                 label="Hasta"
@@ -4017,8 +4042,10 @@ console.log(center)
               </div>
             </LocalizationProvider>
             <button
+               disabled= {disabledSubmitCitas}
               onClick={handleSubmitCitas}
-              className="flex mx-auto my-5 bg-[#0061dd] text-white p-2 rounded-md shadow-md"
+              className="flex mx-auto my-5 bg-[#0061dd] disabled:bg-[#0061dd]/50 text-white p-2 rounded-md shadow-md"
+              
             >
               Guardar Cambios
             </button>
