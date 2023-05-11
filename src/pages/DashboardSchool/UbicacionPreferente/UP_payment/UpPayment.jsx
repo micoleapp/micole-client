@@ -96,7 +96,7 @@ export default function UpPayment({ open, handlerClose }) {
               <div className={style.responsiveBtnMobile}>
                 <div className="flex flex-col ">
                   <div className="flex flex-col text-[1.7vh] gap-4 ">
-                    <h1 className="text-[2.2vh] text-[#0061df] font-semibold pb-2 min-w-[30vh] max-w-[30vh] ">
+                    <h1 className="text-[2.2vh] text-[#0061df] font-semibold pb-2 min-w-[35vh] max-w-[35vh] ">
                       Información Detallada de Ubicación Preferente
                     </h1>
                     <p> ✔️ Tu anuncio aparece en las primeras ubicaciones</p>
