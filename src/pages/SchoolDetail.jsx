@@ -94,7 +94,7 @@ function SchoolDetail() {
         )}
         {/* BODY DETAIL----------------lg:px-[100px]-------*/}
         <div className="flex flex-col  sm:flex-row pl-1 pb-20 justify-around">
-          {/* Header // Nombre colegio // Vcante // Ugel // Pension*/}
+          {/* Header // Nombre colegio // compartir // Pension*/}
           <HeaderSD
             currentVacante={currentVacante}
             url={url}
