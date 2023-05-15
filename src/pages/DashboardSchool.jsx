@@ -382,17 +382,116 @@ function DashboardSchool() {
 
   let libRef = React.useRef(libraries);
 
+ 
+
+  const initialDatosPrincipales = {
+    nombreColegio: oneSchool?.nombre_colegio ? oneSchool.nombre_colegio : "",
+    descripcion: oneSchool?.descripcion ? oneSchool.descripcion : "",
+    propuesta: oneSchool?.propuesta_valor ? oneSchool.propuesta_valor : "",
+    categoria: oneSchool?.Categoria ? oneSchool.Categoria : "",
+    nombreDirector: oneSchool?.nombre_director ? oneSchool.nombre_director : "",
+    fundacion: oneSchool?.fecha_fundacion
+      ? Number(oneSchool?.fecha_fundacion)
+      : null,
+    ruc: oneSchool?.ruc ? Number(oneSchool.ruc) : null,
+    ugel: oneSchool?.ugel ? Number(oneSchool.ugel) : null,
+    area: oneSchool?.area ? Number(oneSchool.area) : null,
+    ingles: oneSchool?.horas_idioma_extranjero
+      ? Number(oneSchool.horas_idioma_extranjero)
+      : null,
+    alumnos: oneSchool?.numero_estudiantes
+      ? Number(oneSchool.numero_estudiantes)
+      : null,
+    niveles: oneSchool?.Nivels?.length > 0 ? oneSchool.Nivels : [],
+    departamento: oneSchool?.Departamento ? oneSchool.Departamento : {},
+    provincia: oneSchool?.Provincium ? oneSchool.Provincium : {},
+    distrito: oneSchool?.Distrito ? oneSchool.Distrito : {},
+    direccion: oneSchool?.direccion ? oneSchool.direccion : "",
+    lat:
+      oneSchool?.ubicacion?.length > 0
+        ? JSON.parse(oneSchool.ubicacion).lat
+        : 0,
+    lng:
+      oneSchool?.ubicacion?.length > 0
+        ? JSON.parse(oneSchool.ubicacion).lng
+        : 0,
+    infraestructura: oneInfra?.Infraestructuras
+      ? oneInfra.Infraestructuras
+      : [],
+    afiliaciones: oneAfiliacion?.Afiliacions ? oneAfiliacion.Afiliacions : [],
+    dificultades: oneSchool?.Dificultades ? oneSchool.Dificultades : [],
+    metodos: oneSchool?.Metodos ? oneSchool.Metodos : [],
+  };
+
+  const [datosPrincipales, setDatosPrincipales] = useState(
+    initialDatosPrincipales
+  );
+
+console.log(datosPrincipales)
+
+  useEffect(() => {
+    setDatosPrincipales(initialDatosPrincipales);
+  }, [oneInfra, oneAfiliacion,oneSchool]);
+  const datosPrincipalesCompleted = () => {
+    if (
+      datosPrincipales.nombreColegio !== "" &&
+      datosPrincipales.descripcion !== "" &&
+      datosPrincipales.propuesta !== "" &&
+      datosPrincipales.categoria.length !== 0 &&
+      datosPrincipales.nombreDirector !== "" &&
+      datosPrincipales.fundacion !== null &&
+      datosPrincipales.ruc !== null &&
+      datosPrincipales.ugel !== null &&
+      datosPrincipales.area !== null &&
+      datosPrincipales.ingles !== null &&
+      datosPrincipales.alumnos !== null &&
+      datosPrincipales.niveles.length !== 0 &&
+      Object.keys(datosPrincipales.departamento).length !== 0 &&
+      Object.keys(datosPrincipales.provincia).length !== 0 &&
+      Object.keys(datosPrincipales.distrito).length !== 0 &&
+      datosPrincipales.direccion !== "" &&
+      datosPrincipales.lat !== 0 &&
+      datosPrincipales.lng !== 0
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyB9qHB47v8fOmLUiByTvWinUehYqALI6q4",
     libraries: libRef.current,
   });
 
-  const [center, setCenter] = React.useState({
-    lat: -12.046374,
-    lng: -77.042793,
-  });
+ 
+   
 
+ console.log(datosPrincipales.lat)
+
+ 
+ 
+ const initialCenter = {
+  lat:  datosPrincipales.lat,
+  lng:   datosPrincipales.lng
+  }
+  console.log(datosPrincipales.lat)
+  
+  const [center, setCenter] = React.useState(initialCenter
+    
+  );
+
+ useEffect(() => {
+  setCenter(initialCenter)
+ }, [datosPrincipales])
+  
+
+
+
+
+ 
+console.log(center)
   const [map, setMap] = React.useState(null);
   const onLoad = React.useCallback(function callback(map) {
     // This is just an example of getting and using the map instance!!! don't just blindly copy!
@@ -439,78 +538,7 @@ function DashboardSchool() {
     }
   };
 
-  const initialDatosPrincipales = {
-    nombreColegio: oneSchool?.nombre_colegio ? oneSchool.nombre_colegio : "",
-    descripcion: oneSchool?.descripcion ? oneSchool.descripcion : "",
-    propuesta: oneSchool?.propuesta_valor ? oneSchool.propuesta_valor : "",
-    categoria: oneSchool?.Categoria ? oneSchool.Categoria : "",
-    nombreDirector: oneSchool?.nombre_director ? oneSchool.nombre_director : "",
-    fundacion: oneSchool?.fecha_fundacion
-      ? Number(oneSchool?.fecha_fundacion)
-      : null,
-    ruc: oneSchool?.ruc ? Number(oneSchool.ruc) : null,
-    ugel: oneSchool?.ugel ? Number(oneSchool.ugel) : null,
-    area: oneSchool?.area ? Number(oneSchool.area) : null,
-    ingles: oneSchool?.horas_idioma_extranjero
-      ? Number(oneSchool.horas_idioma_extranjero)
-      : null,
-    alumnos: oneSchool?.numero_estudiantes
-      ? Number(oneSchool.numero_estudiantes)
-      : null,
-    niveles: oneSchool?.Nivels?.length > 0 ? oneSchool.Nivels : [],
-    departamento: oneSchool?.Departamento ? oneSchool.Departamento : {},
-    provincia: oneSchool?.Provincium ? oneSchool.Provincium : {},
-    distrito: oneSchool?.Distrito ? oneSchool.Distrito : {},
-    direccion: oneSchool?.direccion ? oneSchool.direccion : "",
-    lat:
-      oneSchool?.ubicacion?.length > 0
-        ? JSON.parse(oneSchool.ubicacion).lat
-        : 0,
-    lng:
-      oneSchool?.ubicacion?.length > 0
-        ? JSON.parse(oneSchool.ubicacion).lng
-        : 0,
-    infraestructura: oneInfra?.Infraestructuras
-      ? oneInfra.Infraestructuras
-      : [],
-    afiliaciones: oneAfiliacion?.Afiliacions ? oneAfiliacion.Afiliacions : [],
-    dificultades: oneSchool?.Dificultades ? oneSchool.Dificultades : [],
-    metodos: oneSchool?.Metodos ? oneSchool.Metodos : [],
-  };
 
-  const [datosPrincipales, setDatosPrincipales] = useState(
-    initialDatosPrincipales
-  );
-
-  useEffect(() => {
-    setDatosPrincipales(initialDatosPrincipales);
-  }, [oneInfra, oneAfiliacion,oneSchool]);
-  const datosPrincipalesCompleted = () => {
-    if (
-      datosPrincipales.nombreColegio !== "" &&
-      datosPrincipales.descripcion !== "" &&
-      datosPrincipales.propuesta !== "" &&
-      datosPrincipales.categoria.length !== 0 &&
-      datosPrincipales.nombreDirector !== "" &&
-      datosPrincipales.fundacion !== null &&
-      datosPrincipales.ruc !== null &&
-      datosPrincipales.ugel !== null &&
-      datosPrincipales.area !== null &&
-      datosPrincipales.ingles !== null &&
-      datosPrincipales.alumnos !== null &&
-      datosPrincipales.niveles.length !== 0 &&
-      Object.keys(datosPrincipales.departamento).length !== 0 &&
-      Object.keys(datosPrincipales.provincia).length !== 0 &&
-      Object.keys(datosPrincipales.distrito).length !== 0 &&
-      datosPrincipales.direccion !== "" &&
-      datosPrincipales.lat !== 0 &&
-      datosPrincipales.lng !== 0
-    ) {
-      return false;
-    } else {
-      return true;
-    }
-  };
 
   const infraestructuraCompleted = () => {
     if (datosPrincipales.infraestructura.length !== 0) {
@@ -903,12 +931,18 @@ function DashboardSchool() {
  
     const { horariosColegio } = useSelector((state) => state.schools);
   
-  useEffect(() => {
+    useEffect(() => {
+      dispatch(getHorariosSchool(user.id))
+      getHorarios();
+    }, [])
+ 
+ 
+    useEffect(() => {
     dispatch(getHorariosSchool(user.id))
     getHorarios();
-  }, [horariosColegio.length])
+  }, [horariosColegio.length ])
 
-  
+  console.log(horariosColegio)
 
   let getHorarios = () =>{
     const diasGuardados = [];
@@ -1093,7 +1127,10 @@ function DashboardSchool() {
     { Viernes: [...Viernes] },
   ];
 
- 
+  let disabledSubmitCitas = false
+   
+  
+  
   const handleSubmitCitas = (e) => {
     e.preventDefault();
     const stringDays = [
@@ -1117,7 +1154,9 @@ function DashboardSchool() {
             text: "Colegio listo para mostrarse en nuestra página!",
           });
           dispatch(getSchoolDetail(user.id)); 
-        })
+         
+        }
+        )
         .catch((err) => {
           console.log(err);
         });
@@ -1330,6 +1369,7 @@ function DashboardSchool() {
 
   console.log(activeUpTwo)
   console.log(activeUpOne)
+  console.log(datosPrincipales.direccion)
 
   return (
     <div className="flex lg:flex-row flex-col">
@@ -3226,7 +3266,7 @@ function DashboardSchool() {
                       Lunes.map((hora, index) => (
                         <>
                           {" "}
-                          <small className="font-semibold">
+                          <small className= "font-semibold">
                             {[
                               stringyDate(hora.horario[0]["$H"]).toString(),
                               stringyDate(hora.horario[0]["$m"]).toString(),
@@ -3259,9 +3299,11 @@ function DashboardSchool() {
                               <img src={deleteIcon} alt="delete"></img>
                             </button>
                           </small>
+                          { hora.horario[0] >= hora.horario[1]? <span className="text-red-600 text-sm -mt-3 ">Horario Incorrecto</span>:null}
+                          { hora.horario[0] >= hora.horario[1]? disabledSubmitCitas = true :disabledSubmitCitas = disabledSubmitCitas}
                           {Lunes[index].horario[2] === true ? (
-                            <div className="flex gap-2">
-                              <MobileTimePicker
+                            <div className="flex-col gap-2">
+                             <div className="flex gap-2" > <MobileTimePicker
                                 label="Desde"
                                 disabled={!hora.horario[2]}
                                 className="w-[70px] bg-white"
@@ -3305,7 +3347,7 @@ function DashboardSchool() {
                                 }}
                                 minutesStep={5}
                                 minTime={dayjs("2014-08-18T08:00:00")}
-                                maxTime={hora.horario[1]}
+                                maxTime={dayjs("2014-08-18T16:45:00")}
                               />
                               <MobileTimePicker
                                 label="Hasta"
@@ -3352,11 +3394,15 @@ function DashboardSchool() {
                                 minutesStep={5}
                                 minTime={hora.horario[0]}
                                 maxTime={dayjs("2014-08-18T17:00:00")}
-                              />
+                              /></div>
+                             
+                              
                             </div>
+                            
                           ) : null}
                         </>
                       ))}
+                      
                     <button
                       className="flex "
                       onClick={() =>
@@ -3408,6 +3454,8 @@ function DashboardSchool() {
                               <img src={deleteIcon} alt="delete"></img>
                             </button>
                           </small>
+                          { hora.horario[0] >= hora.horario[1]? <span className="text-red-600 text-sm -mt-3 ">Horario Incorrecto</span>:null}
+                          { hora.horario[0] >= hora.horario[1]? disabledSubmitCitas = true :disabledSubmitCitas = disabledSubmitCitas}
                           {Martes[index].horario[2] === true ? (
                             <div className="flex gap-2">
                               <MobileTimePicker
@@ -3454,7 +3502,7 @@ function DashboardSchool() {
                                 }}
                                 minutesStep={5}
                                 minTime={dayjs("2014-08-18T08:00:00")}
-                                maxTime={hora.horario[1]}
+                                maxTime={dayjs("2014-08-18T16:45:00")}
                               />
                               <MobileTimePicker
                                 label="Hasta"
@@ -3562,6 +3610,8 @@ function DashboardSchool() {
                               <img src={deleteIcon} alt="delete"></img>
                             </button>
                           </small>
+                          { hora.horario[0] >= hora.horario[1]? <span className="text-red-600 text-sm -mt-3 ">Horario Incorrecto</span>:null}
+                          { hora.horario[0] >= hora.horario[1]? disabledSubmitCitas = true :disabledSubmitCitas = disabledSubmitCitas}
                           {Miercoles[index].horario[2] === true ? (
                             <div className="flex gap-2">
                               <MobileTimePicker
@@ -3608,7 +3658,7 @@ function DashboardSchool() {
                                 }}
                                 minutesStep={5}
                                 minTime={dayjs("2014-08-18T08:00:00")}
-                                maxTime={hora.horario[1]}
+                                maxTime={dayjs("2014-08-18T16:45:00")}
                               />
                               <MobileTimePicker
                                 label="Hasta"
@@ -3717,6 +3767,8 @@ function DashboardSchool() {
                               <img src={deleteIcon} alt="delete"></img>
                             </button>
                           </small>
+                          { hora.horario[0] >= hora.horario[1]? <span className="text-red-600 text-sm -mt-3 ">Horario Incorrecto</span>:null}
+                          { hora.horario[0] >= hora.horario[1]? disabledSubmitCitas = true :disabledSubmitCitas = disabledSubmitCitas}
                           {Jueves[index].horario[2] === true ? (
                             <div className="flex gap-2">
                               <MobileTimePicker
@@ -3763,7 +3815,7 @@ function DashboardSchool() {
                                 }}
                                 minutesStep={5}
                                 minTime={dayjs("2014-08-18T08:00:00")}
-                                maxTime={hora.horario[1]}
+                                maxTime={dayjs("2014-08-18T16:45:00")}
                               />
                               <MobileTimePicker
                                 label="Hasta"
@@ -3871,6 +3923,8 @@ function DashboardSchool() {
                               <img src={deleteIcon} alt="delete"></img>
                             </button>
                           </small>
+                          { hora.horario[0] >= hora.horario[1]? <span className="text-red-600 text-sm -mt-3 ">Horario Incorrecto</span>:null}
+                          { hora.horario[0] >= hora.horario[1]? disabledSubmitCitas = true :disabledSubmitCitas = disabledSubmitCitas}
                           {Viernes[index].horario[2] === true ? (
                             <div className="flex gap-2">
                               <MobileTimePicker
@@ -3917,7 +3971,7 @@ function DashboardSchool() {
                                 }}
                                 minutesStep={5}
                                 minTime={dayjs("2014-08-18T08:00:00")}
-                                maxTime={hora.horario[1]}
+                                maxTime={dayjs("2014-08-18T16:45:00")}
                               />
                               <MobileTimePicker
                                 label="Hasta"
@@ -3988,8 +4042,10 @@ function DashboardSchool() {
               </div>
             </LocalizationProvider>
             <button
+               disabled= {disabledSubmitCitas}
               onClick={handleSubmitCitas}
-              className="flex mx-auto my-5 bg-[#0061dd] text-white p-2 rounded-md shadow-md"
+              className="flex mx-auto my-5 bg-[#0061dd] disabled:bg-[#0061dd]/50 text-white p-2 rounded-md shadow-md"
+              
             >
               Guardar Cambios
             </button>
