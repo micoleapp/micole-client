@@ -4,7 +4,7 @@ import style from "./List.module.css";
 import NorthIcon from "@mui/icons-material/North";
 import ContentPasteSearchOutlinedIcon from "@mui/icons-material/ContentPasteSearchOutlined";
 import SouthIcon from "@mui/icons-material/South";
-import SwalProp from "../../exports/SwalProp";
+
 import {
   Box,
   FormControl,
@@ -13,10 +13,12 @@ import {
   Pagination,
   Select,
 } from "@mui/material";
-import sliceIntoChunks from "../../components/CardsCitas/Paginacion/utils/SliceCitas";
+
 import axios from "axios";
 import { useSelector } from "react-redux";
-import fechaFormat from "../../components/SwiperEventos/utils/fechaFormat";
+
+import SwalProp from "../../../exports/SwalProp";
+import fechaFormat from "../../../components/SwiperEventos/utils/fechaFormat";
 export default function ListadeEspera() {
   const { grados } = useSelector((state) => state.schools);
   const [orderSelected, setOrderSelected] = useState(null);
@@ -88,13 +90,15 @@ export default function ListadeEspera() {
     }
   }, []);
 
-  console.log(dataFiltrada);
+ 
   return (
     <>
       <div>
-        <Typography variant="h6" sx={{ color: "#0D263B" }}>
+      <h1 className="text-[2.5vh] font-semibold text-[#0D263B]">
           Lista de Espera
-        </Typography>
+      </h1>
+        
+   
       </div>
       <div className={style.divFiltro}>
         <p
