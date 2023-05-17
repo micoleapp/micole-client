@@ -56,22 +56,13 @@ import { useRef } from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown, faArrowUp } from "@fortawesome/free-solid-svg-icons";
-import { MobileDatePicker, MobileTimePicker } from "@mui/x-date-pickers";
-import dayjs from "dayjs";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { TextField } from "@mui/material";
 const yearNow = new Date().getFullYear();
 import { AiOutlineIdcard } from "react-icons/ai";
 import Cards from "../components/CardsDrgAndDrp/Cards";
 import CardCitas from "../components/CardsCitas/CardCitas";
-import SelectCitasAg from "../components/CardsCitas/SelectCitasAgendadas/SelectCitasAg";
 import { getCita } from "../redux/CitasActions";
 import Miplan from "./DashboardSchool/Miplan/Miplan";
-import Modal from "@mui/material/Modal";
-
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
-
 import UbiPreferente from "./DashboardSchool/UbicacionPreferente/UbiPreferente";
 import ListadeEspera from "./DashboardSchool/ListaEspera/ListadeEspera";
 import HorariosColegio from "./DashboardSchool/HorariosColegio/HorariosColegio";
@@ -118,7 +109,12 @@ function StandardImageList({ one, list, setImage, eliminarImagenDePreview }) {
     );
   }
 }
+const libraries = ["places"];
 
+const containerStyle = {
+  width: "100%",
+  height: "400px",
+};
 function DashboardSchool() {
   const { width, height } = useWindowSize();
   const [page, setPage] = React.useState(0);
