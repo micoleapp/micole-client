@@ -79,7 +79,7 @@ export default function TextEvento({
           open={open}
           idEvento={idEvento}
           fechaEvento={fecha}
-          horaEvento={hora}
+          horaEvento={horaEvento +" "+ hora}
           nombreEvento={nombreEvento}
           setOpen={setOpen}
         />
