@@ -638,7 +638,7 @@ function DashboardSchool() {
   const [activeUpLogo, setActiveUpLogo] = useState(true);
   const [activeUpTwo, setActiveUpTwo] = useState(true);
   useEffect(() => {
-    console.log(datosPrincipales.niveles);
+   
     dispatch(getVacantes(datosPrincipales.niveles));
   }, [datosPrincipales.niveles]);
   const { citasAgendadas } = useSelector((state) => state.schools);
@@ -2548,7 +2548,7 @@ function DashboardSchool() {
                   Sin Confirmar
                 </Button>
               </div>
-              <div>{/* <SelectCitasAg/> */}</div>
+              
             </div>
             <div>
               <CardCitas
