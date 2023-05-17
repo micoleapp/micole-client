@@ -1,7 +1,6 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
-import { useForm } from "react-hook-form";
 import Step from "@mui/material/Step";
 import StepButton from "@mui/material/StepButton";
 import Button from "@mui/material/Button";
@@ -14,8 +13,6 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { BsEye } from "react-icons/bs";
-import { BsEyeSlash } from "react-icons/bs";
 import { Squash as Hamburger } from "hamburger-react";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
@@ -31,9 +28,7 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 import DraftsOutlinedIcon from "@mui/icons-material/DraftsOutlined";
 import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
 import style from "./Dashboard.module.css";
-import CircularProgress from "@mui/material/CircularProgress";
 
-import { MdDeleteForever } from "react-icons/md";
 import {
   GoogleMap,
   useJsApiLoader,
@@ -41,12 +36,7 @@ import {
   Autocomplete,
 } from "@react-google-maps/api";
 import { steps } from "../MockupInfo/Pasos";
-import {
-  getVacantes,
-  postHorariosVacantes,
-  getCitaAgendadas,
-  getHorariosSchool
-} from "../redux/SchoolsActions";
+import { getVacantes, getCitaAgendadas } from "../redux/SchoolsActions";
 import { CiUser, CiClock1 } from "react-icons/ci";
 import { BsWindowDock } from "react-icons/bs";
 import { AiOutlineLogout } from "react-icons/ai";
@@ -66,12 +56,7 @@ import { useRef } from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown, faArrowUp } from "@fortawesome/free-solid-svg-icons";
-import {
-  DateTimePicker,
-  MobileDatePicker,
-  MobileDateTimePicker,
-  MobileTimePicker,
-} from "@mui/x-date-pickers";
+import { MobileDatePicker, MobileTimePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -86,31 +71,12 @@ import Miplan from "./DashboardSchool/Miplan/Miplan";
 import Modal from "@mui/material/Modal";
 
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
-import deleteIcon from "../assets/deleteIcon.png";
-import editIcon from "../assets/editIcon.png";
-import addIcon from "../assets/addIcon.png";
+
 import UbiPreferente from "./DashboardSchool/UbicacionPreferente/UbiPreferente";
 import ListadeEspera from "./DashboardSchool/ListaEspera/ListadeEspera";
-
-
-const styleModal = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  overflow: "auto",
-  maxHeight: "90vh",
-  bgcolor: "background.paper",
-  boxShadow: 24,
-  borderRadius: "10px",
-  p: 4,
-};
-const libraries = ["places"];
-
-const containerStyle = {
-  width: "100%",
-  height: "400px",
-};
+import HorariosColegio from "./DashboardSchool/HorariosColegio/HorariosColegio";
+import DatosPersonales from "./DashboardSchool/Configuracion/DatosPersonales";
+import CreateEvent from "./DashboardSchool/CrearEventoColegio/CreateEvent";
 
 function StandardImageList({ one, list, setImage, eliminarImagenDePreview }) {
   {
@@ -154,9 +120,6 @@ function StandardImageList({ one, list, setImage, eliminarImagenDePreview }) {
 }
 
 function DashboardSchool() {
-  const [hand, setHand] = useState(false);
-  const [editEvento, setEditEvento] = useState({});
-
   const { width, height } = useWindowSize();
   const [page, setPage] = React.useState(0);
   const [activeStep, setActiveStep] = React.useState(0);
@@ -184,72 +147,6 @@ function DashboardSchool() {
   } = useSelector((state) => state.auth);
 
   const id = user.id;
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      email: user.email ? user.email : "",
-      telefono: user.telefono ? user.telefono : "",
-      newEmail: "",
-      password: "",
-      newPassword: "",
-      repitPassword: "",
-    },
-    mode: "onChange",
-  });
-  const OnSubmit = async (user) => {
-    if (user.newPassword !== user.repitPassword) {
-      SwalProp({
-        status: false,
-        title: "Ups!...",
-        text: "Las nuevas contraseñas no coinciden",
-      });
-
-      return;
-    }
-    if (!user.password) {
-      SwalProp({
-        status: false,
-        title: "Ups!...",
-        text: "Ingrese su contraseña para modificar algún campo",
-      });
-      return;
-    }
-    const data = {
-      email: user.email,
-      newEmail: user.newEmail,
-      telefono: user.telefono,
-      password: user.password,
-      newPassword: user.newPassword,
-    };
-    try {
-      axios
-        .put(`/auth/${id}`, data)
-        .then((res) => {
-          SwalProp({
-            status: true,
-            title: "Éxito",
-            text: "Datos actualizados!",
-          });
-        })
-        .catch((err) => {
-          SwalProp({
-            status: false,
-            title: "Algo salió mal",
-            text: err.response.data.error,
-          });
-        });
-    } catch (error) {
-      SwalProp({
-        status: false,
-        title: "Algo salió mal",
-        text: error.response,
-      });
-    }
-  };
 
   const totalSteps = () => {
     return steps.length;
@@ -342,7 +239,7 @@ function DashboardSchool() {
       axios
         .put(`/colegios/${user.id}`, datosPrincipales)
         .then((res) => {
-          dispatch(getAfiliacionSchool(user.id))
+          dispatch(getAfiliacionSchool(user.id));
           console.log(res);
         })
         .catch((err) => {
@@ -383,8 +280,6 @@ function DashboardSchool() {
   };
 
   let libRef = React.useRef(libraries);
-
- 
 
   const initialDatosPrincipales = {
     nombreColegio: oneSchool?.nombre_colegio ? oneSchool.nombre_colegio : "",
@@ -429,11 +324,9 @@ function DashboardSchool() {
     initialDatosPrincipales
   );
 
-console.log(datosPrincipales)
-
   useEffect(() => {
     setDatosPrincipales(initialDatosPrincipales);
-  }, [oneInfra, oneAfiliacion,oneSchool]);
+  }, [oneInfra, oneAfiliacion, oneSchool]);
   const datosPrincipalesCompleted = () => {
     if (
       datosPrincipales.nombreColegio !== "" &&
@@ -467,33 +360,17 @@ console.log(datosPrincipales)
     libraries: libRef.current,
   });
 
- 
-   
+  const initialCenter = {
+    lat: datosPrincipales.lat,
+    lng: datosPrincipales.lng,
+  };
 
- console.log(datosPrincipales.lat)
+  const [center, setCenter] = React.useState(initialCenter);
 
- 
- 
- const initialCenter = {
-  lat:  datosPrincipales.lat,
-  lng:   datosPrincipales.lng
-  }
-  console.log(datosPrincipales.lat)
-  
-  const [center, setCenter] = React.useState(initialCenter
-    
-  );
+  useEffect(() => {
+    setCenter(initialCenter);
+  }, [datosPrincipales]);
 
- useEffect(() => {
-  setCenter(initialCenter)
- }, [datosPrincipales])
-  
-
-
-
-
- 
-console.log(center)
   const [map, setMap] = React.useState(null);
   const onLoad = React.useCallback(function callback(map) {
     // This is just an example of getting and using the map instance!!! don't just blindly copy!
@@ -540,58 +417,10 @@ console.log(center)
     }
   };
 
-
-
-  const infraestructuraCompleted = () => {
-    if (datosPrincipales.infraestructura.length !== 0) {
-      return false;
-    } else {
-      return true;
-    }
-  };
-
-  const acreditacionesCompleted = () => {
-    if (datosPrincipales.afiliaciones.length !== 0) {
-      return false;
-    } else {
-      return true;
-    }
-  };
-
   const [isOpen, setOpen] = useState(false);
-
   const [file, setFile] = useState(null);
   const [fileLogo, setFileLogo] = useState(null);
-  const [fileEvento, setFileEvento] = useState(null);
-  const [fileEditEvento, setFileEditEvento] = useState(null);
-
   const [files, setFiles] = useState(null);
-
-  const [evento, setEvento] = useState({
-    idColegio: id,
-    nombreEvento: "",
-    descripcionEvento: "",
-    tipoEvento: "",
-    capacidadEvento: 0,
-    fechaEvento: dayjs(new Date()),
-    horaEvento: "08:00",
-    image: "",
-  });
-
-  const disableEvento = () => {
-    if (
-      evento.nombreEvento !== "" &&
-      evento.descripcionEvento !== "" &&
-      evento.tipoEvento !== "" &&
-      evento.capacidadEvento !== 0 &&
-      evento.fechaEvento !== "" &&
-      evento.horaEvento !== ""
-    ) {
-      return false;
-    } else {
-      return true;
-    }
-  };
 
   const handleFilesSubmitOne = async (e) => {
     e.preventDefault();
@@ -646,53 +475,6 @@ console.log(center)
     });
     setSpanLogo(false);
     setActiveUpLogo(false);
-  };
-  const handleFilesSubmitEvento = async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    try {
-      formData.append("file", previewEvento);
-      formData.append("upload_preset", "tcotxf16");
-      const res = await axios.post(
-        "https://api.cloudinary.com/v1_1/de4i6biay/image/upload",
-        formData
-      );
-      setEvento({ ...evento, image: res.data.secure_url });
-    } catch (error) {
-      console.log(error);
-      SwalProp({
-        status: false,
-        title: "Algo salió mal",
-        text: "Intenta nuevamente",
-      });
-    }
-    SwalProp({
-      status: true,
-      title: "Éxito",
-      text: "Imagen subida!",
-    });
-    setSpanOne(false);
-    setActiveUpOne(false);
-  };
-  const [succesEditImage, setSuccesEditImage] = useState(false);
-  const handleFilesSubmitEditEvento = async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    try {
-      formData.append("file", previewEditEvento);
-      formData.append("upload_preset", "tcotxf16");
-      const res = await axios.post(
-        "https://api.cloudinary.com/v1_1/de4i6biay/image/upload",
-        formData
-      );
-      setEditEvento({ ...editEvento, image: res.data.secure_url });
-      setHand(false);
-      setSuccesEditImage(true);
-    } catch (error) {
-      console.log(error);
-    }
-    setSpanOne(false);
-    setActiveUpOne(false);
   };
 
   function handleFilesSubmit(e) {
@@ -754,60 +536,6 @@ console.log(center)
   const [previewOne, setPreviewOne] = useState(initialPreviewOne);
   const [previewLogo, setPreviewLogo] = useState(initialPreviewLogo);
 
-  const [previewEvento, setPreviewEvento] = useState(null);
-  const [previewEditEvento, setPreviewEditEvento] = useState(null);
-  const [dateEvento, setDateEvento] = React.useState(dayjs(new Date()));
-  const [timeEvento, setTimeEvento] = React.useState(
-    dayjs("2014-08-18T08:00:00")
-  );
-  const [dateEditEvento, setDateEditEvento] = React.useState(dayjs(new Date()));
-  const [timeEditEvento, setTimeEditEvento] = React.useState(
-    dayjs("2014-08-18T08:00:00")
-  );
-  const [change, setChange] = useState(false);
-  const handleChangeDate = (newValue) => {
-    setDateEvento(dayjs(newValue));
-    setEvento({
-      ...evento,
-      fechaEvento: [
-        stringyDate(newValue["$D"]).toString(),
-        stringyDate(newValue["$M"] + 1).toString(),
-        newValue["$y"].toString(),
-      ].join("/"),
-    });
-  };
-  const handleChangeTime = (newValue) => {
-    setTimeEvento(dayjs(newValue));
-    setEvento({
-      ...evento,
-      horaEvento: [
-        stringyDate(newValue["$H"]).toString(),
-        stringyDate(newValue["$m"]).toString(),
-      ].join(":"),
-    });
-  };
-  const handleChangeDateEdit = (newValue) => {
-    setDateEditEvento(dayjs(newValue));
-    setEditEvento({
-      ...editEvento,
-      fechaEvento: [
-        stringyDate(newValue["$D"]).toString(),
-        stringyDate(newValue["$M"] + 1).toString(),
-        newValue["$y"].toString(),
-      ].join("/"),
-    });
-  };
-  const handleChangeTimeEdit = (newValue) => {
-    setChange(true);
-    setTimeEditEvento(dayjs(newValue));
-    setEditEvento({
-      ...editEvento,
-      horaEvento: [
-        stringyDate(newValue["$H"]).toString(),
-        stringyDate(newValue["$m"]).toString(),
-      ].join(":"),
-    });
-  };
   useEffect(() => {
     if (files !== null && files !== undefined) {
       Object.values(files).map((file) => {
@@ -822,11 +550,6 @@ console.log(center)
     }
   }, [files]);
 
-  // useEffect(() => {
-  //   dispatch(getCitaAgendadas());
-  //   dispatch(getCita());
-  // }, []);
-
   useEffect(() => {
     if (file !== null && file !== undefined) {
       const reader = new FileReader();
@@ -838,26 +561,6 @@ console.log(center)
       setSpanOne(true);
     }
   }, [file]);
-  useEffect(() => {
-    if (fileEvento !== null && fileEvento !== undefined) {
-      const reader = new FileReader();
-      reader.readAsDataURL(fileEvento);
-      reader.onloadend = () => {
-        setPreviewEvento(reader.result);
-      };
-    }
-  }, [fileEvento]);
-
-  useEffect(() => {
-    if (fileEditEvento !== null && fileEditEvento !== undefined) {
-      const reader = new FileReader();
-      reader.readAsDataURL(fileEditEvento);
-      reader.onloadend = () => {
-        setPreviewEditEvento(reader.result);
-        setHand(true);
-      };
-    }
-  }, [fileEditEvento]);
 
   useEffect(() => {
     if (fileLogo !== null && fileLogo !== undefined) {
@@ -924,146 +627,6 @@ console.log(center)
 
   const [vacantes, setVacantes] = useState(0);
 
-
-
-
-  const stringToDate = (string) => {
-    let horario = "2014-08-18 ".concat(string).concat(":00")
-    return horario} 
- 
-    const { horariosColegio } = useSelector((state) => state.schools);
-  
-    useEffect(() => {
-      dispatch(getHorariosSchool(user.id))
-      getHorarios();
-    }, [])
- 
- 
-    useEffect(() => {
-    dispatch(getHorariosSchool(user.id))
-    getHorarios();
-  }, [horariosColegio.length ])
-
-  console.log(horariosColegio)
-
-  let getHorarios = () =>{
-    const diasGuardados = [];
-     horariosColegio.map((dia) => {
-      diasGuardados.push({dia:dia.dia, horarios: dia.horarios })
-       })
-     const Lunesfilter = diasGuardados.filter((d)=>  d.dia == "Lunes")  
-     const lun =[];
-    Lunesfilter.map((c)=> lun.push(c.horarios))
-     if (lun.length > 0) {setLunesString(lun[0]);
-       const lundate =  lun[0].map((l) =>  (
-      {
-        horario: [
-         dayjs(stringToDate(l.desde)),
-          dayjs(stringToDate(l.hasta)),
-          false,
-        ],
-      }),
-     
-    )
-    if (lundate.length > 0) {
-    setLunes(lundate)
-   };}
-  
-    const Martesfilter = diasGuardados.filter((d)=>  d.dia == "Martes")  
-    const mar =[];
-    Martesfilter.map((c)=> mar.push(c.horarios))    
-    if (mar.length > 0) {setMartesString(mar[0]);
-        const mardate =  mar[0].map((l) =>  (
-        {
-          horario: [
-           dayjs(stringToDate(l.desde)),
-            dayjs(stringToDate(l.hasta)),
-            false,
-          ],
-        }),
-       
-      )
-     if (mardate.length > 0) {
-      setMartes(mardate)
-     };}
-    
-    const Miercolesfilter = diasGuardados.filter((d)=>  d.dia == "Miercoles")  
-    const mie =[];
-    Miercolesfilter.map((c)=> mie.push(c.horarios))
-    if (mie.length > 0) {setMiercolesString(mie[0]);
-       const miedate =  mie[0].map((l) =>  (
-        {
-          horario: [
-           dayjs(stringToDate(l.desde)),
-            dayjs(stringToDate(l.hasta)),
-            false,
-          ],
-        }),
-       
-      )
-     if (miedate.length > 0) {
-      setMiercoles(miedate)
-     };}
-    
-    const Juevesfilter = diasGuardados.filter((d)=>  d.dia == "Jueves")  
-    const jue =[];
-    Juevesfilter.map((c)=> jue.push(c.horarios))
-    if (jue.length > 0) {setJuevesString(jue[0]);
-        const juedate =  jue[0].map((l) =>  (
-        {
-          horario: [
-           dayjs(stringToDate(l.desde)),
-            dayjs(stringToDate(l.hasta)),
-            false,
-          ],
-        }),
-       
-      )
-     if (juedate.length > 0) {
-      setJueves(juedate)
-     };}
-    
-
-    const Viernesfilter = diasGuardados.filter((d)=>  d.dia == "Viernes")  
-    const vie =[];
-    Viernesfilter.map((c)=> vie.push(c.horarios))
-    if (vie.length > 0) {setViernesString(vie[0]);
-        const viedate =  vie[0].map((l) =>  (
-        {
-          horario: [
-           dayjs(stringToDate(l.desde)),
-            dayjs(stringToDate(l.hasta)),
-            false,
-          ],
-        }),
-       
-      )
-    if (viedate.length > 0) {
-      setViernes(viedate)
-     };} 
-    
-  }
-
-  const initialDaysWithTime = [];
-
-  const initialStringDays = [];
-
-  const [Lunes, setLunes] = React.useState(initialDaysWithTime);
-  const [Martes, setMartes] = React.useState(initialDaysWithTime);
-  const [Miercoles, setMiercoles] = React.useState(initialDaysWithTime);
-  const [Jueves, setJueves] = React.useState(initialDaysWithTime);
-  const [Viernes, setViernes] = React.useState(initialDaysWithTime);
-
-  const [LunesString, setLunesString] = React.useState(initialStringDays);
-  const [MartesString, setMartesString] = React.useState(initialStringDays);
-  const [MiercolesString, setMiercolesString] =
-    React.useState(initialStringDays);
-  const [JuevesString, setJuevesString] = React.useState(initialStringDays);
-  const [ViernesString, setViernesString] = React.useState(initialStringDays);
-
-  console.log(LunesString);
-  console.log(MartesString);
-
   const stringyDate = (date) => {
     if (date.toString().length === 1) {
       return "0" + date++;
@@ -1072,290 +635,26 @@ console.log(center)
     }
   };
 
-  const addHorario = (setdia, dia, setString, diaString) => {
-    setdia([
-      ...dia,
-      {
-        horario: [
-          dayjs("2014-08-18T10:00:00"),
-          dayjs("2014-08-18T11:00:00"),
-          true,
-        ],
-      },
-    ]);
-    setString([
-      ...diaString,
-      {
-        desde: "10:00",
-        hasta: "11:00",
-      },
-    ]);
-  };
-
-  const editHorario = (setdia, dia, index) => {
-    if (dia[index].horario[2] === false) {
-      setdia([
-        ...dia.slice(0, index),
-        {
-          horario: [dia[index].horario[0], dia[index].horario[1], true],
-        },
-
-        ...dia.slice(index + 1),
-      ]);
-    } else {
-      setdia([
-        ...dia.slice(0, index),
-        {
-          horario: [dia[index].horario[0], dia[index].horario[1], false],
-        },
-
-        ...dia.slice(index + 1),
-      ]);
-      console.log(dia[index].horario[2]);
-    }
-  };
-
-  const deleteHorario = (setdia, setString, dia, diaString, index) => {
-    setdia([...dia.slice(0, index), ...dia.slice(index + 1)]);
-
-    setString([...diaString.slice(0, index), ...diaString.slice(index + 1)]);
-  };
-
-  const diasdias = [
-    { Lunes: [...Lunes] },
-    { Martes: [...Martes] },
-    { Miercoles: [...Miercoles] },
-    { Jueves: [...Jueves] },
-    { Viernes: [...Viernes] },
-  ];
-
-  let disabledSubmitCitas = false
-   
-  
-  
-  const handleSubmitCitas = (e) => {
-    e.preventDefault();
-    const stringDays = [
-      { dia: "Lunes", horarios: [...LunesString] },
-      { dia: "Martes", horarios: [...MartesString] },
-      { dia: "Miercoles", horarios: [...MiercolesString] },
-      { dia: "Jueves", horarios: [...JuevesString] },
-      { dia: "Viernes", horarios: [...ViernesString] },
-    ];
-    const diasActivos = stringDays.filter((ele) => ele.horarios.length > 0);
-
-    dispatch(postHorariosVacantes(diasActivos,user.id));
-    console.log(user.id);
-    try {
-      axios
-        .put(`/colegios/activo/${user.id}`, { isActive: true })
-        .then((res) => {
-          SwalProp({
-            status: true,
-            title: "Felicitaciones!",
-            text: "Colegio listo para mostrarse en nuestra página!",
-          });
-          dispatch(getSchoolDetail(user.id)); 
-         
-        }
-        )
-        .catch((err) => {
-          console.log(err);
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const [spanOne, setSpanOne] = useState(false);
   const [spanTwo, setSpanTwo] = useState(false);
   const [spanLogo, setSpanLogo] = useState(false);
   const [activeUpOne, setActiveUpOne] = useState(true);
   const [activeUpLogo, setActiveUpLogo] = useState(true);
-
   const [activeUpTwo, setActiveUpTwo] = useState(true);
-
-  const [seePassword, setSeePassword] = useState(false);
-  const [seeNewPassword, setSeeNewPassword] = useState(false);
-
   useEffect(() => {
     console.log(datosPrincipales.niveles);
     dispatch(getVacantes(datosPrincipales.niveles));
   }, [datosPrincipales.niveles]);
-
-  const { success } = useSelector((state) => state.citas);
   const { citasAgendadas } = useSelector((state) => state.schools);
 
   useEffect(() => {
     dispatch(getCitaAgendadas());
     dispatch(getCita());
   }, [citasAgendadas.CitasActivas?.length]);
-  // citasAgendadas.CitasActivas?.length,success
+
   const [vacantesOffOne, setVacantesOffOne] = useState(true);
   const [vacantesOffTwo, setVacantesOffTwo] = useState(true);
   const [vacantesOffThree, setVacantesOffThree] = useState(true);
-
-  const handleSubmitEvento = (e) => {
-    e.preventDefault();
-    try {
-      axios
-        .post("/eventos", evento)
-        .then((res) => {
-          SwalProp({
-            status: true,
-            title: "Éxito",
-            text: "Evento creado!",
-          });
-          dispatch(getSchoolDetail(id));
-          setEvento({
-            idColegio: id,
-            nombreEvento: "",
-            descripcionEvento: "",
-            tipoEvento: "",
-            capacidadEvento: 0,
-            fechaEvento: dayjs(new Date()),
-            horaEvento: "08:00",
-            image: "plantilla",
-          });
-          setFileEvento(null);
-          setPreviewEvento(null);
-        })
-        .catch((err) => {
-          SwalProp({
-            status: false,
-            title: "Ups!...",
-            text: "Algo salió mal!",
-          });
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleDelete = (id) => {
-    try {
-      Swal.fire({
-        title: "Estás seguro?",
-        text: "No podrás revertir esto!",
-        icon: "warning",
-        showDenyButton: true,
-        confirmButtonText: "Sí, eliminar!",
-        denyButtonText: `No`,
-      }).then((res) => {
-        if (res.isConfirmed) {
-          axios
-            .delete(`/eventos/${id}`)
-            .then((res) => {
-              dispatch(getSchoolDetail(user.id));
-              SwalProp({
-                status: true,
-                title: "Éxito",
-                text: "Evento eliminado!",
-              });
-            })
-            .catch((err) => {
-              SwalProp({
-                status: false,
-                title: "Ups!...",
-                text: "Algo salió mal!",
-              });
-            });
-        }
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const handleSubmitEditEvento = (id) => {
-    if (change) {
-      try {
-        axios
-          .put(`/eventos/${id}`, editEvento)
-          .then((res) => {
-            SwalProp({
-              status: true,
-              title: "Éxito",
-              text: "Evento editado!",
-            });
-            dispatch(getSchoolDetail(user.id));
-          })
-          .catch((err) => {
-            SwalProp({
-              status: false,
-              title: "Ups!...",
-              text: "Algo salió mal!",
-            });
-          });
-      } catch (error) {
-        console.log(error);
-      }
-      handleCloseModal();
-      setHand(false);
-      setSuccesEditImage(false);
-      setChange(false);
-    } else {
-      const horaEvento = [
-        stringyDate(editEvento.horaEvento["$H"]).toString(),
-        stringyDate(editEvento.horaEvento["$m"]).toString(),
-      ].join(":");
-      const newEvent = { ...editEvento, horaEvento };
-      console.log(newEvent);
-      console.log(editEvento);
-      try {
-        axios
-          .put(`/eventos/${id}`, newEvent)
-          .then((res) => {
-            SwalProp({
-              status: true,
-              title: "Éxito",
-              text: "Evento editado!",
-            });
-            dispatch(getSchoolDetail(user.id));
-          })
-          .catch((err) => {
-            SwalProp({
-              status: false,
-              title: "Ups!...",
-              text: "Algo salió mal!",
-            });
-          });
-      } catch (error) {
-        console.log(error);
-      }
-      handleCloseModal();
-      setHand(false);
-      setSuccesEditImage(false);
-      setChange(false);
-    }
-  };
-
-  console.log(change);
-
-  const [openModal, setOpenModal] = React.useState(false);
-  const handleOpenModal = () => setOpenModal(true);
-  const handleCloseModal = () => {
-    setEditEvento({});
-    setOpenModal(false);
-  };
-
-  const handleEdit = (id) => {
-    handleOpenModal();
-    const editEventoNew = oneSchool?.Eventos?.find((e) => e.id === id);
-
-    const newFecha = "2014-08-18T" + editEventoNew.hora_evento + ":00";
-    setTimeEditEvento(dayjs(newFecha));
-    setDateEditEvento(editEventoNew.fecha_evento);
-    setEditEvento({
-      idColegio: editEventoNew.id,
-      nombreEvento: editEventoNew.nombre_evento,
-      descripcionEvento: editEventoNew.descripcion,
-      tipoEvento: editEventoNew.tipo_evento,
-      capacidadEvento: editEventoNew.capacidad,
-      fechaEvento: dateEditEvento,
-      horaEvento: timeEditEvento,
-      image: editEventoNew.imagen_evento,
-    });
-  };
 
   useEffect(() => {
     if (activeStep === 3) {
@@ -1368,10 +667,6 @@ console.log(center)
       dispatch(getAfiliacionSchool(id));
     }
   }, [activeStep]);
-
-  console.log(activeUpTwo)
-  console.log(activeUpOne)
-  console.log(datosPrincipales.direccion)
 
   return (
     <div className="flex lg:flex-row flex-col">
@@ -1546,8 +841,6 @@ console.log(center)
               Ubicación Preferente
             </span>
           </button>
-
-
 
           <button
             className={`flex items-center duration-300 focus:bg-[#0061dd] focus:text-white cursor-pointer gap-2 group p-3 rounded-md hover:bg-[#0060dd97] hover:text-white ${
@@ -2319,28 +1612,13 @@ console.log(center)
                         >
                           Guardar y continuar
                         </button>
-                        {/* {activeStep !== steps.length &&
-                      (completed[activeStep] ? (
-                        <Typography
-                          variant="caption"
-                          sx={{ display: "inline-block" }}
-                        >
-                          Step {activeStep + 1} already completed
-                        </Typography>
-                      ) : (
-                        <Button onClick={handleComplete}>
-                          {completedSteps() === totalSteps() - 1
-                            ? "Finish"
-                            : "Complete Step"}
-                        </Button>
-                      ))} */}
                       </Box>
                     </form>
                   )}
                   {activeStep === 1 && (
                     <div className="flex flex-col gap-5">
                       <h1 className="text-2xl">
-                       Debes selecionar al menos una casilla 
+                        Debes selecionar al menos una casilla
                       </h1>
                       <small>Puede marcar mas de una opción</small>
                       <div className="flex flex-col lg:flex-row gap-5">
@@ -2601,21 +1879,6 @@ console.log(center)
                         >
                           Guardar y continuar
                         </button>
-                        {/* {activeStep !== steps.length &&
-                      (completed[activeStep] ? (
-                        <Typography
-                          variant="caption"
-                          sx={{ display: "inline-block" }}
-                        >
-                          Step {activeStep + 1} already completed
-                        </Typography>
-                      ) : (
-                        <Button onClick={handleComplete}>
-                          {completedSteps() === totalSteps() - 1
-                            ? "Finish"
-                            : "Complete Step"}
-                        </Button>
-                      ))} */}
                       </Box>
                     </div>
                   )}
@@ -2836,21 +2099,6 @@ console.log(center)
                         >
                           Guardar y continuar
                         </button>
-                        {/* {activeStep !== steps.length &&
-                      (completed[activeStep] ? (
-                        <Typography
-                          variant="caption"
-                          sx={{ display: "inline-block" }}
-                        >
-                          Step {activeStep + 1} already completed
-                        </Typography>
-                      ) : (
-                        <Button onClick={handleComplete}>
-                          {completedSteps() === totalSteps() - 1
-                            ? "Finish"
-                            : "Complete Step"}
-                        </Button>
-                      ))} */}
                       </Box>
                     </div>
                   )}
@@ -2941,21 +2189,6 @@ console.log(center)
                         >
                           Guardar y continuar
                         </button>
-                        {/* {activeStep !== steps.length &&
-                      (completed[activeStep] ? (
-                        <Typography
-                          variant="caption"
-                          sx={{ display: "inline-block" }}
-                        >
-                          Step {activeStep + 1} already completed
-                        </Typography>
-                      ) : (
-                        <Button onClick={handleComplete}>
-                          {completedSteps() === totalSteps() - 1
-                            ? "Finish"
-                            : "Complete Step"}
-                        </Button>
-                      ))} */}
                       </Box>
                     </div>
                   )}
@@ -2983,7 +2216,7 @@ console.log(center)
                               </span>{" "}
                             </label>
                             <input
-                            multiple={false}
+                              multiple={false}
                               type="file"
                               id="image"
                               name="image"
@@ -3067,7 +2300,6 @@ console.log(center)
                               name="images"
                               accept="image/png,image/jpeg"
                               onChange={(e) => {
-                             
                                 setFiles(e.target.files);
                               }}
                               multiple
@@ -3248,21 +2480,6 @@ console.log(center)
                         >
                           Guardar y continuar
                         </button>
-                        {/* {activeStep !== steps.length &&
-                                        (completed[activeStep] ? (
-                                          <Typography
-                                            variant="caption"
-                                            sx={{ display: "inline-block" }}
-                                          >
-                                            Step {activeStep + 1} already completed
-                                          </Typography>
-                                        ) : (
-                                          <Button onClick={handleComplete}>
-                                            {completedSteps() === totalSteps() - 1
-                                              ? "Finish"
-                                              : "Complete Step"}
-                                          </Button>
-                                        ))} */}
                       </Box>
                     </div>
                   )}
@@ -3271,948 +2488,13 @@ console.log(center)
             </div>
           </Box>
         ) : page === 1 ? (
-          <div className="min-h-screen p-5 flex flex-col gap-5">
-            <h1 className="text-[2.5vh] font-medium">
-              Deberas completar estos datos para aparecer en nuestra lista
-            </h1>
-            <p className="text-[1.8vh] text-[#7A7777]">
-              En esta sección, indica tu disponibilidad horaria para atender al
-              público. Las familias podrán programar citas en los horarios que
-              especifiques. Si no especifica horarios en un día, se considerará
-              como un día no disponible para atención al público.{" "}
-            </p>
-            {/* <CheckBox disabled  sx={{color:'#0061DF'}} /> */}
-       
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <div className="grid lg:grid-cols-3 w-full grid-cols-2">
-                <div className="my-3">
-              
-                  <span>Lunes</span>
-                  <div className="flex flex-col gap-3">
-                    {Lunes &&
-                      Lunes.map((hora, index) => (
-                        <>
-                          {" "}
-                          <small className= "font-semibold">
-                            {[
-                              stringyDate(hora.horario[0]["$H"]).toString(),
-                              stringyDate(hora.horario[0]["$m"]).toString(),
-                            ].join(":")}{" "}
-                            -{" "}
-                            {[
-                              stringyDate(hora.horario[1]["$H"]).toString(),
-                              stringyDate(hora.horario[1]["$m"]).toString(),
-                            ].join(":")}{" "}
-                            <button
-                              className="ml-6 scale-75"
-                              onClick={() =>
-                                editHorario(setLunes, Lunes, index)
-                              }
-                            >
-                              <img src={editIcon} alt="edit"></img>
-                            </button>
-                            <button
-                              className="ml-3 scale-75"
-                              onClick={() =>
-                                deleteHorario(
-                                  setLunes,
-                                  setLunesString,
-                                  Lunes,
-                                  LunesString,
-                                  index
-                                )
-                              }
-                            >
-                              <img src={deleteIcon} alt="delete"></img>
-                            </button>
-                          </small>
-                          { hora.horario[0] >= hora.horario[1]? <span className="text-red-600 text-sm -mt-3 ">Horario Incorrecto</span>:null}
-                          { hora.horario[0] >= hora.horario[1]? disabledSubmitCitas = true :disabledSubmitCitas = disabledSubmitCitas}
-                          {Lunes[index].horario[2] === true ? (
-                            <div className="flex-col gap-2">
-                             <div className="flex gap-2" > <MobileTimePicker
-                                label="Desde"
-                                disabled={!hora.horario[2]}
-                                className="w-[70px] bg-white"
-                                value={hora.horario[0]}
-                                renderInput={(params) => (
-                                  <TextField {...params} />
-                                )}
-                                ampm={false}
-                                onChange={(newValue) => {
-                                  setLunes([
-                                    ...Lunes.slice(0, index),
-                                    {
-                                      horario: [
-                                        newValue,
-                                        hora.horario[1],
-                                        true,
-                                      ],
-                                    },
-                                    ...Lunes.slice(index + 1),
-                                  ]);
-                                  setLunesString([
-                                    ...LunesString.slice(0, index),
-                                    {
-                                      desde: stringyDate(newValue["$H"])
-                                        .toString()
-                                        .concat(":")
-                                        .concat(
-                                          stringyDate(newValue["$m"]).toString()
-                                        ),
-                                      hasta: stringyDate(hora.horario[1]["$H"])
-                                        .toString()
-                                        .concat(":")
-                                        .concat(
-                                          stringyDate(
-                                            hora.horario[1]["$m"]
-                                          ).toString()
-                                        ),
-                                    },
-                                    ...LunesString.slice(index + 1),
-                                  ]);
-                                }}
-                                minutesStep={5}
-                                minTime={dayjs("2014-08-18T08:00:00")}
-                                maxTime={dayjs("2014-08-18T16:45:00")}
-                              />
-                              <MobileTimePicker
-                                label="Hasta"
-                                disabled={!hora.horario[2]}
-                                className="w-[70px] bg-white"
-                                onChange={(newValue) => {
-                                  setLunes([
-                                    ...Lunes.slice(0, index),
-                                    {
-                                      horario: [
-                                        hora.horario[0],
-                                        newValue,
-                                        true,
-                                      ],
-                                    },
-                                    ...Lunes.slice(index + 1),
-                                  ]);
-                                  setLunesString([
-                                    ...LunesString.slice(0, index),
-                                    {
-                                      desde: stringyDate(hora.horario[0]["$H"])
-                                        .toString()
-                                        .concat(":")
-                                        .concat(
-                                          stringyDate(
-                                            hora.horario[0]["$m"]
-                                          ).toString()
-                                        ),
-                                      hasta: stringyDate(newValue["$H"])
-                                        .toString()
-                                        .concat(":")
-                                        .concat(
-                                          stringyDate(newValue["$m"]).toString()
-                                        ),
-                                    },
-                                    ...LunesString.slice(index + 1),
-                                  ]);
-                                }}
-                                value={Lunes[index].horario[1]}
-                                renderInput={(params) => (
-                                  <TextField {...params} />
-                                )}
-                                ampm={false}
-                                minutesStep={5}
-                                minTime={hora.horario[0]}
-                                maxTime={dayjs("2014-08-18T17:00:00")}
-                              /></div>
-                             
-                              
-                            </div>
-                            
-                          ) : null}
-                        </>
-                      ))}
-                      
-                    <button
-                      className="flex "
-                      onClick={() =>
-                        addHorario(setLunes, Lunes, setLunesString, LunesString)
-                      }
-                    >
-                      <img src={addIcon} alt="edit"></img>
-                      <span className="ml-2 text-[#0061dd]">Añadir Horas</span>
-                    </button>
-                  </div>
-                </div>
-                <div className="my-3">
-                  <span>Martes</span>
-                  <div className="flex flex-col gap-3">
-                    {Martes &&
-                      Martes.map((hora, index) => (
-                        <>
-                          {" "}
-                          <small className="font-semibold">
-                            {[
-                              stringyDate(hora.horario[0]["$H"]).toString(),
-                              stringyDate(hora.horario[0]["$m"]).toString(),
-                            ].join(":")}{" "}
-                            -{" "}
-                            {[
-                              stringyDate(hora.horario[1]["$H"]).toString(),
-                              stringyDate(hora.horario[1]["$m"]).toString(),
-                            ].join(":")}{" "}
-                            <button
-                              className="ml-6 scale-75"
-                              onClick={() =>
-                                editHorario(setMartes, Martes, index)
-                              }
-                            >
-                              <img src={editIcon} alt="edit"></img>
-                            </button>
-                            <button
-                              className="ml-3 scale-75"
-                              onClick={() =>
-                                deleteHorario(
-                                  setMartes,
-                                  setMartesString,
-                                  Martes,
-                                  MartesString,
-                                  index
-                                )
-                              }
-                            >
-                              <img src={deleteIcon} alt="delete"></img>
-                            </button>
-                          </small>
-                          { hora.horario[0] >= hora.horario[1]? <span className="text-red-600 text-sm -mt-3 ">Horario Incorrecto</span>:null}
-                          { hora.horario[0] >= hora.horario[1]? disabledSubmitCitas = true :disabledSubmitCitas = disabledSubmitCitas}
-                          {Martes[index].horario[2] === true ? (
-                            <div className="flex gap-2">
-                              <MobileTimePicker
-                                label="Desde"
-                                disabled={!hora.horario[2]}
-                                className="w-[70px] bg-white"
-                                value={hora.horario[0]}
-                                renderInput={(params) => (
-                                  <TextField {...params} />
-                                )}
-                                ampm={false}
-                                onChange={(newValue) => {
-                                  setMartes([
-                                    ...Martes.slice(0, index),
-                                    {
-                                      horario: [
-                                        newValue,
-                                        hora.horario[1],
-                                        true,
-                                      ],
-                                    },
-                                    ...Martes.slice(index + 1),
-                                  ]);
-                                  setMartesString([
-                                    ...MartesString.slice(0, index),
-                                    {
-                                      desde: stringyDate(newValue["$H"])
-                                        .toString()
-                                        .concat(":")
-                                        .concat(
-                                          stringyDate(newValue["$m"]).toString()
-                                        ),
-                                      hasta: stringyDate(hora.horario[1]["$H"])
-                                        .toString()
-                                        .concat(":")
-                                        .concat(
-                                          stringyDate(
-                                            hora.horario[1]["$m"]
-                                          ).toString()
-                                        ),
-                                    },
-                                    ...MartesString.slice(index + 1),
-                                  ]);
-                                }}
-                                minutesStep={5}
-                                minTime={dayjs("2014-08-18T08:00:00")}
-                                maxTime={dayjs("2014-08-18T16:45:00")}
-                              />
-                              <MobileTimePicker
-                                label="Hasta"
-                                disabled={!hora.horario[2]}
-                                className="w-[70px] bg-white"
-                                onChange={(newValue) => {
-                                  setMartes([
-                                    ...Martes.slice(0, index),
-                                    {
-                                      horario: [
-                                        hora.horario[0],
-                                        newValue,
-                                        true,
-                                      ],
-                                    },
-                                    ...Martes.slice(index + 1),
-                                  ]);
-                                  setMartesString([
-                                    ...MartesString.slice(0, index),
-                                    {
-                                      desde: stringyDate(hora.horario[0]["$H"])
-                                        .toString()
-                                        .concat(":")
-                                        .concat(
-                                          stringyDate(
-                                            hora.horario[0]["$m"]
-                                          ).toString()
-                                        ),
-                                      hasta: stringyDate(newValue["$H"])
-                                        .toString()
-                                        .concat(":")
-                                        .concat(
-                                          stringyDate(newValue["$m"]).toString()
-                                        ),
-                                    },
-                                    ...MartesString.slice(index + 1),
-                                  ]);
-                                }}
-                                value={Martes[index].horario[1]}
-                                renderInput={(params) => (
-                                  <TextField {...params} />
-                                )}
-                                ampm={false}
-                                minutesStep={5}
-                                minTime={hora.horario[0]}
-                                maxTime={dayjs("2014-08-18T17:00:00")}
-                              />
-                            </div>
-                          ) : null}
-                        </>
-                      ))}
-                    <button
-                      className="flex"
-                      onClick={() =>
-                        addHorario(
-                          setMartes,
-                          Martes,
-                          setMartesString,
-                          MartesString
-                        )
-                      }
-                    >
-                      <img src={addIcon} alt="edit"></img>
-                      <span className="ml-2 text-[#0061dd]">Añadir Horas</span>
-                    </button>
-                  </div>
-                </div>
-                <div className="my-3">
-                  <span>Miércoles</span>
-                  <div className="flex flex-col gap-3">
-                    {Miercoles &&
-                      Miercoles.map((hora, index) => (
-                        <>
-                          {" "}
-                          <small className="font-semibold">
-                            {[
-                              stringyDate(hora.horario[0]["$H"]).toString(),
-                              stringyDate(hora.horario[0]["$m"]).toString(),
-                            ].join(":")}{" "}
-                            -{" "}
-                            {[
-                              stringyDate(hora.horario[1]["$H"]).toString(),
-                              stringyDate(hora.horario[1]["$m"]).toString(),
-                            ].join(":")}{" "}
-                            <button
-                              className="ml-6 scale-75"
-                              onClick={() =>
-                                editHorario(setMiercoles, Miercoles, index)
-                              }
-                            >
-                              <img src={editIcon} alt="edit"></img>
-                            </button>
-                            <button
-                              className="ml-3 scale-75"
-                              onClick={() =>
-                                deleteHorario(
-                                  setMiercoles,
-                                  setMiercolesString,
-                                  Miercoles,
-                                  MiercolesString,
-                                  index
-                                )
-                              }
-                            >
-                              <img src={deleteIcon} alt="delete"></img>
-                            </button>
-                          </small>
-                          { hora.horario[0] >= hora.horario[1]? <span className="text-red-600 text-sm -mt-3 ">Horario Incorrecto</span>:null}
-                          { hora.horario[0] >= hora.horario[1]? disabledSubmitCitas = true :disabledSubmitCitas = disabledSubmitCitas}
-                          {Miercoles[index].horario[2] === true ? (
-                            <div className="flex gap-2">
-                              <MobileTimePicker
-                                label="Desde"
-                                disabled={!hora.horario[2]}
-                                className="w-[70px] bg-white"
-                                value={hora.horario[0]}
-                                renderInput={(params) => (
-                                  <TextField {...params} />
-                                )}
-                                ampm={false}
-                                onChange={(newValue) => {
-                                  setMiercoles([
-                                    ...Miercoles.slice(0, index),
-                                    {
-                                      horario: [
-                                        newValue,
-                                        hora.horario[1],
-                                        true,
-                                      ],
-                                    },
-                                    ...Miercoles.slice(index + 1),
-                                  ]);
-                                  setMiercolesString([
-                                    ...MiercolesString.slice(0, index),
-                                    {
-                                      desde: stringyDate(newValue["$H"])
-                                        .toString()
-                                        .concat(":")
-                                        .concat(
-                                          stringyDate(newValue["$m"]).toString()
-                                        ),
-                                      hasta: stringyDate(hora.horario[1]["$H"])
-                                        .toString()
-                                        .concat(":")
-                                        .concat(
-                                          stringyDate(
-                                            hora.horario[1]["$m"]
-                                          ).toString()
-                                        ),
-                                    },
-                                    ...MiercolesString.slice(index + 1),
-                                  ]);
-                                }}
-                                minutesStep={5}
-                                minTime={dayjs("2014-08-18T08:00:00")}
-                                maxTime={dayjs("2014-08-18T16:45:00")}
-                              />
-                              <MobileTimePicker
-                                label="Hasta"
-                                disabled={!hora.horario[2]}
-                                className="w-[70px] bg-white"
-                                onChange={(newValue) => {
-                                  setMiercoles([
-                                    ...Miercoles.slice(0, index),
-                                    {
-                                      horario: [
-                                        hora.horario[0],
-                                        newValue,
-                                        true,
-                                      ],
-                                    },
-                                    ...Miercoles.slice(index + 1),
-                                  ]);
-                                  setMiercolesString([
-                                    ...MiercolesString.slice(0, index),
-                                    {
-                                      desde: stringyDate(hora.horario[0]["$H"])
-                                        .toString()
-                                        .concat(":")
-                                        .concat(
-                                          stringyDate(
-                                            hora.horario[0]["$m"]
-                                          ).toString()
-                                        ),
-                                      hasta: stringyDate(newValue["$H"])
-                                        .toString()
-                                        .concat(":")
-                                        .concat(
-                                          stringyDate(newValue["$m"]).toString()
-                                        ),
-                                    },
-                                    ...MiercolesString.slice(index + 1),
-                                  ]);
-                                }}
-                                value={Miercoles[index].horario[1]}
-                                renderInput={(params) => (
-                                  <TextField {...params} />
-                                )}
-                                ampm={false}
-                                minutesStep={5}
-                                minTime={hora.horario[0]}
-                                maxTime={dayjs("2014-08-18T17:00:00")}
-                              />
-                            </div>
-                          ) : null}
-                        </>
-                      ))}
-                    <button
-                      className="flex"
-                      onClick={() =>
-                        addHorario(
-                          setMiercoles,
-                          Miercoles,
-                          setMiercolesString,
-                          MiercolesString
-                        )
-                      }
-                    >
-                      <img src={addIcon} alt="edit"></img>
-                      <span className="ml-2 text-[#0061dd]">Añadir Horas</span>
-                    </button>
-                  </div>
-                </div>
-
-                <div className="my-3">
-                  <span>Jueves</span>
-                  <div className="flex flex-col gap-3">
-                    {Jueves &&
-                      Jueves.map((hora, index) => (
-                        <>
-                          {" "}
-                          <small className="font-semibold">
-                            {[
-                              stringyDate(hora.horario[0]["$H"]).toString(),
-                              stringyDate(hora.horario[0]["$m"]).toString(),
-                            ].join(":")}{" "}
-                            -{" "}
-                            {[
-                              stringyDate(hora.horario[1]["$H"]).toString(),
-                              stringyDate(hora.horario[1]["$m"]).toString(),
-                            ].join(":")}{" "}
-                            <button
-                              className="ml-6 scale-75"
-                              onClick={() =>
-                                editHorario(setJueves, Jueves, index)
-                              }
-                            >
-                              <img src={editIcon} alt="edit"></img>
-                            </button>
-                            <button
-                              className="ml-3 scale-75"
-                              onClick={() =>
-                                deleteHorario(
-                                  setJueves,
-                                  setJuevesString,
-                                  Jueves,
-                                  JuevesString,
-                                  index
-                                )
-                              }
-                            >
-                              <img src={deleteIcon} alt="delete"></img>
-                            </button>
-                          </small>
-                          { hora.horario[0] >= hora.horario[1]? <span className="text-red-600 text-sm -mt-3 ">Horario Incorrecto</span>:null}
-                          { hora.horario[0] >= hora.horario[1]? disabledSubmitCitas = true :disabledSubmitCitas = disabledSubmitCitas}
-                          {Jueves[index].horario[2] === true ? (
-                            <div className="flex gap-2">
-                              <MobileTimePicker
-                                label="Desde"
-                                disabled={!hora.horario[2]}
-                                className="w-[70px] bg-white"
-                                value={hora.horario[0]}
-                                renderInput={(params) => (
-                                  <TextField {...params} />
-                                )}
-                                ampm={false}
-                                onChange={(newValue) => {
-                                  setJueves([
-                                    ...Jueves.slice(0, index),
-                                    {
-                                      horario: [
-                                        newValue,
-                                        hora.horario[1],
-                                        true,
-                                      ],
-                                    },
-                                    ...Jueves.slice(index + 1),
-                                  ]);
-                                  setJuevesString([
-                                    ...JuevesString.slice(0, index),
-                                    {
-                                      desde: stringyDate(newValue["$H"])
-                                        .toString()
-                                        .concat(":")
-                                        .concat(
-                                          stringyDate(newValue["$m"]).toString()
-                                        ),
-                                      hasta: stringyDate(hora.horario[1]["$H"])
-                                        .toString()
-                                        .concat(":")
-                                        .concat(
-                                          stringyDate(
-                                            hora.horario[1]["$m"]
-                                          ).toString()
-                                        ),
-                                    },
-                                    ...JuevesString.slice(index + 1),
-                                  ]);
-                                }}
-                                minutesStep={5}
-                                minTime={dayjs("2014-08-18T08:00:00")}
-                                maxTime={dayjs("2014-08-18T16:45:00")}
-                              />
-                              <MobileTimePicker
-                                label="Hasta"
-                                disabled={!hora.horario[2]}
-                                className="w-[70px] bg-white"
-                                onChange={(newValue) => {
-                                  setJueves([
-                                    ...Jueves.slice(0, index),
-                                    {
-                                      horario: [
-                                        hora.horario[0],
-                                        newValue,
-                                        true,
-                                      ],
-                                    },
-                                    ...Jueves.slice(index + 1),
-                                  ]);
-                                  setJuevesString([
-                                    ...JuevesString.slice(0, index),
-                                    {
-                                      desde: stringyDate(hora.horario[0]["$H"])
-                                        .toString()
-                                        .concat(":")
-                                        .concat(
-                                          stringyDate(
-                                            hora.horario[0]["$m"]
-                                          ).toString()
-                                        ),
-                                      hasta: stringyDate(newValue["$H"])
-                                        .toString()
-                                        .concat(":")
-                                        .concat(
-                                          stringyDate(newValue["$m"]).toString()
-                                        ),
-                                    },
-                                    ...JuevesString.slice(index + 1),
-                                  ]);
-                                }}
-                                value={Jueves[index].horario[1]}
-                                renderInput={(params) => (
-                                  <TextField {...params} />
-                                )}
-                                ampm={false}
-                                minutesStep={5}
-                                minTime={hora.horario[0]}
-                                maxTime={dayjs("2014-08-18T17:00:00")}
-                              />
-                            </div>
-                          ) : null}
-                        </>
-                      ))}
-                    <button
-                      className="flex"
-                      onClick={() =>
-                        addHorario(
-                          setJueves,
-                          Jueves,
-                          setJuevesString,
-                          JuevesString
-                        )
-                      }
-                    >
-                      <img src={addIcon} alt="edit"></img>
-                      <span className="ml-2 text-[#0061dd]">Añadir Horas</span>
-                    </button>
-                  </div>
-                </div>
-                <div className="my-3">
-                  <span>Viernes</span>
-                  <div className="flex flex-col gap-3">
-                    {Viernes &&
-                      Viernes.map((hora, index) => (
-                        <>
-                          {" "}
-                          <small className="font-semibold">
-                            {[
-                              stringyDate(hora.horario[0]["$H"]).toString(),
-                              stringyDate(hora.horario[0]["$m"]).toString(),
-                            ].join(":")}{" "}
-                            -{" "}
-                            {[
-                              stringyDate(hora.horario[1]["$H"]).toString(),
-                              stringyDate(hora.horario[1]["$m"]).toString(),
-                            ].join(":")}{" "}
-                            <button
-                              className="ml-6 scale-75"
-                              onClick={() =>
-                                editHorario(setViernes, Viernes, index)
-                              }
-                            >
-                              <img src={editIcon} alt="edit"></img>
-                            </button>
-                            <button
-                              className="ml-3 scale-75"
-                              onClick={() =>
-                                deleteHorario(
-                                  setViernes,
-                                  setViernesString,
-                                  Viernes,
-                                  ViernesString,
-                                  index
-                                )
-                              }
-                            >
-                              <img src={deleteIcon} alt="delete"></img>
-                            </button>
-                          </small>
-                          { hora.horario[0] >= hora.horario[1]? <span className="text-red-600 text-sm -mt-3 ">Horario Incorrecto</span>:null}
-                          { hora.horario[0] >= hora.horario[1]? disabledSubmitCitas = true :disabledSubmitCitas = disabledSubmitCitas}
-                          {Viernes[index].horario[2] === true ? (
-                            <div className="flex gap-2">
-                              <MobileTimePicker
-                                label="Desde"
-                                disabled={!hora.horario[2]}
-                                className="w-[70px] bg-white"
-                                value={hora.horario[0]}
-                                renderInput={(params) => (
-                                  <TextField {...params} />
-                                )}
-                                ampm={false}
-                                onChange={(newValue) => {
-                                  setViernes([
-                                    ...Viernes.slice(0, index),
-                                    {
-                                      horario: [
-                                        newValue,
-                                        hora.horario[1],
-                                        true,
-                                      ],
-                                    },
-                                    ...Viernes.slice(index + 1),
-                                  ]);
-                                  setViernesString([
-                                    ...ViernesString.slice(0, index),
-                                    {
-                                      desde: stringyDate(newValue["$H"])
-                                        .toString()
-                                        .concat(":")
-                                        .concat(
-                                          stringyDate(newValue["$m"]).toString()
-                                        ),
-                                      hasta: stringyDate(hora.horario[1]["$H"])
-                                        .toString()
-                                        .concat(":")
-                                        .concat(
-                                          stringyDate(
-                                            hora.horario[1]["$m"]
-                                          ).toString()
-                                        ),
-                                    },
-                                    ...ViernesString.slice(index + 1),
-                                  ]);
-                                }}
-                                minutesStep={5}
-                                minTime={dayjs("2014-08-18T08:00:00")}
-                                maxTime={dayjs("2014-08-18T16:45:00")}
-                              />
-                              <MobileTimePicker
-                                label="Hasta"
-                                disabled={!hora.horario[2]}
-                                className="w-[70px] bg-white"
-                                onChange={(newValue) => {
-                                  setViernes([
-                                    ...Viernes.slice(0, index),
-                                    {
-                                      horario: [
-                                        hora.horario[0],
-                                        newValue,
-                                        true,
-                                      ],
-                                    },
-                                    ...Viernes.slice(index + 1),
-                                  ]);
-                                  setViernesString([
-                                    ...ViernesString.slice(0, index),
-                                    {
-                                      desde: stringyDate(hora.horario[0]["$H"])
-                                        .toString()
-                                        .concat(":")
-                                        .concat(
-                                          stringyDate(
-                                            hora.horario[0]["$m"]
-                                          ).toString()
-                                        ),
-                                      hasta: stringyDate(newValue["$H"])
-                                        .toString()
-                                        .concat(":")
-                                        .concat(
-                                          stringyDate(newValue["$m"]).toString()
-                                        ),
-                                    },
-                                    ...ViernesString.slice(index + 1),
-                                  ]);
-                                }}
-                                value={Viernes[index].horario[1]}
-                                renderInput={(params) => (
-                                  <TextField {...params} />
-                                )}
-                                ampm={false}
-                                minutesStep={5}
-                                minTime={hora.horario[0]}
-                                maxTime={dayjs("2014-08-18T17:00:00")}
-                              />
-                            </div>
-                          ) : null}
-                        </>
-                      ))}
-                    <button
-                      className="flex"
-                      onClick={() =>
-                        addHorario(
-                          setViernes,
-                          Viernes,
-                          setViernesString,
-                          ViernesString
-                        )
-                      }
-                    >
-                      <img src={addIcon} alt="edit"></img>
-                      <span className="ml-2 text-[#0061dd]">Añadir Horas</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </LocalizationProvider>
-            <button
-               disabled= {disabledSubmitCitas}
-              onClick={handleSubmitCitas}
-              className="flex mx-auto my-5 bg-[#0061dd] disabled:bg-[#0061dd]/50 text-white p-2 rounded-md shadow-md"
-              
-            >
-              Guardar Cambios
-            </button>
-          </div>
+          <HorariosColegio />
         ) : page === 2 ? (
           <div className="min-h-screen">
-             <Miplan UbiPreferente={false}/>
+            <Miplan UbiPreferente={false} />
           </div>
         ) : page === 3 ? (
-          <div className="flex flex-col gap-5 min-h-screen px-24">
-            <h1 className="text-xl font-semibold">Datos Personales</h1>
-            <form
-              className="flex flex-col gap-4"
-              onSubmit={handleSubmit(OnSubmit)}
-            >
-              <div className="flex flex-col gap-2">
-                <label htmlFor="email" className="text-base font-medium">
-                  Email Actual
-                </label>
-                <input
-                  {...register("email", {
-                    required: true,
-                  })}
-                  disabled
-                  type="email"
-                  name="email"
-                  id="email"
-                  className="p-3 rounded-md border-2 w-full lg:w-1/2 outline-none"
-                  placeholder="Ingresa el email"
-                />
-              </div>
-              <div className="flex flex-col gap-2">
-                <label htmlFor="newEmail" className="text-base font-medium">
-                  Nuevo Email
-                </label>
-                <input
-                  {...register("newEmail")}
-                  type="email"
-                  name="newEmail"
-                  id="newEmail"
-                  className="p-3 rounded-md border-2 w-full lg:w-1/2 outline-none"
-                  placeholder="Ingresa el nuevo email"
-                />
-              </div>
-              <div className="flex flex-col gap-2">
-                <label htmlFor="telefono" className="text-base font-medium">
-                  Telefono
-                </label>
-                <input
-                  {...register("telefono", {
-                    required: true,
-                  })}
-                  type="number"
-                  name="telefono"
-                  id="telefono"
-                  className="p-3 rounded-md border-2 w-full lg:w-1/2 outline-none"
-                  placeholder="Ingresa el telefono"
-                />
-              </div>
-              <div className="flex flex-col gap-2">
-                <label htmlFor="password" className="text-base font-medium">
-                  Contraseña actual
-                </label>
-                <div className="relative w-full lg:w-1/2">
-                  <input
-                    {...register("password")}
-                    type={seePassword ? "text" : "password"}
-                    name="password"
-                    id="password"
-                    className="p-3 rounded-md border-2 w-full outline-none"
-                    placeholder="Ingresa la contraseña"
-                  />
-                  {seePassword ? (
-                    <BsEye
-                      onClick={() => setSeePassword(!seePassword)}
-                      className="absolute cursor-pointer top-[35%] lg:top-[40%] right-5"
-                    />
-                  ) : (
-                    <BsEyeSlash
-                      onClick={() => setSeePassword(!seePassword)}
-                      className="absolute top-[35%] lg:top-[40%] cursor-pointer right-5"
-                    />
-                  )}
-                </div>
-              </div>
-              <div className="flex flex-col gap-2">
-                <label htmlFor="newPassword" className="text-base font-medium">
-                  Contraseña nueva
-                </label>
-                <div className="relative w-full lg:w-1/2">
-                  <input
-                    {...register("newPassword")}
-                    type={seeNewPassword ? "text" : "password"}
-                    name="newPassword"
-                    id="newPassword"
-                    className="p-3 rounded-md border-2 w-full outline-none"
-                    placeholder="Ingresa la nueva contraseña"
-                  />
-                  {seeNewPassword ? (
-                    <BsEye
-                      onClick={() => setSeeNewPassword(!seeNewPassword)}
-                      className="absolute cursor-pointer top-[35%] lg:top-[40%] right-5"
-                    />
-                  ) : (
-                    <BsEyeSlash
-                      onClick={() => setSeeNewPassword(!seeNewPassword)}
-                      className="absolute top-[35%] lg:top-[40%] cursor-pointer right-5"
-                    />
-                  )}
-                </div>
-                <div className="relative w-full lg:w-1/2">
-                  <input
-                    {...register("repitPassword")}
-                    type={seeNewPassword ? "text" : "password"}
-                    name="repitPassword"
-                    id="repitPassword"
-                    className="p-3 rounded-md border-2 w-full outline-none"
-                    placeholder="Repeti la nueva contraseña"
-                  />
-                  {seeNewPassword ? (
-                    <BsEye
-                      onClick={() => setSeeNewPassword(!seeNewPassword)}
-                      className="absolute cursor-pointer top-[35%] lg:top-[40%] right-5"
-                    />
-                  ) : (
-                    <BsEyeSlash
-                      onClick={() => setSeeNewPassword(!seeNewPassword)}
-                      className="absolute top-[35%] lg:top-[40%] cursor-pointer right-5"
-                    />
-                  )}
-                </div>
-              </div>
-              <button
-                type="submit"
-                className="bg-[#0061dd] text-white w-full lg:w-1/2 outline-none p-2 rounded-md"
-              >
-                Guardar cambios
-              </button>
-            </form>
-          </div>
+          <DatosPersonales />
         ) : page === 4 ? (
           <div className="min-h-screen">
             <div
@@ -4281,398 +2563,16 @@ console.log(center)
             </div>
           </div>
         ) : page === 6 ? (
-          <div className="min-h-screen p-10 flex flex-col gap-5">
-            <h1 className="text-xl font-medium">Crear nuevo evento</h1>
-            <p>Si no agregas una imagen se crea una plantilla por default</p>
-            <div className="flex flex-col lg:flex-row gap-5">
-              <form
-                onSubmit={handleFilesSubmitEvento}
-                className="flex flex-col"
-              >
-                <div className="file-select flex w-full lg:min-w-[200px] ">
-                  <label
-                    htmlFor="image"
-                    className="bg-white cursor-pointer p-5 w-full h-full shadow-md flex justify-center flex-col items-center rounded-t-md"
-                  >
-                    <RiImageAddLine className="text-7xl text-[#0061dd] group-focus:text-white group-hover:text-white" />
-                    <span className="text-sm mx-auto text-center text-[#0061dd]">
-                      Agregar imagen
-                    </span>{" "}
-                  </label>
-                  <input
-                    type="file"
-                    id="image"
-                    name="image"
-                    accept="image/png,image/jpeg"
-                    onChange={(e) => {
-                      setSpanOne(true);
-                      setFileEvento(e.target.files[0]);
-                    }}
-                    className="hidden"
-                  />
-                </div>
-                {fileEvento !== null && (
-                  <button
-                    type="submit"
-                    disabled={previewEvento == null}
-                    className="p-2 bg-[#0061dd] disabled:bg-[#0061dd]/50 text-white rounded-b-md"
-                  >
-                    Upload
-                  </button>
-                )}
-
-                {spanOne && (
-                  <span className="relative text-center animate-bounce text-3xl">
-                    👆
-                  </span>
-                )}
-                {previewEvento !== null && (
-                  <img
-                    src={previewEvento}
-                    alt=""
-                    className="object-cover mt-2 rounded-md"
-                  />
-                )}
-              </form>
-              <form className="flex flex-col w-full gap-2">
-                <label htmlFor="nombreEvento" className="font-medium">
-                  Nombre del Evento
-                </label>
-                <input
-                  type="text"
-                  value={evento.nombreEvento}
-                  id="nombreEvento"
-                  className="p-3 rounded-md border-2  outline-none"
-                  onChange={(e) => {
-                    setEvento({ ...evento, nombreEvento: e.target.value });
-                  }}
-                />
-                <label className="font-medium" htmlFor="descripcionEvento">
-                  Breve descripción del evento
-                </label>
-                <textarea
-                  value={evento.descripcionEvento}
-                  id="descripcionEvento"
-                  className="p-3 rounded-md border-2  outline-none"
-                  onChange={(e) => {
-                    setEvento({ ...evento, descripcionEvento: e.target.value });
-                  }}
-                />
-                <div className="lg:grid grid-cols-3 gap-5 flex flex-col">
-                  <div className="flex flex-col">
-                    <label htmlFor="tipoEvento" className="font-medium">
-                      Tipo de evento
-                    </label>
-                    <input
-                      type="text"
-                      value={evento.tipoEvento}
-                      id="tipoEvento"
-                      className="p-3 rounded-md border-2  outline-none"
-                      onChange={(e) => {
-                        setEvento({ ...evento, tipoEvento: e.target.value });
-                      }}
-                    />
-                  </div>
-                  <div className="flex flex-col">
-                    <label htmlFor="capacidadEvento" className="font-medium">
-                      Capacidad
-                    </label>
-                    <input
-                      type="number"
-                      value={evento.capacidadEvento}
-                      id="capacidadEvento"
-                      className="p-3 rounded-md border-2  outline-none"
-                      onChange={(e) => {
-                        setEvento({
-                          ...evento,
-                          capacidadEvento: e.target.value,
-                        });
-                      }}
-                    />
-                  </div>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <div className="flex w-full items-center justify-between mt-4  flex-col gap-4 lg:flex-row">
-                      <MobileDatePicker
-                        label="Elegir fecha"
-                        value={dateEvento}
-                        inputFormat="DD/MM/YYYY"
-                        renderInput={(params) => <TextField {...params} />}
-                        disablePast
-                        onChange={handleChangeDate}
-                        className="bg-white"
-                      />
-                      <MobileTimePicker
-                        label="Elegir hora"
-                        renderInput={(params) => <TextField {...params} />}
-                        ampm={false}
-                        value={timeEvento}
-                        className="bg-white"
-                        onChange={handleChangeTime}
-                      />
-                    </div>
-                  </LocalizationProvider>
-                </div>
-                <button
-                  type="button"
-                  onClick={handleSubmitEvento}
-                  disabled={disableEvento()}
-                  className="p-2 mt-2 mx-auto lg:mx-0 w-fit bg-[#0061dd] text-white rounded-md disabled:bg-[#0061dd]/40"
-                >
-                  Crear evento{" "}
-                </button>
-              </form>
-            </div>
-            {loading ? (
-              <div className="flex flex-col items-center justify-center gap-3">
-                <h1 className="text-center text-2xl font-medium">
-                  Cargando nuevos eventos...
-                </h1>
-                <CircularProgress size="3rem" />
-              </div>
-            ) : (
-              <>
-                <h1 className="text-xl font-medium">Historial de eventos</h1>
-                {oneSchool?.Eventos?.length > 0 ? (
-                  <div className="flex flex-col mx-10 gap-5">
-                    {oneSchool?.Eventos?.map((evento) => (
-                      <div className="flex lg:flex-row flex-col w-full items-center p-3 justify-around shadow-md bg-white rounded-md gap-2">
-                        {evento.imagen_evento !== "" ? (
-                          <img
-                            src={evento.imagen_evento}
-                            alt={evento.nombre_evento}
-                            className="rounded-full w-24 h-24 object-cover"
-                          />
-                        ) : oneSchool.logo !== null ? (
-                          <img
-                            src={oneSchool.logo}
-                            alt={oneSchool.nombre_colegio}
-                            className="rounded-full w-24 h-24 object-cover"
-                          />
-                        ) : null}
-                        <div className="flex flex-col text-center lg:text-start gap-2">
-                          <h2 className="font-semibold">
-                            {evento.nombre_evento}
-                          </h2>
-                          <div className="flex gap-2">
-                            <small className="font-medium">
-                              Fecha:{" "}
-                              <span className="font-normal">
-                                {evento.fecha_evento}
-                              </span>{" "}
-                            </small>
-                            <small className="font-medium">
-                              Hora:{" "}
-                              <span className="font-normal">
-                                {" "}
-                                {evento.hora_evento}
-                              </span>
-                            </small>
-                          </div>
-                        </div>
-                        <div className="flex flex-col gap-2">
-                          <small className="font-medium">
-                            Capacidad:{" "}
-                            <span className="font-normal">
-                              {evento.capacidad}
-                            </span>{" "}
-                          </small>
-                          <small className="font-medium">
-                            Inscriptos: <span className="font-normal">123</span>{" "}
-                          </small>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <button
-                            onClick={() => handleEdit(evento.id)}
-                            className="p-2 flex font-medium mx-auto lg:mx-0 w-fit text-[#0061dd] rounded-md bg-[#0061dd]/20"
-                          >
-                            Editar
-                          </button>
-                          <MdDeleteForever
-                            onClick={() => handleDelete(evento.id)}
-                            className="text-[#0061dd] text-4xl cursor-pointer"
-                          />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <h1>No hay eventos creados</h1>
-                )}
-              </>
-            )}
-            <Modal
-              open={openModal}
-              onClose={handleCloseModal}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            >
-              <Box sx={styleModal}>
-                <div className="flex flex-col lg:flex-row gap-5">
-                  <form
-                    onSubmit={handleFilesSubmitEditEvento}
-                    className="flex flex-col"
-                  >
-                    <div className="file-select flex w-full lg:min-w-[200px] ">
-                      <label
-                        htmlFor="imageEdit"
-                        className="bg-white cursor-pointer p-5 w-full h-full shadow-md flex justify-center flex-col items-center rounded-t-md"
-                      >
-                        <RiImageAddLine className="text-7xl text-[#0061dd] group-focus:text-white group-hover:text-white" />
-                        <span className="text-sm mx-auto text-center text-[#0061dd]">
-                          Modificar imagen
-                        </span>{" "}
-                      </label>
-                      <input
-                        type="file"
-                        id="imageEdit"
-                        name="imageEdit"
-                        accept="image/png,image/jpeg"
-                        onChange={(e) => {
-                          setFileEditEvento(e.target.files[0]);
-                        }}
-                        className="hidden"
-                      />
-                    </div>
-                    {hand && (
-                      <button
-                        type="submit"
-                        disabled={previewEditEvento == null}
-                        className="p-2 bg-[#0061dd] disabled:bg-[#0061dd]/50 text-white rounded-b-md"
-                      >
-                        Upload
-                      </button>
-                    )}
-
-                    {hand && (
-                      <span className="relative text-center animate-bounce text-3xl">
-                        👆
-                      </span>
-                    )}
-
-                    <img
-                      src={editEvento.image}
-                      alt=""
-                      className="object-cover mt-2 rounded-md"
-                    />
-                    {succesEditImage && (
-                      <span className="text-green-500 text-sm">
-                        Imagen modificada con exito
-                      </span>
-                    )}
-                  </form>
-                  <form className="flex flex-col w-full gap-2">
-                    <label htmlFor="nombreEvento" className="font-medium">
-                      Nombre del Evento
-                    </label>
-                    <input
-                      type="text"
-                      value={editEvento.nombreEvento}
-                      id="nombreEvento"
-                      className="p-3 rounded-md border-2  outline-none"
-                      onChange={(e) => {
-                        setEditEvento({
-                          ...editEvento,
-                          nombreEvento: e.target.value,
-                        });
-                      }}
-                    />
-                    <label htmlFor="descripcionEvento" className="font-medium">
-                      Breve descripción del evento
-                    </label>
-                    <textarea
-                      value={editEvento.descripcionEvento}
-                      id="descripcionEvento"
-                      className="p-3 rounded-md border-2  outline-none"
-                      onChange={(e) => {
-                        setEditEvento({
-                          ...editEvento,
-                          descripcionEvento: e.target.value,
-                        });
-                      }}
-                    />
-                    <div className="gap-5 flex flex-col">
-                      <div className="flex flex-col">
-                        <label htmlFor="tipoEvento" className="font-medium">
-                          Tipo de evento
-                        </label>
-                        <input
-                          type="text"
-                          value={editEvento.tipoEvento}
-                          id="tipoEvento"
-                          className="p-3 rounded-md border-2  outline-none"
-                          onChange={(e) => {
-                            setEditEvento({
-                              ...editEvento,
-                              tipoEvento: e.target.value,
-                            });
-                          }}
-                        />
-                      </div>
-                      <div className="flex flex-col">
-                        <label
-                          htmlFor="capacidadEvento"
-                          className="font-medium"
-                        >
-                          Capacidad
-                        </label>
-                        <input
-                          type="number"
-                          value={editEvento.capacidadEvento}
-                          id="capacidadEvento"
-                          className="p-3 rounded-md border-2  outline-none"
-                          onChange={(e) => {
-                            setEditEvento({
-                              ...editEvento,
-                              capacidadEvento: e.target.value,
-                            });
-                          }}
-                        />
-                      </div>
-                      <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <div className="flex w-full items-center justify-between mt-4  flex-col gap-4 lg:flex-row">
-                          <MobileDatePicker
-                            label="Elegir fecha"
-                            value={dateEditEvento}
-                            inputFormat="DD/MM/YYYY"
-                            renderInput={(params) => <TextField {...params} />}
-                            disablePast
-                            onChange={handleChangeDateEdit}
-                            className="bg-white"
-                          />
-                          <MobileTimePicker
-                            label="Elegir hora"
-                            renderInput={(params) => <TextField {...params} />}
-                            ampm={false}
-                            value={timeEditEvento}
-                            className="bg-white"
-                            onChange={handleChangeTimeEdit}
-                          />
-                        </div>
-                      </LocalizationProvider>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        handleSubmitEditEvento(editEvento.idColegio)
-                      }
-                      className="p-2 mt-2 mx-auto lg:mx-0 w-fit bg-[#0061dd] text-white rounded-md disabled:bg-[#0061dd]/40"
-                    >
-                      Modificar evento{" "}
-                    </button>
-                  </form>
-                </div>
-              </Box>
-            </Modal>
-          </div>
+          <CreateEvent setActiveUpOne={setActiveUpOne} />
         ) : page === 7 ? (
           <div className=" min-h-screen">
             <ListadeEspera />
           </div>
-        ) :  page === 8 ? (
+        ) : page === 8 ? (
           <div className=" min-h-screen">
             <UbiPreferente />
           </div>
-        ):null}
+        ) : null}
       </section>
     </div>
   );

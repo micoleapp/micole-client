@@ -30,18 +30,18 @@ export default function ModalInscripcion({
   Miplan,
 }) {
   const { isAuth, success } = useSelector((state) => state.auth);
-  console.log(OpenPaymentPLan.price);
+ 
   const [OpenRegister, setOpenRegister] = useState(true);
   const [OpenLogin, setOpenLogin] = useState(false);
 
   const toggleClose = () => {
     handleClose(false);
-    handleClosePayment({
-      ...OpenPaymentPLan,
-      state: false,
-      price: 0,
-      plan: "",
-    });
+    // handleClosePayment({
+    //   ...OpenPaymentPLan,
+    //   state: false,
+    //   price: 0,
+    //   plan: "",
+    // });
   };
 
   return (
