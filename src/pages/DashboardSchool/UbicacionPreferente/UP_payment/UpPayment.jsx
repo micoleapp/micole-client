@@ -40,8 +40,6 @@ export default function UpPayment({ open, handlerClose }) {
     e.preventDefault();
     const data = {
       colegioId: user.id,
-      planPagoId,
-      // cantidad: months,
       email: user.email,
     };
     try {

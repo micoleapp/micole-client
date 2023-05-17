@@ -4,61 +4,98 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepButton from "@mui/material/StepButton";
 import Button from "@mui/material/Button";
+import InputLabel from "@mui/material/InputLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Confetti from "react-confetti";
-import { steps } from "../MockupInfo/Pasos";
+import { steps } from "../../../MockupInfo/Pasos";
+import { useRef } from "react";
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowDown, faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import useWindowSize from "react-use-window-size";
+import ListItemText from "@mui/material/ListItemText";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import { RiImageAddLine } from "react-icons/ri";
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+import { getVacantes, getCitaAgendadas } from "../../../redux/SchoolsActions";
+import { getCita } from "../../../redux/CitasActions";
+import GridVacantes from "../../../components/GridVacantes";
+import {
+  logout,
+  getSchoolDetail,
+  setVacantesRedux,
+  getInfraestructuraSchool,
+  getAfiliacionSchool,
+} from "../../../redux/AuthActions";
 import {
   GoogleMap,
   useJsApiLoader,
   MarkerF,
   Autocomplete,
 } from "@react-google-maps/api";
-const initialDatosPrincipales = {
-  nombreColegio: oneSchool?.nombre_colegio ? oneSchool.nombre_colegio : "",
-  descripcion: oneSchool?.descripcion ? oneSchool.descripcion : "",
-  propuesta: oneSchool?.propuesta_valor ? oneSchool.propuesta_valor : "",
-  categoria: oneSchool?.Categoria ? oneSchool.Categoria : "",
-  nombreDirector: oneSchool?.nombre_director ? oneSchool.nombre_director : "",
-  fundacion: oneSchool?.fecha_fundacion
-    ? Number(oneSchool?.fecha_fundacion)
-    : null,
-  ruc: oneSchool?.ruc ? Number(oneSchool.ruc) : null,
-  ugel: oneSchool?.ugel ? Number(oneSchool.ugel) : null,
-  area: oneSchool?.area ? Number(oneSchool.area) : null,
-  ingles: oneSchool?.horas_idioma_extranjero
-    ? Number(oneSchool.horas_idioma_extranjero)
-    : null,
-  alumnos: oneSchool?.numero_estudiantes
-    ? Number(oneSchool.numero_estudiantes)
-    : null,
-  niveles: oneSchool?.Nivels?.length > 0 ? oneSchool.Nivels : [],
-  departamento: oneSchool?.Departamento ? oneSchool.Departamento : {},
-  provincia: oneSchool?.Provincium ? oneSchool.Provincium : {},
-  distrito: oneSchool?.Distrito ? oneSchool.Distrito : {},
-  direccion: oneSchool?.direccion ? oneSchool.direccion : "",
-  lat:
-    oneSchool?.ubicacion?.length > 0
-      ? JSON.parse(oneSchool.ubicacion).lat
-      : 0,
-  lng:
-    oneSchool?.ubicacion?.length > 0
-      ? JSON.parse(oneSchool.ubicacion).lng
-      : 0,
-  infraestructura: oneInfra?.Infraestructuras
-    ? oneInfra.Infraestructuras
-    : [],
-  afiliaciones: oneAfiliacion?.Afiliacions ? oneAfiliacion.Afiliacions : [],
-  dificultades: oneSchool?.Dificultades ? oneSchool.Dificultades : [],
-  metodos: oneSchool?.Metodos ? oneSchool.Metodos : [],
+import SwalProp from '../../../exports/SwalProp';
+import axios from 'axios';
+const libraries = ["places"];
+
+const containerStyle = {
+  width: "100%",
+  height: "400px",
 };
+
+const yearNow = new Date().getFullYear();
+function StandardImageList({ one, list, setImage, eliminarImagenDePreview }) {
+  {
+    return one ? (
+      <div className="flex justify-center items-center relative">
+        <button
+          onClick={() => eliminarImagenDePreview(list)}
+          className="absolute bg-[#0061dd]/30 right-2 top-2 text-white hover:bg-[#0061dd] p-2 rounded-md duration-300"
+        >
+          Quitar
+        </button>
+        <img
+          src={list}
+          alt={list}
+          onClick={() => setImage(list)}
+          className="cursor-pointer object-cover w-[200px] h-[200px] "
+        />
+      </div>
+    ) : (
+      <ImageList sx={{ width: "100%", height: 200 }} cols={2} rowHeight={200}>
+        {list.map((item) => (
+          <ImageListItem key={item}>
+            <button
+              onClick={() => eliminarImagenDePreview(item)}
+              className="absolute bg-[#0061dd]/30 right-2 top-2 text-white hover:bg-[#0061dd] p-2 rounded-md duration-300"
+            >
+              Quitar
+            </button>
+            <img
+              src={item}
+              alt={item}
+              loading="lazy"
+              onClick={() => setImage(item)}
+              className="cursor-pointer max-h-[200px] max-w-[200px] "
+            />
+          </ImageListItem>
+        ))}
+      </ImageList>
+    );
+  }
+}
 export default function FormPerfilColegio() {
+  const { width, height } = useWindowSize();
+  const [page, setPage] = React.useState(0);
+  const [activeStep, setActiveStep] = React.useState(0);
+  const [completed, setCompleted] = React.useState({});
+  const [Filtro, setFiltro] = useState("");
+
+  const dispatch = useDispatch();
   const {
     categories,
     provincias,
@@ -78,78 +115,7 @@ export default function FormPerfilColegio() {
     afiliacion: oneAfiliacion,
   } = useSelector((state) => state.auth);
 
-  const { width, height } = useWindowSize();
-  const [activeStep, setActiveStep] = React.useState(0);
-  const [completed, setCompleted] = React.useState({});
-
-  const initialCenter = {
-    lat: datosPrincipales.lat,
-    lng: datosPrincipales.lng,
-  };
-  const [center, setCenter] = React.useState(initialCenter);
-
-  useEffect(() => {
-    setCenter(initialCenter);
-  }, [datosPrincipales]);
-
-  const [map, setMap] = React.useState(null);
-  const onLoad = React.useCallback(function callback(map) {
-    // This is just an example of getting and using the map instance!!! don't just blindly copy!
-    const zoom = 18;
-    map.setZoom(zoom);
-    setMap(map);
-  }, []);
-
-  const onUnmount = React.useCallback(function callback(map) {
-    setMap(null);
-  }, []);
-
-  const direccion = useRef();
-
-  const [autocomplete, setAutocomplete] = useState(null);
-
-  const onLoadPlace = (autocomplete) => {
-    setAutocomplete(autocomplete);
-  };
-
-  const [latitud, setLatitud] = useState(null);
-  const [longitud, setLongitud] = useState(null);
-
-  const onPlaceChanged = () => {
-    if (autocomplete !== null) {
-      const place = autocomplete.getPlace();
-      setLatitud(place.geometry.location.lat());
-      setLongitud(place.geometry.location.lng());
-      setCenter({
-        lat: place.geometry.location.lat(),
-        lng: place.geometry.location.lng(),
-      });
-      setDatosPrincipales({
-        ...datosPrincipales,
-        direccion:
-          place.address_components[1].long_name +
-          " " +
-          place.address_components[0].long_name,
-        lat: place.geometry.location.lat(),
-        lng: place.geometry.location.lng(),
-      });
-    } else {
-      console.log("Autocomplete is not loaded yet!");
-    }
-  };
- 
-
-  const [datosPrincipales, setDatosPrincipales] = useState(
-    initialDatosPrincipales
-  );
-
-  const handleStep = (step) => () => {
-    setActiveStep(step);
-  };
-
-  const dispatch = useDispatch();
-
-
+  const id = user.id;
 
   const totalSteps = () => {
     return steps.length;
@@ -179,6 +145,10 @@ export default function FormPerfilColegio() {
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const handleStep = (step) => () => {
+    setActiveStep(step);
   };
 
   const handleCompleteDatosPrincipales = () => {
@@ -277,22 +247,51 @@ export default function FormPerfilColegio() {
     setActiveStep(0);
     setCompleted({});
   };
-  const handleSubmitFormComplete = (e) => {
-    e.preventDefault();
-    Swal.fire({
-      imageUrl: Success,
-      title: "Felicidades, ya estás a un paso de publicar tu colegio",
-      confirmButtonText: "Continuar",
-    }).then((res) => {
-      if (res.isConfirmed) {
-        handleReset();
-        setPage(1);
-      }
-    });
+
+  let libRef = React.useRef(libraries);
+
+  const initialDatosPrincipales = {
+    nombreColegio: oneSchool?.nombre_colegio ? oneSchool.nombre_colegio : "",
+    descripcion: oneSchool?.descripcion ? oneSchool.descripcion : "",
+    propuesta: oneSchool?.propuesta_valor ? oneSchool.propuesta_valor : "",
+    categoria: oneSchool?.Categoria ? oneSchool.Categoria : "",
+    nombreDirector: oneSchool?.nombre_director ? oneSchool.nombre_director : "",
+    fundacion: oneSchool?.fecha_fundacion
+      ? Number(oneSchool?.fecha_fundacion)
+      : null,
+    ruc: oneSchool?.ruc ? Number(oneSchool.ruc) : null,
+    ugel: oneSchool?.ugel ? Number(oneSchool.ugel) : null,
+    area: oneSchool?.area ? Number(oneSchool.area) : null,
+    ingles: oneSchool?.horas_idioma_extranjero
+      ? Number(oneSchool.horas_idioma_extranjero)
+      : null,
+    alumnos: oneSchool?.numero_estudiantes
+      ? Number(oneSchool.numero_estudiantes)
+      : null,
+    niveles: oneSchool?.Nivels?.length > 0 ? oneSchool.Nivels : [],
+    departamento: oneSchool?.Departamento ? oneSchool.Departamento : {},
+    provincia: oneSchool?.Provincium ? oneSchool.Provincium : {},
+    distrito: oneSchool?.Distrito ? oneSchool.Distrito : {},
+    direccion: oneSchool?.direccion ? oneSchool.direccion : "",
+    lat:
+      oneSchool?.ubicacion?.length > 0
+        ? JSON.parse(oneSchool.ubicacion).lat
+        : 0,
+    lng:
+      oneSchool?.ubicacion?.length > 0
+        ? JSON.parse(oneSchool.ubicacion).lng
+        : 0,
+    infraestructura: oneInfra?.Infraestructuras
+      ? oneInfra.Infraestructuras
+      : [],
+    afiliaciones: oneAfiliacion?.Afiliacions ? oneAfiliacion.Afiliacions : [],
+    dificultades: oneSchool?.Dificultades ? oneSchool.Dificultades : [],
+    metodos: oneSchool?.Metodos ? oneSchool.Metodos : [],
   };
 
-
-
+  const [datosPrincipales, setDatosPrincipales] = useState(
+    initialDatosPrincipales
+  );
 
   useEffect(() => {
     setDatosPrincipales(initialDatosPrincipales);
@@ -324,7 +323,318 @@ export default function FormPerfilColegio() {
     }
   };
 
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: "AIzaSyB9qHB47v8fOmLUiByTvWinUehYqALI6q4",
+    libraries: libRef.current,
+  });
 
+  const initialCenter = {
+    lat: datosPrincipales.lat,
+    lng: datosPrincipales.lng,
+  };
+
+  const [center, setCenter] = React.useState(initialCenter);
+
+  useEffect(() => {
+    setCenter(initialCenter);
+  }, [datosPrincipales]);
+
+  const [map, setMap] = React.useState(null);
+  const onLoad = React.useCallback(function callback(map) {
+    // This is just an example of getting and using the map instance!!! don't just blindly copy!
+    const zoom = 18;
+    map.setZoom(zoom);
+    setMap(map);
+  }, []);
+
+  const onUnmount = React.useCallback(function callback(map) {
+    setMap(null);
+  }, []);
+
+  const direccion = useRef();
+
+  const [autocomplete, setAutocomplete] = useState(null);
+
+  const onLoadPlace = (autocomplete) => {
+    setAutocomplete(autocomplete);
+  };
+
+  const [latitud, setLatitud] = useState(null);
+  const [longitud, setLongitud] = useState(null);
+
+  const onPlaceChanged = () => {
+    if (autocomplete !== null) {
+      const place = autocomplete.getPlace();
+      setLatitud(place.geometry.location.lat());
+      setLongitud(place.geometry.location.lng());
+      setCenter({
+        lat: place.geometry.location.lat(),
+        lng: place.geometry.location.lng(),
+      });
+      setDatosPrincipales({
+        ...datosPrincipales,
+        direccion:
+          place.address_components[1].long_name +
+          " " +
+          place.address_components[0].long_name,
+        lat: place.geometry.location.lat(),
+        lng: place.geometry.location.lng(),
+      });
+    } else {
+      console.log("Autocomplete is not loaded yet!");
+    }
+  };
+
+  const [isOpen, setOpen] = useState(false);
+  const [file, setFile] = useState(null);
+  const [fileLogo, setFileLogo] = useState(null);
+  const [files, setFiles] = useState(null);
+
+  const handleFilesSubmitOne = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    try {
+      formData.append("file", previewOne);
+      formData.append("upload_preset", "tcotxf16");
+      const res = await axios.post(
+        "https://api.cloudinary.com/v1_1/de4i6biay/image/upload",
+        formData
+      );
+      setMultimedia({ ...multimedia, image: res.data.secure_url });
+    } catch (error) {
+      console.log(error);
+      SwalProp({
+        status: false,
+        title: "Algo salió mal",
+        text: "Intenta nuevamente",
+      });
+    }
+    SwalProp({
+      status: true,
+      title: "Éxito",
+      text: "Imagen subida!",
+    });
+    setSpanOne(false);
+    setActiveUpOne(false);
+  };
+  const handleFilesSubmitLogo = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    try {
+      formData.append("file", previewLogo);
+      formData.append("upload_preset", "tcotxf16");
+      const res = await axios.post(
+        "https://api.cloudinary.com/v1_1/de4i6biay/image/upload",
+        formData
+      );
+      setMultimedia({ ...multimedia, logo: res.data.secure_url });
+    } catch (error) {
+      console.log(error);
+      SwalProp({
+        status: false,
+        title: "Algo salió mal",
+        text: "Intenta nuevamente",
+      });
+    }
+    SwalProp({
+      status: true,
+      title: "Éxito",
+      text: "Imagen subida!",
+    });
+    setSpanLogo(false);
+    setActiveUpLogo(false);
+  };
+
+  function handleFilesSubmit(e) {
+    e.preventDefault();
+    let arrayImages = [];
+    preview?.map(async (image, index) => {
+      const formData = new FormData();
+      try {
+        formData.append("file", image);
+        formData.append("upload_preset", "tcotxf16");
+        const res = await axios.post(
+          "https://api.cloudinary.com/v1_1/de4i6biay/image/upload",
+          formData
+        );
+        arrayImages.push(res.data.secure_url);
+        setMultimedia({
+          ...multimedia,
+          images: arrayImages,
+        });
+      } catch (error) {
+        console.log(error);
+        SwalProp({
+          status: false,
+          title: "Algo salió mal",
+          text: "Intenta nuevamente",
+        });
+      }
+    });
+    SwalProp({
+      status: true,
+      title: "Éxito",
+      text: "Imágenes subidas!",
+    });
+    setSpanTwo(false);
+    setActiveUpTwo(false);
+  }
+
+  const initialMultimedia = {
+    image:
+      oneSchool?.primera_imagen?.length > 0 ? oneSchool.primera_imagen : "",
+    images:
+      oneSchool?.galeria_fotos?.length > 0
+        ? JSON.parse(oneSchool.galeria_fotos)
+        : [],
+    video_url: oneSchool?.video_url?.length > 0 ? oneSchool.video_url : "",
+    logo: oneSchool?.logo?.length > 0 ? oneSchool.logo : "",
+  };
+
+  const [multimedia, setMultimedia] = useState(initialMultimedia);
+
+  const initialPreviewOne =
+    oneSchool?.primera_imagen?.length > 0 ? oneSchool.primera_imagen : "";
+  const initialPreview =
+    oneSchool?.galeria_fotos?.length > 0
+      ? JSON.parse(oneSchool.galeria_fotos)
+      : [];
+  const initialPreviewLogo = oneSchool?.logo?.length > 0 ? oneSchool.logo : "";
+  const [preview, setPreview] = useState(initialPreview);
+  const [previewOne, setPreviewOne] = useState(initialPreviewOne);
+  const [previewLogo, setPreviewLogo] = useState(initialPreviewLogo);
+
+  useEffect(() => {
+    if (files !== null && files !== undefined) {
+      Object.values(files).map((file) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+          setPreview((prev) => [...prev, reader.result]);
+        };
+        setActiveUpTwo(true);
+        setSpanTwo(true);
+      });
+    }
+  }, [files]);
+
+  useEffect(() => {
+    if (file !== null && file !== undefined) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        setPreviewOne(reader.result);
+      };
+      setActiveUpOne(true);
+      setSpanOne(true);
+    }
+  }, [file]);
+
+  useEffect(() => {
+    if (fileLogo !== null && fileLogo !== undefined) {
+      const reader = new FileReader();
+      reader.readAsDataURL(fileLogo);
+      reader.onloadend = () => {
+        setPreviewLogo(reader.result);
+      };
+      setActiveUpLogo(true);
+      setSpanLogo(true);
+    }
+  }, [fileLogo]);
+
+  const eliminarImagenDePreview = (img) => {
+    let newPreview = preview.filter((image) => image !== img);
+    setPreview(newPreview);
+    setMultimedia({ ...multimedia, images: newPreview });
+  };
+  useEffect(() => {
+    if (multimedia.images.length === 0) {
+      setSpanTwo(false);
+    }
+  }, [multimedia.images]);
+  const eliminarImagenDePreviewOne = (img) => {
+    setPreviewOne("");
+    setMultimedia({ ...multimedia, image: "" });
+    setSpanOne(false);
+    setActiveUpOne(false);
+  };
+  const eliminarImagenDePreviewLogo = (img) => {
+    setPreviewLogo("");
+    setMultimedia({ ...multimedia, logo: "" });
+    setActiveUpLogo(false);
+    setSpanLogo(false);
+  };
+  const [image, setImage] = useState(null);
+  const [imageLogo, setImageLogo] = useState(null);
+
+  const multimediaCompleted = () => {
+    if (
+      multimedia.image !== "" &&
+      multimedia.images.length !== 0 &&
+      multimedia.logo !== ""
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  const handleSubmitFormComplete = (e) => {
+    e.preventDefault();
+    Swal.fire({
+      imageUrl: Success,
+      title: "Felicidades, ya estás a un paso de publicar tu colegio",
+      confirmButtonText: "Continuar",
+    }).then((res) => {
+      if (res.isConfirmed) {
+        handleReset();
+        setPage(1);
+      }
+    });
+  };
+
+  const [vacantes, setVacantes] = useState(0);
+
+  const stringyDate = (date) => {
+    if (date.toString().length === 1) {
+      return "0" + date++;
+    } else {
+      return date;
+    }
+  };
+
+  const [spanOne, setSpanOne] = useState(false);
+  const [spanTwo, setSpanTwo] = useState(false);
+  const [spanLogo, setSpanLogo] = useState(false);
+  const [activeUpOne, setActiveUpOne] = useState(true);
+  const [activeUpLogo, setActiveUpLogo] = useState(true);
+  const [activeUpTwo, setActiveUpTwo] = useState(true);
+  useEffect(() => {
+    dispatch(getVacantes(datosPrincipales.niveles));
+  }, [datosPrincipales.niveles]);
+  const { citasAgendadas } = useSelector((state) => state.schools);
+
+  useEffect(() => {
+    dispatch(getCitaAgendadas());
+    dispatch(getCita());
+  }, [citasAgendadas.CitasActivas?.length]);
+
+  const [vacantesOffOne, setVacantesOffOne] = useState(true);
+  const [vacantesOffTwo, setVacantesOffTwo] = useState(true);
+  const [vacantesOffThree, setVacantesOffThree] = useState(true);
+
+  useEffect(() => {
+    if (activeStep === 3) {
+      dispatch(setVacantesRedux(id));
+    }
+    if (activeStep === 1) {
+      dispatch(getInfraestructuraSchool(id));
+    }
+    if (activeStep === 2) {
+      dispatch(getAfiliacionSchool(id));
+    }
+  }, [activeStep]);
 
 
 
