@@ -22,11 +22,9 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import { RiImageAddLine } from "react-icons/ri";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
-import { getVacantes, getCitaAgendadas } from "../../../redux/SchoolsActions";
-import { getCita } from "../../../redux/CitasActions";
+import { getVacantes } from "../../../redux/SchoolsActions";
 import GridVacantes from "../../../components/GridVacantes";
 import {
-  logout,
   getSchoolDetail,
   setVacantesRedux,
   getInfraestructuraSchool,
@@ -93,7 +91,7 @@ export default function FormPerfilColegio() {
   const [page, setPage] = React.useState(0);
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});
-  const [Filtro, setFiltro] = useState("");
+
 
   const dispatch = useDispatch();
   const {
@@ -188,7 +186,7 @@ export default function FormPerfilColegio() {
       axios
         .put(`/colegios/${user.id}`, datosPrincipales)
         .then((res) => {
-          console.log(res);
+      
           dispatch(getInfraestructuraSchool(user.id));
         })
         .catch((err) => {
@@ -209,7 +207,7 @@ export default function FormPerfilColegio() {
         .put(`/colegios/${user.id}`, datosPrincipales)
         .then((res) => {
           dispatch(getAfiliacionSchool(user.id));
-          console.log(res);
+      
         })
         .catch((err) => {
           console.log(err);
@@ -229,7 +227,7 @@ export default function FormPerfilColegio() {
       axios
         .put(`/colegios/multimedia/${user.id}`, { multimedia })
         .then((res) => {
-          console.log(res);
+     
           dispatch(getSchoolDetail(user.id));
         })
         .catch((err) => {
@@ -595,15 +593,6 @@ export default function FormPerfilColegio() {
   };
 
   const [vacantes, setVacantes] = useState(0);
-
-  const stringyDate = (date) => {
-    if (date.toString().length === 1) {
-      return "0" + date++;
-    } else {
-      return date;
-    }
-  };
-
   const [spanOne, setSpanOne] = useState(false);
   const [spanTwo, setSpanTwo] = useState(false);
   const [spanLogo, setSpanLogo] = useState(false);
@@ -613,12 +602,7 @@ export default function FormPerfilColegio() {
   useEffect(() => {
     dispatch(getVacantes(datosPrincipales.niveles));
   }, [datosPrincipales.niveles]);
-  const { citasAgendadas } = useSelector((state) => state.schools);
 
-  useEffect(() => {
-    dispatch(getCitaAgendadas());
-    dispatch(getCita());
-  }, [citasAgendadas.CitasActivas?.length]);
 
   const [vacantesOffOne, setVacantesOffOne] = useState(true);
   const [vacantesOffTwo, setVacantesOffTwo] = useState(true);
