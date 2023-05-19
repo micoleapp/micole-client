@@ -9,9 +9,49 @@ import { useDispatch } from "react-redux";
 import { BsEye } from "react-icons/bs";
 import { BsEyeSlash } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { signInWithPopup } from "firebase/auth";
+import { auth, providerGoogle,providerFacebook  } from "../../firebase-config";
+import SwalProp from "../../exports/SwalProp";
 export default function FormLogin({ handlerClose, OpenLogin, setOpenLogin }) {
+  const [userInfo, setUserInfo] = useState(null);
   const dispatch = useDispatch();
 
+  const handleFacebookLogin = () => {
+ 
+    signInWithPopup(auth, providerFacebook)
+      .then((result) => {
+        const credential = FacebookAuthProvider.credentialFromResult(result);
+        const accessToken = credential.accessToken;
+        setUserInfo(result.user);
+        console.log(accessToken);
+      })
+      .catch((err) => {
+        console.log(err);
+        // SwalProp({
+        //   status: false,
+        //   title: "Upss ...",
+        //   text: err,
+        // });
+      });
+  };
+
+  const handleGoogleLogin = () => {
+ 
+    signInWithPopup(auth, providerGoogle)
+      .then((result) => {
+    
+        setUserInfo(result.user);
+      })
+      .catch((err) => {
+        console.log(err);
+        // SwalProp({
+        //   status: false,
+        //   title: "Upss ...",
+        //   text: err,
+        // });
+      });
+  };
+  console.log(userInfo);
   const ToggleSeePass = () => {
     setseePassword(!seePassword);
   };
@@ -73,10 +113,10 @@ export default function FormLogin({ handlerClose, OpenLogin, setOpenLogin }) {
         </button>
       </form>
       <div className="text-center mb-3">
-        <p  className="  text-base">¿Has olvidado tu contraseña?</p>
+        <p className="  text-base">¿Has olvidado tu contraseña?</p>
         <p className="text-[#0061dd]  text-sm  ">Recuperar contraseña</p>
       </div>
-      
+
       <div className={style.socialMedia}>
         <p className="  text-base">Prefiero iniciar sesion con:</p>
         <div
@@ -86,9 +126,14 @@ export default function FormLogin({ handlerClose, OpenLogin, setOpenLogin }) {
             padding: "1vh",
             alignItems: "center",
           }}
-        >
-          <FB />
-          <Gmail />
+        > 
+          <div  className="cursor-pointer" onClick={handleFacebookLogin}>
+            <FB />
+          </div>
+          <div className="cursor-pointer" onClick={handleGoogleLogin}>
+              <Gmail />
+          </div>
+        
         </div>
       </div>
       <div className="text-center mb-3  p-2">
