@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { BsEye } from "react-icons/bs";
 import { BsEyeSlash } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import { signInWithPopup } from "firebase/auth";
+import { signInWithPopup , signInWithRedirect} from "firebase/auth";
 import { auth, providerGoogle,providerFacebook  } from "../../firebase-config";
 import SwalProp from "../../exports/SwalProp";
 export default function FormLogin({ handlerClose, OpenLogin, setOpenLogin }) {
@@ -18,7 +18,7 @@ export default function FormLogin({ handlerClose, OpenLogin, setOpenLogin }) {
 
   const handleFacebookLogin = () => {
  
-    signInWithPopup(auth, providerFacebook)
+    signInWithRedirect(auth, providerFacebook)
       .then((result) => {
         const credential = FacebookAuthProvider.credentialFromResult(result);
         const accessToken = credential.accessToken;
