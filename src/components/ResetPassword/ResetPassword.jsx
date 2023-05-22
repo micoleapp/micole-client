@@ -49,7 +49,7 @@ export default function ResetPassword() {
     };
     try {
       axios
-        .post("http://localhost:3001/auth/reset", data)
+        .post(`/auth/reset`, data)
         .then((res) => {
           SwalProp({
             status: true,

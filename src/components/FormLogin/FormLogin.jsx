@@ -49,7 +49,7 @@ export default function FormLogin({ handlerClose, OpenLogin, setOpenLogin }) {
       setEmail(data)
 
       axios
-        .post("http://localhost:3001/auth/recovery", {
+        .post(`/auth/recovery`, {
          mail: data,
          otp,
         })

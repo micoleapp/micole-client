@@ -23,12 +23,12 @@ export default function PassRecovery({ mail}) {
   function resendOTP() {
     if (disable) return;
     axios
-      .post("http://localhost:5000/send_recovery_email", {
-        OTP: otp,
-        recipient_email: email,
+      .post(`/auth/recovery`, {
+        mail: email,
+        otp,
+        
       })
       .then(() => setDisable(true))
-      .then(() => alert("A new OTP has succesfully been sent to your email."))
       .then(() => setTimer(60))
       .catch(console.log);
   }
@@ -67,7 +67,7 @@ export default function PassRecovery({ mail}) {
     
     inputs.forEach((input) => {
       input.addEventListener('keyup', (event) => {
-        console.log("hayaaaaaaaaa")
+        
         
         if (input.value != ""){
               const num = Number(event.key);
