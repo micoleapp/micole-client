@@ -9,7 +9,14 @@ import { useDispatch } from "react-redux";
 import { BsEye } from "react-icons/bs";
 import { BsEyeSlash } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { RecoveryContext } from "../LoginDistributor/LoginDistributor";
+import axios from "axios";
+import SwalProp from "../../exports/SwalProp";
+
+
 export default function FormLogin({ handlerClose, OpenLogin, setOpenLogin }) {
+ 
+  const { setEmail, setPage, email, setOTP } = useContext(RecoveryContext)
   const dispatch = useDispatch();
 
   const ToggleSeePass = () => {
@@ -19,6 +26,7 @@ export default function FormLogin({ handlerClose, OpenLogin, setOpenLogin }) {
   const {
     register,
     handleSubmit,
+    getValues,
     watch,
     formState: { errors },
   } = useForm({
@@ -32,6 +40,44 @@ export default function FormLogin({ handlerClose, OpenLogin, setOpenLogin }) {
   const OnSubmit = async (user) => {
     dispatch(login(user));
   };
+
+  const otpHandler = (data) => {
+    if (data) {
+      const otp = Math.floor(Math.random() * 9000 + 1000);
+      console.log(otp);
+      setOTP(otp);
+      setEmail(data)
+
+      axios
+        .post("http://localhost:3001/auth/recovery", {
+         mail: data,
+         otp,
+        })
+        .then((res) => {
+            if (res.data == "usuario inexistente"){
+              SwalProp({
+                status: false,
+                title: "Ups!...",
+                text: "No existe usuario registrado con ese correo",
+              });
+            }
+            else{ setPage("otp")} })
+        
+        .catch((err) => {
+          SwalProp({
+            status: false,
+            title: "Algo salió mal",
+            text: err.response.data.error,
+          });
+        } );
+      return;
+    }
+    SwalProp({
+      status: false,
+      title: "Ups!...",
+      text: "Debes ingresar tu correo para recuperar la contraseña",
+    });
+  }
 
   return (
     <>
@@ -74,7 +120,8 @@ export default function FormLogin({ handlerClose, OpenLogin, setOpenLogin }) {
       </form>
       <div className="text-center mb-3">
         <p  className="  text-base">¿Has olvidado tu contraseña?</p>
-        <p className="text-[#0061dd]  text-sm  ">Recuperar contraseña</p>
+        <p  onClick={()=> otpHandler(getValues("email"))} 
+        className="text-[#0061dd] text-sm  cursor-pointer" >Recuperar contraseña</p>
       </div>
       
       <div className={style.socialMedia}>
