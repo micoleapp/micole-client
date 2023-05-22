@@ -3,12 +3,16 @@ import { useForm } from "react-hook-form";
 import { register as registerUser } from "../../redux/AuthActions";
 import { Box, Modal, Typography } from "@mui/material";
 import style from "./ModalRegister.module.css";
+import LoginDistributor from "../LoginDistributor/LoginDistributor";
 import FormLogin from "../FormLogin/FormLogin";
 import ModalLogin from "../ModalLogin/ModalLogin";
 import { BsEye } from "react-icons/bs";
 import { BsEyeSlash } from "react-icons/bs";
 import FB from "../FormLogin/svg/FB";
 import Gmail from "../FormLogin/svg/Gmail";
+import { Link } from "react-router-dom";
+
+
 const style1 = {
   position: "absolute",
   top: "50%",
@@ -25,6 +29,8 @@ const style1 = {
 export default function ModalRegistroFamilia({ open, setOpen }) {
   const [OpenLogin, setOpenLogin] = useState(false);
   const [seePassword, setseePassword] = useState(false);
+  const [checkInput, setcheckInput] = useState("");
+
   const handlerOpenLogin = () => {
     setOpenLogin(true);
   };
@@ -189,6 +195,34 @@ export default function ModalRegistroFamilia({ open, setOpen }) {
                     <p className={style.p}>Campo requerido</p>
                   )}
                 </div>
+                <div className= "flex flex-column mt-2 p-2 ">
+                   
+
+                   <input
+                     
+                     type= "checkbox"
+                     {...register("checkbox", { required: true })}
+                   
+                     style={{width:18}  }
+                   />
+                    <p className="text-sm text-[1.4vh] text-start ml-2 mt-3">
+              Acepto los{" "}
+               <Link className="text-[#0061dd] hover:underline ">
+                 Términos y Condiciones de Uso y la Política de Privacidad
+               </Link>
+              
+             </p>
+           
+                 </div>
+                 { errors.checkbox  && (
+                   <p className={style.pAccept}>Requiere aceptación</p>
+                 )}
+                 <div className="flex items-center justify-center">
+                
+           </div>
+              
+              
+              
               </div>
               <div className={style.divButton}>
                 <button type="submit">REGISTRARSE</button>
@@ -237,7 +271,7 @@ export default function ModalRegistroFamilia({ open, setOpen }) {
             </form>
           )}
           {OpenLogin && (
-            <FormLogin
+            <LoginDistributor
               OpenLogin={OpenLogin}
               setOpenLogin={setOpenLogin}
               //   handlerClose={setOpenLogin}

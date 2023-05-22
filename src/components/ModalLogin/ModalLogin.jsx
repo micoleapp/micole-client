@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import FormLogin from "../FormLogin/FormLogin";
 import FormInscripcion from "../FormInscripcion/FormInscripcion";
+import LoginDistributor from "../LoginDistributor/LoginDistributor";
+import PassRecovery from "../PassRecovery/PassRecovery";
 import style from "./ModaLogin.module.css";
 import CloseButton from "../ModalInscripcion/svg/CloseButton";
 import { useSelector } from "react-redux";
@@ -28,7 +30,7 @@ export default function ModalLogin({ handlerClose }) {
               <CloseButton />
             </div>
           </div>
-     {OpenLogin ? <FormInscripcion handlerOpenLogin={setOpenLogin} OpenLogin={OpenLogin} /> : <FormLogin OpenLogin={OpenLogin} setOpenLogin={setOpenLogin} handlerClose={handlerClose} /> }
+     {OpenLogin ? <FormInscripcion handlerOpenLogin={setOpenLogin} OpenLogin={OpenLogin} /> : <LoginDistributor OpenLogin={OpenLogin} setOpenLogin={setOpenLogin} handlerClose={handlerClose} /> }
         </div>
       </div>
     </div>

@@ -52,7 +52,8 @@
   .divInputs {
     display: flex;
     flex-direction: column;
-  
+    justify-content: center;
+    align-items: center;
 
   }
   .label {
@@ -96,6 +97,14 @@
     font-size: 1.2vh;
     color: #b10000;
   }
+
+  .pAccept{
+    font-size: 1.2vh;
+    color: #b10000;
+    display: flex;
+    margin-top: -30px;
+    justify-content: center;
+  }
   
   
   
@@ -133,6 +142,11 @@
   position: absolute;
   top: 12px;
   right: 40px;
+  }
+
+  .checkbox{
+    width: 5px;
+    height: 5px;
   }
   
 
