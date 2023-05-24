@@ -23,7 +23,7 @@ import.meta.env.MODE === "development"
   : (axios.defaults.baseURL = "https://micole-production.up.railway.app");
 */
 
-import.meta.env.MODE === "development" ? (axios.defaults.baseURL = "https://api.micole.com.pe/") : (axios.defaults.baseURL = "https://api.micole.com.pe/");
+import.meta.env.MODE === "development" ? (axios.defaults.baseURL = "http://localhost:3001/") : (axios.defaults.baseURL = "https://api.micole.com.pe/");
 
 
 // let previusTitle = document.title
