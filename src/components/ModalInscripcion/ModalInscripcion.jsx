@@ -53,7 +53,7 @@ export default function ModalInscripcion({
     <Modal
       keepMounted
       open={open}
-      onClose={Openterms === false? handleClose: null}
+      onClose={handleClose}
       aria-labelledby="keep-mounted-modal-title"
       aria-describedby="keep-mounted-modal-description"
     >
@@ -95,9 +95,9 @@ export default function ModalInscripcion({
 
           {OpenLogin === false && Openterms === true && (
               <div className={style.divButton}>
-              <button onClick={() => {setOpenTerms(false)}}>ENTENDIDO</button>
-             
-            </div>
+          <button onClick={() => {setOpenTerms(false)}}>ENTENDIDO</button>
+         
+        </div>
           )}
         </div>
         <div>
