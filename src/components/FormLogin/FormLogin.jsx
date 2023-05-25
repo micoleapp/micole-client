@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import style from "./FormLogin.module.css";
 import Logo from "../../assets/logoPayment.png";
 import FB from "./svg/FB";
@@ -15,8 +14,7 @@ import SwalProp from "../../exports/SwalProp";
 
 export default function FormLogin({ handlerClose, OpenLogin, setOpenLogin }) {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
-  
+
   const ToggleSeePass = () => {
     setseePassword(!seePassword);
   };
@@ -59,15 +57,14 @@ export default function FormLogin({ handlerClose, OpenLogin, setOpenLogin }) {
                 status: true,
                 title: "Éxito!",
                 text: "Te hemos enviado un correo, léelo y sigue las instrucciones para recuperar tu contraseña",
-              }),
+              })
 
-              navigate('/')
              } })
         
         .catch((err) => {
           SwalProp({
             status: false,
-            title: "Ups!...",
+            title: "Ups...",
             text: err.response.data.error,
           });
         } );

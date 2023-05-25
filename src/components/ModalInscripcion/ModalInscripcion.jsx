@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import style from "./ModalInscripcion.module.css";
 import CloseButton from "./svg/CloseButton";
 import FormInscripcion from "../FormInscripcion/FormInscripcion";
+import Terms from "../Terms/Terms"
 import Payment from "../FormPayment/Payment";
 import FormLogin from "../FormLogin/FormLogin";
 import { useSelector } from "react-redux";
@@ -33,6 +34,7 @@ export default function ModalInscripcion({
  
   const [OpenRegister, setOpenRegister] = useState(true);
   const [OpenLogin, setOpenLogin] = useState(false);
+  const [Openterms, setOpenTerms]  = useState(false);
 
   const toggleClose = () => {
     handleClose(false);
@@ -44,7 +46,10 @@ export default function ModalInscripcion({
     // });
   };
 
+  
+
   return (
+      
     <Modal
       keepMounted
       open={open}
@@ -58,7 +63,11 @@ export default function ModalInscripcion({
             <CloseButton />
           </div>
         </div>
-        {OpenLogin === false && isAuth === false && OpenRegister === true && (
+       
+        {OpenLogin === false && isAuth === false && OpenRegister === true && Openterms === true && (
+          <Terms handlerOpenLogin={setOpenLogin} setOpenTerms={setOpenTerms} />)}
+       
+        {OpenLogin === false && isAuth === false && OpenRegister === true && Openterms === false && (
           <FormInscripcion handlerOpenLogin={setOpenLogin} />
         )}
         <div>
@@ -70,14 +79,24 @@ export default function ModalInscripcion({
               Miplan={Miplan}
             />
           )}
-          {OpenLogin === false && (
-            <div className="flex items-center justify-center">
+          {OpenLogin === false && Openterms === false && (
+           
+           
+           <div className="flex items-center justify-center">
+             
               <p className="text-sm text-[1.5vh] text-center">
                 Al adquirir nuestros planes estás aceptando los{" "}
-                <Link className="text-[#0061dd] hover:underline">
+                <Link onClick={() => setOpenTerms(true)} className="text-[#0061dd] hover:underline">
                   Términos y Condiciones de Uso y la Política de Privacidad
                 </Link>
               </p>
+            </div>
+          )}
+
+          {OpenLogin === false && Openterms === true && (
+              <div className={style.divButton}>
+              <button onClick={() => {setOpenTerms(false)}}>ENTENDIDO</button>
+             
             </div>
           )}
         </div>
