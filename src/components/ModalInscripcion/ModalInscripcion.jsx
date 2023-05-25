@@ -53,7 +53,7 @@ export default function ModalInscripcion({
     <Modal
       keepMounted
       open={open}
-      onClose={handleClose}
+      onClose={Openterms === false? handleClose: null}
       aria-labelledby="keep-mounted-modal-title"
       aria-describedby="keep-mounted-modal-description"
     >
