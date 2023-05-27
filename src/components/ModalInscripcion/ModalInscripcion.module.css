@@ -33,13 +33,35 @@
     right: 10px;
   }
 
+  .divButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1vh;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .divButton button {
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    width: 200px;
+    border-radius: 8px;
+    height: 40px;
+    background-color: #0061df;
+    margin-top: 20px;
+  }
+
     
   .contenedorModal::-webkit-scrollbar {
     -webkit-appearance: none;
   }
   
   .contenedorModal::-webkit-scrollbar:vertical {
-    width:8px;
+    width:2px;
   }
   
   .contenedorModal::-webkit-scrollbar-button:increment,.contenedor::-webkit-scrollbar-button {

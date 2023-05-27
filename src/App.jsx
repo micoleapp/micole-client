@@ -9,6 +9,7 @@ import SchoolDetail from "./pages/SchoolDetail";
 import InfoPlanes from "./components/FormPayment/utils/InfoPlanes";
 import { useSelector, useDispatch } from "react-redux";
 import Error from "./pages/Error";
+import ResetPassword from "./components/ResetPassword/ResetPassword"
 
 import DashboardSchool from "./pages/DashboardSchool";
 import { getUserByToken, getSchoolDetail } from "./redux/AuthActions";
@@ -82,6 +83,7 @@ function App() {
           <Route exact path="/enroll" element={<EnrollSchool />} />
           <Route path="/listschool" element={<ListSchool />} />
           <Route path="/schooldetail/:id" er element={<SchoolDetail />} />
+          <Route path="/reset-password/:id" element={<ResetPassword />} />
           <Route path="/comparador"  element={<Comparador />} />
           <Route path="/*" element={<Error />} />
           <Route path="*" element={<Error />} />

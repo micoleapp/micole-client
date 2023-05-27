@@ -1,0 +1,146 @@
+
+.h1_div {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color:  #0061DF;
+  margin-bottom: 20px;
+  /* padding: 20px; */
+}
+
+.h1_div h1 {
+  font-size: 28px;
+  color: #edeef0;
+  font-weight: 700;
+  
+   
+}
+
+
+
+
+
+.divButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 1vh;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.divButton button {
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  width: 200px;
+  border-radius: 8px;
+  height: 40px;
+  background-color: #0061df;
+  margin-top: 20px;
+}
+
+.divSingIn {
+  display: flex;
+  padding-top: 20px;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  width: 100%;
+}
+
+.divp {
+  overflow-y: auto;
+  height: 400px;
+  border: 2px solid rgb(231, 228, 228);
+  border-radius: 4px;
+  padding: 24px;
+  margin: 20px;
+  
+   
+  
+}
+
+
+.divp::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.divp::-webkit-scrollbar:vertical {
+  width:8px ;
+}
+
+.divp::-webkit-scrollbar-button:increment,.contenedor::-webkit-scrollbar-button {
+  display: none;
+} 
+
+.divp::-webkit-scrollbar:horizontal {
+  height: 5px;
+}
+
+.divp::-webkit-scrollbar-thumb {
+  background-color: #dfdfdf;
+  border-radius: 10px;
+  border:0.5px solid #424242;
+}
+
+.divp::-webkit-scrollbar-track {
+  border-radius: 10px;  
+}
+
+
+
+.p {
+  font-size: 14px;
+  color: #b10000;
+}
+
+
+
+
+
+.DivPass {
+  position: relative;
+}
+
+.Password {
+  position: absolute;
+  top: 12px;
+  right: 20px;
+}
+
+@media (max-width: 800px) {
+  .divInputs input {
+    width: 200px;
+    height: 40px;
+    gap: 0px;
+  }
+
+  .label {
+    color: rgb(49, 48, 48);
+    padding-top: 0px;
+  }
+
+  .form {
+    flex-direction: column;
+    padding: 10px;
+    gap: 0px;
+  }
+
+  .formLayout {
+    height: auto;
+    align-items: center;
+  }
+
+  .contenedorModal {
+    max-height: 700px;
+    overflow-y: scroll;
+  }
+
+  .h1_div h1 {
+    font-size: 20px;
+  }
+}
