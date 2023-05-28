@@ -13,20 +13,8 @@ import {
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import RotateLeftIcon from "@mui/icons-material/RotateLeft";
 import Button from "@mui/material/Button";
-// const reorderColumnList = (sourceCol, startIndex, endIndex) => {
-//   const newTaskIds = Array.from(sourceCol.taskIds);
+import ModalLeadsExternos from "./ModalAddLeadsExternos/LeadsExternos";
 
-//   const [removed] = newTaskIds.splice(startIndex, 1);
-
-//   newTaskIds.splice(endIndex, 0, removed);
-//   console.log(newTaskIds)
-//   const newColumn = {
-//     ...sourceCol,
-//     taskIds: newTaskIds,
-//   };
-
-//   return newColumn;
-// };
 
 const reorderColumnList = (sourceCol, startIndex, endIndex) => {
   const newTaskIds = [...sourceCol.taskIds];
@@ -128,10 +116,10 @@ function DragAndDrop() {
   };
   const [filterAño, setfilterAño] = useState("");
   const [filterGrado, setfilterGrado] = useState("");
-  useEffect(() => {
-    // dispatch(getCita());
-    dispatch(getCitaDnD_filtros({ filterGrado, filterAño }));
-  }, [citasAgendadas.CitasActivas?.length, success, tasks]);
+  // useEffect(() => {
+  //   // dispatch(getCita());
+  //   dispatch(getCitaDnD_filtros({ filterGrado, filterAño }));
+  // }, [citasAgendadas.CitasActivas?.length, success, tasks]);
 
   const handleChangeState = (event) => {
     // let state = event.target.value;
@@ -147,21 +135,24 @@ function DragAndDrop() {
     console.log(filterGrado, filterAño);
     dispatch(getCitaDnD_filtros({ filterGrado, filterAño }));
   };
-  const  handlerResetFiltros = () => {
-    setfilterGrado('');
-    setfilterAño('');
+  const handlerResetFiltros = () => {
+    setfilterGrado("");
+    setfilterAño("");
     dispatch(getCitaDnD_filtros({ filterGrado, filterAño }));
-  }
-
+  };
 
   const yearNow = new Date().getFullYear();
-
+  const [open, setOpen] = useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
-    <DragDropContext Scrollable onDragEnd={onDragEnd}>
+    <> 
+     <DragDropContext Scrollable onDragEnd={onDragEnd}>
       <div className="flex flex-col text-base py-2 w-full min-h-max   gap-5 duration-300  mb-6 bg-[#f6f7f8] text-[#0061dd]">
-        <div className="flex items-center flex-col my-5 ">
+        <div className="flex items-star flex-col my-5 justify-start ">
           {/* aca van los select de año de ingreso y grado*/}
-          <div style={{ display: "flex", width: "100%" }}>
+          <div className="flex flex-row items-center ">
             <FormControl sx={{ m: 1, minWidth: 100 }} size="small">
               <InputLabel id="demo-select-small">Grado</InputLabel>
 
@@ -194,13 +185,12 @@ function DragAndDrop() {
                 <MenuItem value={yearNow + 2}>{yearNow + 2} </MenuItem>
               </Select>
             </FormControl>
-            {filterGrado != ""|| filterAño != "" ? (
-              <Button
-              onClick={handlerResetFiltros}
-              >
+            {filterGrado != "" || filterAño != "" ? (
+              <Button onClick={handlerResetFiltros}>
                 <RotateLeftIcon />
               </Button>
-           ) : null} 
+            ) : null}
+            <Button variant="contained"  onClick={()=>{setOpen(true)}}>Agrear cita</Button>
           </div>
         </div>
         <div className="flex flex-col text-base lg:flex-row justify-between  gap-5 px-4">
@@ -217,7 +207,14 @@ function DragAndDrop() {
           })}
         </div>
       </div>
+      { open&&
+     < ModalLeadsExternos  open={open} handleClose={handleClose} />
+    }
     </DragDropContext>
+   
+    </>
+  
+    
   );
 }
 
