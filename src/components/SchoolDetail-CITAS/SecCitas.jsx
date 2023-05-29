@@ -41,6 +41,7 @@ export default function SecCitas({ sendDateHs }) {
     console.log(card);
     setSelectedCard([card]);
   };
+  
   return (
     <>
       <div className={style.divResponsiveDesktop}>

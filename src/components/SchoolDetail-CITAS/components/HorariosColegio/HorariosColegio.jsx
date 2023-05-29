@@ -9,16 +9,17 @@ function HorariosColegio({ diaSelecionado, sendDateHs }) {
   };
   const handlerInfo = (e, date, time, validacion) => {
     // setValidacion(true)
-
+    const dateSelected = diaSelecionado && Object.assign({}, ...diaSelecionado);
+    const objDate = dateSelected?.date;
+    console.log(date);
     let infoDiaHora = {
       time: time,
-      date: date,
+      date: objDate,
       select: validacion,
     };
 
     sendDateHs(infoDiaHora);
   };
-
 
   // Se convierte el arr  diaSelecionado a un obj y accedemos a la propiedad time que es un array
 
@@ -27,20 +28,17 @@ function HorariosColegio({ diaSelecionado, sendDateHs }) {
   const fnParse = () => {
     const arrHorarios = diaSelecionado && Object.assign({}, ...diaSelecionado);
     const objHorarios = arrHorarios?.time;
-    console.log(objHorarios);
 
     if (Array.isArray(objHorarios)) {
-      console.log("a");
       return arrHorarios?.time;
     } else {
       const newArrHorarios = [];
       newArrHorarios.push(arrHorarios?.time);
-      console.log("b");
+
       return newArrHorarios;
     }
   };
   const arrDefHorarios = fnParse();
-  console.log(arrDefHorarios);
 
   return (
     <>
@@ -50,7 +48,13 @@ function HorariosColegio({ diaSelecionado, sendDateHs }) {
           <InputLabel id="demo-select-small"> Seleccionar hora</InputLabel>
 
           <Select
-            sx={{ border: "none", outline: "none", fontSize: "2vh", width:'100%', minWidth:'20vh' }}
+            sx={{
+              border: "none",
+              outline: "none",
+              fontSize: "2vh",
+              width: "100%",
+              minWidth: "20vh",
+            }}
             labelId="demo-select-small"
             id="demo-select-small"
             value={horarioColegio}
