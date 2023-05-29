@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import React, { useEffect, useState } from "react";
+import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useSelector } from "react-redux";
 import {
   FormControl,
@@ -32,7 +32,6 @@ const styles = {
 };
 import Button from "@mui/material/Button";
 import { useForm } from "react-hook-form";
-
 
 export default function ModalLeadsExternos({ open, handleClose }) {
   const { grados } = useSelector((state) => state.schools);
@@ -77,6 +76,33 @@ export default function ModalLeadsExternos({ open, handleClose }) {
   const handleModo = () => {
     setModo(!modo);
   };
+
+  const [date, setDate] = useState(new Date());
+  const [calendarOpen, setCalendarOpen] = useState(false);
+  const [DateSelect, setDateSelect] = useState();
+  const onChangeHandler = (date) => {
+    if (date) {
+      setDate(date);
+    }
+  };
+  const dateSelected = Object.values(date);
+    const dateValue= dateSelected[4];
+  console.log(dateValue);
+  console.log(dateSelected);
+  console.log(date);
+  //   Array(12) [ 'en', undefined, new Date('2000-05-29T13:21:37.000Z'), {}, 2000, 4, 29, 1, 10, 21, 37, 303 ]
+  
+  
+  useEffect(() => {
+    
+    const dateSelected = Object.values(date);
+    const dateValue= dateSelected[4];
+  console.log(dateValue);
+  console.log(dateSelected);
+  console.log(date);
+   setDateSelect(`${dateSelected[6]}-${dateSelected[5] + 1}-${dateSelected[4]}`)
+  }, [date])
+  console.log(DateSelect)
   return (
     <Modal
       keepMounted
@@ -143,11 +169,52 @@ export default function ModalLeadsExternos({ open, handleClose }) {
               disabled={!modo}
             />
           </div>
-          {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-   
-        <DatePicker label="Basic date picker" />
-    
-    </LocalizationProvider> */}
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              open={calendarOpen}
+              onClose={() => setCalendarOpen(false)}
+              value={date}
+              onChange={(newValue) => {
+                setDate(newValue);
+              }}
+              renderInput={(params) => (
+                <div className=" flex flex-row text-[1.8vh] placeholder:text-[1.9vh] placeholder:text-[#6e6d6de8]  font-normal placeholder:pl-2   w-full h-[5vh] outline-[#ffff] border-solid border-[1px] rounded-[2px] border-[#99999966] ">
+                  {/* HACK: this next line was needed to get the calendar to render in the right position */}
+                  <input
+                  value={DateSelect}
+            // placeholder="Nombre"
+            // {...register("name", {
+            //   required: true,
+            //   maxLength: 100,
+            // })}
+            className="text-[1.8vh] placeholder:text-[1.9vh] placeholder:text-[#6e6d6de8]  font-normal placeholder:pl-2   w-full h-[5vh] outline-[#ffff] border-solid border-[1px] rounded-[2px] border-[#99999966] "
+          />
+                  <TextField
+                    style={{ opacity: 0, width: 0, height: 0 }}
+                    {...params}
+                  />
+                  <Button
+                    className="p-1"
+                    variant="outlined"
+                    onClick={() =>
+                      setCalendarOpen((calendarOpen) => !calendarOpen)
+                    }
+                  >
+                    <CalendarMonthOutlinedIcon />
+                  </Button>
+                  {/* <input
+                   value={date}
+                    placeholder="Telefono"
+                    {...register("celular", {
+                      required: true,
+                      maxLength: 100,
+                    })}
+                    className="text-[1.8vh] placeholder:text-[1.9vh] placeholder:text-[#6e6d6de8]  font-normal placeholder:pl-2   w-full h-[5vh] outline-[#ffff] border-solid border-[1px] rounded-[2px] border-[#99999966] "
+                  /> */}
+                </div>
+              )}
+            />
+          </LocalizationProvider>
           <FormControl sx={{ m: 1, minWidth: "100%" }} size="small">
             <InputLabel id="demo-select-small">Grado</InputLabel>
 
