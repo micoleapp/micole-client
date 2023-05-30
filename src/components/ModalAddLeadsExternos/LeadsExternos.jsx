@@ -4,9 +4,9 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useSelector } from "react-redux";
-import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 
-import dayjs from 'dayjs';
+import dayjs from "dayjs";
 import {
   FormControl,
   InputLabel,
@@ -16,6 +16,7 @@ import {
   Modal,
   TextField,
   Typography,
+  Stack,
 } from "@mui/material";
 const styles = {
   position: "absolute",
@@ -35,6 +36,8 @@ const styles = {
 };
 import Button from "@mui/material/Button";
 import { useForm } from "react-hook-form";
+import { postCita } from "../../redux/SchoolsActions";
+import SwalProp from "../../exports/SwalProp";
 
 export default function ModalLeadsExternos({ open, handleClose }) {
   const { grados } = useSelector((state) => state.schools);
@@ -64,23 +67,6 @@ export default function ModalLeadsExternos({ open, handleClose }) {
     mode: "onChange",
   });
 
-  const OnSubmit = async (cita) => {
-    const newLead = {
-      date: "",
-      time: "",
-      modo: modo ? "Presencial" : "Virtual",
-      nombre: cita.name,
-      celular: cita.celular,
-      correo: cita.email,
-      añoIngreso: filterAño,
-      grado: filterGrado,
-    };
-    console.log(newLead);
-  };
-  const handleModo = () => {
-    setModo(!modo);
-  };
-
   const [date, setDate] = useState(new Date());
   const [calendarOpen, setCalendarOpen] = useState(false);
   const [DateSelect, setDateSelect] = useState();
@@ -88,20 +74,63 @@ export default function ModalLeadsExternos({ open, handleClose }) {
   const dateSelected = Object.values(date);
   const dateValue = dateSelected[4];
   const [value, setValue] = React.useState();
-  const [openTime, setOpenTime] = useState(false)
+  const [openTime, setOpenTime] = useState(false);
+  const [timeValue, setTimeValue] = useState(null);
+  const [timeSelected, setTimeSelected] = useState(null);
   //   Array(12) [ 'en', undefined, new Date('2000-05-29T13:21:37.000Z'), {}, 2000, 4, 29, 1, 10, 21, 37, 303 ]
 
   useEffect(() => {
     const dateSelected = Object.values(date);
-    const dateValue = dateSelected[4];
-    console.log(dateValue);
-    console.log(dateSelected);
-    console.log(date);
-    setDateSelect(
-      `${dateSelected[6]}-${dateSelected[5] + 1}-${dateSelected[4]}`
-    );
-  }, [date]);
+    const TimeSelect = timeValue && Object.values(timeValue);
+    if (TimeSelect !== null) {
+      const timeSelectValue = {
+        h: TimeSelect[8] === 0 ? 12 : TimeSelect[8],
+        m: TimeSelect[9] === 0 ? "00" : TimeSelect[9],
+      };
+      setTimeSelected(`${timeSelectValue.h}:${timeSelectValue.m}`);
+    }
 
+    setDateSelect(
+      `${dateSelected[6]}/${dateSelected[5] + 1}/${dateSelected[4]}`
+    );
+  }, [date, timeValue]);
+
+  const OnSubmit = async (cita) => {
+    console.log(cita);
+
+    const newLead = {
+      date: DateSelect,
+      time: timeSelected,
+      modo: modo ? "Presencial" : "Virtual",
+      nombre: cita.name,
+      celular: cita.celular,
+      correo: cita.email,
+      añoIngreso: filterAño,
+      grado: filterGrado,
+      dnd: true,
+    };
+    console.log(newLead);
+    if (
+      newLead.correo === "" ||
+      newLead.celular === "" ||
+      newLead.nombre === "" 
+      // newLead.time === null
+    ) {
+      // dispatch(postCita(newLead));
+      console.log("A");
+    } else {
+      console.log("b");
+      // SwalProp({
+      //   status: false,
+
+      //   title: "Ups...",
+      //   text: "Debes llenar todos los datos para continuar",
+      // });
+    }
+  };
+  const handleModo = () => {
+    setModo(!modo);
+  };
   return (
     <Modal
       keepMounted
@@ -168,121 +197,30 @@ export default function ModalLeadsExternos({ open, handleClose }) {
               disabled={!modo}
             />
           </div>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker
-              open={calendarOpen}
-              onClose={() => setCalendarOpen(false)}
-              value={date}
-              onChange={(newValue) => {
-                setDate(newValue);
-              }}
-              renderInput={(params) => (
-                <div className=" flex flex-row text-[1.8vh] placeholder:text-[1.9vh] placeholder:text-[#6e6d6de8]  font-normal placeholder:pl-2   w-full h-[5vh] outline-[#ffff] border-solid border-[1px] rounded-[2px] border-[#99999966] ">
-                  {/* HACK: this next line was needed to get the calendar to render in the right position */}
-                  <input
-                    value={DateSelect}
-                    className="text-[1.8vh] placeholder:text-[1.9vh] placeholder:text-[#6e6d6de8]  font-normal placeholder:pl-2   w-full h-[5vh] outline-[#ffff] border-solid border-[1px] rounded-[2px] border-[#99999966] "
-                  />
-                  <TextField
-                    style={{ opacity: 0, width: 0, height: 0 }}
-                    {...params}
-                  />
-                  <Button
-                    className="p-1"
-                    variant="outlined"
-                    onClick={() =>
-                      setCalendarOpen((calendarOpen) => !calendarOpen)
-                    }
-                  >
-                    <CalendarMonthOutlinedIcon />
-                  </Button>
-                  {/* <input
-                   value={date}
-                    placeholder="Telefono"
-                    {...register("celular", {
-                      required: true,
-                      maxLength: 100,
-                    })}
-                    className="text-[1.8vh] placeholder:text-[1.9vh] placeholder:text-[#6e6d6de8]  font-normal placeholder:pl-2   w-full h-[5vh] outline-[#ffff] border-solid border-[1px] rounded-[2px] border-[#99999966] "
-                  /> */}
-                </div>
-              )}
-            />
-                <TimePicker
-              format="hh:mm"
-          // defaultValue={dayjs('2022-04-17T15:30')} 
-          open={openTime}
-          onClose={() =>  setOpenTime((openTime) => !openTime)}
-          value={value}
-          onChange={(newValue) => {
-            setValue(newValue);
-          }}
-          renderInput={(params) => (
-            <div className=" flex flex-row text-[1.8vh] placeholder:text-[1.9vh] placeholder:text-[#6e6d6de8]  font-normal placeholder:pl-2   w-full h-[5vh] outline-[#ffff] border-solid border-[1px] rounded-[2px] border-[#99999966] ">
-      
-              <input
-                value={value}
-                className="text-[1.8vh] placeholder:text-[1.9vh] placeholder:text-[#6e6d6de8]  font-normal placeholder:pl-2   w-full h-[5vh] outline-[#ffff] border-solid border-[1px] rounded-[2px] border-[#99999966] "
+          <Stack direction="row" spacing={2} mt={3}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                value={date}
+                onChange={(newValue) => {
+                  setDate(newValue);
+                }}
+                renderInput={(props) => <TextField {...props} />}
               />
-              <TextField
-                style={{ opacity: 0, width: 0, height: 0 }}
-                {...params}
-              />
-              <Button
-                className="p-1"
-                variant="outlined"
-                onClick={() =>
-                  setOpenTime((openTime) => !openTime)
-                }
-              >
-                <CalendarMonthOutlinedIcon />
-              </Button>
-            
-            </div>
-          )}
-          
-          />
-          </LocalizationProvider>
-          {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-        
-          <TimePicker
-          defaultValue={dayjs('2022-04-17T15:30')} 
-          open={openTime}
-          onClose={() => setCalendarOpen(false)}
-          value={value}
-          onChange={(newValue) => {
-            setValue(newValue);
-          }}
-          renderInput={(params) => (
-            <div className=" flex flex-row text-[1.8vh] placeholder:text-[1.9vh] placeholder:text-[#6e6d6de8]  font-normal placeholder:pl-2   w-full h-[5vh] outline-[#ffff] border-solid border-[1px] rounded-[2px] border-[#99999966] ">
-      
-              <input
-                value={value}
-                className="text-[1.8vh] placeholder:text-[1.9vh] placeholder:text-[#6e6d6de8]  font-normal placeholder:pl-2   w-full h-[5vh] outline-[#ffff] border-solid border-[1px] rounded-[2px] border-[#99999966] "
-              />
-              <TextField
-                style={{ opacity: 0, width: 0, height: 0 }}
-                {...params}
-              />
-              <Button
-                className="p-1"
-                variant="outlined"
-                onClick={() =>
-                  setOpenTime((openTime) => !openTime)
-                }
-              >
-                <CalendarMonthOutlinedIcon />
-              </Button>
-            
-            </div>
-          )}
-          
-          />
-   
-      
-   
+            </LocalizationProvider>
+          </Stack>
 
-    </LocalizationProvider> */}
+          <Stack direction="row" spacing={2} mt={3}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <TimePicker
+                value={timeValue}
+                onChange={(newValue) => {
+                  setTimeValue(newValue);
+                }}
+                renderInput={(props) => <TextField {...props} />}
+              />
+            </LocalizationProvider>
+          </Stack>
+
           <FormControl sx={{ m: 1, minWidth: "100%" }} size="small">
             <InputLabel id="demo-select-small">Grado</InputLabel>
 
@@ -295,7 +233,9 @@ export default function ModalLeadsExternos({ open, handleClose }) {
               onChange={handleChangeStateGrado}
             >
               {grados?.map((g) => (
-                <MenuItem value={g.id}>{g.nombre_grado} </MenuItem>
+                <MenuItem key={g} value={g.id}>
+                  {g.nombre_grado}{" "}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -316,7 +256,7 @@ export default function ModalLeadsExternos({ open, handleClose }) {
             </Select>
           </FormControl>
           <Button type="submit" variant="contained">
-            Agregar
+            Añadir
           </Button>
         </form>
       </Box>
