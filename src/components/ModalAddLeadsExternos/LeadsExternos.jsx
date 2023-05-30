@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
-import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useSelector } from "react-redux";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
-
-import dayjs from "dayjs";
 import {
   FormControl,
   InputLabel,
@@ -63,18 +60,14 @@ export default function ModalLeadsExternos({ open, handleClose }) {
     defaultValues: {
       name: "",
       email: "",
+      celular: "",
     },
     mode: "onChange",
   });
 
   const [date, setDate] = useState(new Date());
-  const [calendarOpen, setCalendarOpen] = useState(false);
   const [DateSelect, setDateSelect] = useState();
 
-  const dateSelected = Object.values(date);
-  const dateValue = dateSelected[4];
-  const [value, setValue] = React.useState();
-  const [openTime, setOpenTime] = useState(false);
   const [timeValue, setTimeValue] = useState(null);
   const [timeSelected, setTimeSelected] = useState(null);
   //   Array(12) [ 'en', undefined, new Date('2000-05-29T13:21:37.000Z'), {}, 2000, 4, 29, 1, 10, 21, 37, 303 ]
@@ -109,23 +102,18 @@ export default function ModalLeadsExternos({ open, handleClose }) {
       grado: filterGrado,
       dnd: true,
     };
-    console.log(newLead);
+ 
     if (
       newLead.date === "undefined/NaN/undefined" &&
       newLead.time === null
-      // newLead.time === null
+   
     ) {
-      // dispatch(postCita(newLead));
-      console.log("A");
+    
       setError(true);
     } else {
-      console.log("b");
-      // SwalProp({
-      //   status: false,
-
-      //   title: "Ups...",
-      //   text: "Debes llenar todos los datos para continuar",
-      // });
+   
+      setError(false);
+      dispatch(postCita(newLead));
     }
   };
   const handleModo = () => {
@@ -248,17 +236,22 @@ export default function ModalLeadsExternos({ open, handleClose }) {
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <TimePicker
                 value={timeValue}
-               fullWidth
+                fullWidth
                 onChange={(newValue) => {
                   setTimeValue(newValue);
                 }}
-                renderInput={(props) => <TextField  sx={{width:'100%'}} {...props} />}
+                renderInput={(props) => (
+                  <TextField sx={{ width: "100%" }} {...props} />
+                )}
               />
             </LocalizationProvider>
           </Stack>
 
-       
-          {error && <p className="text-[1.6vh] text-[#]">Debes llenar todos los datos para continuar</p>}
+          {error && (
+            <p className="text-[1.6vh] text-[#BF4747]">
+              Debes llenar todos los datos para continuar
+            </p>
+          )}
           <Button type="submit" variant="contained">
             Añadir
           </Button>
