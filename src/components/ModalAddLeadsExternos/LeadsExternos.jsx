@@ -5,7 +5,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useSelector } from "react-redux";
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
-import { DesktopTimePicker } from '@mui/x-date-pickers/DesktopTimePicker';
+
 import dayjs from 'dayjs';
 import {
   FormControl,
@@ -42,7 +42,7 @@ export default function ModalLeadsExternos({ open, handleClose }) {
   const [filterAño, setfilterAño] = useState("");
   const [filterGrado, setfilterGrado] = useState("");
   const [modo, setModo] = React.useState(true);
-  const [value, setValue] = React.useState(dayjs('2022-04-17T15:30'));
+
   const handleChangeState = (event) => {
     setfilterAño(event.target.value);
   };
@@ -87,7 +87,8 @@ export default function ModalLeadsExternos({ open, handleClose }) {
 
   const dateSelected = Object.values(date);
   const dateValue = dateSelected[4];
-  
+  const [value, setValue] = React.useState();
+  const [openTime, setOpenTime] = useState(false)
   //   Array(12) [ 'en', undefined, new Date('2000-05-29T13:21:37.000Z'), {}, 2000, 4, 29, 1, 10, 21, 37, 303 ]
 
   useEffect(() => {
@@ -207,15 +208,81 @@ export default function ModalLeadsExternos({ open, handleClose }) {
                 </div>
               )}
             />
+                <TimePicker
+              format="hh:mm"
+          // defaultValue={dayjs('2022-04-17T15:30')} 
+          open={openTime}
+          onClose={() =>  setOpenTime((openTime) => !openTime)}
+          value={value}
+          onChange={(newValue) => {
+            setValue(newValue);
+          }}
+          renderInput={(params) => (
+            <div className=" flex flex-row text-[1.8vh] placeholder:text-[1.9vh] placeholder:text-[#6e6d6de8]  font-normal placeholder:pl-2   w-full h-[5vh] outline-[#ffff] border-solid border-[1px] rounded-[2px] border-[#99999966] ">
+      
+              <input
+                value={value}
+                className="text-[1.8vh] placeholder:text-[1.9vh] placeholder:text-[#6e6d6de8]  font-normal placeholder:pl-2   w-full h-[5vh] outline-[#ffff] border-solid border-[1px] rounded-[2px] border-[#99999966] "
+              />
+              <TextField
+                style={{ opacity: 0, width: 0, height: 0 }}
+                {...params}
+              />
+              <Button
+                className="p-1"
+                variant="outlined"
+                onClick={() =>
+                  setOpenTime((openTime) => !openTime)
+                }
+              >
+                <CalendarMonthOutlinedIcon />
+              </Button>
+            
+            </div>
+          )}
+          
+          />
           </LocalizationProvider>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
+          {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
         
-          <DesktopTimePicker defaultValue={dayjs('2022-04-17T15:30')} />
+          <TimePicker
+          defaultValue={dayjs('2022-04-17T15:30')} 
+          open={openTime}
+          onClose={() => setCalendarOpen(false)}
+          value={value}
+          onChange={(newValue) => {
+            setValue(newValue);
+          }}
+          renderInput={(params) => (
+            <div className=" flex flex-row text-[1.8vh] placeholder:text-[1.9vh] placeholder:text-[#6e6d6de8]  font-normal placeholder:pl-2   w-full h-[5vh] outline-[#ffff] border-solid border-[1px] rounded-[2px] border-[#99999966] ">
+      
+              <input
+                value={value}
+                className="text-[1.8vh] placeholder:text-[1.9vh] placeholder:text-[#6e6d6de8]  font-normal placeholder:pl-2   w-full h-[5vh] outline-[#ffff] border-solid border-[1px] rounded-[2px] border-[#99999966] "
+              />
+              <TextField
+                style={{ opacity: 0, width: 0, height: 0 }}
+                {...params}
+              />
+              <Button
+                className="p-1"
+                variant="outlined"
+                onClick={() =>
+                  setOpenTime((openTime) => !openTime)
+                }
+              >
+                <CalendarMonthOutlinedIcon />
+              </Button>
+            
+            </div>
+          )}
+          
+          />
    
       
    
 
-    </LocalizationProvider>
+    </LocalizationProvider> */}
           <FormControl sx={{ m: 1, minWidth: "100%" }} size="small">
             <InputLabel id="demo-select-small">Grado</InputLabel>
 
