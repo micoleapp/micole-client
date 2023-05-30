@@ -45,7 +45,7 @@ export default function ModalLeadsExternos({ open, handleClose }) {
   const [filterAño, setfilterAño] = useState("");
   const [filterGrado, setfilterGrado] = useState("");
   const [modo, setModo] = React.useState(true);
-
+  const [error, setError] = useState(false);
   const handleChangeState = (event) => {
     setfilterAño(event.target.value);
   };
@@ -111,13 +111,13 @@ export default function ModalLeadsExternos({ open, handleClose }) {
     };
     console.log(newLead);
     if (
-      newLead.correo === "" ||
-      newLead.celular === "" ||
-      newLead.nombre === "" 
+      newLead.date === "undefined/NaN/undefined" &&
+      newLead.time === null
       // newLead.time === null
     ) {
       // dispatch(postCita(newLead));
       console.log("A");
+      setError(true);
     } else {
       console.log("b");
       // SwalProp({
@@ -183,44 +183,20 @@ export default function ModalLeadsExternos({ open, handleClose }) {
               value={"Presencial"}
               className={`border w-[120px] ${
                 modo ? "bg-[#0061dd] text-white" : "cursor-pointer"
-              } py-2 rounded-md shadow-lg duration-300`}
+              } py-[2px] rounded-md shadow-lg duration-300`}
               onClick={handleModo}
               disabled={modo}
             />
             <input
               type="button"
               value={"Virtual"}
-              className={`border w-[120px] py-2 rounded-md shadow-lg ${
+              className={`border w-[120px] py-[2px] rounded-md shadow-lg ${
                 !modo ? "bg-[#0061dd] text-white" : "cursor-pointer"
               } duration-300`}
               onClick={handleModo}
               disabled={!modo}
             />
           </div>
-          <Stack direction="row" spacing={2} mt={3}>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker
-                value={date}
-                onChange={(newValue) => {
-                  setDate(newValue);
-                }}
-                renderInput={(props) => <TextField {...props} />}
-              />
-            </LocalizationProvider>
-          </Stack>
-
-          <Stack direction="row" spacing={2} mt={3}>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <TimePicker
-                value={timeValue}
-                onChange={(newValue) => {
-                  setTimeValue(newValue);
-                }}
-                renderInput={(props) => <TextField {...props} />}
-              />
-            </LocalizationProvider>
-          </Stack>
-
           <FormControl sx={{ m: 1, minWidth: "100%" }} size="small">
             <InputLabel id="demo-select-small">Grado</InputLabel>
 
@@ -255,6 +231,34 @@ export default function ModalLeadsExternos({ open, handleClose }) {
               <MenuItem value={yearNow + 2}>{yearNow + 2} </MenuItem>
             </Select>
           </FormControl>
+          <h1 className="w-full text-start text-[1.9vh]">Horario / Fecha</h1>
+          <Stack direction="row" spacing={2} mt={1}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                value={date}
+                onChange={(newValue) => {
+                  setDate(newValue);
+                }}
+                renderInput={(props) => <TextField {...props} />}
+              />
+            </LocalizationProvider>
+          </Stack>
+
+          <Stack direction="row" spacing={1} mt={1}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <TimePicker
+                value={timeValue}
+               fullWidth
+                onChange={(newValue) => {
+                  setTimeValue(newValue);
+                }}
+                renderInput={(props) => <TextField  sx={{width:'100%'}} {...props} />}
+              />
+            </LocalizationProvider>
+          </Stack>
+
+       
+          {error && <p className="text-[1.6vh] text-[#]">Debes llenar todos los datos para continuar</p>}
           <Button type="submit" variant="contained">
             Añadir
           </Button>
