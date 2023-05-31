@@ -17,18 +17,27 @@ import Button from "@mui/material/Button";
 import BalanceIcon from "@mui/icons-material/Balance";
 import Comentarios from "../Comentarios/Comentarios";
 import style from "./TabsD.module.css";
+import { getDataSchools } from "../../../redux/ComparadorActions";
+import { useDispatch } from "react-redux";
 export default function TabsDetail({
   id,
   gradoParams,
   ingresoParams,
   nombre_grado,
   listaParams,
+  handlerOpenComparador
 }) {
   const { oneSchool } = useSelector((state) => state.schools);
+  const dispatch=useDispatch()
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
   const [value, setValue] = useState("1");
+  const handlerComparador = (e, id) => {
+    console.log(id);
+    dispatch(getDataSchools({ id }));
+    handlerOpenComparador()
+  };
 
   return (
     <main className="flex gap-5 flex-col lg:flex-row">

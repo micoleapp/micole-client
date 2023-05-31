@@ -109,6 +109,7 @@ function SchoolDetail() {
             ingresoParams={ingresoParams}
             nombre_grado={nombre_grado}
             listaParams={listaParams}
+            handlerOpenComparador={handlerOpenComparador}
           />
 
           {/* ---------------------------------Modales---------------------------------------------- */}
