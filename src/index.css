@@ -5,6 +5,10 @@
 *{
   font-family: Poppins;
 }
+body{
+  zoom: 0.8;
+  zoom: 90%;
+}
 
 .hr {
   border: 0 none #7d769d66;

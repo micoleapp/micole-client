@@ -35,8 +35,10 @@ import Button from "@mui/material/Button";
 import { useForm } from "react-hook-form";
 import { postCita } from "../../redux/SchoolsActions";
 import SwalProp from "../../exports/SwalProp";
+import { useDispatch } from "react-redux";
 
 export default function ModalLeadsExternos({ open, handleClose }) {
+  const dispatch = useDispatch()
   const { grados } = useSelector((state) => state.schools);
   const yearNow = new Date().getFullYear();
   const [filterAño, setfilterAño] = useState("");
@@ -72,7 +74,7 @@ export default function ModalLeadsExternos({ open, handleClose }) {
   const [timeSelected, setTimeSelected] = useState(null);
   //   Array(12) [ 'en', undefined, new Date('2000-05-29T13:21:37.000Z'), {}, 2000, 4, 29, 1, 10, 21, 37, 303 ]
 
-  useEffect(() => {
+  const handlerPickers = () => {
     const dateSelected = Object.values(date);
     const TimeSelect = timeValue && Object.values(timeValue);
     if (TimeSelect !== null) {
@@ -86,7 +88,7 @@ export default function ModalLeadsExternos({ open, handleClose }) {
     setDateSelect(
       `${dateSelected[6]}/${dateSelected[5] + 1}/${dateSelected[4]}`
     );
-  }, [date, timeValue]);
+  };
 
   const OnSubmit = async (cita) => {
     console.log(cita);
@@ -102,18 +104,14 @@ export default function ModalLeadsExternos({ open, handleClose }) {
       grado: filterGrado,
       dnd: true,
     };
- 
-    if (
-      newLead.date === "undefined/NaN/undefined" &&
-      newLead.time === null
-   
-    ) {
-    
+
+    if (newLead.date === "undefined/NaN/undefined" && newLead.time === null) {
       setError(true);
     } else {
-   
       setError(false);
       dispatch(postCita(newLead));
+      handleClose()
+  
     }
   };
   const handleModo = () => {
@@ -226,6 +224,7 @@ export default function ModalLeadsExternos({ open, handleClose }) {
                 value={date}
                 onChange={(newValue) => {
                   setDate(newValue);
+                  handlerPickers();
                 }}
                 renderInput={(props) => <TextField {...props} />}
               />
@@ -239,6 +238,7 @@ export default function ModalLeadsExternos({ open, handleClose }) {
                 fullWidth
                 onChange={(newValue) => {
                   setTimeValue(newValue);
+                  handlerPickers();
                 }}
                 renderInput={(props) => (
                   <TextField sx={{ width: "100%" }} {...props} />
