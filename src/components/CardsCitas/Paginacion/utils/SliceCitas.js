@@ -5,8 +5,7 @@
       const chunk =arr.slice(i, i + chunkSize);
       res.push(chunk);
     }
-    console.log(arr)
-    console.log(res.length)
+
     return res;
   }
   

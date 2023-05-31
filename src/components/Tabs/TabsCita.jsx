@@ -24,7 +24,6 @@ export default function NavTabs({ task, handleCloseModal }) {
   const [OpenDelete, setOpenDelete] = useState(false);
   const [CitaID, setCitaID] = useState("");
   const dispatch = useDispatch();
-  console.log(OpenDelete);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

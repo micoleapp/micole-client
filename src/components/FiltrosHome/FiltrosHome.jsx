@@ -29,20 +29,20 @@ function FiltrosHome() {
   };
 
 /* const handleSubmit = (event) => {
-  console.log("hola");
+
   dispatch(getFilterListSchool(data, 1));
 } */
 
 const handleValueDistrito =(event)=>{
-  console.log(event.target.value)
+  
   setDistrito(event.target.value)
 }
 const handleValueGrado =(event)=>{
-console.log(event.target.value)
+
 setGrado(event.target.value)
 }
 const handleValueAño =(event)=>{
-  console.log(event.target.value)
+  
   setIngreso(event.target.value)
 }
   return (

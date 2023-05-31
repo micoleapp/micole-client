@@ -41,7 +41,7 @@ const [openMFiltros, setOpenMFiltros] = useState(false)
   );
 
   const dispatch = useDispatch();
-  console.log(filterSelected);
+
   const handleChangeState = (event) => {
     dispatch(filterAdminState());
     setFilterSelected({
@@ -75,7 +75,7 @@ const [openMFiltros, setOpenMFiltros] = useState(false)
     }
   };
   // filterAdminState
-  console.log(OptionSelectedState);
+
   return (
     <>
       <div

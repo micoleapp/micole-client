@@ -82,7 +82,7 @@ export default function PageAfiliaciones() {
         logo: res.data.secure_url,
       });
     } catch (error) {
-      console.log(error);
+   
       SwalProp({
         status: false,
         title: "Algo salió mal",
@@ -126,7 +126,7 @@ export default function PageAfiliaciones() {
           });
         });
     } catch (error) {
-      console.log(error);
+
     }
   };
 
@@ -172,7 +172,7 @@ export default function PageAfiliaciones() {
         }
       });
     } catch (error) {
-      console.log(error);
+   
     }
   };
 
@@ -254,7 +254,7 @@ export default function PageAfiliaciones() {
       setHand(false);
       setSuccesEditImage(true);
     } catch (error) {
-      console.log(error);
+
     }
     setSpanOne(false);
   };
@@ -273,7 +273,7 @@ export default function PageAfiliaciones() {
   }, [fileEdit]);
 
   const handleSubmitEdit = (e) => {
-    console.log(editedInfra)
+
     e.preventDefault();
     try {
       axios
@@ -298,7 +298,7 @@ export default function PageAfiliaciones() {
           });
         });
     } catch (error) {
-      console.log(error);
+   
     }
   };
 

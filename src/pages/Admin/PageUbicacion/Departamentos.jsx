@@ -59,7 +59,7 @@ function Departamentos() {
           });
         });
     } catch (error) {
-      console.log(error);
+      
     }
   };
   useEffect(() => {
@@ -92,7 +92,7 @@ function Departamentos() {
           });
         });
     } catch (error) {
-      console.log(error);
+      
     }
   };
 
@@ -117,7 +117,7 @@ function Departamentos() {
           });
         });
     } catch (error) {
-      console.log(error);
+      
     }
   };
 
@@ -172,7 +172,7 @@ function Departamentos() {
 
   const [filterPais, setFilterPais] = useState("");
 
-  console.log(paises)
+
 
   return (
     <div className="flex flex-col gap-3">

@@ -104,7 +104,7 @@ const ImageSlider = ({ images }) => {
 };
 
 const SliderC = ({images,setImages}) => {
-  console.log(setImages)
+ 
   return (
     <div className="h-[100vh] w-[100vw] fixed top-0 flex justify-center items-center bg-black/70 z-50">
       <button className="absolute top-5 right-5 text-xl bg-transparent text-white" onClick={()=>setImages({open:false,src:""})}>Atras</button>

@@ -84,7 +84,7 @@ export default function PageInfraestructura() {
         imagen: res.data.secure_url,
       });
     } catch (error) {
-      console.log(error);
+      
       SwalProp({
         status: false,
         title: "Algo salió mal",
@@ -128,7 +128,7 @@ export default function PageInfraestructura() {
           });
         });
     } catch (error) {
-      console.log(error);
+      
     }
   };
 
@@ -174,7 +174,7 @@ export default function PageInfraestructura() {
         }
       });
     } catch (error) {
-      console.log(error);
+      
     }
   };
 
@@ -256,7 +256,7 @@ export default function PageInfraestructura() {
       setHand(false);
       setSuccesEditImage(true);
     } catch (error) {
-      console.log(error);
+      
     }
     setSpanOne(false);
   };
@@ -299,7 +299,7 @@ export default function PageInfraestructura() {
           });
         });
     } catch (error) {
-      console.log(error);
+      
     }
   };
 

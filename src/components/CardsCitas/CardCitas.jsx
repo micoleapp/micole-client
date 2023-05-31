@@ -58,7 +58,6 @@ function BtnPutCitas({ id }) {
 
     putStateCita(id, setLoading);
   };
-  console.log(Toggle);
 
   return (
     <>
@@ -92,7 +91,7 @@ export default function CardCitas({ data, filtros, setPlan }) {
     setPlan(5);
   };
   const comprobacion = (iD) => {
-    console.log(Inactivas);
+
     const CitasConfirmadas = Inactivas.find((ele) => ele.id === iD);
     setActivas([...Activas, CitasConfirmadas]);
     setInactivas([Inactivas[0].filter((ele) => ele.id !== iD)]);
@@ -283,7 +282,7 @@ export default function CardCitas({ data, filtros, setPlan }) {
                           <div>
                             {grados &&
                               grados.map((ele) => {
-                                console.log(ele.id === cita.GradoId);
+                              
                                 if (ele.id === cita.GradoId) {
                                   return (
                                     <Chip
@@ -482,7 +481,7 @@ export default function CardCitas({ data, filtros, setPlan }) {
                           <div>
                             {grados &&
                               grados.map((ele) => {
-                                console.log(ele.id === cita.GradoId);
+                             
                                 if (ele.id === cita.GradoId) {
                                   return (
                                     <Chip
@@ -673,7 +672,7 @@ export default function CardCitas({ data, filtros, setPlan }) {
                           <div>
                             {grados &&
                               grados.map((ele) => {
-                                console.log(ele.id === cita.GradoId);
+                               
                                 if (ele.id === cita.GradoId) {
                                   return (
                                     <Chip
@@ -873,7 +872,7 @@ export default function CardCitas({ data, filtros, setPlan }) {
                           <div>
                             {grados &&
                               grados.map((ele) => {
-                                console.log(ele.id === cita.GradoId);
+                               
                                 if (ele.id === cita.GradoId) {
                                   return (
                                     <Chip
@@ -1061,7 +1060,7 @@ export default function CardCitas({ data, filtros, setPlan }) {
                         <div>
                           {grados &&
                             grados.map((ele) => {
-                              console.log(ele.id === cita.GradoId);
+                           
                               if (ele.id === cita.GradoId) {
                                 return (
                                   <Chip

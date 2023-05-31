@@ -39,7 +39,7 @@ function DragAndDrop() {
   );
   const [state, setState] = React.useState({ tasks, columns, columnOrder });
   const dispatch = useDispatch();
-  console.log(success);
+
 
   const onDragEnd = (result) => {
     const { destination, source } = result;
@@ -132,7 +132,7 @@ function DragAndDrop() {
     // let state = event.target.value;
 
     setfilterGrado(event.target.value);
-    console.log(filterGrado, filterAño);
+  
     dispatch(getCitaDnD_filtros({ filterGrado, filterAño }));
   };
   const handlerResetFiltros = () => {

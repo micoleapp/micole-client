@@ -16,7 +16,7 @@ export default function CardColegio({ input, data, isLoading, page }) {
   const pages= useRef(page);
   
   const putActiveColegio = (id, setLoading) => {
-    console.log(id);
+   
     setLoading(true);
     try {
       axios
@@ -47,7 +47,7 @@ export default function CardColegio({ input, data, isLoading, page }) {
     }
   };
   const putDesactiveColegio = (id, setLoading) => {
-    console.log(id);
+
     setLoading(true);
     try {
       axios
@@ -128,9 +128,9 @@ export default function CardColegio({ input, data, isLoading, page }) {
           ? data?.map((ele) => {
               let str = ele.direccion;
 
-              console.log(str);
+         
               let str2 = str?.slice(0, 60);
-              console.log(str2);
+         
               return (
                 <>
                   <div className={style.layout}>

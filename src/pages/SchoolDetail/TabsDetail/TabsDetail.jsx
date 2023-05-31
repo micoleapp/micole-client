@@ -34,7 +34,7 @@ export default function TabsDetail({
   };
   const [value, setValue] = useState("1");
   const handlerComparador = (e, id) => {
-    console.log(id);
+
     dispatch(getDataSchools({ id }));
     handlerOpenComparador()
   };

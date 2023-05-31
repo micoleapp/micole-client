@@ -14,13 +14,13 @@ const meses = {
   12: "Diciembre",
 };
 export default function fechaFormat(fecha) {
-  console.log(fecha);
+
   var expresionRegular = /-/;
   let fechaArr = fecha?.split(expresionRegular).reverse();
 
-  console.log(fechaArr);
+
   const separarMes = fechaArr[1].split(/0/);
-  console.log(separarMes);
+
   const numeroMes = (fechaArr[1] = parseInt(fechaArr[1], 10).toString());
   const mes = meses[numeroMes];
 

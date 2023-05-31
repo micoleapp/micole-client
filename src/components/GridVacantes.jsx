@@ -65,7 +65,7 @@ export default function GridVacantes({ año, setVacantesOff }) {
           });
         });
     } catch (error) {
-      console.log(error);
+   
     }
   };
 

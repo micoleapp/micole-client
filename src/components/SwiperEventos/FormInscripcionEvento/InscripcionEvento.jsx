@@ -22,7 +22,7 @@ export default function InscripcionEvento({
 }) {
   const { user, isAuth } = useSelector((state) => state.auth);
   const [openLogin, setOpenLogin] = useState(false);
-  console.log(horaEvento, fechaEvento, idEvento, nombreEvento);
+
   const onSubmit = () => {
     if (isAuth) {
       const idUser = user.id;

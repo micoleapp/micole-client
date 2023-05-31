@@ -23,7 +23,7 @@ import TextEvento from "./TextEvento";
 export default function SwiperEventos({ data }) {
   let logoColegio = data?.logo ? data?.logo : data?.primera_imagen;
   let publiColegio = data.Eventos.map((e) => e.imagen_evento);
-console.log(data)
+
   return (
     <>
       <div className={style.divDesktop}>

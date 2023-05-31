@@ -62,7 +62,7 @@ function EnrollSchool() {
           });
         });
     } catch (error) {
-      console.log(error);
+   
     }
   };
 

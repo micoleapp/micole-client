@@ -38,7 +38,7 @@ export default function SecCitas({ sendDateHs }) {
   const [selectedCard, setSelectedCard] = useState(null);
 
   const handleCardSelect = (card) => {
-    console.log(card);
+
     setSelectedCard([card]);
   };
   

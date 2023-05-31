@@ -47,77 +47,77 @@ const types = [
     value: "mayor_precio_pension",
     label: "Mayor Precio Pensión",
     onClick: () => {
-      console.log("Mayor Precio");
+      
     },
   },
   {
     value: "menor_precio_pension",
     label: "Menor Precio Pensión",
     onClick: () => {
-      console.log("Menor Precio");
+  
     },
   },
   {
     value: "",
     label: "",
     onClick: () => {
-      console.log("divider");
+  
     },
   },
   {
     value: "mayor_precio_matricula",
     label: "Mayor Precio Matricula",
     onClick: () => {
-      console.log("Mayor Precio");
+      
     },
   },
   {
     value: "menor_precio_matricula",
     label: "Menor Precio Matricula",
     onClick: () => {
-      console.log("Menor Precio");
+  
     },
   },
   {
     value: "",
     label: "",
     onClick: () => {
-      console.log("divider");
+
     },
   },
   {
     value: "mayor_precio_ingreso",
     label: "Mayor Precio Ingreso",
     onClick: () => {
-      console.log("Mayor Precio");
+   
     },
   },
   {
     value: "menor_precio_ingreso",
     label: "Menor Precio Ingreso",
     onClick: () => {
-      console.log("Menor Precio");
+ 
     },
   },
   {
     value: "",
     label: "",
     onClick: () => {
-      console.log("divider");
+ 
     },
   },
   {
     value: "mayor_rating",
     label: "Mayor Rating",
     onClick: () => {
-      console.log("Mayor Precio");
+
     },
   },
   {
     value: "menor_rating",
     label: "Menor Rating",
     onClick: () => {
-      console.log("Menor Precio");
+
     },
   },
 ];
@@ -302,7 +302,7 @@ function ListSchool() {
   };
   const [openComparador, setOpenComparador] = useState(false);
   const handlerComparador = (e, id) => {
-    console.log(id);
+
     dispatch(getDataSchools({ id }));
     setOpenComparador(true);
   };

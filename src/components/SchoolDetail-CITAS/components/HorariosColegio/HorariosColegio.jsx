@@ -11,7 +11,7 @@ function HorariosColegio({ diaSelecionado, sendDateHs }) {
     // setValidacion(true)
     const dateSelected = diaSelecionado && Object.assign({}, ...diaSelecionado);
     const objDate = dateSelected?.date;
-    console.log(date);
+  
     let infoDiaHora = {
       time: time,
       date: objDate,
@@ -63,7 +63,7 @@ function HorariosColegio({ diaSelecionado, sendDateHs }) {
           >
             {diaSelecionado ? (
               arrDefHorarios?.map((ele) => {
-                console.log(ele);
+              
                 return (
                   <MenuItem
                     key={ele.desde}

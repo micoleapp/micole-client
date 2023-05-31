@@ -14,7 +14,7 @@ export default function ResetPassword() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  console.log(params)
+  
   function changePassword() {
     
   }

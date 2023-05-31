@@ -55,7 +55,7 @@ export default function ModalRegistroFamilia({ open, setOpen }) {
       password: user.password,
       telefono: user.phone,
     };
-    console.log(data);
+
     dispatch(registerUser(data));
     handleClose();
   };

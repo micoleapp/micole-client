@@ -17,10 +17,10 @@ const Column = ({ column, tasksArr }) => {
   const [value, setValue] = React.useState("");
   const handleOpen = (event) => {
     setOpen(true);
-    console.log(event.target.value);
+
   };
   const handleClose = () => setOpen(false);
-  console.log(tasksArr);
+
   // useEffect(() => {}, [success]);
   const añoActual = yearNow;
   const añoSig = yearNow + 1;

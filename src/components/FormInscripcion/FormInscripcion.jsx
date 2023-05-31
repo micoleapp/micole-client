@@ -27,7 +27,7 @@ function FormInscripcion({ handlerOpenPayment, handlerOpenLogin , OpenLogin }) {
   };
 
   const handleValueDistrito = (event) => {
-    console.log(event.target.value);
+
     setDistrito(event.target.value);
   };
   const {

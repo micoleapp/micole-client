@@ -91,7 +91,7 @@ export default function ModalLeadsExternos({ open, handleClose }) {
   };
 
   const OnSubmit = async (cita) => {
-    console.log(cita);
+
 
     const newLead = {
       date: DateSelect,

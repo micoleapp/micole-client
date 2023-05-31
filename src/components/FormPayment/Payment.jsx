@@ -151,10 +151,10 @@ function Payment({ plan: Plan ,  handleClose, Miplan }) {
           setIsLoading(false);
         })
         .catch((err) => {
-          console.log(err);
+          
         });
     } catch (error) {
-      console.log(error);
+   
     }
   };
  
