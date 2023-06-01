@@ -99,8 +99,10 @@ function EnrollSchool() {
         {OpenRegister && (
           <ModalInscripcion
             handleClose={setOpenRegister}
+            switchLoginOrRegister={true}
             OpenPaymentPLan={OpenPaymentPLan}
             Miplan={false}
+            handleClosePayment={setOpenPaymentPLan}
           />
         )}
 
@@ -150,6 +152,7 @@ admisión simple y eficiente"
       </section>
       {OpenPaymentPLan.state === true && (
         <ModalInscripcion
+          switchLoginOrRegister={true}
           OpenPaymentPLan={OpenPaymentPLan}
           handleClose={setOpenRegister}
           handleClosePayment={setOpenPaymentPLan}

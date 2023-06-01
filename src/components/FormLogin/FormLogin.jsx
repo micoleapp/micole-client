@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import SwalProp from "../../exports/SwalProp";
 
-export default function FormLogin({ handlerClose, OpenLogin, setOpenLogin }) {
+export default function FormLogin({ handlerOpenLogin,  OpenRegister, handleClose}) {
   const dispatch = useDispatch();
 
   const ToggleSeePass = () => {
@@ -35,6 +35,13 @@ export default function FormLogin({ handlerClose, OpenLogin, setOpenLogin }) {
 
   const OnSubmit = async (user) => {
     dispatch(login(user));
+    handleClose(false)
+  };
+
+  
+  const handlerLogin = (asd) => {
+    handlerOpenLogin(asd);
+    
   };
 
   const forgotHandler = (data) => {
@@ -142,7 +149,7 @@ export default function FormLogin({ handlerClose, OpenLogin, setOpenLogin }) {
         <p className="  text-base">¿No tienes una cuenta?</p>
         <p
           className="text-[#0061dd] text-sm  cursor-pointer"
-          onClick={() => setOpenLogin(!OpenLogin)}
+          onClick={() => handlerLogin(true)}
         >
           Registrate Aqui
         </p>

@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { register as registerUser } from "../../redux/AuthActions";
 import { BsEye } from "react-icons/bs";
 import { BsEyeSlash } from "react-icons/bs";
-function FormInscripcion({ handlerOpenPayment, handlerOpenLogin , OpenLogin }) {
+function FormInscripcion({ handlerOpenPayment, handlerOpenLogin , OpenLogin, OpenRegister }) {
 
   const {error} = useSelector(state=>state.auth)
 
@@ -51,8 +51,7 @@ function FormInscripcion({ handlerOpenPayment, handlerOpenLogin , OpenLogin }) {
   });
   const navigate = useNavigate();
   const handlerLogin = () => {
-    handlerOpenLogin(true);
-    handlerOpenLogin(!OpenLogin)
+    handlerOpenLogin(false)
   };
   const OnSubmit = (user) => {
     const data = {

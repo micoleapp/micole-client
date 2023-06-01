@@ -1,7 +1,7 @@
 import React, { useEffect, useSquasState,useState } from "react";
 import Logo from "../../assets/logo1.png";
 import style from "./NavBar.module.css";
-
+import ModalInscripcion from "../ModalInscripcion/ModalInscripcion";
 import { Link } from "react-router-dom";
 import ModalLogin from "../ModalLogin/ModalLogin";
 import { useDispatch, useSelector } from "react-redux";
@@ -161,7 +161,7 @@ function NavBar() {
       </div>
     
       {OpenLogin && (
-        <ModalLogin handlerClose={setOpenLogin} OpenLogin={OpenLogin} />
+        <ModalInscripcion handleClose={setOpenLogin} switchLoginOrRegister={false}/>
       )}
       <div
         className={`bg-[#0061dd] w-[100vw] absolute top-16 z-[30] ${

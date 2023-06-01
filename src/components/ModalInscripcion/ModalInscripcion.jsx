@@ -26,18 +26,22 @@ const styles = {
 };
 export default function ModalInscripcion({
   handleClose,
+  switchLoginOrRegister,
   handleClosePayment,
   OpenPaymentPLan,
   Miplan,
 }) {
   const { isAuth, success } = useSelector((state) => state.auth);
  
-  const [OpenRegister, setOpenRegister] = useState(true);
-  const [OpenLogin, setOpenLogin] = useState(false);
+  const [OpenRegister, setOpenRegister] = useState(switchLoginOrRegister);
+  const [OpenLogin, setOpenLogin] = useState(true);
   const [Openterms, setOpenTerms]  = useState(false);
+
+  console.log(OpenRegister)
 
   const toggleClose = () => {
     handleClose(false);
+    handleClosePayment(false);
     // handleClosePayment({
     //   ...OpenPaymentPLan,
     //   state: false,
@@ -64,14 +68,17 @@ export default function ModalInscripcion({
           </div>
         </div>
        
-        {OpenLogin === false && isAuth === false && OpenRegister === true && Openterms === true && (
+        {OpenLogin === true && isAuth === false && OpenRegister === false && Openterms === false && (
+          <FormLogin handlerOpenLogin={setOpenRegister} OpenRegister={OpenRegister}  handleClose={handleClose}/>)}
+       
+        {OpenLogin === true && OpenRegister === true && Openterms === true && (
           <Terms handlerOpenLogin={setOpenLogin} setOpenTerms={setOpenTerms} />)}
        
-        {OpenLogin === false && isAuth === false && OpenRegister === true && Openterms === false && (
-          <FormInscripcion handlerOpenLogin={setOpenLogin} />
+        {OpenLogin === true && isAuth === false && OpenRegister === true && Openterms === false && (
+          <FormInscripcion handlerOpenLogin={setOpenRegister} OpenRegister={OpenRegister}  />
         )}
         <div>
-          {isAuth === true && (
+        {isAuth === true  && Openterms === false && (
             <Payment
               plan={OpenPaymentPLan?.plan}
               price={OpenPaymentPLan?.price}
@@ -79,7 +86,7 @@ export default function ModalInscripcion({
               Miplan={Miplan}
             />
           )}
-          {OpenLogin === false && Openterms === false && (
+          {OpenLogin === true && Openterms === false && OpenRegister === true && (
            
            
            <div className="flex items-center justify-center">
@@ -93,18 +100,14 @@ export default function ModalInscripcion({
             </div>
           )}
 
-          {OpenLogin === false && Openterms === true && (
+          {OpenLogin === true && Openterms === true && OpenRegister === true && (
               <div className={style.divButton}>
           <button onClick={() => {setOpenTerms(false)}}>ENTENDIDO</button>
          
         </div>
           )}
         </div>
-        <div>
-          {OpenLogin === true && isAuth === false && (
-            <FormLogin setOpenLogin={setOpenLogin} OpenLogin={OpenLogin} />
-          )}
-        </div>
+        
         {/* </div> */}
       </Box>
     </Modal>
