@@ -25,7 +25,6 @@ import.meta.env.MODE === "development"
 
 import.meta.env.MODE === "development" ? (axios.defaults.baseURL = "https://api.micole.com.pe/") : (axios.defaults.baseURL = "https://api.micole.com.pe/");
 
-
 // let previusTitle = document.title
 
 // window.addEventListener('blur',()=>{
@@ -36,6 +35,7 @@ import.meta.env.MODE === "development" ? (axios.defaults.baseURL = "https://api.
 // window.addEventListener('focus',()=>{
 //   document.title = previusTitle
 // })
+
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <>
