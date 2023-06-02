@@ -23,7 +23,18 @@ const styles = {
   maxHeight: "90vh",
   overflowY: "scroll",
   gap: "2vh",
+  zIndex:0,
+  
 };
+const stylesModal = {
+  
+  zIndex:20,
+  
+};
+
+
+
+
 export default function ModalInscripcion({
   handleClose,
   switchLoginOrRegister,
@@ -54,7 +65,7 @@ export default function ModalInscripcion({
 
   return (
       
-    <Modal
+    <Modal sx={stylesModal}
       keepMounted
       open={open}
       onClose={handleClose}

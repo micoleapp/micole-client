@@ -11,9 +11,48 @@ import { BsEyeSlash } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import SwalProp from "../../exports/SwalProp";
+//import { signInWithPopup , signInWithRedirect} from "firebase/auth";
+//import { auth, providerGoogle,providerFacebook  } from "../../firebase-config";
 
 export default function FormLogin({ handlerOpenLogin,  OpenRegister, handleClose}) {
   const dispatch = useDispatch();
+
+  const handleFacebookLogin = () => {
+ 
+    signInWithRedirect(auth, providerFacebook)
+      .then((result) => {
+        const credential = FacebookAuthProvider.credentialFromResult(result);
+        const accessToken = credential.accessToken;
+        setUserInfo(result.user);
+        console.log(accessToken);
+      })
+      .catch((err) => {
+        console.log(err);
+        // SwalProp({
+        //   status: false,
+        //   title: "Upss ...",
+        //   text: err,
+        // });
+      });
+  };
+
+  const handleGoogleLogin = () => {
+ 
+    signInWithPopup(auth, providerGoogle)
+      .then((result) => {
+    
+        setUserInfo(result.user);
+      })
+      .catch((err) => {
+        console.log(err);
+        // SwalProp({
+        //   status: false,
+        //   title: "Upss ...",
+        //   text: err,
+        // });
+      });
+  };
+  
 
   const ToggleSeePass = () => {
     setseePassword(!seePassword);
@@ -141,8 +180,12 @@ export default function FormLogin({ handlerOpenLogin,  OpenRegister, handleClose
             alignItems: "center",
           }}
         >
-          <FB />
-          <Gmail />
+           <div  className="cursor-pointer" onClick={handleFacebookLogin}>
+            <FB />
+          </div>
+          <div className="cursor-pointer" onClick={handleGoogleLogin}>
+              <Gmail />
+          </div>
         </div>
       </div>
       <div className="text-center mb-3  p-2">
